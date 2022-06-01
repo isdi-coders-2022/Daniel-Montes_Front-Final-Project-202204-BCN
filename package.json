@@ -63,17 +63,9 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "!./src/index.tsx",
-      "!./src/reportWebVitals.ts",
-      "!./src/**/*.ts",
-      "!./src/**/*.tsx",
-      "!./src/setupTests.tsx",
-      "!.eslintrc.tsx",
-      "!coverage/*/.tsx",
-      "!./src/**/*.test.tsx",
-      "!./src/**/*.test.ts",
-      "!src/**/*.test.tsx.snap",
-      "!src/react-app-env.d.ts"
+      "!src/index.ts",
+      "!src/reportWebVitals.ts",
+      "!src/components/LoginForm/__snapshots__/*"
     ]
   }
 }
