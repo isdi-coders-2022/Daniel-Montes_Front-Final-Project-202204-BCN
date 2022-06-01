@@ -16,10 +16,11 @@ export const LoginPageStyles = styled.div`
   .container {
     width: 100%;
   }
-  h2 {
+  h1 {
     top: 5px;
     position: absolute;
     width: 100%;
+    font-size: 18px;
   }
 
   .link {
