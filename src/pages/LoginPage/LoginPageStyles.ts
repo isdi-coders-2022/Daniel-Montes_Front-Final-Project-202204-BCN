@@ -6,11 +6,11 @@ export const LoginPageStyles = styled.div`
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 
   background-image: url(${image});
-  background-position-x: 215px;
-  background-position-y: 140px;
+  background-size: 200%;
+  background-position-x: 80px;
+  background-position-y: 230px;
   background-repeat: no-repeat;
-  height: 730px;
-
+  height: 650px;
   text-align: center;
 
   .container {
