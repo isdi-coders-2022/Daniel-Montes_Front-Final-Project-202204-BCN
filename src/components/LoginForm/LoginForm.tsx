@@ -1,12 +1,11 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { LoginFormStyles } from "./LoginFormStyles";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { LoginData } from "../../app/redux/types/userInterfaces";
 import { loginThunk } from "../../app/redux/thunks/userThunk/userThunk";
 
 const LoginForm = () => {
-  // const navigate = useNavigate();
   const blankData: LoginData = {
     username: "",
     password: "",
@@ -34,7 +33,6 @@ const LoginForm = () => {
     event.preventDefault();
     resetForm();
     dispatch(loginThunk(formData));
-    // navigate("/");
   };
 
   return (
