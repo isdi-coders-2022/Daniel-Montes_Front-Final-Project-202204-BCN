@@ -1,12 +1,15 @@
 import React from "react";
 import LoginPage from "./pages/LoginPage/LoginPage";
 
+import styled from "styled-components";
+
+const AppStyles = styled.div``;
+
 const App: React.FC = () => {
   return (
-    <>
-      <h1>AdoptaUnPinguino.com</h1>
+    <AppStyles>
       <LoginPage />
-    </>
+    </AppStyles>
   );
 };
 

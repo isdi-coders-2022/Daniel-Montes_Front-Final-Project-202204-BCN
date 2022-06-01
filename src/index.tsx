@@ -6,25 +6,15 @@ import App from "./App";
 import store from "./app/redux/store/store";
 import reportWebVitals from "./reportWebVitals";
 
-import styled from "styled-components";
-
-const IndexStyles = styled.div`
-  h1 {
-    text-align: center;
-  }
-`;
-
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <IndexStyles>
-        <Provider store={store}>
-          <App />
-        </Provider>
-      </IndexStyles>
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>
 );
