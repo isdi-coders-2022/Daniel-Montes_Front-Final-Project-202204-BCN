@@ -28,11 +28,11 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest",
+    "test": "react-scripts test",
     "test:watch": "jest --watch",
     "eject": "react-scripts eject",
     "test-jest": "jest --watchAll=false --passWithNoTests",
-    "test-coverage": "jest --coverage --watchAll=false",
+    "test-coverage": "npm run test -- --coverage --watchAll=false",
     "prepare": "husky install"
   },
   "eslintConfig": {
@@ -63,9 +63,17 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "!src/index.ts",
+      "!src/index.tsx",
       "!src/reportWebVitals.ts",
-      "!src/components/LoginForm/__snapshots__/*"
+      "!src/setupTests.tsx",
+      "!.eslintrc.tsx",
+      "!coverage/*/.tsx",
+      "!src/**/*.test.tsx",
+      "!src/**/*.test.tsx.snap",
+      "!src/react-app-env.d.ts",
+      "!src/index.ts",
+      "!src/components/LoginForm/__snapshots__/*",
+      "!src/app/redux/types/userInterfaces.ts"
     ]
   }
 }
