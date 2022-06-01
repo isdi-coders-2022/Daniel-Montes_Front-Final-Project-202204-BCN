@@ -48,6 +48,7 @@ const LoginForm = () => {
               value={formData.username}
               onChange={changeData}
               placeholder="Username"
+              autoComplete="username"
             />
           </label>
           <label className="label-password" htmlFor="password">
@@ -57,6 +58,7 @@ const LoginForm = () => {
               value={formData.password}
               onChange={changeData}
               placeholder="Password"
+              autoComplete="password"
             />
           </label>
           <div className="submitContainer">
