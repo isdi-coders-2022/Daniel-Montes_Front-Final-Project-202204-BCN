@@ -1,7 +1,13 @@
-import "./App.css";
+import React from "react";
+import LoginForm from "./components/LoginForm/LoginForm";
 
-function App() {
-  return <div className="App" />;
-}
+const App: React.FC = () => {
+  return (
+    <>
+      <h1>AdoptaUnPinguino.com</h1>
+      <LoginForm />
+    </>
+  );
+};
 
 export default App;
