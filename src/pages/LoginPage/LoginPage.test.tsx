@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import store from "../app/redux/store/store";
-import LoginPage from "./loginPage";
+import store from "../../app/redux/store/store";
+import LoginPage from "./LoginPage";
 import { BrowserRouter } from "react-router-dom";
 
 describe("Given a LoginPage Component", () => {
