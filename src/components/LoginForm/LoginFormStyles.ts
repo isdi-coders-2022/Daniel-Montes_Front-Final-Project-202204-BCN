@@ -21,7 +21,7 @@ export const LoginFormStyles = styled.div`
       height: 60px;
       padding-bottom: 10px;
       font-size: 20px;
-
+      display: none;
       input {
         ::placeholder {
           font-weight: bolder;
