@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import store from "../../app/redux/store/store";
 import LoginForm from "./LoginForm";
@@ -8,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 describe("Given a SignUpForm component", () => {
   describe("When it's invoked", () => {
     test("Then it should render 2 labels", () => {
-      const expectedText = "Login";
+      const expectedText = "Log In";
 
       render(
         <BrowserRouter>
@@ -18,7 +17,7 @@ describe("Given a SignUpForm component", () => {
         </BrowserRouter>
       );
 
-      const expectedRenderedHeading = screen.getByRole("heading", { level: 2 });
+      const expectedRenderedHeading = screen.getByRole("button");
 
       const inputUsername = screen.getByPlaceholderText("Username");
       const inputPassword = screen.getByPlaceholderText("Password");

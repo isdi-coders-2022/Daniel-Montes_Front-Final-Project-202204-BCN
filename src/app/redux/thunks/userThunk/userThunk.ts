@@ -10,7 +10,7 @@ import { Dispatch } from "@reduxjs/toolkit";
 
 export const loginThunk =
   (userData: LoginData) => async (dispatch: Dispatch) => {
-    const url: string = `${process.env.REACT_APP_API_URL}/users/login`;
+    const url: string = `${process.env.REACT_APP_API_URL}users/login`;
     try {
       const { data, status }: DataAxiosLogin = await axios.post(url, userData);
 
