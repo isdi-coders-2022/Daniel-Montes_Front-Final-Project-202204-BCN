@@ -1,6 +1,5 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { LoginData } from "../../app/redux/types/userInterfaces";
 import { loginThunk } from "../../app/redux/thunks/userThunk/userThunk";
