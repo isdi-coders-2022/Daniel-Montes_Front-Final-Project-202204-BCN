@@ -3,7 +3,7 @@ import { LoginPageStyles } from "./LoginPageStyles";
 const LoginPage = (): JSX.Element => {
   return (
     <LoginPageStyles>
-      <h2>AdoptaUnPingüino.com</h2>
+      <h1>AdoptaUnPingüino.com</h1>
       <LoginForm />
     </LoginPageStyles>
   );
