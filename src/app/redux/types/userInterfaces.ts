@@ -1,9 +1,6 @@
 export interface IUser {
-  name: string;
   username: string;
-  email: string;
   password: string;
-  city: string;
 }
 
 export interface LoginResponse {
@@ -12,6 +9,10 @@ export interface LoginResponse {
 }
 
 export interface LoginData {
+  username: string;
+  password: string;
+}
+export interface UserRegister {
   username: string;
   password: string;
 }

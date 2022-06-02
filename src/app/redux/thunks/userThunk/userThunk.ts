@@ -4,6 +4,7 @@ import {
   DataAxiosLogin,
   LoginData,
   LoginResponse,
+  UserRegister,
 } from "../../types/userInterfaces";
 import { loginActionCreator } from "../../features/userSlice/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
@@ -22,4 +23,12 @@ export const loginThunk =
     } catch (error: any) {
       return error.message;
     }
+  };
+
+export const registerThunk =
+  (userData: UserRegister) => async (dispatch: Dispatch) => {
+    await axios.post(
+      `${process.env.REACT_APP_API_URL}users/register`,
+      userData
+    );
   };
