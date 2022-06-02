@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { LoginData } from "../../app/redux/types/userInterfaces";
@@ -10,16 +10,9 @@ const LoginForm = () => {
     password: "",
   };
   const [formData, setFormData] = useState(blankData);
-  const [buttonDisabled, setButtonDisabled] = useState(true);
+  const buttonDisabled = formData.password === "" || formData.username === "";
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    if (formData.username !== "" && formData.password !== "")
-      setButtonDisabled(false);
-    else {
-      setButtonDisabled(true);
-    }
-  }, [formData]);
   const resetForm = () => {
     setFormData(blankData);
   };
