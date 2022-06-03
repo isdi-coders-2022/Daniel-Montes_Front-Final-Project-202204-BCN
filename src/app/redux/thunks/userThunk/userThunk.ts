@@ -6,7 +6,7 @@ import {
   LoginResponse,
   UserRegister,
 } from "../../types/userInterfaces";
-import { loginActionCreator } from "../../features/userSlice/userSlice";
+import { logInActionCreator } from "../../features/userSlice/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 
 export const loginThunk =
@@ -18,7 +18,7 @@ export const loginThunk =
       if (status === 200) {
         const { name, username }: LoginResponse = jwt_decode(data.token);
         localStorage.setItem("token", data.token);
-        dispatch(loginActionCreator({ name, username }));
+        dispatch(logInActionCreator({ name, username }));
       }
     } catch (error: any) {
       return error.message;
