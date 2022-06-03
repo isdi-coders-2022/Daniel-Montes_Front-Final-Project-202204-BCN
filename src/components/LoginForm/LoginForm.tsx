@@ -57,7 +57,7 @@ const LoginForm = () => {
         </label>
         <div className="submitContainer">
           <button disabled={buttonDisabled} className="button">
-            Log In
+            Login
           </button>
         </div>
       </form>
