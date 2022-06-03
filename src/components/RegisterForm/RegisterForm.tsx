@@ -35,6 +35,7 @@ const RegisterForm = (): JSX.Element => {
   return (
     <div className="container">
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <label htmlFor="username"> Username </label>
         <input
           type="text"
           id="username"
@@ -42,8 +43,9 @@ const RegisterForm = (): JSX.Element => {
           placeholder="Username"
           value={formData.username}
           onChange={handleInputChange}
+          name="Username"
         />
-
+        <label htmlFor="password"> Password </label>
         <input
           type="password"
           id="password"
@@ -51,6 +53,7 @@ const RegisterForm = (): JSX.Element => {
           value={formData.password}
           placeholder="Password"
           onChange={handleInputChange}
+          name="Password"
         />
         <button type="submit" className="bt-register">
           Register
