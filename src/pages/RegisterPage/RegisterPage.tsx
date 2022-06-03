@@ -1,5 +1,5 @@
 import RegisterForm from "../../components/RegisterForm/RegisterForm";
-import RegisterPageStyles from "./RegisterPageStyled";
+import RegisterPageStyles from "./RegisterPageStyles";
 
 const RegisterPage = (): JSX.Element => {
   return (
