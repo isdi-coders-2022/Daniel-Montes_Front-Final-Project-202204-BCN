@@ -60,7 +60,7 @@ export const LoginPageStyles = styled.div`
         justify-content: center;
         border-radius: 12px;
         box-sizing: border-box;
-        color: white;
+        color: black;
         font-size: 18px;
         height: 100%;
       }
