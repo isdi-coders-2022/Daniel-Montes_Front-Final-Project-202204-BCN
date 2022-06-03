@@ -1,0 +1,66 @@
+import { ChangeEvent, FormEvent, useState } from "react";
+import { useAppDispatch } from "../../app/redux/hooks/hooks";
+import { registerThunk } from "../../app/redux/thunks/userThunk/userThunk";
+import { NavLink } from "react-router-dom";
+
+interface FormData {
+  name: string;
+  username: string;
+  password: string;
+}
+
+const RegisterForm = (): JSX.Element => {
+  const blankFields = {
+    name: "",
+    username: "",
+    password: "",
+  };
+
+  const [formData, setFormData] = useState<FormData>(blankFields);
+  const dispatch = useAppDispatch();
+
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setFormData({
+      ...formData,
+      [event.target.id]: event.target.value,
+    });
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    dispatch(registerThunk(formData));
+    setFormData(blankFields);
+  };
+
+  return (
+    <div className="container">
+      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <input
+          type="text"
+          id="username"
+          autoComplete="username"
+          placeholder="Username"
+          value={formData.username}
+          onChange={handleInputChange}
+        />
+
+        <input
+          type="password"
+          id="password"
+          autoComplete="password"
+          value={formData.password}
+          placeholder="Password"
+          onChange={handleInputChange}
+        />
+        <button type="submit" className="bt-register">
+          Register
+        </button>
+        <NavLink to="/login" className="link">
+          Login
+        </NavLink>
+      </form>
+    </div>
+  );
+};
+
+export default RegisterForm;

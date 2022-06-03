@@ -1,6 +1,12 @@
-export interface IUser {
+export interface UserInfo {
+  name: string;
   username: string;
-  password: string;
+}
+
+export interface UserState {
+  name: string;
+  username: string;
+  logged: boolean;
 }
 
 export interface LoginResponse {

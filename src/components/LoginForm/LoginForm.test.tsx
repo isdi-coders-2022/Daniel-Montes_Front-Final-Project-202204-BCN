@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 describe("Given a SignUpForm component", () => {
   describe("When it's invoked", () => {
     test("Then it should render 2 labels", () => {
-      const expectedText = "Log In";
+      const expectedText = "Login";
 
       render(
         <BrowserRouter>
@@ -40,7 +40,7 @@ describe("Given a SignUpForm component", () => {
         </BrowserRouter>
       );
 
-      const button = screen.getByRole("button", { name: "Log In" });
+      const button = screen.getByRole("button", { name: "Login" });
 
       expect(button).toBeDisabled();
     });

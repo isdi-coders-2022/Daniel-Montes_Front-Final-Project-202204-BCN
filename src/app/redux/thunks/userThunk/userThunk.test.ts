@@ -6,7 +6,7 @@ beforeEach(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-jest.mock("jwt-decode", () => () => ({ username: "jota", id: "1" }));
+jest.mock("jwt-decode", () => () => ({ username: "user1", id: "1" }));
 
 describe("Given a registerThunk", () => {
   describe("When its called", () => {
