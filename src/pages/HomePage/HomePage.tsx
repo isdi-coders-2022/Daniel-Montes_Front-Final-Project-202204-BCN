@@ -1,11 +1,11 @@
 import Home from "../../components/Home/Home";
-import HomePageStyled from "./HomePageStyled";
+import HomePageStyles from "./HomePageStyles";
 
 const HomePage = (): JSX.Element => {
   return (
-    <HomePageStyled>
+    <HomePageStyles>
       <Home />
-    </HomePageStyled>
+    </HomePageStyles>
   );
 };
 
