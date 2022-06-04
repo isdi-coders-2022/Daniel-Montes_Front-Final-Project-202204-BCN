@@ -24,6 +24,7 @@ const LoginForm = () => {
   const submitLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     resetForm();
+
     dispatch(loginThunk(formData));
   };
 
@@ -32,7 +33,7 @@ const LoginForm = () => {
       <form autoComplete="off" noValidate onSubmit={submitLogin}>
         <div className="link">
           New user? please
-          <Link to="/create"> register</Link>
+          <Link to="/register"> register</Link>
         </div>
         <label htmlFor="username">
           <input
