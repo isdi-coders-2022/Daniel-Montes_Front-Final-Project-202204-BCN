@@ -1,6 +1,7 @@
 export interface UserInfo {
   name: string;
   username: string;
+  logged: boolean;
 }
 
 export interface UserState {
