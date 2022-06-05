@@ -6,9 +6,10 @@ import store from "../../app/redux/store/store";
 import RegisterForm from "./RegisterForm";
 
 describe("Given a RegisterForm component", () => {
-  describe("When the word 'user1' is written to the username input field", () => {
-    test("Then the value of the username input field should be 'user1'", () => {
+  describe("When the word 'hello' is written to the username input field", () => {
+    test("Then the value of the username input field should be 'hello'", () => {
       const labelToFind = "Username";
+      const inputText = "user1";
 
       render(
         <Provider store={store}>
@@ -18,7 +19,8 @@ describe("Given a RegisterForm component", () => {
         </Provider>
       );
 
-      const label = screen.getByPlaceholderText(labelToFind);
+      const label = screen.getByLabelText(labelToFind);
+      userEvent.type(label, inputText);
 
       expect(label).toBeInTheDocument();
     });
