@@ -1,12 +1,16 @@
 import { rest } from "msw";
+import { mockPenguins } from "./penguins";
+
+export const mockTokenKey: string = "CHORIZACODELBUENO";
 
 export const usersHandlers = [
-  rest.post(`${process.env.REACT_APP_API_URL}users/login`, (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        token: "mocktoken",
-      })
-    );
-  }),
+  rest.post(`${process.env.REACT_APP_API_URL}users/login`, (_, res, ctx) =>
+    res(ctx.status(200), ctx.json({ token: mockTokenKey }))
+  ),
+  rest.post(`${process.env.REACT_APP_API_URL}users/register`, (_, res, ctx) =>
+    res(ctx.status(200), ctx.json({ token: mockTokenKey }))
+  ),
+  rest.get(`${process.env.REACT_APP_API_URL}penguins/`, (_, res, ctx) =>
+    res(ctx.status(200), ctx.json(mockPenguins))
+  ),
 ];

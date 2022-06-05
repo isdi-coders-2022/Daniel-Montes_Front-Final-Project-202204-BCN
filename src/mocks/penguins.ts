@@ -1,4 +1,4 @@
-const mockPenguin = {
+export const mockPenguin = {
   name: "penguin1",
   description: "description1",
   image: "image1",
@@ -12,8 +12,6 @@ export const mockPenguins = [
     category: "Penguin",
     description: "Cal is a penguin",
     likes: 2,
-    Image: "imgae.jpg",
+    Image: "image.jpg",
   },
 ];
-
-export default mockPenguin;
