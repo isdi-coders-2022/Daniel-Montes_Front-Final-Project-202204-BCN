@@ -75,6 +75,7 @@ const RegisterPageStyles = styled.div`
       padding-bottom: 10px;
       font-size: 20px;
       margin: auto;
+      display: none;
     }
     input {
       ::placeholder {
