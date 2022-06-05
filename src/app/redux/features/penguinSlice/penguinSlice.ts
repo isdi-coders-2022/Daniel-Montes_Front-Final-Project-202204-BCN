@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IPenguin } from "../../types/penguin/penguinInterfaces";
 
-interface penguinsState {
+interface PenguinsState {
   AllPenguins: IPenguin[];
 }
 
-const initialState: penguinsState = {
+const initialState: PenguinsState = {
   AllPenguins: [],
 };
 
@@ -13,7 +13,7 @@ const penguinSlice = createSlice({
   name: "penguins",
   initialState,
   reducers: {
-    loadPenguins: (penguins, action): penguinsState => ({
+    loadPenguins: (penguins, action): PenguinsState => ({
       ...penguins,
       AllPenguins: action.payload,
     }),

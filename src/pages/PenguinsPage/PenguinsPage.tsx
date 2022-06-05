@@ -1,7 +1,7 @@
 import Penguins from "../../components/Penguins/Penguins";
 import PenguinsPageStyles from "./PenguinsPageStyles";
 
-const PenguinPage = () => {
+const PenguinsPage = () => {
   return (
     <div className="container">
       <h1>Discover</h1>
@@ -11,4 +11,4 @@ const PenguinPage = () => {
     </div>
   );
 };
-export default PenguinPage;
+export default PenguinsPage;

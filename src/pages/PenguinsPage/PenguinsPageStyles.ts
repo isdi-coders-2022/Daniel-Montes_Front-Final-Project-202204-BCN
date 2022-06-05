@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import image from "../../images/background.png";
 
-const PenguinsPageStyled = styled.div`
+const PenguinsPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 
@@ -89,4 +89,4 @@ const PenguinsPageStyled = styled.div`
   }
 `;
 
-export default PenguinsPageStyled;
+export default PenguinsPageStyles;

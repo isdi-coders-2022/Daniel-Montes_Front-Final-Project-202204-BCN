@@ -1,4 +1,4 @@
-export interface penguinInfo {
+export interface PenguinInfo {
   name: string;
   username: string;
   logged: boolean;
@@ -13,7 +13,7 @@ export interface IPenguin {
   image: string;
 }
 
-export interface penguinsState {
+export interface PenguinsState {
   id: string;
   name: string;
   category: string;

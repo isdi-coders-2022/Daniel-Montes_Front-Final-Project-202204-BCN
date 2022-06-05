@@ -1,4 +1,4 @@
-import mockPenguins from "../../../../mocks/penguins";
+import { mockPenguins } from "../../../../mocks/penguins";
 import penguinReducer, {
   loadPenguinsActionCreator,
 } from "../../features/penguinSlice/penguinSlice";
