@@ -1,10 +1,13 @@
 import Penguins from "../../components/Penguins/Penguins";
+import PenguinsPageStyles from "./PenguinsPageStyles";
 
 const PenguinPage = () => {
   return (
     <div className="container">
       <h1>Discover</h1>
-      <Penguins />
+      <PenguinsPageStyles>
+        <Penguins />
+      </PenguinsPageStyles>
     </div>
   );
 };
