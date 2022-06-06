@@ -8,11 +8,16 @@ import {
 } from "../../types/userInterfaces/userInterfaces";
 import { logInActionCreator } from "../../features/userSlice/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
+import {
+  correctAction,
+  wrongAction,
+} from "../../../../components/Modals/Modals";
 
 export const loginThunk =
   (userData: LoginData) => async (dispatch: Dispatch) => {
-    const url: string = `${process.env.REACT_APP_API_URL}users/login`;
     try {
+      const url: string = `${process.env.REACT_APP_API_URL}users/login`;
+
       const { data, status }: DataAxiosLogin = await axios.post(url, userData);
 
       if (status === 200) {
@@ -20,8 +25,10 @@ export const loginThunk =
         const logged = false;
         localStorage.setItem("token", data.token);
         dispatch(logInActionCreator({ name, username, logged }));
+        correctAction("Logged in!");
       }
     } catch (error: any) {
+      wrongAction("Something went wrong try again");
       return error.message;
     }
     document.location.href = "/penguins";
@@ -29,8 +36,14 @@ export const loginThunk =
 
 export const registerThunk =
   (userData: UserRegister) => async (dispatch: Dispatch) => {
-    await axios.post(
-      `${process.env.REACT_APP_API_URL}users/register`,
-      userData
-    );
+    try {
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}users/register`,
+        userData
+      );
+      correctAction("Registered!");
+    } catch (error: any) {
+      wrongAction("Something went wrong try again");
+      return error.message;
+    }
   };

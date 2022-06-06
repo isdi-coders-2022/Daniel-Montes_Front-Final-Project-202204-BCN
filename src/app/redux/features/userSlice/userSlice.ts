@@ -8,11 +8,11 @@ const initialState: UserState = {
 };
 
 const userSlice = createSlice({
-  name: "user",
+  name: "users",
   initialState,
 
   reducers: {
-    login: (user: UserState, action: PayloadAction<UserInfo>) => ({
+    login: (users: UserState, action: PayloadAction<UserInfo>) => ({
       ...action.payload,
       logged: true,
     }),

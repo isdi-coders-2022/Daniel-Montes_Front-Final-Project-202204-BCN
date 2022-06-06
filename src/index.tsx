@@ -5,17 +5,19 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 import store from "./app/redux/store/store";
 import reportWebVitals from "./reportWebVitals";
+import { ToastContainer } from "react-toastify";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <BrowserRouter>
+    <BrowserRouter>
+      <Provider store={store}>
+        <ToastContainer autoClose={800} />
         <App />
-      </BrowserRouter>
-    </Provider>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

@@ -39,7 +39,7 @@ const RegisterForm = (): JSX.Element => {
         <input
           type="text"
           id="username"
-          autoComplete="username"
+          autoComplete="off"
           placeholder="Username"
           value={formData.username}
           onChange={handleInputChange}
@@ -49,7 +49,7 @@ const RegisterForm = (): JSX.Element => {
         <input
           type="password"
           id="password"
-          autoComplete="password"
+          autoComplete="off"
           value={formData.password}
           placeholder="Password"
           onChange={handleInputChange}
@@ -58,8 +58,9 @@ const RegisterForm = (): JSX.Element => {
         <button type="submit" className="bt-register">
           Register
         </button>
+        Already have an account? Please
         <NavLink to="/login" className="link">
-          Login
+          Log In
         </NavLink>
       </form>
     </div>

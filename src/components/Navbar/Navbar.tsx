@@ -1,30 +1,20 @@
-import { NavLink } from "react-router-dom";
-import styled from "styled-components";
-
-const StyledNavbarComponenent = styled.div`
-  color: black;
-  display: flex;
-  justify-content: space-around;
-
-  h2 {
-    font-size: 22px;
-    color: white;
-  }
-  a {
-    text-decoration: none;
-  }
-`;
+import menuIcon from "../../images/menu_hamburguer.png";
+import buttonBack from "../../images/button-back.png";
 
 const Navbar = () => {
+  const location = document.location.pathname;
+
+  const HiderClass = !location.includes("penguins")
+    ? "display-block"
+    : "modal display-none";
+
   return (
-    <StyledNavbarComponenent>
-      <NavLink to="/homepage">
-        <h2>Home</h2>
-      </NavLink>
-      <NavLink to="/favspage">
-        <h2>Favs</h2>
-      </NavLink>
-    </StyledNavbarComponenent>
+    <div className="menu-container">
+      <div className={HiderClass}>
+        <img src={buttonBack} alt="Menu icon" className="menu-button" />
+      </div>
+      <img src={menuIcon} alt="Menu icon" className="menu-icon" />
+    </div>
   );
 };
 

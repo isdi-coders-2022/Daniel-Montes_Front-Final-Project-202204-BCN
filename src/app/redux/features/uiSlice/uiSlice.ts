@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { RootState } from "../../store/store";
 
 interface UISliceState {
   loading: boolean;
@@ -42,4 +43,7 @@ export const {
   apiResponse: apiResponseActionCreator,
   cleanApiResponse: cleanApiResponseActionCreator,
 } = uiSlice.actions;
+
+export const uiLoadSpinnerSelector = (state: RootState) => state.ui.loading;
+
 export default uiSlice.reducer;
