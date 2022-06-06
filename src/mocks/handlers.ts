@@ -10,7 +10,4 @@ export const usersHandlers = [
   rest.post(`${process.env.REACT_APP_API_URL}users/register`, (_, res, ctx) =>
     res(ctx.status(200), ctx.json({ token: mockTokenKey }))
   ),
-  rest.get(`${process.env.REACT_APP_API_URL}penguins/`, (_, res, ctx) =>
-    res(ctx.status(200), ctx.json(mockPenguins))
-  ),
 ];
