@@ -37,10 +37,7 @@ export const loginThunk =
 export const registerThunk =
   (userData: UserRegister) => async (dispatch: Dispatch) => {
     try {
-      await axios.post(
-        `${process.env.REACT_APP_API_URL}users/register`,
-        userData
-      );
+      await axios.post(`${process.env.REACT_APP_API_URL}register`, userData);
       correctAction("Registered!");
     } catch (error: any) {
       wrongAction("Something went wrong try again");
