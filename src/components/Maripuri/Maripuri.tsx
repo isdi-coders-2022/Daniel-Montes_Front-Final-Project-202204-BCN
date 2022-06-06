@@ -16,7 +16,7 @@ const Maripuri = ({ children }: Props) => {
 
   useEffect(() => {
     if (!logged) {
-      navigate("/logineeeee");
+      navigate("/login");
     }
   }, [logged, navigate]);
 

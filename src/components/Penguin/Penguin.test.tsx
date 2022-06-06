@@ -17,7 +17,7 @@ describe("Given a RegisterForm component", () => {
 
       const name = screen.getByRole("heading");
 
-      expect(name).toHaveTextContent("test");
+      expect(name).toHaveTextContent("Test");
     });
   });
 });
