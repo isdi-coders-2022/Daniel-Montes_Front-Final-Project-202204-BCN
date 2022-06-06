@@ -1,32 +1,36 @@
+import axios from "axios";
 import { loadPenguinsThunk } from "./penguinThunk";
-import { server } from "../../../../mocks/server";
+import { mockPenguins } from "../../../../mocks/penguins";
+import { loadPenguinsActionCreator } from "../../features/penguinSlice/penguinSlice";
 
-beforeEach(() => server.listen());
-afterEach(() => server.resetHandlers());
-afterAll(() => server.close());
+describe("Given the loadPenguinsThunk function", () => {
+  describe("When it's called", () => {
+    test("Then it should call dispatch with the load notes action with the penguins received from the axios request", async () => {
+      const dispatch = jest.fn();
+      const action = loadPenguinsActionCreator(mockPenguins);
 
-jest.mock("axios", () =>
-  jest.fn().mockResolvedValue([
-    {
-      name: "Penguin1",
-      category: "Penguin",
-      description: "Cal is a penguin",
-      likes: 2,
-      Image: "image.jpg",
-    },
-  ])
-);
+      jest.spyOn(Storage.prototype, "getItem").mockReturnValue("token");
+      axios.get = jest
+        .fn()
+        .mockResolvedValue({ data: { penguins: mockPenguins }, status: 200 });
 
-const dispatch = jest.fn();
-
-describe("Given a penguinThunk", () => {
-  describe("When it's invoked", () => {
-    test("Then the dispatch function is called", async () => {
       const thunk = loadPenguinsThunk();
+      await thunk(dispatch);
 
-      await thunk(dispatch());
+      expect(dispatch).toHaveBeenCalledWith(action);
+    });
+  });
 
-      expect(dispatch).toHaveBeenCalled();
+  describe("When it's called and there is no token", () => {
+    test("Then it should not call dispatch", async () => {
+      const dispatch = jest.fn();
+
+      jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
+
+      const thunk = loadPenguinsThunk();
+      await thunk(dispatch);
+
+      expect(dispatch).not.toHaveBeenCalled();
     });
   });
 });
