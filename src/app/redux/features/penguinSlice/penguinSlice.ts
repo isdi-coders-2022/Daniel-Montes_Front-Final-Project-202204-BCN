@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IPenguin } from "../../types/penguin/penguinInterfaces";
+import { RootState } from "../../store/store";
 
 interface PenguinsState {
   AllPenguins: IPenguin[];
@@ -21,5 +22,8 @@ const penguinSlice = createSlice({
 });
 
 export const { loadPenguins: loadPenguinsActionCreator } = penguinSlice.actions;
+
+export const penguinsSelector = (state: RootState) =>
+  state.penguins.AllPenguins;
 
 export default penguinSlice.reducer;

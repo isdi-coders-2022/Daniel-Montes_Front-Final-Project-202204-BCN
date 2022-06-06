@@ -13,6 +13,10 @@ export interface IPenguin {
   image: string;
 }
 
+export interface IPenguins {
+  results: IPenguin[];
+}
+
 export interface PenguinsState {
   id: string;
   name: string;

@@ -1,18 +1,18 @@
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 
-interface Props {
+const Penguin = ({
+  penguin: { id, name, category, image, likes, description },
+}: {
   penguin: IPenguin;
-}
-
-const Penguin = (props: Props): JSX.Element => {
+}) => {
   return (
     <div className="penguin-container">
-      <img src={props.penguin.image} alt={props.penguin.name} />
-      <h4>{props.penguin.name}</h4>
+      <img src={image} alt={name} />
+      <h4>{name}</h4>
       <ul className="penguin-datalist">
-        <li>{props.penguin.category}</li>
-        <li>{props.penguin.likes}</li>
-        <li>{props.penguin.description}</li>
+        <li>{category}</li>
+        <li>{likes}</li>
+        <li>{description}</li>
       </ul>
     </div>
   );
