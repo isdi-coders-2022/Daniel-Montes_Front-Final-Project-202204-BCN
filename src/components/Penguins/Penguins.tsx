@@ -18,8 +18,8 @@ const Penguins = ({ results: penguins }: IPenguins) => {
     <div className="penguins-container">
       {penguins.map((penguin: IPenguin) => {
         return (
-          <div className="penguin-container">
-            <Penguin penguin={penguin} key={penguin.id} />
+          <div className="penguin-container" key={penguin.id}>
+            <Penguin penguin={penguin} />
           </div>
         );
       })}
