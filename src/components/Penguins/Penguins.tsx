@@ -1,22 +1,29 @@
 import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
+import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import {
+  IPenguin,
+  IPenguins,
+} from "../../app/redux/types/penguin/penguinInterfaces";
 import Penguin from "../Penguin/Penguin";
 
-const Penguins = (): JSX.Element => {
+const Penguins = ({ results: penguins }: IPenguins) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(loadPenguinsThunk());
   }, [dispatch]);
 
-  const { AllPenguins } = useAppSelector((state) => state.penguins);
   return (
-    <ul className="penguins-container">
-      {AllPenguins.map((penguin, index) => {
-        return <Penguin key={index} penguin={penguin} />;
+    <div className="penguins-container">
+      {penguins.map((penguin: IPenguin) => {
+        return (
+          <div className="penguin-container">
+            <Penguin penguin={penguin} key={penguin.id} />
+          </div>
+        );
       })}
-    </ul>
+    </div>
   );
 };
 

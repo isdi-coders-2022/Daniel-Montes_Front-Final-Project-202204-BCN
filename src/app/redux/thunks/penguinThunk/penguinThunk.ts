@@ -8,11 +8,7 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   if (token) {
     const {
       data: { penguins },
-    } = await axios.get(`${process.env.REACT_APP_API_URL}penguins`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    } = await axios.get(`${process.env.REACT_APP_API_URL}penguins`);
 
     dispatch(loadPenguinsActionCreator(penguins));
   }
