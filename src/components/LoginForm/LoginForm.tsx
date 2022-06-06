@@ -41,7 +41,7 @@ const LoginForm = () => {
             value={formData.username}
             onChange={changeData}
             placeholder="Username"
-            autoComplete="username"
+            autoComplete="off"
             alt="Username"
           />
         </label>
@@ -52,7 +52,7 @@ const LoginForm = () => {
             value={formData.password}
             onChange={changeData}
             placeholder="Password"
-            autoComplete="password"
+            autoComplete="off"
             alt="Password"
           />
         </label>

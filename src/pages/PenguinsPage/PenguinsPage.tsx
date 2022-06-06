@@ -8,13 +8,13 @@ const PenguinsPage = () => {
   const penguins = useAppSelector(penguinsSelector);
 
   return (
-    <div className="container">
-      <PenguinsPageStyles>
+    <PenguinsPageStyles>
+      <div className="container">
         <Navbar />
         <h1>Discover</h1>
         <Penguins results={penguins} />
-      </PenguinsPageStyles>
-    </div>
+      </div>
+    </PenguinsPageStyles>
   );
 };
 export default PenguinsPage;

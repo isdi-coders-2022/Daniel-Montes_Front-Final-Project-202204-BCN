@@ -10,8 +10,22 @@ function App() {
     <Routes>
       <Route path="/" element={<Navigate to="/homepage" />} />
       <Route path="/homepage" element={<HomePage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/register" element={<RegisterPage />} />
+      <Route
+        path="/login"
+        element={
+          <Maripuri>
+            <LoginPage />
+          </Maripuri>
+        }
+      />
+      <Route
+        path="/register"
+        element={
+          <Maripuri>
+            <RegisterPage />
+          </Maripuri>
+        }
+      />
       <Route
         path="/penguins"
         element={
