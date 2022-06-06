@@ -1,5 +1,4 @@
 import { rest } from "msw";
-import { mockPenguins } from "./penguins";
 
 export const mockTokenKey: string = "CHORIZACODELBUENO";
 
