@@ -92,6 +92,7 @@ const PenguinsPageStyles = styled.div`
   h1,
   h2 {
     text-align: left;
+    color: black;
   }
 
   a {
