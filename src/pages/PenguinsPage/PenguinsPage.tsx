@@ -8,8 +8,8 @@ const PenguinsPage = () => {
 
   return (
     <div className="container">
-      <h1>Discover</h1>
       <PenguinsPageStyles>
+        <h1>Discover</h1>
         <Penguins results={penguins} />
       </PenguinsPageStyles>
     </div>
