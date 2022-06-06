@@ -4,7 +4,6 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
 import Maripuri from "./components/Maripuri/Maripuri";
-// import Maripuri from "./components/Maripuri/Maripuri";
 
 function App() {
   return (

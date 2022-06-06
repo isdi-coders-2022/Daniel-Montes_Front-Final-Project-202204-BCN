@@ -1,6 +1,6 @@
 import axios from "axios";
 import { loadPenguinsActionCreator } from "../../features/penguinSlice/penguinSlice";
-// import { logOutActionCreator } from "../../features/userSlice/userSlice";
+
 import { AppDispatch } from "../../store/store";
 import { wrongAction } from "../../../../components/Modals/Modals";
 
