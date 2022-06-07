@@ -28,7 +28,9 @@ export const loginThunk =
         dispatch(logInActionCreator({ name, username, logged }));
       }
     } catch (error: any) {
-      wrongAction("Something went wrong try again");
+      wrongAction(
+        "Login failed!\nCheck credentials for username: " + userData.username
+      );
       return error.message;
     }
     document.location.href = "/penguins";
