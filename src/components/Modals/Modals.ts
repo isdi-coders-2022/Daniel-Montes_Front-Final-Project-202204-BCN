@@ -1,5 +1,7 @@
 import { toast } from "react-toastify";
 
+const customID = "custom-id";
+
 const toastOptions = {
   position: toast.POSITION.TOP_CENTER,
   autoClose: 2000,
@@ -10,10 +12,14 @@ const toastOptions = {
   pauseOnFocusLoss: true,
   draggable: true,
   pauseOnHover: true,
+  toastId: `${customID}`,
 };
 
-export const correctAction = (message: string) =>
-  toast.success(message, toastOptions);
+export const correctAction = (message: string) => {
+  if (!toast.isActive(customID)) {
+    toast.success(message, toastOptions);
+  }
+};
 
 export const wrongAction = (message: string) =>
   toast.error(message, toastOptions);

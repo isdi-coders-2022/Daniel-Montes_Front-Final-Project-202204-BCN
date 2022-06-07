@@ -12,6 +12,7 @@ import {
   correctAction,
   wrongAction,
 } from "../../../../components/Modals/Modals";
+import { finishedLoadingActionCreator } from "../../features/uiSlice/uiSlice";
 
 export const loginThunk =
   (userData: LoginData) => async (dispatch: Dispatch) => {
@@ -31,19 +32,31 @@ export const loginThunk =
       wrongAction(
         "Login failed!\nCheck credentials for username: " + userData.username
       );
+
       return error.message;
+    } finally {
+      dispatch(finishedLoadingActionCreator());
+      document.location.href = "/penguins";
     }
-    document.location.href = "/penguins";
   };
 
 export const registerThunk =
   (userData: UserRegister) => async (dispatch: Dispatch) => {
     try {
+      correctAction("Registering...");
       await axios.post(`${process.env.REACT_APP_API_URL}register`, userData);
-      correctAction("Registered!");
-      document.location.href = "/penguins";
+      correctAction("Registed!...");
     } catch (error: any) {
-      wrongAction("Something went wrong try again");
+      wrongAction(
+        "Registration failed!: \nUsername: " +
+          userData.username +
+          "\nPass: " +
+          userData.password
+      );
+
       return error.message;
+    } finally {
+      dispatch(finishedLoadingActionCreator());
+      document.location.href = "/penguins";
     }
   };

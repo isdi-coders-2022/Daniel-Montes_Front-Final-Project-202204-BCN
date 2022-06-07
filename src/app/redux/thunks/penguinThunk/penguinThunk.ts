@@ -4,9 +4,10 @@ import { loadPenguinsActionCreator } from "../../features/penguinSlice/penguinSl
 import { AppDispatch } from "../../store/store";
 import {
   correctAction,
-  infoAction,
+  // infoAction,
   wrongAction,
 } from "../../../../components/Modals/Modals";
+import { finishedLoadingActionCreator } from "../../features/uiSlice/uiSlice";
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   try {
@@ -16,12 +17,13 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
       const {
         data: { penguins },
       } = await axios.get(`${process.env.REACT_APP_API_URL}penguins`);
-      infoAction("Loading penguins...");
+
       dispatch(loadPenguinsActionCreator(penguins));
-      infoAction("Penguins loaded");
-      correctAction("Penguins loaded");
     }
   } catch {
-    wrongAction("Something went wrong connecting with the server");
+    wrongAction("Penguins loader failed!");
+  } finally {
+    dispatch(finishedLoadingActionCreator());
+    correctAction("Penguins loaded!");
   }
 };
