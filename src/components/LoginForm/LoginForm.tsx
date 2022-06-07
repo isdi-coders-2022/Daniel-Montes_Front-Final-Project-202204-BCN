@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { LoginData } from "../../app/redux/types/userInterfaces/userInterfaces";
 import { loginThunk } from "../../app/redux/thunks/userThunk/userThunk";
+import { infoAction } from "../Modals/Modals";
 
 const LoginForm = () => {
   const blankData: LoginData = {
@@ -23,9 +24,10 @@ const LoginForm = () => {
 
   const submitLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    resetForm();
+    infoAction("Logging in...");
 
     dispatch(loginThunk(formData));
+    resetForm();
   };
 
   return (
