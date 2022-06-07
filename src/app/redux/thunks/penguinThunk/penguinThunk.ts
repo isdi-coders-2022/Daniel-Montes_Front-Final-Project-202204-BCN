@@ -19,11 +19,11 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
       } = await axios.get(`${process.env.REACT_APP_API_URL}penguins`);
 
       dispatch(loadPenguinsActionCreator(penguins));
+      dispatch(finishedLoadingActionCreator());
     }
   } catch {
     wrongAction("Penguins loader failed!");
   } finally {
-    dispatch(finishedLoadingActionCreator());
     correctAction("Penguins loaded!");
   }
 };

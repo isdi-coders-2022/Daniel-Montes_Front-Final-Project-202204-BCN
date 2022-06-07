@@ -27,6 +27,7 @@ export const loginThunk =
         localStorage.setItem("token", data.token);
         correctAction("Logged in!");
         dispatch(logInActionCreator({ name, username, logged }));
+        dispatch(finishedLoadingActionCreator());
       }
     } catch (error: any) {
       wrongAction(
@@ -35,7 +36,6 @@ export const loginThunk =
 
       return error.message;
     } finally {
-      dispatch(finishedLoadingActionCreator());
       document.location.href = "/penguins";
     }
   };
