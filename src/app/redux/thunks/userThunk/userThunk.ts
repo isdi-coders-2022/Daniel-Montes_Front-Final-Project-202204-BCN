@@ -24,8 +24,8 @@ export const loginThunk =
         const { name, username }: LoginResponse = jwt_decode(data.token);
         const logged = false;
         localStorage.setItem("token", data.token);
-        dispatch(logInActionCreator({ name, username, logged }));
         correctAction("Logged in!");
+        dispatch(logInActionCreator({ name, username, logged }));
       }
     } catch (error: any) {
       wrongAction("Something went wrong try again");
@@ -39,6 +39,7 @@ export const registerThunk =
     try {
       await axios.post(`${process.env.REACT_APP_API_URL}register`, userData);
       correctAction("Registered!");
+      document.location.href = "/penguins";
     } catch (error: any) {
       wrongAction("Something went wrong try again");
       return error.message;
