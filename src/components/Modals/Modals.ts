@@ -4,7 +4,7 @@ const customID = "custom-id";
 
 const toastOptions = {
   position: toast.POSITION.TOP_CENTER,
-  autoClose: 2000,
+  autoClose: 1000,
   hideProgressBar: false,
   newstOnTop: false,
   closeOnClick: true,
@@ -25,7 +25,9 @@ export const wrongAction = (message: string) =>
   toast.error(message, toastOptions);
 
 export const infoAction = (message: string) =>
-  toast.info(message, toastOptions);
+  toast.loading(message, toastOptions);
 
 export const warnAction = (message: string) =>
   toast.warn(message, toastOptions);
+
+export const stopLoadingAction = () => toast.dismiss(customID);

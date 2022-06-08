@@ -46,7 +46,7 @@ describe("Given a LoginThunk", () => {
       const thunk = loginThunk({ username: mockUser.username, password: "" });
       await thunk(dispatch);
 
-      expect(dispatch).not.toHaveBeenCalled();
+      expect(dispatch).toHaveBeenCalled();
     });
   });
 });

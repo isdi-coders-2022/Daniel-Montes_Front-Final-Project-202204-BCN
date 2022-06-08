@@ -7,6 +7,7 @@ import store from "./app/redux/store/store";
 import reportWebVitals from "./reportWebVitals";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Spinner from "./components/Spinner/Spinner";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -16,6 +17,8 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         <ToastContainer />
+        <Spinner hide />
+
         <App />
       </Provider>
     </BrowserRouter>

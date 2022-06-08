@@ -33,8 +33,11 @@ const PenguinsPageStyles = styled.div`
     text-align: left;
   }
   h1 {
-    font-size: 30px;
+    font-size: 25px;
     margin-left: 10px;
+  }
+  h2 {
+    font-size: 20px;
   }
   h1,
   h2 {
@@ -55,7 +58,6 @@ const PenguinsPageStyles = styled.div`
     font-size: 20px;
     margin: auto;
   }
-
   input {
     border: 2px solid black;
     align-items: center;
@@ -67,16 +69,17 @@ const PenguinsPageStyles = styled.div`
     height: 100%;
   }
 
-  input ::placeholder {
+  input :placeholder {
     font-weight: bolder;
     padding-left: 20px;
     text-align: center;
   }
 
-  img {
-    width: 100%;
-    height: 100%;
-    margin-bottom: 10px;
+  .penguin-image {
+    border: 1px solid;
+    border-radius: 5px;
+    max-width: 360px;
+    max-height: 290px;
   }
 
   .container {
@@ -85,21 +88,34 @@ const PenguinsPageStyles = styled.div`
   }
 
   .category {
+    position: relative;
+    top: -140px;
+    left: 15px;
     background-color: #f4ba26;
     border-radius: 4px;
     flex: 1;
     margin-bottom: 25px;
     padding-left: 5px;
+    box-shadow: 0 3px 6px #666;
   }
 
   .likes {
     text-align: right;
     flex: 3;
+    position: relative;
+    top: -140px;
+    left: -36px;
   }
-
+  .penguin-description {
+    position: relative;
+    top: -140px;
+    left: 30px;
+    width: 84%;
+  }
   .menu-container {
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
   }
 
   button {
@@ -115,12 +131,12 @@ const PenguinsPageStyles = styled.div`
 
   .bt-menu {
     background: url(${iconHamburguer});
+    border-radius: 10px;
   }
 
-  .bt-favs {
+  .bt-favs-menu {
     background: url(${iconFavs});
   }
-
   .bt-back {
     background: url(${iconBack});
   }
@@ -129,18 +145,33 @@ const PenguinsPageStyles = styled.div`
     background: url(${iconHome});
     height: 25px;
   }
+  .bt-favs {
+    background: url(${iconFavs});
+    position: relative;
+    top: -10px;
+    left: -27px;
 
-  .star-image {
+    margin-top: 20px;
+    padding: 0 0 0 0;
+  }
+
+  .bt-favs {
     width: 32px;
     height: 32px;
     margin-top: 20px;
+    padding: 0 0 0 0;
   }
 
+  .penguin-image-container {
+    box-shadow: 0 3px 6px #666;
+    padding: 10px 10px 150px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px 5px 5px 5px;
+    margin: auto;
+    text-align: center;
+  }
   .penguin-container {
-    border: 2px solid #e4e4e4;
     border-radius: 8px;
-    margin-bottom: 20px;
-    padding: 16px;
     padding: 0 10px 15px;
   }
 
@@ -150,31 +181,17 @@ const PenguinsPageStyles = styled.div`
   }
 
   .penguin-name,
-  .likes-image {
+  .bt-likes {
     flex: 3;
   }
 
-  .image-container {
-    text-align: right;
-    margin-right: 5px;
+  .bt-likes {
     width: 32px;
     height: 32px;
-  }
-
-  .likes-image {
-    width: 32px;
-    height: 32px;
-  }
-  .link {
-    margin: auto;
-  }
-
-  .submitContainer {
-    display: flex;
-    width: 100%;
-  }
-  .display-none {
-    visibility: hidden;
+    padding: 0 0 0 0;
+    position: relative;
+    top: -140px;
+    left: -28px;
   }
 
   .bt-register {
@@ -185,11 +202,22 @@ const PenguinsPageStyles = styled.div`
     border: none;
     font-weight: bold;
     cursor: pointer;
-
     opacity: 0.9;
-
     font-size: 20px;
     border-radius: 15px;
+  }
+
+  .link {
+    margin: auto;
+  }
+
+  .submitContainer {
+    display: flex;
+    width: 100%;
+  }
+
+  .display-none {
+    visibility: hidden;
   }
 `;
 
