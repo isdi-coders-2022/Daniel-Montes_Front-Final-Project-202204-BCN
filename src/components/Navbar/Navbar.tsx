@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { infoAction } from "../Modals/Modals";
 
-export let loadFavs = {};
-
 const Navbar = () => {
   const location = document.location.pathname;
   const dispatch = useAppDispatch();
@@ -21,7 +19,7 @@ const Navbar = () => {
     navigate("/");
   };
 
-  loadFavs = () => {
+  const loadFavs = () => {
     infoAction("Loading Favs...");
     dispatch(loadFavsThunk());
   };
