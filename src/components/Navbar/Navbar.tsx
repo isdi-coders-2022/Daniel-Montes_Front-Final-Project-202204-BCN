@@ -1,21 +1,31 @@
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
-
 import { useNavigate } from "react-router-dom";
 import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+<<<<<<< refs/remotes/origin/feature/add-checkout-security
 import { infoAction, stopLoadingAction } from "../Modals/Modals";
+=======
+import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
+import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
+>>>>>>> local
+
+let hideMenuStatus = true;
 
 const Navbar = () => {
   const location = document.location.pathname;
   const dispatch = useAppDispatch();
-  const HiderClass = !location.includes("penguins")
-    ? "display-block"
-    : "modal display-none";
 
+  const hideBackButton = !location.includes("penguins")
+    ? "display-block"
+    : "display-none";
+
+  let hideMenuClass = hideMenuStatus ? "display-none" : "display-block";
+  debugger;
   const navigate = useNavigate();
 
   const logOutUser = () => {
     infoAction("Login out...");
     localStorage.removeItem("token");
+    correctAction("Logged out!");
     stopLoadingAction();
     navigate("/");
   };
@@ -36,22 +46,24 @@ const Navbar = () => {
     navigate("/penguins");
   };
   const loadMenu = () => {
-    infoAction("this feature is not ready yet");
+    hideMenuStatus = !hideMenuStatus;
+    const result = !hideMenuStatus ? "display-none" : "display-block";
+    hideMenuClass = result;
   };
 
   return (
     <div className="menu-container">
-      <div className={HiderClass}>
+      <div className={hideBackButton}>
         <button onClick={loadBack} className="bt-back" />
       </div>
-      {/* <div className={showMenu}> */}
-      <button title="bt-home" onClick={loadHome} className="bt-home" />
+      <div className={hideMenuClass}>
+        <button title="bt-home" onClick={loadHome} className="bt-home" />
 
-      <button onClick={loadFavs} className="bt-favs-menu" />
-      <button onClick={logOutUser} className="bt-logout" />
+        <button onClick={loadFavs} className="bt-favs-menu" />
+        <button onClick={logOutUser} className="bt-logout" />
+      </div>
       <button onClick={loadMenu} className="bt-menu" />
     </div>
-    // </div>
   );
 };
 

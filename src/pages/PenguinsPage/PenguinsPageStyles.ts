@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import iconHamburguer from "../../images/menu_hamburguer.png";
 import iconBack from "../../images/button-back.png";
-import iconFavs from "../../images/star-full.png";
+import iconFavs from "../../images/favorite_star_iconPlus2.png";
 import iconLogout from "../../images/logoutt.png";
+import iconLike from "../../images/heartLike.png";
 import iconHome from "../../images/home.png";
 
 const PenguinsPageStyles = styled.div`
@@ -34,10 +35,12 @@ const PenguinsPageStyles = styled.div`
   }
   h1 {
     font-size: 25px;
-    margin-left: 10px;
+    margin-left: 15px;
   }
   h2 {
     font-size: 20px;
+    flex: 3;
+    margin-left: 10px;
   }
   h1,
   h2 {
@@ -78,7 +81,7 @@ const PenguinsPageStyles = styled.div`
   .penguin-image {
     border: 1px solid;
     border-radius: 5px;
-    max-width: 360px;
+    max-width: 345px;
     max-height: 290px;
   }
 
@@ -88,9 +91,6 @@ const PenguinsPageStyles = styled.div`
   }
 
   .category {
-    position: relative;
-    top: -140px;
-    left: 15px;
     background-color: #f4ba26;
     border-radius: 4px;
     flex: 1;
@@ -102,9 +102,7 @@ const PenguinsPageStyles = styled.div`
   .likes {
     text-align: right;
     flex: 3;
-    position: relative;
-    top: -140px;
-    left: -36px;
+    margin-right: 20px;
   }
   .penguin-description {
     position: relative;
@@ -116,6 +114,7 @@ const PenguinsPageStyles = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    margin-bottom: 10px;
   }
 
   button {
@@ -145,21 +144,15 @@ const PenguinsPageStyles = styled.div`
     background: url(${iconHome});
     height: 25px;
   }
+
   .bt-favs {
     background: url(${iconFavs});
+    padding: 0 0 0 0;
+    width: 65px;
+    height: 65px;
     position: relative;
-    top: -10px;
-    left: -27px;
-
-    margin-top: 20px;
-    padding: 0 0 0 0;
-  }
-
-  .bt-favs {
-    width: 32px;
-    height: 32px;
-    margin-top: 20px;
-    padding: 0 0 0 0;
+    background-repeat: no-repeat;
+    top: 32px;
   }
 
   .penguin-image-container {
@@ -173,25 +166,32 @@ const PenguinsPageStyles = styled.div`
   .penguin-container {
     border-radius: 8px;
     padding: 0 10px 15px;
+    height: 450px;
   }
 
-  .penguin-datalist,
   .penguin-title {
     display: flex;
   }
 
+  .penguin-datalist {
+    display: flex;
+    width: 92%;
+    position: relative;
+    top: -142px;
+    left: 14px;
+  }
+
   .penguin-name,
   .bt-likes {
-    flex: 3;
   }
 
   .bt-likes {
     width: 32px;
     height: 32px;
+    background: url(${iconLike});
+    background-repeat: no-repeat;
     padding: 0 0 0 0;
-    position: relative;
-    top: -140px;
-    left: -28px;
+    flex: none;
   }
 
   .bt-register {

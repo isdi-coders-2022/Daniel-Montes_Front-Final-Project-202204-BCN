@@ -19,6 +19,7 @@ import { loadingActionCreator } from "../../features/uiSlice/uiSlice";
 export const loginThunk =
   (userData: LoginData) => async (dispatch: Dispatch) => {
     try {
+      infoAction("Loading penguins...");
       dispatch(loadingActionCreator());
       const url: string = `${process.env.REACT_APP_API_URL}users/login`;
 
@@ -30,8 +31,9 @@ export const loginThunk =
         localStorage.setItem("token", data.token);
 
         dispatch(logInActionCreator({ name, username, logged }));
-        stopLoadingAction();
       }
+      document.location.href = "/penguins";
+      stopLoadingAction();
     } catch (error: any) {
       wrongAction(
         "Login failed!\nCheck credentials for username: " + userData.username
@@ -39,7 +41,10 @@ export const loginThunk =
 
       return error.message;
     } finally {
+<<<<<<< refs/remotes/origin/feature/add-checkout-security
       stopLoadingAction();
+=======
+>>>>>>> local
       correctAction("Logged in!");
       document.location.href = "/penguins";
     }
@@ -48,13 +53,14 @@ export const loginThunk =
 export const registerThunk =
   (userData: UserRegister) => async (dispatch: Dispatch) => {
     try {
-      infoAction("Registering...");
       const { data, status }: DataAxiosLogin = await axios.post(
         `${process.env.REACT_APP_API_URL}register`,
         userData
       );
       if (status === 200) {
         localStorage.setItem("token", data.token);
+
+        correctAction("Registed!...");
       }
     } catch (error: any) {
       wrongAction(
@@ -66,8 +72,6 @@ export const registerThunk =
 
       return error.message;
     } finally {
-      stopLoadingAction();
-      correctAction("Registed!...");
-      document.location.href = "/penguins";
+      document.location.href = "/login";
     }
   };

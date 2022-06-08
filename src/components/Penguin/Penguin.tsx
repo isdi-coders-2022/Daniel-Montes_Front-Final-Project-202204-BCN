@@ -1,6 +1,4 @@
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import starImage from "../../images/star-empty.png";
-import likesImage from "../../images/littleHeart.png";
 
 const Penguin = ({
   penguin: { id, name, category, image, likes, description },
@@ -17,7 +15,7 @@ const Penguin = ({
     <div className="penguin-container">
       <div className="penguin-title">
         <h2 className="penguin-name">{toPascalCase(name)}</h2>
-        <img src={starImage} className="bt-favs" alt={name} />
+        <button className="bt-favs" />
       </div>
       <div className="penguin-image-container">
         <img src={image} alt={name} className="penguin-image" />
@@ -26,7 +24,7 @@ const Penguin = ({
         <span className="category">{toPascalCase(category)}</span>
         <span className="likes">{likes}</span>
         <div className="image-container">
-          <img src={likesImage} alt={name} className="bt-likes" />
+          <button className="bt-likes" />
         </div>
       </div>
       <div className="penguin-description">{description}</div>
