@@ -39,9 +39,9 @@ export const loginThunk =
 
       return error.message;
     } finally {
+      document.location.href = "/penguins";
       stopLoadingAction();
       correctAction("Logged in!");
-      document.location.href = "/penguins";
     }
   };
 

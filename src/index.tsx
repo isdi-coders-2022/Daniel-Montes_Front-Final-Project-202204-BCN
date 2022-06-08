@@ -17,7 +17,7 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         <ToastContainer />
-        <Spinner hide />
+        <Spinner hide={false} />
 
         <App />
       </Provider>
