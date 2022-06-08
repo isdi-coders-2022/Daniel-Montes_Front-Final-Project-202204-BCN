@@ -4,7 +4,7 @@ const Home = (): JSX.Element => {
   return (
     <div className="info">
       <header></header>
-      <h2> AdoptaUnPingüino.com </h2>
+      <h1> AdoptaUnPingüino.com </h1>
       <div className="bt-container">
         <NavLink to="/login" className="link">
           <button className="bt-login">Login</button>

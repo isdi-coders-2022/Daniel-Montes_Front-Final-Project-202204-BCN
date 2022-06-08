@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import image from "../../images/background.png";
+import image from "../../images/background2Heart.png";
 
 const RegisterPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -7,10 +7,10 @@ const RegisterPageStyles = styled.div`
 
   background-image: url(${image});
   background-size: 200%;
-  background-position-x: 80px;
-  background-position-y: 230px;
+  background-position-x: 97px;
+  background-position-y: 30px;
   background-repeat: no-repeat;
-  height: 650px;
+  height: 690px;
   text-align: center;
 
   .bt-container {
@@ -63,59 +63,60 @@ const RegisterPageStyles = styled.div`
     align-items: center;
     justify-content: center;
     row-gap: 20px;
-    width: 70%;
+    width: 100%;
     margin: auto;
-    padding-top: 105px;
+    padding-top: 210px;
+  }
 
-    label {
-      display: flex;
-      flex-direction: column;
-      width: 80%;
-      height: 60px;
-      padding-bottom: 10px;
-      font-size: 20px;
-      margin: auto;
-      display: none;
-    }
-    input {
-      ::placeholder {
-        font-weight: bolder;
-        padding-left: 20px;
-        text-align: center;
-      }
+  label {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 60px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    margin: auto;
+    display: none;
+  }
 
-      border: 2px solid black;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      box-sizing: border-box;
-      color: black;
-      font-size: 18px;
-      height: 100%;
-      height: 60px;
-    }
+  input {
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-sizing: border-box;
+    color: black;
+    font-size: 18px;
+    height: 60px;
+    width: 80%;
+  }
+
+  input:placeholder {
+    font-weight: bolder;
+    padding-left: 20px;
+    text-align: center;
   }
 
   .submitContainer {
     display: flex;
     width: 100%;
+  }
 
-    button {
-      color: white;
-      background-color: black;
-      padding: 14px 20px;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      width: 80%;
-      opacity: 0.9;
-      display: flex;
-      justify-content: center;
-      font-size: 20px;
-      border-radius: 15px;
-      align-items: center;
-      margin: auto;
-    }
+  button {
+    color: white;
+    background-color: black;
+    padding: 14px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 15px;
+    align-items: center;
+    margin: auto;
   }
 `;
 

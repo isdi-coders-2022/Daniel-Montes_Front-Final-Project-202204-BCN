@@ -28,6 +28,7 @@ const Navbar = () => {
     infoAction("Back loading...");
     navigate("/penguins");
   };
+
   const loadHome = () => {
     infoAction("Loading Home...");
     navigate("/penguins");
@@ -39,10 +40,10 @@ const Navbar = () => {
   return (
     <div className="menu-container">
       <div className={HiderClass}>
-        <button onClick={loadFavs} className="icon-back" />
+        <button onClick={loadBack} className="icon-back" />
       </div>
       <button title="bt-home" onClick={loadHome} className="bt-home" />
-      <button onClick={loadBack} className="bt-back" />
+
       <button onClick={loadFavs} className="bt-favs" />
       <button onClick={logOutUser} className="bt-logout" />
       <button onClick={loadMenu} className="bt-menu" />

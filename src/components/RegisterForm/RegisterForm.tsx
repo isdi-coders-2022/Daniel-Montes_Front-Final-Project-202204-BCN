@@ -35,6 +35,9 @@ const RegisterForm = (): JSX.Element => {
   return (
     <div className="container">
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+        <NavLink to="/login" className="link">
+          Already have an account? Please Log In
+        </NavLink>
         <label htmlFor="username"> Username </label>
         <input
           type="text"
@@ -58,10 +61,6 @@ const RegisterForm = (): JSX.Element => {
         <button type="submit" className="bt-register">
           Register
         </button>
-        Already have an account? Please
-        <NavLink to="/login" className="link">
-          Log In
-        </NavLink>
       </form>
     </div>
   );

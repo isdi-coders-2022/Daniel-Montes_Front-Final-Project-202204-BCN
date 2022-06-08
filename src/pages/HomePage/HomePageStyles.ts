@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import image from "../../images/background.png";
+import image from "../../images/background2Heart.png";
 
 const HomePageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -7,17 +7,17 @@ const HomePageStyles = styled.div`
 
   background-image: url(${image});
   background-size: 200%;
-  background-position-x: 80px;
-  background-position-y: 230px;
+  background-position-x: 97px;
+  background-position-y: 30px;
   background-repeat: no-repeat;
-  height: 650px;
+  height: 690px;
   text-align: center;
 
   .bt-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
+    margin-top: 275px;
     width: 100%;
   }
 
@@ -43,8 +43,8 @@ const HomePageStyles = styled.div`
   }
 
   h1 {
-    top: 5px;
-    position: absolute;
+    top: 25px;
+    position: relative;
     width: 100%;
     font-size: 18px;
   }
@@ -55,66 +55,69 @@ const HomePageStyles = styled.div`
 
   a {
     text-decoration: none;
+    width: 100%;
   }
 
   form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
     row-gap: 20px;
-    width: 70%;
+    width: 100%;
     margin: auto;
-    padding-top: 105px;
+    padding-top: 210px;
+  }
 
-    label {
-      display: flex;
-      flex-direction: column;
-      width: 80%;
-      height: 60px;
-      padding-bottom: 10px;
-      font-size: 20px;
-      margin: auto;
+  label {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    height: 60px;
+    padding-bottom: 10px;
+    font-size: 20px;
+    margin: auto;
+    display: none;
+  }
 
-      input {
-        ::placeholder {
-          font-weight: bolder;
-          padding-left: 20px;
-          text-align: center;
-        }
+  input {
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-sizing: border-box;
+    color: black;
+    font-size: 18px;
+    height: 60px;
+    width: 80%;
+  }
 
-        border: 2px solid black;
-        align-items: center;
-        justify-content: center;
-        border-radius: 12px;
-        box-sizing: border-box;
-        color: white;
-        font-size: 18px;
-        height: 100%;
-      }
-    }
+  input:placeholder {
+    font-weight: bolder;
+    padding-left: 20px;
+    text-align: center;
+  }
 
-    .submitContainer {
-      display: flex;
-      width: 100%;
+  .submitContainer {
+    display: flex;
+    width: 100%;
+  }
 
-      button {
-        color: white;
-        background-color: black;
-        padding: 14px 20px;
-        border: none;
-        font-weight: bold;
-        cursor: pointer;
-        width: 80%;
-        opacity: 0.9;
-        display: flex;
-        justify-content: center;
-        font-size: 20px;
-        border-radius: 15px;
-        align-items: center;
-        margin: auto;
-      }
-    }
+  button {
+    color: white;
+    background-color: black;
+    padding: 14px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 15px;
+    align-items: center;
+    margin: auto;
   }
 `;
 

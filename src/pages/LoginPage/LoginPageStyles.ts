@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import image from "../../images/background.png";
+import image from "../../images/background2Heart.png";
 
 export const LoginPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -7,10 +7,10 @@ export const LoginPageStyles = styled.div`
 
   background-image: url(${image});
   background-size: 200%;
-  background-position-x: 80px;
-  background-position-y: 230px;
+  background-position-x: 97px;
+  background-position-y: 30px;
   background-repeat: no-repeat;
-  height: 650px;
+  height: 690px;
   text-align: center;
 
   .container {
@@ -35,9 +35,9 @@ export const LoginPageStyles = styled.div`
     align-items: flex-start;
     justify-content: center;
     row-gap: 20px;
-    width: 70%;
+    width: 100%;
     margin: auto;
-    padding-top: 105px;
+    padding-top: 210px;
 
     label {
       display: flex;
