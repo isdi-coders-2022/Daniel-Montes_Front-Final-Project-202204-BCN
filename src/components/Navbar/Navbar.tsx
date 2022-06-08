@@ -1,8 +1,8 @@
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
-import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
+
 import { useNavigate } from "react-router-dom";
 import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { infoAction } from "../Modals/Modals";
+import { infoAction, stopLoadingAction } from "../Modals/Modals";
 
 const Navbar = () => {
   const location = document.location.pathname;
@@ -15,13 +15,15 @@ const Navbar = () => {
 
   const logOutUser = () => {
     infoAction("Login out...");
-    dispatch(logOutActionCreator());
+    localStorage.removeItem("token");
+    stopLoadingAction();
     navigate("/");
   };
 
   const loadFavs = () => {
     infoAction("Loading Favs...");
     dispatch(loadFavsThunk());
+    navigate("/favs");
   };
 
   const loadBack = () => {
@@ -34,20 +36,22 @@ const Navbar = () => {
     navigate("/penguins");
   };
   const loadMenu = () => {
-    infoAction("This feature is not available yet");
+    infoAction("this feature is not ready yet");
   };
 
   return (
     <div className="menu-container">
       <div className={HiderClass}>
-        <button onClick={loadBack} className="icon-back" />
+        <button onClick={loadBack} className="bt-back" />
       </div>
+      {/* <div className={showMenu}> */}
       <button title="bt-home" onClick={loadHome} className="bt-home" />
 
-      <button onClick={loadFavs} className="bt-favs" />
+      <button onClick={loadFavs} className="bt-favs-menu" />
       <button onClick={logOutUser} className="bt-logout" />
       <button onClick={loadMenu} className="bt-menu" />
     </div>
+    // </div>
   );
 };
 

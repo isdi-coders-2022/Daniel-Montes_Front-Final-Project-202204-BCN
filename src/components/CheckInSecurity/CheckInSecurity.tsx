@@ -8,22 +8,19 @@ type Props = {
   children: JSX.Element;
 };
 
-const Maripuri = ({ children }: Props) => {
+const CheckInSecurity = ({ children }: Props) => {
   const token = localStorage.getItem("token") as string;
   const logged = useAppSelector((state) => state.users.logged);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (!logged) {
-      navigate("/login");
+    if (!token) {
+      // navigate("/login");
+      return;
     }
-  }, [logged, navigate]);
-
-  useEffect(() => {
-    if (token) {
+    if (!logged) {
       const userData: UserState = jwtDecode(token);
-
       dispatch(
         logInActionCreator({
           name: userData.name,
@@ -32,13 +29,9 @@ const Maripuri = ({ children }: Props) => {
         })
       );
     }
-  }, [dispatch, token]);
+  }, [dispatch, logged, navigate, token]);
 
-  if (!logged) {
-    return null;
-  } else {
-    return children;
-  }
+  return children;
 };
 
-export default Maripuri;
+export default CheckInSecurity;

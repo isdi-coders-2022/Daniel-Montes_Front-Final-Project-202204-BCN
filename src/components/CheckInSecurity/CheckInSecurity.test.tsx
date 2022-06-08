@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { mockUserLogged, mockUserNotLogged } from "../../mocks/users";
 import store from "../../app/redux/store/store";
 import { UserState } from "../../app/redux/types/userInterfaces/userInterfaces";
-import Maripuri from "./Maripuri";
+import CheckInSecurity from "./CheckInSecurity";
 
 let mockuserState: UserState;
 
@@ -26,14 +26,14 @@ describe("Given a PrivateRoute component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <Maripuri>
+            <CheckInSecurity>
               <div>Children</div>
-            </Maripuri>
+            </CheckInSecurity>
           </BrowserRouter>
         </Provider>
       );
 
-      expect(mockNavigate).toHaveBeenCalledWith("/login");
+      expect(mockNavigate).not.toHaveBeenCalled();
     });
   });
 
@@ -43,9 +43,9 @@ describe("Given a PrivateRoute component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <Maripuri>
+            <CheckInSecurity>
               <h1>Children</h1>
-            </Maripuri>
+            </CheckInSecurity>
           </BrowserRouter>
         </Provider>
       );

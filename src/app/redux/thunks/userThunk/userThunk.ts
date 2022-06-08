@@ -11,12 +11,15 @@ import { Dispatch } from "@reduxjs/toolkit";
 import {
   correctAction,
   wrongAction,
+  infoAction,
+  stopLoadingAction,
 } from "../../../../components/Modals/Modals";
-import { finishedLoadingActionCreator } from "../../features/uiSlice/uiSlice";
+import { loadingActionCreator } from "../../features/uiSlice/uiSlice";
 
 export const loginThunk =
   (userData: LoginData) => async (dispatch: Dispatch) => {
     try {
+      dispatch(loadingActionCreator());
       const url: string = `${process.env.REACT_APP_API_URL}users/login`;
 
       const { data, status }: DataAxiosLogin = await axios.post(url, userData);
@@ -25,9 +28,9 @@ export const loginThunk =
         const { name, username }: LoginResponse = jwt_decode(data.token);
         const logged = false;
         localStorage.setItem("token", data.token);
-        correctAction("Logged in!");
+
         dispatch(logInActionCreator({ name, username, logged }));
-        dispatch(finishedLoadingActionCreator());
+        stopLoadingAction();
       }
     } catch (error: any) {
       wrongAction(
@@ -36,6 +39,8 @@ export const loginThunk =
 
       return error.message;
     } finally {
+      stopLoadingAction();
+      correctAction("Logged in!");
       document.location.href = "/penguins";
     }
   };
@@ -43,9 +48,14 @@ export const loginThunk =
 export const registerThunk =
   (userData: UserRegister) => async (dispatch: Dispatch) => {
     try {
-      correctAction("Registering...");
-      await axios.post(`${process.env.REACT_APP_API_URL}register`, userData);
-      correctAction("Registed!...");
+      infoAction("Registering...");
+      const { data, status }: DataAxiosLogin = await axios.post(
+        `${process.env.REACT_APP_API_URL}register`,
+        userData
+      );
+      if (status === 200) {
+        localStorage.setItem("token", data.token);
+      }
     } catch (error: any) {
       wrongAction(
         "Registration failed!: \nUsername: " +
@@ -56,7 +66,8 @@ export const registerThunk =
 
       return error.message;
     } finally {
-      dispatch(finishedLoadingActionCreator());
+      stopLoadingAction();
+      correctAction("Registed!...");
       document.location.href = "/penguins";
     }
   };
