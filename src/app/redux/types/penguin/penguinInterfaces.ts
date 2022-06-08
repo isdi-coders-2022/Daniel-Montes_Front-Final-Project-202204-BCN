@@ -17,6 +17,10 @@ export interface IPenguins {
   results: IPenguin[];
 }
 
+export interface IFavsPenguins {
+  results: IPenguin[];
+}
+
 export interface PenguinsState {
   id: string;
   name: string;

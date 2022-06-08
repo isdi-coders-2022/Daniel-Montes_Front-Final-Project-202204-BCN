@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { mockUserLogged, mockUserNotLogged } from "../../mocks/users";
 import store from "../../app/redux/store/store";
 import { UserState } from "../../app/redux/types/userInterfaces/userInterfaces";
-import CheckInSecurity from "./CheckInSecurity";
+import CheckOutSecurity from "./CheckOutSecurity";
 
 let mockuserState: UserState;
 
@@ -19,16 +19,16 @@ jest.mock("react-router-dom", () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe("Given a PrivateRoute component", () => {
+describe("Given a CheckOutSecurity component", () => {
   describe("When its invoked and the user is not logged in", () => {
     test("Then it should call the navigate function with tue route '/login'", () => {
       mockuserState = mockUserNotLogged;
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <CheckInSecurity>
+            <CheckOutSecurity>
               <div>Children</div>
-            </CheckInSecurity>
+            </CheckOutSecurity>
           </BrowserRouter>
         </Provider>
       );
@@ -43,9 +43,9 @@ describe("Given a PrivateRoute component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <CheckInSecurity>
+            <CheckOutSecurity>
               <h1>Children</h1>
-            </CheckInSecurity>
+            </CheckOutSecurity>
           </BrowserRouter>
         </Provider>
       );

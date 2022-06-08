@@ -1,26 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IPenguin } from "../../types/penguin/penguinInterfaces";
+import { IFavsPenguins } from "../../types/penguin/penguinInterfaces";
 import { RootState } from "../../store/store";
 
-interface PenguinsState {
-  AllPenguins: IPenguin[];
+interface FavsState {
+  favs: IFavsPenguins[];
 }
 
-const initialState: PenguinsState = {
-  AllPenguins: [],
+const initialState: FavsState = {
+  favs: [],
 };
 
-const penguinSlice = createSlice({
-  name: "penguins",
+const favsSlice = createSlice({
+  name: "favs",
   initialState,
   reducers: {
-    loadFavs: (penguins, action): PenguinsState => ({
+    loadFavs: (penguins, action): FavsState => ({
       ...action.payload,
-      AllPenguins: action.payload,
+      favs: action.payload,
     }),
-    createFav: (penguins, action): PenguinsState => ({
+    createFav: (penguins, action): FavsState => ({
       ...penguins,
-      AllPenguins: action.payload,
+      favs: action.payload,
     }),
   },
 });
@@ -28,9 +28,8 @@ const penguinSlice = createSlice({
 export const {
   createFav: createFavActionCreator,
   loadFavs: loadFavsActionCreator,
-} = penguinSlice.actions;
+} = favsSlice.actions;
 
-export const penguinsSelector = (state: RootState) =>
-  state.penguins.AllPenguins;
+export const favsSelector = (state: RootState) => state.favs.favs;
 
-export default penguinSlice.reducer;
+export default favsSlice.reducer;

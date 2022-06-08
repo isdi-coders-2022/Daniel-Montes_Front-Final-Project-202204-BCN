@@ -3,6 +3,7 @@ import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { useNavigate } from "react-router-dom";
 import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { infoAction, stopLoadingAction } from "../Modals/Modals";
+import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
 
 const Navbar = () => {
   const location = document.location.pathname;
@@ -15,6 +16,7 @@ const Navbar = () => {
 
   const logOutUser = () => {
     infoAction("Login out...");
+    dispatch(logOutActionCreator());
     localStorage.removeItem("token");
     stopLoadingAction();
     navigate("/");

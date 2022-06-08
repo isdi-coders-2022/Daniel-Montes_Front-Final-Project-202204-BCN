@@ -2,22 +2,24 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import Navbar from "./Navbar";
+import NavBar from "./Navbar";
 
-describe("Given Navbar function", () => {
-  describe("When it's called with to word given", () => {
-    test("Then it should render two img", () => {
+describe("Given a HeaderComponent Component", () => {
+  describe("When it's call", () => {
+    test("Then it should render a HeaderComponent with 2 li item", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <Navbar />
+            <NavBar />
           </Provider>
         </BrowserRouter>
       );
 
-      const expectedNavbarText = screen.getAllByRole("button");
+      const expectedNumOfLi = 5;
 
-      expect(expectedNavbarText).toHaveLength(5);
+      const totalList = screen.getAllByRole("button");
+
+      expect(totalList.length).toBe(expectedNumOfLi);
     });
   });
 });

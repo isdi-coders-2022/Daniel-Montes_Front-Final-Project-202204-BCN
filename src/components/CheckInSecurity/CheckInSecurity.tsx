@@ -16,7 +16,7 @@ const CheckInSecurity = ({ children }: Props) => {
 
   useEffect(() => {
     if (!token) {
-      // navigate("/login");
+      navigate("/login");
       return;
     }
     if (!logged) {
