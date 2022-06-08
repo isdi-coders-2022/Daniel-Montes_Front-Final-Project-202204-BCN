@@ -17,7 +17,7 @@ describe("Given Navbar function", () => {
 
       const expectedNavbarText = screen.getAllByRole("button");
 
-      expect(expectedNavbarText).toHaveLength(6);
+      expect(expectedNavbarText).toHaveLength(5);
     });
   });
 });
