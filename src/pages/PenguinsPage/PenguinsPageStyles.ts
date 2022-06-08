@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import iconHamburguer from "../../images/menu_hamburguer.png";
+import iconBack from "../../images/button-back.png";
+import iconFavs from "../../images/star-full.png";
+import iconLogout from "../../images/logoutt.png";
+import iconHome from "../../images/home.png";
 
 const PenguinsPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -91,18 +96,38 @@ const PenguinsPageStyles = styled.div`
     text-align: right;
     flex: 3;
   }
+
   .menu-container {
     display: flex;
     justify-content: space-between;
   }
-  .menu-icon {
+
+  button {
     width: 32px;
     height: 32px;
+    background-repeat: no-repeat;
+    border: 0;
   }
-  .menu-button {
-    width: 32px;
-    height: 32px;
-    text-align: left;
+
+  .bt-logout {
+    background: url(${iconLogout});
+  }
+
+  .bt-menu {
+    background: url(${iconHamburguer});
+  }
+
+  .bt-favs {
+    background: url(${iconFavs});
+  }
+
+  .bt-back {
+    background: url(${iconBack});
+  }
+
+  .bt-home {
+    background: url(${iconHome});
+    height: 25px;
   }
 
   .star-image {
@@ -117,10 +142,6 @@ const PenguinsPageStyles = styled.div`
     margin-bottom: 20px;
     padding: 16px;
     padding: 0 10px 15px;
-
-  }
-
-   
   }
 
   .penguin-datalist,
@@ -155,23 +176,20 @@ const PenguinsPageStyles = styled.div`
   .display-none {
     visibility: hidden;
   }
-  
-   .bt-register {
-      width: 80px;
+
+  .bt-register {
+    width: 80px;
     color: white;
     background-color: black;
     padding: 14px 20px;
     border: none;
     font-weight: bold;
     cursor: pointer;
-   
+
     opacity: 0.9;
-   
-   
+
     font-size: 20px;
     border-radius: 15px;
-    
-  
   }
 `;
 
