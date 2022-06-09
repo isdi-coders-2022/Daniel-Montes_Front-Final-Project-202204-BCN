@@ -72,7 +72,7 @@ const CreateForm = (): JSX.Element => {
           value={formData.description}
           name="description"
         />
-        <button type="submit" className="bt-register">
+        <button type="submit" className="bt-register" placeholder="bt-register">
           Save
         </button>
       </form>

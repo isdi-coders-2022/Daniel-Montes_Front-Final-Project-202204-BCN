@@ -41,7 +41,8 @@ describe("Given a CreatePage component", () => {
 
       const username = screen.getByLabelText(nameLabel);
       const password = screen.getByLabelText(catLabel);
-      const submitButton = screen.getByRole("button");
+      const submitButton = screen.getByPlaceholderText("bt-register");
+      const buttons = screen.getAllByRole("button");
 
       userEvent.type(username, inputText);
       userEvent.type(password, inputText);
@@ -49,6 +50,7 @@ describe("Given a CreatePage component", () => {
 
       expect(username).toHaveValue("");
       expect(password).toHaveValue("");
+      expect(buttons).toHaveLength(7);
     });
   });
 });
