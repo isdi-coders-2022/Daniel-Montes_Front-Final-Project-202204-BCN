@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { correctAction, infoAction } from "../Modals/Modals";
 
