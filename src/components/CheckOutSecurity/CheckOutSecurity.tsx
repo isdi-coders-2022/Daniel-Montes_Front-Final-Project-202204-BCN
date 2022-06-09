@@ -1,14 +1,13 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/redux/hooks/hooks";
-import { wrongAction } from "../Modals/Modals";
 
 type Props = {
   children: JSX.Element;
 };
 
 const CheckOutSecurity = ({ children }: Props) => {
-  const { logged } = useAppSelector((state) => state.users);
+  const logged = useAppSelector((state) => state.users.logged);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,8 +17,6 @@ const CheckOutSecurity = ({ children }: Props) => {
   }, [logged, navigate]);
 
   if (!logged) {
-    wrongAction("You must be logged in to access this page");
-    navigate("/login");
     return children;
   } else {
     return null;
