@@ -16,7 +16,7 @@ const toastOptions = {
 };
 
 const toastOptionsSuccess = {
-  autoClose: 2000,
+  autoClose: 1200,
   closeOnClick: true,
 };
 

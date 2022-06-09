@@ -6,6 +6,7 @@ import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
 import FavsPage from "./pages/FavsPage/FavsPage";
 import CheckOutSecurity from "./components/CheckOutSecurity/CheckOutSecurity";
 import CheckInSecurity from "./components/CheckInSecurity/CheckInSecurity";
+import CreatePage from "./pages/CreatePage/CreatePage";
 
 function App() {
   return (
@@ -41,6 +42,14 @@ function App() {
         element={
           <CheckInSecurity>
             <FavsPage />
+          </CheckInSecurity>
+        }
+      />
+      <Route
+        path="/create"
+        element={
+          <CheckInSecurity>
+            <CreatePage />
           </CheckInSecurity>
         }
       />
