@@ -11,7 +11,7 @@ const PenguinsPage = () => {
     <PenguinsPageStyles>
       <div className="container">
         <Navbar />
-        <h1>Discover</h1>
+
         <Penguins results={penguins} />
       </div>
     </PenguinsPageStyles>

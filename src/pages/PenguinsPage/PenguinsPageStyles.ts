@@ -2,8 +2,10 @@ import styled from "styled-components";
 import iconHamburguer from "../../images/menu_hamburguer.png";
 import iconBack from "../../images/button-back.png";
 import iconFavs from "../../images/star-full.png";
+import iconMenuFavs from "../../images/favorite_star_iconPlus.png";
 import iconLogout from "../../images/logoutt.png";
 import iconHome from "../../images/home.png";
+import iconLike from "../../images/heartLike.png";
 
 const PenguinsPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -38,6 +40,8 @@ const PenguinsPageStyles = styled.div`
   }
   h2 {
     font-size: 20px;
+    margin-left: 12px;
+    margin-top: 43px;
   }
   h1,
   h2 {
@@ -78,8 +82,7 @@ const PenguinsPageStyles = styled.div`
   .penguin-image {
     border: 1px solid;
     border-radius: 5px;
-    max-width: 360px;
-    max-height: 290px;
+    width: 340px;
   }
 
   .container {
@@ -109,13 +112,14 @@ const PenguinsPageStyles = styled.div`
   .penguin-description {
     position: relative;
     top: -140px;
-    left: 30px;
-    width: 84%;
+    left: 18px;
+    width: 89%;
   }
   .menu-container {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    margin-bottom: 30px;
   }
 
   button {
@@ -137,6 +141,7 @@ const PenguinsPageStyles = styled.div`
   .bt-favs-menu {
     background: url(${iconFavs});
   }
+
   .bt-back {
     background: url(${iconBack});
   }
@@ -145,19 +150,14 @@ const PenguinsPageStyles = styled.div`
     background: url(${iconHome});
     height: 25px;
   }
+
   .bt-favs {
-    background: url(${iconFavs});
+    width: 65px;
+    height: 65px;
+    background: url(${iconMenuFavs});
     position: relative;
-    top: -10px;
-    left: -27px;
-
-    margin-top: 20px;
-    padding: 0 0 0 0;
-  }
-
-  .bt-favs {
-    width: 32px;
-    height: 32px;
+    top: 34px;
+    left: -13px;
     margin-top: 20px;
     padding: 0 0 0 0;
   }
@@ -173,6 +173,7 @@ const PenguinsPageStyles = styled.div`
   .penguin-container {
     border-radius: 8px;
     padding: 0 10px 15px;
+    height: 440px;
   }
 
   .penguin-datalist,
@@ -188,6 +189,8 @@ const PenguinsPageStyles = styled.div`
   .bt-likes {
     width: 32px;
     height: 32px;
+    background: url(${iconLike});
+    background-repeat: no-repeat;
     padding: 0 0 0 0;
     position: relative;
     top: -140px;
