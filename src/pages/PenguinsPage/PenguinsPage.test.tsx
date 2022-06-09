@@ -6,8 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 
 describe("Given a PenguinsPage Component", () => {
   describe("When it's rendered", () => {
-    test("Then it should render 3 buttons", () => {
-      const expectedResult = 5;
+    test("Then it should render 6 buttons", () => {
+      const expectedResult = 6;
 
       render(
         <BrowserRouter>

@@ -6,7 +6,10 @@ import {
   stopLoadingAction,
   wrongAction,
 } from "../../../../components/Modals/Modals";
-import { loadFavsActionCreator } from "../../features/favsSlice/favsSlice";
+import {
+  createFavActionCreator,
+  loadFavsActionCreator,
+} from "../../features/favsSlice/favsSlice";
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   try {
@@ -43,3 +46,22 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
     wrongAction("Penguins Favs loader failed!");
   }
 };
+
+export const createFavThunk =
+  (idUser: string) => async (dispatch: AppDispatch) => {
+    try {
+      const token = localStorage.getItem("token");
+
+      if (token) {
+        const {
+          data: { penguins },
+        } = await axios.get(`${process.env.REACT_APP_API_URL}favs`);
+        dispatch(createFavActionCreator(penguins));
+
+        stopLoadingAction();
+      }
+    } catch {
+      stopLoadingAction();
+      wrongAction("Penguins Favs loader failed!");
+    }
+  };

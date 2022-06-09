@@ -6,6 +6,7 @@ import iconMenuFavs from "../../images/favorite_star_iconPlus.png";
 import iconLogout from "../../images/logoutt.png";
 import iconHome from "../../images/home.png";
 import iconLike from "../../images/heartLike.png";
+import iconAddFav from "../../images/Add-icon2.png";
 
 const PenguinsPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -161,7 +162,11 @@ const PenguinsPageStyles = styled.div`
     margin-top: 20px;
     padding: 0 0 0 0;
   }
-
+  .bt-addfav {
+    width: 32px;
+    height: 32px;
+    background: url(${iconAddFav});
+  }
   .penguin-image-container {
     box-shadow: 0 3px 6px #666;
     padding: 10px 10px 150px 10px;

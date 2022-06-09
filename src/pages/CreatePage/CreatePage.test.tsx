@@ -3,23 +3,23 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import LoginForm from "./LoginForm";
+import CreatePage from "./CreatePage";
 
-describe("Given a LoginForm component", () => {
-  describe("When the word 'user1' is written to the username input field", () => {
-    test("Then the value of the username input field should be 'user1'", () => {
-      const labelToFind = "Username";
-      const inputText = "user1";
+describe("Given a CreatePage component", () => {
+  describe("When the word 'penguin' is written to the username input field", () => {
+    test("Then the value of the username input field should be 'penguin'", () => {
+      const labelToFind = "Name";
+      const inputText = "penguin1";
 
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <LoginForm />
+            <CreatePage />
           </BrowserRouter>
         </Provider>
       );
 
-      const label = screen.getByPlaceholderText(labelToFind);
+      const label = screen.getByText(labelToFind);
       userEvent.type(label, inputText);
 
       expect(label).toBeInTheDocument();
@@ -27,21 +27,22 @@ describe("Given a LoginForm component", () => {
   });
   describe("When the two inputs have text and the submit button is clicked", () => {
     test("Then the two inputs should be empty", () => {
-      const usernameLabel = "Username";
-      const passwordLabel = "Password";
-      const inputText = "user1";
+      const nameLabel = "Name";
+      const catLabel = "Category";
+      const inputText = "penguin";
 
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <LoginForm />
+            <CreatePage />
           </BrowserRouter>
         </Provider>
       );
 
-      const username = screen.getByPlaceholderText(usernameLabel);
-      const password = screen.getByPlaceholderText(passwordLabel);
-      const submitButton = screen.getByRole("button");
+      const username = screen.getByLabelText(nameLabel);
+      const password = screen.getByLabelText(catLabel);
+      const submitButton = screen.getByPlaceholderText("bt-register");
+      const buttons = screen.getAllByRole("button");
 
       userEvent.type(username, inputText);
       userEvent.type(password, inputText);
@@ -49,6 +50,7 @@ describe("Given a LoginForm component", () => {
 
       expect(username).toHaveValue("");
       expect(password).toHaveValue("");
+      expect(buttons).toHaveLength(7);
     });
   });
 });
