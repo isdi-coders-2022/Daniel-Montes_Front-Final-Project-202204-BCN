@@ -16,8 +16,10 @@ describe("Given a HeaderComponent Component", () => {
       );
 
       const bthome = screen.getByTitle("bt-home");
+      const buttons = screen.getAllByRole("button");
 
       expect(bthome).toBeInTheDocument();
+      expect(buttons.length).toBe(5);
     });
   });
 });
