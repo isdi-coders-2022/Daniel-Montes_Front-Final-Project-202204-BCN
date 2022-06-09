@@ -15,13 +15,9 @@ describe("Given a HeaderComponent Component", () => {
         </BrowserRouter>
       );
 
-      const expectedNumOfLi = 5;
+      const bthome = screen.getByTitle("bt-home");
 
-      const totalList = screen.getAllByRole("button");
-
-      expect(totalList.length).toBe(expectedNumOfLi);
+      expect(bthome).toBeInTheDocument();
     });
-
-    const bthome = screen.getByTitle("bt-home");
   });
 });
