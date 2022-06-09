@@ -50,7 +50,7 @@ describe("Given a CreatePage component", () => {
 
       expect(username).toHaveValue("");
       expect(password).toHaveValue("");
-      expect(buttons).toHaveLength(7);
+      expect(buttons).toHaveLength(13);
     });
   });
 });

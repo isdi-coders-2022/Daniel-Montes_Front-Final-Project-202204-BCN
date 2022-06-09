@@ -1,16 +1,6 @@
 import styled from "styled-components";
 
 export const NavbarStyles = styled.nav`
-  @font-face {
-    font-family: OpenSans-Regular;
-    src: url("../../fonts/OpenSans-Regular.ttf");
-  }
-
-  @font-face {
-    font-family: RobotoCondensed-Light;
-    src: url("../../fonts/RobotoCondensed-Light.ttf");
-  }
-
   html,
   body {
     margin: 0;
@@ -19,6 +9,18 @@ export const NavbarStyles = styled.nav`
     background: rgb(233, 233, 233);
   }
 
+  .menu-header {
+    display: flex;
+    flex-direction: column;
+  }
+  text {
+    margin-left: 16px;
+    font-size: 28px;
+    padding-bottom: 10px;
+  }
+  h1 {
+    color: white;
+  }
   h1,
   h2,
   h3,
@@ -26,7 +28,7 @@ export const NavbarStyles = styled.nav`
   h5,
   h6,
   button {
-    font-family: RobotoCondensed-Light, OpenSans-Regular;
+    color: white;
   }
 
   .app {
@@ -126,7 +128,7 @@ export const NavbarStyles = styled.nav`
     top: 0;
 
     display: flex;
-    justify-content: center;
+    justify-content: left;
   }
 
   .menu-open {

@@ -12,7 +12,14 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/homepage" />} />
-      <Route path="/homepage" element={<HomePage />} />
+      <Route
+        path="/homepage"
+        element={
+          <CheckOutSecurity>
+            <HomePage />
+          </CheckOutSecurity>
+        }
+      />
       <Route
         path="/login"
         element={
