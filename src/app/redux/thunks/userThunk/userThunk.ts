@@ -30,18 +30,17 @@ export const loginThunk =
         localStorage.setItem("token", data.token);
 
         dispatch(logInActionCreator({ name, username, logged }));
-        stopLoadingAction();
       }
+      correctAction("Logged in!");
+      document.location.href = "/penguins";
+
+      stopLoadingAction();
     } catch (error: any) {
       wrongAction(
         "Login failed!\nCheck credentials for username: " + userData.username
       );
 
       return error.message;
-    } finally {
-      document.location.href = "/penguins";
-      stopLoadingAction();
-      correctAction("Logged in!");
     }
   };
 

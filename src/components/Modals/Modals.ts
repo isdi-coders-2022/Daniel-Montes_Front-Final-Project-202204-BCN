@@ -45,7 +45,7 @@ export const warnAction = (message: string) => {
 
 export const infoAction = (message: string) => {
   if (!toast.isActive(customID)) {
-    customID = toast.info(message, toastOptions);
+    customID = toast.loading(message, toastOptions);
   }
 };
 

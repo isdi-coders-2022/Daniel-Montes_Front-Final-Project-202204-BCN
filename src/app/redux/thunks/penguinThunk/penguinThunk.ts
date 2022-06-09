@@ -18,6 +18,7 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
         data: { penguins },
       } = await axios.get(`${process.env.REACT_APP_API_URL}penguins`);
       dispatch(loadPenguinsActionCreator(penguins));
+
       stopLoadingAction();
     }
   } catch {
@@ -33,8 +34,8 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
       const {
         data: { penguins },
       } = await axios.get(`${process.env.REACT_APP_API_URL}favs`);
-
       dispatch(loadFavsActionCreator(penguins));
+
       stopLoadingAction();
     }
   } catch {
