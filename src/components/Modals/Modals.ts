@@ -1,10 +1,10 @@
-import { toast } from "react-toastify";
+import { Id, toast } from "react-toastify";
 
-const idModal = "modal-id";
+let customID: Id = "custom-id";
 
 const toastOptions = {
   position: toast.POSITION.TOP_CENTER,
-  autoClose: 1000,
+  autoClose: 3000,
   hideProgressBar: false,
   newstOnTop: false,
   closeOnClick: true,
@@ -12,33 +12,43 @@ const toastOptions = {
   pauseOnFocusLoss: true,
   draggable: true,
   pauseOnHover: true,
-  toastId: `${idModal}`,
+  toastId: `${customID}`,
+};
+
+const toastOptionsSuccess = {
+  autoClose: 2000,
+  closeOnClick: true,
+};
+
+const toastOptionsWrong = {
+  autoClose: 2000,
+  closeOnClick: true,
 };
 
 export const correctAction = (message: string) => {
-  if (!toast.isActive(idModal)) {
-    toast.success(message, toastOptions);
+  if (!toast.isActive(customID)) {
+    customID = toast.success(message, toastOptionsSuccess);
   }
 };
 
 export const wrongAction = (message: string) => {
-  if (!toast.isActive(idModal)) {
-    toast.error(message, toastOptions);
-  }
-};
-
-export const infoAction = (message: string) => {
-  if (!toast.isActive(idModal)) {
-    toast.info(message, toastOptions);
+  if (!toast.isActive(customID)) {
+    customID = toast.error(message, toastOptionsWrong);
   }
 };
 
 export const warnAction = (message: string) => {
-  if (!toast.isActive(idModal)) {
-    toast.loading(message, toastOptions);
+  if (!toast.isActive(customID)) {
+    customID = toast.warning(message, toastOptionsSuccess);
+  }
+};
+
+export const infoAction = (message: string) => {
+  if (!toast.isActive(customID)) {
+    customID = toast.info(message, toastOptions);
   }
 };
 
 export const stopLoadingAction = () => {
-  toast.dismiss(idModal);
+  toast.dismiss(customID);
 };
