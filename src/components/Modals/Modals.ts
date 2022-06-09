@@ -1,6 +1,6 @@
-import { toast } from "react-toastify";
+import { Id, toast } from "react-toastify";
 
-const customID = "custom-id";
+let customID: Id = "custom-id";
 
 const toastOptions = {
   position: toast.POSITION.TOP_CENTER,
@@ -26,37 +26,27 @@ const toastOptionsWrong = {
 };
 
 export const correctAction = (message: string) => {
-<<<<<<< refs/remotes/origin/feature/add-checkout-security
   if (!toast.isActive(customID)) {
-    toast.success(message, toastOptions);
+    customID = toast.success(message, toastOptionsSuccess);
   }
 };
 
-export const wrongAction = (message: string) =>
-  toast.error(message, toastOptions);
-
-export const infoAction = (message: string) =>
-  toast.loading(message, toastOptions);
-=======
-  if (!toast.isActive(idModal)) {
-    toast.success(message, toastOptionsSuccess);
+export const warnAction = (message: string) => {
+  if (!toast.isActive(customID)) {
+    customID = toast.success(message, toastOptionsSuccess);
   }
 };
 
 export const wrongAction = (message: string) => {
-  if (!toast.isActive(idModal)) {
-    toast.error(message, toastOptionsWrong);
+  if (!toast.isActive(customID)) {
+    customID = toast.error(message, toastOptionsWrong);
   }
 };
 
 export const infoAction = (message: string) => {
-  if (!toast.isActive(idModal)) {
-    toast.loading(message, toastOptions);
+  if (!toast.isActive(customID)) {
+    customID = toast.loading(message, toastOptions);
   }
 };
->>>>>>> local
-
-export const warnAction = (message: string) =>
-  toast.warn(message, toastOptions);
 
 export const stopLoadingAction = () => toast.dismiss(customID);

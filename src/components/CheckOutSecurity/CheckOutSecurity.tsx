@@ -12,7 +12,7 @@ const AntiController = ({ children }: Props) => {
 
   useEffect(() => {
     if (logged) {
-      navigate("/homepage");
+      navigate("/penguins");
     }
   }, [logged, navigate]);
 

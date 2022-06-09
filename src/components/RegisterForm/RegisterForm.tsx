@@ -29,9 +29,11 @@ const RegisterForm = (): JSX.Element => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     infoAction("Registering...");
+
     event.preventDefault();
     dispatch(registerThunk(formData));
     setFormData(blankFields);
+
     stopLoadingAction();
   };
 

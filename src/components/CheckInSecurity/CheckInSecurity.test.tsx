@@ -33,7 +33,7 @@ describe("Given a PrivateRoute component", () => {
         </Provider>
       );
 
-      expect(mockNavigate).not.toHaveBeenCalled();
+      expect(mockNavigate).toHaveBeenCalled();
     });
   });
 

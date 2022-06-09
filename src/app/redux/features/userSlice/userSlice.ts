@@ -25,6 +25,6 @@ const userSlice = createSlice({
 export const { login: logInActionCreator, logout: logOutActionCreator } =
   userSlice.actions;
 
-export const penguinsSelector = (state: RootState) => state.users;
+export const usersSelector = (state: RootState) => state.users;
 
 export default userSlice.reducer;

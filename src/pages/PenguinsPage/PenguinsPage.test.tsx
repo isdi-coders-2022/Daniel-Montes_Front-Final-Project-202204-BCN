@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 describe("Given a PenguinsPage Component", () => {
   describe("When it's rendered", () => {
     test("Then it should show the text 'Name'", () => {
-      const expectedResult = "Discover";
+      const expectedResult = 5;
 
       render(
         <BrowserRouter>
@@ -17,8 +17,8 @@ describe("Given a PenguinsPage Component", () => {
         </BrowserRouter>
       );
 
-      const receivedResult = screen.getByText(expectedResult);
-      expect(receivedResult).toBeInTheDocument();
+      const receivedResult = screen.getAllByRole("button");
+      expect(receivedResult.length).toBe(expectedResult);
     });
   });
 });

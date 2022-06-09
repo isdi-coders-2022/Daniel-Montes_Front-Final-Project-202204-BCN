@@ -2,6 +2,7 @@ import styled from "styled-components";
 import iconHamburguer from "../../images/menu_hamburguer.png";
 import iconBack from "../../images/button-back.png";
 import iconFavs from "../../images/favorite_star_iconPlus2.png";
+import iconMenuFavs from "../../images/star-full.png";
 import iconLogout from "../../images/logoutt.png";
 import iconLike from "../../images/heartLike.png";
 import iconHome from "../../images/home.png";
@@ -81,8 +82,7 @@ const PenguinsPageStyles = styled.div`
   .penguin-image {
     border: 1px solid;
     border-radius: 5px;
-    max-width: 345px;
-    max-height: 290px;
+    width: 345px;
   }
 
   .container {
@@ -107,8 +107,8 @@ const PenguinsPageStyles = styled.div`
   .penguin-description {
     position: relative;
     top: -140px;
-    left: 30px;
-    width: 84%;
+    left: 20px;
+    width: 85%;
   }
   .menu-container {
     display: flex;
@@ -131,10 +131,11 @@ const PenguinsPageStyles = styled.div`
   .bt-menu {
     background: url(${iconHamburguer});
     border-radius: 10px;
+    margin-right: 10px;
   }
 
   .bt-favs-menu {
-    background: url(${iconFavs});
+    background: url(${iconMenuFavs});
   }
   .bt-back {
     background: url(${iconBack});
@@ -156,7 +157,7 @@ const PenguinsPageStyles = styled.div`
   }
 
   .penguin-image-container {
-    box-shadow: 0 3px 6px #666;
+    box-shadow: 0 10px 10px #666;
     padding: 10px 10px 150px 10px;
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
@@ -178,7 +179,7 @@ const PenguinsPageStyles = styled.div`
     width: 92%;
     position: relative;
     top: -142px;
-    left: 14px;
+    left: 17px;
   }
 
   .penguin-name,

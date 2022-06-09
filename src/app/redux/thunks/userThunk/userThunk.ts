@@ -9,7 +9,6 @@ import {
 import { logInActionCreator } from "../../features/userSlice/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import {
-  correctAction,
   wrongAction,
   infoAction,
   stopLoadingAction,
@@ -33,6 +32,7 @@ export const loginThunk =
         dispatch(logInActionCreator({ name, username, logged }));
       }
       document.location.href = "/penguins";
+
       stopLoadingAction();
     } catch (error: any) {
       wrongAction(
@@ -41,26 +41,22 @@ export const loginThunk =
 
       return error.message;
     } finally {
-<<<<<<< refs/remotes/origin/feature/add-checkout-security
-      stopLoadingAction();
-=======
->>>>>>> local
-      correctAction("Logged in!");
-      document.location.href = "/penguins";
     }
   };
 
 export const registerThunk =
   (userData: UserRegister) => async (dispatch: Dispatch) => {
     try {
+      infoAction("Loading penguins...");
       const { data, status }: DataAxiosLogin = await axios.post(
         `${process.env.REACT_APP_API_URL}register`,
         userData
       );
       if (status === 200) {
         localStorage.setItem("token", data.token);
+        document.location.href = "/penguins";
 
-        correctAction("Registed!...");
+        stopLoadingAction();
       }
     } catch (error: any) {
       wrongAction(
@@ -69,9 +65,7 @@ export const registerThunk =
           "\nPass: " +
           userData.password
       );
-
+      stopLoadingAction();
       return error.message;
-    } finally {
-      document.location.href = "/login";
     }
   };
