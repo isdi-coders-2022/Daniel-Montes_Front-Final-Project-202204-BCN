@@ -40,7 +40,7 @@ export const loginThunk =
       );
 
       return error.message;
-    } finally {
+    } 
     }
   };
 

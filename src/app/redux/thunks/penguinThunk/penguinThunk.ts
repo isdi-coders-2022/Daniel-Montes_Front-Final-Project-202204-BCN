@@ -17,7 +17,6 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
       const {
         data: { penguins },
       } = await axios.get(`${process.env.REACT_APP_API_URL}penguins`);
-
       dispatch(loadPenguinsActionCreator(penguins));
       stopLoadingAction();
     }

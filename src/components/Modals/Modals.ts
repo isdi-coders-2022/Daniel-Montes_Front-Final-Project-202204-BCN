@@ -26,6 +26,7 @@ const toastOptionsWrong = {
 };
 
 export const correctAction = (message: string) => {
+
   if (!toast.isActive(customID)) {
     customID = toast.success(message, toastOptionsSuccess);
   }
@@ -46,7 +47,10 @@ export const wrongAction = (message: string) => {
 export const infoAction = (message: string) => {
   if (!toast.isActive(customID)) {
     customID = toast.loading(message, toastOptions);
+
   }
 };
 
-export const stopLoadingAction = () => toast.dismiss(customID);
+export const stopLoadingAction = () => {
+  toast.dismiss(customID);
+};

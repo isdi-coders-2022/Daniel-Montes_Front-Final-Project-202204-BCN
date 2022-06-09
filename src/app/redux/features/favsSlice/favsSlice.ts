@@ -10,8 +10,8 @@ const initialState: FavsSliceState = {
   favs: [],
 };
 
-const penguinSlice = createSlice({
-  name: "penguins",
+const favsSlice = createSlice({
+  name: "favs",
   initialState,
   reducers: {
     loadFavs: (penguins, action): FavsSliceState => ({
@@ -28,9 +28,8 @@ const penguinSlice = createSlice({
 export const {
   createFav: createFavActionCreator,
   loadFavs: loadFavsActionCreator,
-} = penguinSlice.actions;
+} = favsSlice.actions;
 
-export const penguinsSelector = (state: RootState) =>
-  state.penguins.AllPenguins;
+export const favsSelector = (state: RootState) => state.favs.favs;
 
-export default penguinSlice.reducer;
+export default favsSlice.reducer;

@@ -12,6 +12,7 @@ const CheckInSecurity = ({ children }: Props) => {
   const { logged } = useAppSelector((state) => state.users);
 
   useEffect(() => {
+
     if (!logged) {
       stopLoadingAction();
 

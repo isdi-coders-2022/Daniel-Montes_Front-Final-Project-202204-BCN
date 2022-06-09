@@ -23,6 +23,7 @@ describe("Given an CheckOutSecurity function", () => {
       );
 
       expect(mockUseNavigate).toHaveBeenCalledWith("/penguins");
+
     });
   });
 });

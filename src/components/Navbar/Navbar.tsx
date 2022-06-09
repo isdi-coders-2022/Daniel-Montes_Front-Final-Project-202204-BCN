@@ -1,7 +1,9 @@
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { useNavigate } from "react-router-dom";
 import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+
 import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
+
 
 const Navbar = () => {
   const location = document.location.pathname;
@@ -14,6 +16,7 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const logOutUser = () => {
+
     localStorage.removeItem("token");
     correctAction("Logged out!");
     navigate("/");

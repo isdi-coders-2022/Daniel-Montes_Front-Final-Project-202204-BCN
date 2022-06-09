@@ -3,9 +3,10 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
-import CheckInSecurity from "./components/CheckInSecurity/CheckInSecurity";
-import CheckOutSecurity from "./components/CheckOutSecurity/CheckOutSecurity";
 import FavsPage from "./pages/FavsPage/FavsPage";
+
+import CheckOutSecurity from "./components/CheckOutSecurity/CheckOutSecurity";
+
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           </CheckOutSecurity>
         }
       />
+
       <Route
         path="/register"
         element={

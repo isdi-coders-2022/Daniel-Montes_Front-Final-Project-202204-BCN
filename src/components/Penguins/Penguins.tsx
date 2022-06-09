@@ -5,6 +5,7 @@ import {
   IPenguin,
   IPenguins,
 } from "../../app/redux/types/penguin/penguinInterfaces";
+
 import Penguin from "../Penguin/Penguin";
 
 const Penguins = ({ results: penguins }: IPenguins) => {
