@@ -1,48 +1,54 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
 import LoginForm from "./LoginForm";
-import { BrowserRouter } from "react-router-dom";
 
-describe("Given a SignUpForm component", () => {
-  describe("When it's invoked", () => {
-    test("Then it should render 2 labels", () => {
-      const expectedText = "Login";
+describe("Given a LoginForm component", () => {
+  describe("When the word 'user1' is written to the username input field", () => {
+    test("Then the value of the username input field should be 'user1'", () => {
+      const labelToFind = "Username";
+      const inputText = "user1";
 
       render(
-        <BrowserRouter>
-          <Provider store={store}>
+        <Provider store={store}>
+          <BrowserRouter>
             <LoginForm />
-          </Provider>
-        </BrowserRouter>
+          </BrowserRouter>
+        </Provider>
       );
 
-      const expectedRenderedHeading = screen.getByRole("button");
+      const label = screen.getByPlaceholderText(labelToFind);
+      userEvent.type(label, inputText);
 
-      const inputUsername = screen.getByPlaceholderText("Username");
-      const inputPassword = screen.getByPlaceholderText("Password");
-      const button = screen.getByRole("button");
-
-      expect(inputUsername).toBeInTheDocument();
-      expect(inputPassword).toBeInTheDocument();
-      expect(button).toBeInTheDocument();
-      expect(expectedRenderedHeading).toHaveTextContent(expectedText);
+      expect(label).toBeInTheDocument();
     });
   });
+  describe("When the two inputs have text and the submit button is clicked", () => {
+    test("Then the two inputs should be empty", () => {
+      const usernameLabel = "Username";
+      const passwordLabel = "Password";
+      const inputText = "user1";
 
-  describe("When the user doesn't write in all inputs", () => {
-    test("Then the button are disabled", () => {
       render(
-        <BrowserRouter>
-          <Provider store={store}>
+        <Provider store={store}>
+          <BrowserRouter>
             <LoginForm />
-          </Provider>
-        </BrowserRouter>
+          </BrowserRouter>
+        </Provider>
       );
 
-      const button = screen.getByRole("button", { name: "Login" });
+      const username = screen.getByPlaceholderText(usernameLabel);
+      const password = screen.getByPlaceholderText(passwordLabel);
+      const submitButton = screen.getByRole("button");
 
-      expect(button).toBeDisabled();
+      userEvent.type(username, inputText);
+      userEvent.type(password, inputText);
+      userEvent.click(submitButton);
+
+      expect(username).toHaveValue("");
+      expect(password).toHaveValue("");
     });
   });
 });

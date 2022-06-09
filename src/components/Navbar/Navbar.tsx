@@ -66,12 +66,32 @@ const Navbar = (): JSX.Element => {
         blur={1.5}
       />
       <div className="menu-container">
-        <button onClick={loadBack} className={`bt-back ${HiderClass}`} />
-        <button onClick={loadHome} className="bt-home" title="bt-home" />
-        <button onClick={loadFavs} className="bt-favs-menu" />
-        <button onClick={logOutUser} className="bt-logout" />
-        <button onClick={addFav} className="bt-addfav" />
-        <button onClick={handleMenu} className="menu-btn bt-menu" />
+        <button
+          onClick={loadBack}
+          className={`bt-back ${HiderClass}`}
+          placeholder="bt-back"
+        />
+        <button onClick={loadHome} className="bt-home" placeholder="bt-home" />
+        <button
+          onClick={loadFavs}
+          className="bt-favs-menu"
+          placeholder="bt-favs-menu"
+        />
+        <button
+          onClick={logOutUser}
+          className="bt-logout"
+          placeholder="bt-logout"
+        />
+        <button
+          onClick={addFav}
+          className="bt-addfav"
+          placeholder="bt-addfav"
+        />
+        <button
+          onClick={handleMenu}
+          className="menu-btn bt-menu"
+          placeholder="bt-menu"
+        />
       </div>
     </NavbarStyles>
   );

@@ -1,13 +1,15 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
 import CreatePage from "./CreatePage";
 
-describe("Given a RegisterPage Component", () => {
-  describe("When it's rendered", () => {
-    test("Then it should show the text 'Register'", () => {
-      const expectedResult = "Register";
+describe("Given a CreatePage component", () => {
+  describe("When the word 'penguin' is written to the username input field", () => {
+    test("Then the value of the username input field should be 'penguin'", () => {
+      const labelToFind = "Name";
+      const inputText = "penguin1";
 
       render(
         <Provider store={store}>
@@ -17,9 +19,36 @@ describe("Given a RegisterPage Component", () => {
         </Provider>
       );
 
-      const receivedResult = screen.getByText(expectedResult);
+      const label = screen.getByText(labelToFind);
+      userEvent.type(label, inputText);
 
-      expect(receivedResult).toBeInTheDocument();
+      expect(label).toBeInTheDocument();
+    });
+  });
+  describe("When the two inputs have text and the submit button is clicked", () => {
+    test("Then the two inputs should be empty", () => {
+      const nameLabel = "Name";
+      const catLabel = "Category";
+      const inputText = "penguin";
+
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <CreatePage />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const username = screen.getByLabelText(nameLabel);
+      const password = screen.getByLabelText(catLabel);
+      const submitButton = screen.getByRole("button");
+
+      userEvent.type(username, inputText);
+      userEvent.type(password, inputText);
+      userEvent.click(submitButton);
+
+      expect(username).toHaveValue("");
+      expect(password).toHaveValue("");
     });
   });
 });

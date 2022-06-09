@@ -43,9 +43,7 @@ const CreateForm = (): JSX.Element => {
   return (
     <div className="container">
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <NavLink to="/login" className="link">
-          Already have an account? Please Log In
-        </NavLink>
+        <h1>New fav...</h1>
         <label htmlFor="username"> Name </label>
         <input
           type="text"
