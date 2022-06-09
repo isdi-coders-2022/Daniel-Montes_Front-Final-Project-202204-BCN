@@ -21,5 +21,7 @@ describe("Given a HeaderComponent Component", () => {
 
       expect(totalList.length).toBe(expectedNumOfLi);
     });
+
+    const bthome = screen.getByTitle("bt-home");
   });
 });

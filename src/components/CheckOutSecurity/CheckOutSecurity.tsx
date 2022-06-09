@@ -7,7 +7,7 @@ type Props = {
 };
 
 const CheckOutSecurity = ({ children }: Props) => {
-  const logged = useAppSelector((state) => state.users.logged);
+  const logged = useAppSelector((state) => state.users);
   const navigate = useNavigate();
 
   useEffect(() => {
