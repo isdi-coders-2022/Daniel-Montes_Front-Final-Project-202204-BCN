@@ -1,7 +1,7 @@
 import * as React from "react";
-import { ChangeEvent, FormEvent, useState } from "react";
+
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   createFavThunk,
   loadFavsThunk,
@@ -16,11 +16,6 @@ interface IMenuProps {
 export const Menu = ({ isMenuOpen }: IMenuProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const loadBack = () => {
-    infoAction("Back loading...");
-    navigate("/penguins");
-  };
 
   const logOutUser = () => {
     infoAction("Login out...");
@@ -42,22 +37,40 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
   };
 
   const addFav = () => {
-    infoAction("Adding to Favs...");
-    dispatch(createFavThunk("ID"));
-    localStorage.removeItem("token");
-
-    stopLoadingAction();
-    navigate("/favs");
+    navigate("/create");
   };
 
   return (
     <div className={`app-menu ${isMenuOpen ? "menu-open" : ""}`}>
-      <h2>This is my MEEEEEENU</h2>
+      <div className="menu-header">
+        <ul>
+          <li>
+            <Link to="/homepage">
+              <button onClick={loadHome} className="bt-home" title="bt-home" />
+              <text>Home</text>
+            </Link>
+          </li>
+          <li>
+            <Link to="/favs">
+              <button onClick={loadFavs} className="bt-favs-menu" />
+              <text>Favourites</text>
+            </Link>
+          </li>
+          <li>
+            <Link to="/create">
+              <button onClick={addFav} className="bt-addfav" />
+              <text>Add new...</text>
+            </Link>
+          </li>
 
-      <button onClick={loadHome} className="bt-home" title="bt-home" />
-      <button onClick={loadFavs} className="bt-favs-menu" />
-      <button onClick={logOutUser} className="bt-logout" />
-      <button onClick={addFav} className="bt-addfav" />
+          <li>
+            <Link to="/logout">
+              <button onClick={logOutUser} className="bt-logout" />
+              <text>Logout</text>
+            </Link>
+          </li>
+        </ul>
+      </div>
     </div>
   );
 };

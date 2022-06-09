@@ -3,6 +3,8 @@ import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { useNavigate } from "react-router-dom";
 import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { correctAction, infoAction } from "../Modals/Modals";
+import CreateFormStyles from "./CreateFormStyles";
+import Navbar from "../Navbar/Navbar";
 
 interface FormData {
   name: string;
@@ -41,42 +43,49 @@ const CreateForm = (): JSX.Element => {
   };
 
   return (
-    <div className="container">
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-        <h1>New fav...</h1>
-        <label htmlFor="username"> Name </label>
-        <input
-          type="text"
-          id="username"
-          autoComplete="off"
-          placeholder="Username"
-          value={formData.name}
-          onChange={handleInputChange}
-          name="Username"
-        />
-        <label htmlFor="category"> Category </label>
-        <input
-          type="text"
-          id="category"
-          autoComplete="off"
-          placeholder="Category"
-          value={formData.category}
-          name="category"
-        />
-        <label htmlFor="description"> Description </label>
-        <input
-          type="text"
-          id="description"
-          autoComplete="off"
-          placeholder="Description"
-          value={formData.description}
-          name="description"
-        />
-        <button type="submit" className="bt-register" placeholder="bt-register">
-          Save
-        </button>
-      </form>
-    </div>
+    <CreateFormStyles>
+      <Navbar />
+      <div className="container">
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <h1>New fav...</h1>
+          <label htmlFor="username"> Name </label>
+          <input
+            type="text"
+            id="username"
+            autoComplete="off"
+            placeholder="Username"
+            value={formData.name}
+            onChange={handleInputChange}
+            name="Username"
+          />
+          <label htmlFor="category"> Category </label>
+          <input
+            type="text"
+            id="category"
+            autoComplete="off"
+            placeholder="Category"
+            value={formData.category}
+            name="category"
+          />
+          <label htmlFor="description"> Description </label>
+          <input
+            type="text"
+            id="description"
+            autoComplete="off"
+            placeholder="Description"
+            value={formData.description}
+            name="description"
+          />
+          <button
+            type="submit"
+            className="bt-register"
+            placeholder="bt-register"
+          >
+            Save
+          </button>
+        </form>
+      </div>
+    </CreateFormStyles>
   );
 };
 

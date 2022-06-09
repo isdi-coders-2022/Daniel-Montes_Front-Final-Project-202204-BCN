@@ -8,7 +8,7 @@ import iconAddFav from "../../images/icon-folder-edit.png";
 import iconHome from "../../images/icon-menu-home.png";
 import iconLogout from "../../images/icon-menu-logout.png";
 
-const PenguinsPageStyles = styled.div`
+const CreateFormStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 
@@ -53,7 +53,6 @@ const PenguinsPageStyles = styled.div`
 
   a {
     text-decoration: none;
-    color: white;
   }
 
   label {
@@ -242,4 +241,4 @@ const PenguinsPageStyles = styled.div`
   }
 `;
 
-export default PenguinsPageStyles;
+export default CreateFormStyles;
