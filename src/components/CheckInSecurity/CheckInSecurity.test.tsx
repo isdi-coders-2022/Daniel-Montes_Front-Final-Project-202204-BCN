@@ -26,4 +26,27 @@ describe("Given a CheckInSecurity function", () => {
       expect(mockUseNavigate).toHaveBeenCalledWith("/login");
     });
   });
+  const mockNavigate = jest.fn();
+
+  jest.mock("react-router-dom", () => ({
+    ...jest.requireActual("react-router-dom"),
+    useNavigate: () => mockNavigate,
+  }));
+  let mockedToken = "uwuwu";
+  jest.mock("jwt-decode", () => () => mockedToken);
+
+  const saveToStorage = (value: string) => {
+    window.localStorage.setItem("token", value);
+  };
+
+  describe("When its invoked and receives a children JSX element and there is a token in the localStorage", () => {
+    test("Then it should render the children JSX element and", () => {
+      saveToStorage("token");
+      render(<CheckInSecurity children={<h1>penguin</h1>} />);
+
+      // const expectedHeading = screen.getByRole("heading", { name: "penguin" });
+
+      expect(window.localStorage.getItem("token")).toBe("token");
+    });
+  });
 });
