@@ -4,7 +4,7 @@ import { NavbarStyles } from "./NavbarStyles";
 import { Menu } from "../Menu/Menu";
 import { IParameter } from "../../app/redux/types/userInterfaces/userInterfaces";
 
-const Navbar = ({ title: IParameter }: IParameter): JSX.Element => {
+const Navbar = ({ title }: IParameter): JSX.Element => {
   const [isMenuOpen, setMenu] = useState(false);
 
   const handleMenu = () => {

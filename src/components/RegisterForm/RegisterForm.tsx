@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { registerThunk } from "../../app/redux/thunks/userThunk/userThunk";
 import { NavLink } from "react-router-dom";
+import { infoAction } from "../Modals/Modals";
 
 interface FormData {
   name: string;
@@ -27,8 +28,10 @@ const RegisterForm = (): JSX.Element => {
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    infoAction("Registering...");
     event.preventDefault();
     dispatch(registerThunk(formData));
+
     setFormData(blankFields);
   };
 

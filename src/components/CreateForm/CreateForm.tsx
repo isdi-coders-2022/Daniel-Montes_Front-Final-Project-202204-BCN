@@ -36,6 +36,7 @@ const CreateForm = (): JSX.Element => {
   };
 
   const handleSubmit = (event: React.FormEvent): void => {
+    infoAction("Creating...");
     event.preventDefault();
 
     const newFav = new FormData();
