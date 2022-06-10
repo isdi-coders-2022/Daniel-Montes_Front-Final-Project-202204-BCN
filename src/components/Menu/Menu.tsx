@@ -15,20 +15,25 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
 
   const logOutUser = () => {
     infoAction("Login out...");
+
     dispatch(logOutActionCreator());
     localStorage.removeItem("token");
+
     stopLoadingAction();
     navigate("/");
   };
 
   const loadFavs = () => {
     infoAction("Loading Favs...");
+
     dispatch(loadPenguinsThunk());
+
     navigate("/favs");
   };
 
   const loadHome = () => {
     infoAction("Loading Home...");
+
     navigate("/penguins");
   };
 

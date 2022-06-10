@@ -11,7 +11,6 @@ import { Dispatch } from "@reduxjs/toolkit";
 import {
   correctAction,
   wrongAction,
-  infoAction,
   stopLoadingAction,
 } from "../../../../components/Modals/Modals";
 import { loadingActionCreator } from "../../features/uiSlice/uiSlice";
@@ -40,6 +39,8 @@ export const loginThunk =
         "Login failed!\nCheck credentials for username: " + userData.username
       );
 
+      stopLoadingAction();
+
       return error.message;
     }
   };
@@ -47,7 +48,6 @@ export const loginThunk =
 export const registerThunk =
   (userData: UserRegister) => async (dispatch: Dispatch) => {
     try {
-      infoAction("Registering...");
       const { data, status }: DataAxiosLogin = await axios.post(
         `${process.env.REACT_APP_API_URL}register`,
         userData
@@ -55,6 +55,12 @@ export const registerThunk =
       if (status === 200) {
         localStorage.setItem("token", data.token);
       }
+
+      correctAction("Registed!...");
+
+      stopLoadingAction();
+
+      document.location.href = "/penguins";
     } catch (error: any) {
       wrongAction(
         "Registration failed!: \nUsername: " +
@@ -63,10 +69,8 @@ export const registerThunk =
           userData.password
       );
 
-      return error.message;
-    } finally {
       stopLoadingAction();
-      correctAction("Registed!...");
-      document.location.href = "/penguins";
+
+      return error.message;
     }
   };

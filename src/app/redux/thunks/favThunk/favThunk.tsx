@@ -39,6 +39,8 @@ export const createFavThunk =
         "Content-Type": "mutipart/form-data",
       },
     });
+
     dispatch(createFavActionCreator(newFav));
+
     stopLoadingAction();
   };
