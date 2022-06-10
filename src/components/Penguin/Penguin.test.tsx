@@ -10,6 +10,7 @@ describe("Given a RegisterForm component", () => {
         category: "test",
         description: "test",
         image: "test",
+        imageBackup: "test",
         likes: 4,
       };
 

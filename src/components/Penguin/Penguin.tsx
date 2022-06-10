@@ -1,7 +1,7 @@
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 
 const Penguin = ({
-  penguin: { id, name, category, image, likes, description },
+  penguin: { id, name, category, image, imageBackup, likes, description },
 }: {
   penguin: IPenguin;
 }) => {

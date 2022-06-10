@@ -49,9 +49,7 @@ const CreateFormStyles = styled.div`
     align-items: center;
     margin: auto;
   }
-  label {
-    visibility: hidden;
-  }
+
   ul,
   li {
     list-style-type: none;
@@ -81,10 +79,10 @@ const CreateFormStyles = styled.div`
     display: flex;
     flex-direction: column;
     width: 80%;
-    height: 60px;
-    padding-bottom: 10px;
     font-size: 20px;
     margin: auto;
+    visibility: hidden;
+    height: 5px;
   }
   input {
     border: 2px solid black;
@@ -94,7 +92,7 @@ const CreateFormStyles = styled.div`
     box-sizing: border-box;
     color: black;
     font-size: 18px;
-    height: 100%;
+    height: 50px;
   }
 
   input :placeholder {
@@ -104,9 +102,15 @@ const CreateFormStyles = styled.div`
   }
 
   .penguin-image {
-    border: 1px solid;
-    border-radius: 5px;
-    width: 340px;
+    width: 90%;
+    height: 190px;
+    margin: auto;
+
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-sizing: border-box;
   }
   nav {
     margin-right: 9px;

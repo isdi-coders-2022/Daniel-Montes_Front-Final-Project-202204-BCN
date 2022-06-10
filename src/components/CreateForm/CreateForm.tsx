@@ -1,48 +1,66 @@
-import { ChangeEvent, FormEvent, useState } from "react";
-import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { useNavigate } from "react-router-dom";
+import { INewFav } from "../../app/redux/types/penguin/penguinInterfaces";
+import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { correctAction, infoAction } from "../Modals/Modals";
+import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
 import CreateFormStyles from "./CreateFormStyles";
 import Navbar from "../Navbar/Navbar";
 
-interface FormData {
-  name: string;
-  category: string;
-  description: string;
-  image: string;
-}
-
 const CreateForm = (): JSX.Element => {
-  const blankFields = {
+  const { username } = useAppSelector((state) => state.users);
+
+  const blankFields: INewFav = {
     name: "",
     category: "",
+    likes: 0,
     description: "",
     image: "",
+    imageBackup: "",
+    owner: username,
+    id: 0,
   };
 
-  const [formData, setFormData] = useState<FormData>(blankFields);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+  const [formData, setFormData] = useState(blankFields);
+
+  const handleInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ): void => {
     setFormData({
       ...formData,
       [event.target.id]: event.target.value,
     });
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    infoAction("Creating...");
-
+  const handleSubmit = (event: React.FormEvent): void => {
     event.preventDefault();
-    dispatch(createFavThunk(""));
+
+    const newFav = new FormData();
+
+    newFav.append("name", formData.name);
+    newFav.append("likes", JSON.stringify(formData.likes));
+    newFav.append("category", formData.category);
+    newFav.append("description", formData.description);
+    newFav.append("image", formData.image);
+    newFav.append("owner", formData.owner);
+
+    dispatch(createFavThunk(newFav));
     setFormData(blankFields);
+
     correctAction("Created!");
-    infoAction(
-      "Finally operation was unsuccessful, we really sorry about that..."
-    );
     navigate("/favs");
+  };
+
+  const uploadImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
+    infoAction("Uploading image...");
+    setFormData({
+      ...formData,
+      [event.target.id]: event.target.files?.[0] || "",
+    });
+    stopLoadingAction();
   };
 
   return (
@@ -50,46 +68,45 @@ const CreateForm = (): JSX.Element => {
       <Navbar title="New Fav..." />
       <div className="container">
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+          <label htmlFor="image">Image</label>
           <input
-            type="text"
-            id="photo"
+            className="image penguin-image"
+            id="image"
+            type="file"
+            onChange={uploadImage}
             autoComplete="off"
-            placeholder="Photo"
-            value={formData.image}
-            onChange={handleInputChange}
-            name="Photo"
-            className="photo"
+            placeholder="Image"
           />
-
+          <label htmlFor="title">Name</label>
           <input
             type="text"
             id="name"
             autoComplete="off"
-            placeholder="Name"
             value={formData.name}
             onChange={handleInputChange}
-            name="Name"
+            placeholder="Name"
           />
-
+          <label htmlFor="times">Likes</label>
           <input
-            type="text"
-            id="category"
+            className="times"
+            type="number"
+            id="likes"
             autoComplete="off"
-            placeholder="Category"
-            value={formData.category}
+            value={formData.likes}
+            placeholder="Likes"
             onChange={handleInputChange}
-            name="category"
           />
-
+          <label htmlFor="description">Description</label>
           <input
+            className="description"
             type="text"
             id="description"
             autoComplete="off"
-            placeholder="Description"
             value={formData.description}
+            placeholder="Description"
             onChange={handleInputChange}
-            name="description"
           />
+
           <button type="submit" className="bt-save" placeholder="bt-save">
             Save
           </button>

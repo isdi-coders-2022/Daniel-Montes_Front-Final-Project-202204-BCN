@@ -48,20 +48,19 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 };
 
 export const createFavThunk =
-  (idUser: string) => async (dispatch: AppDispatch) => {
+  (formData: any) => async (dispatch: AppDispatch) => {
     try {
       const token = localStorage.getItem("token");
 
       if (token) {
         const {
           data: { penguins },
-        } = await axios.get(`${process.env.REACT_APP_API_URL}favs`);
+        } = await axios.get(`${process.env.REACT_APP_API_URL}create`);
         dispatch(createFavActionCreator(penguins));
-
-        stopLoadingAction();
       }
-    } catch {
       stopLoadingAction();
+    } catch {
       wrongAction("Penguins Favs loader failed!");
+      stopLoadingAction();
     }
   };
