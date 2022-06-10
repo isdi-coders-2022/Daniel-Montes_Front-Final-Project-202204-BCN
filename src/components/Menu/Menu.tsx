@@ -1,7 +1,7 @@
 import * as React from "react";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { Link, useNavigate } from "react-router-dom";
-import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { infoAction, stopLoadingAction } from "../Modals/Modals";
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
 
@@ -23,7 +23,7 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
 
   const loadFavs = () => {
     infoAction("Loading Favs...");
-    dispatch(loadFavsThunk());
+    dispatch(loadPenguinsThunk());
     navigate("/favs");
   };
 

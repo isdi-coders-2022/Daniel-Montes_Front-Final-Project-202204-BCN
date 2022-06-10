@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { INewFav } from "../../app/redux/types/penguin/penguinInterfaces";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { createFavThunk } from "../../app/redux/thunks/favThunk/favThunk";
 import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
 import CreateFormStyles from "./CreateFormStyles";
 import Navbar from "../Navbar/Navbar";
@@ -91,7 +91,7 @@ const CreateForm = (): JSX.Element => {
             type="text"
             id="category"
             autoComplete="off"
-            value={formData.name}
+            value={formData.category}
             onChange={handleInputChange}
             placeholder="Category"
           />

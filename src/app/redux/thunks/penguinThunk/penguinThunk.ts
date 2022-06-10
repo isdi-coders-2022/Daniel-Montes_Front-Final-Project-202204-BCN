@@ -1,66 +1,24 @@
 import axios from "axios";
-import { loadPenguinsActionCreator } from "../../features/penguinSlice/penguinSlice";
 import { AppDispatch } from "../../store/store";
 import {
   infoAction,
   stopLoadingAction,
-  wrongAction,
 } from "../../../../components/Modals/Modals";
-import {
-  createFavActionCreator,
-  loadFavsActionCreator,
-} from "../../features/favsSlice/favsSlice";
+import { loadFavsActionCreator } from "../../features/favsSlice/favsSlice";
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
-  try {
-    infoAction("Loading all penguins for: " + localStorage.getItem("username"));
-    const token = localStorage.getItem("token");
+  const token = localStorage.getItem("token");
+  if (token) {
+    infoAction("Loading favs...");
+    const {
+      data: { favs },
+    } = await axios.get(`${process.env.REACT_APP_API_URL}favs`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-    if (token) {
-      const {
-        data: { penguins },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}penguins`);
-      dispatch(loadPenguinsActionCreator(penguins));
-
-      stopLoadingAction();
-    }
-  } catch {
-    wrongAction("Penguins loader failed!");
-  }
-};
-
-export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
-  try {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      const {
-        data: { penguins },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}favs`);
-      dispatch(loadFavsActionCreator(penguins));
-
-      stopLoadingAction();
-    }
-  } catch {
+    dispatch(loadFavsActionCreator(favs));
     stopLoadingAction();
-    wrongAction("Penguins Favs loader failed!");
   }
 };
-
-export const createFavThunk =
-  (formData: any) => async (dispatch: AppDispatch) => {
-    try {
-      const token = localStorage.getItem("token");
-
-      if (token) {
-        const {
-          data: { penguins },
-        } = await axios.get(`${process.env.REACT_APP_API_URL}create`);
-        dispatch(createFavActionCreator(penguins));
-      }
-      stopLoadingAction();
-    } catch {
-      wrongAction("Penguins Favs loader failed!");
-      stopLoadingAction();
-    }
-  };

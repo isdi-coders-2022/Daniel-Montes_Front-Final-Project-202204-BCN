@@ -1,35 +1,26 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IFavsPenguins } from "../../types/penguin/penguinInterfaces";
-import { RootState } from "../../store/store";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { INewFav, IPenguin } from "../../types/penguin/penguinInterfaces";
 
-interface FavsState {
-  favs: IFavsPenguins[];
-}
-
-const initialState: FavsState = {
-  favs: [],
-};
+const initialState: IPenguin[] = [];
 
 const favsSlice = createSlice({
   name: "favs",
   initialState,
   reducers: {
-    loadFavs: (penguins, action): FavsState => ({
-      ...action.payload,
-      favs: action.payload,
-    }),
-    createFav: (penguins, action): FavsState => ({
-      ...penguins,
-      favs: action.payload,
-    }),
+    loadFavs: (favs, action): IPenguin[] => [...action.payload],
+    createFav: (favs, action: PayloadAction<INewFav>): IPenguin[] => [
+      ...favs,
+      action.payload,
+    ],
+    deleteFav: (favs, action): IPenguin[] =>
+      favs.filter((fav) => fav.id !== action.payload),
   },
 });
 
 export const {
   createFav: createFavActionCreator,
   loadFavs: loadFavsActionCreator,
+  deleteFav: deleteFavActionCreator,
 } = favsSlice.actions;
-
-export const favsSelector = (state: RootState) => state.favs.favs;
 
 export default favsSlice.reducer;

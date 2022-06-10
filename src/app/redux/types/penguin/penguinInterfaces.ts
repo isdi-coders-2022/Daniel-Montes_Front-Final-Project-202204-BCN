@@ -34,12 +34,13 @@ export interface IFavsPenguins {
 }
 
 export interface PenguinsState {
-  id: string;
+  id: number;
   name: string;
   category: string;
   likes: number;
   description: string;
   image: string;
+  imageBackup: string;
 }
 
 export interface Ierror {
