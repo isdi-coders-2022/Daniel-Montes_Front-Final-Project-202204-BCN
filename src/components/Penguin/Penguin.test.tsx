@@ -12,6 +12,7 @@ describe("Given a RegisterForm component", () => {
         image: "test",
         imageBackup: "test",
         likes: 4,
+        owner: "",
       };
 
       render(<Penguin penguin={penguin} key={penguin.id} />);
