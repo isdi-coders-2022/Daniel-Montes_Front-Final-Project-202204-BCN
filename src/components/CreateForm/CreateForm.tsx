@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { INewFav } from "../../app/redux/types/penguin/penguinInterfaces";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-// import { createFavThunk } from "../../app/redux/thunks/favThunk/favThunk";
+import { createFavThunk } from "../../app/redux/thunks/favThunk/favThunk";
 import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
 import CreateFormStyles from "./CreateFormStyles";
 import Navbar from "../Navbar/Navbar";
@@ -37,19 +37,19 @@ const CreateForm = (): JSX.Element => {
 
   const handleSubmit = (event: React.FormEvent): void => {
     infoAction("Creating...");
-    // event.preventDefault();
+    event.preventDefault();
 
-    // const newFav = new FormData();
+    const newFav = new FormData();
 
-    // newFav.append("name", formData.name);
-    // newFav.append("likes", JSON.stringify(formData.likes));
-    // newFav.append("category", formData.category);
-    // newFav.append("description", formData.description);
-    // newFav.append("image", formData.image);
-    // newFav.append("owner", formData.owner);
+    newFav.append("name", formData.name);
+    newFav.append("likes", JSON.stringify(formData.likes));
+    newFav.append("category", formData.category);
+    newFav.append("description", formData.description);
+    newFav.append("image", formData.image);
+    newFav.append("owner", formData.owner);
 
-    // dispatch(createFavThunk(newFav));
-    // setFormData(blankFields);
+    dispatch(createFavThunk(newFav));
+    setFormData(blankFields);
 
     correctAction("Created!");
     navigate("/favs");
@@ -98,7 +98,7 @@ const CreateForm = (): JSX.Element => {
           />
           <label htmlFor="times">Likes</label>
           <input
-            className="times"
+            className="w3-input"
             type="number"
             id="likes"
             autoComplete="off"

@@ -54,7 +54,7 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
           <li>
             <Link to="/create">
               <button onClick={addFav} className="bt-addfav" />
-              <span>Add new...</span>
+              <span>New...</span>
             </Link>
           </li>
           <li>
@@ -65,6 +65,7 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
           </li>
 
           <li>
+            <hr />
             <Link to="/logout">
               <button onClick={logOutUser} className="bt-logout" />
               <span>Logout</span>
