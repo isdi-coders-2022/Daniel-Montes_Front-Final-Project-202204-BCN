@@ -86,6 +86,15 @@ const CreateForm = (): JSX.Element => {
             onChange={handleInputChange}
             placeholder="Name"
           />
+          <label htmlFor="title">Category</label>
+          <input
+            type="text"
+            id="category"
+            autoComplete="off"
+            value={formData.name}
+            onChange={handleInputChange}
+            placeholder="Category"
+          />
           <label htmlFor="times">Likes</label>
           <input
             className="times"

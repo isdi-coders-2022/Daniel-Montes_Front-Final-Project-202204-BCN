@@ -22,7 +22,7 @@ const CreateFormStyles = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 10px;
     width: 70%;
     margin: auto;
     width: 85%;
@@ -84,6 +84,15 @@ const CreateFormStyles = styled.div`
     visibility: hidden;
     height: 5px;
   }
+  input#image {
+    background-image: url(bg.jpg);
+    background-repeat: no-repeat;
+    text-indent: 20px;
+  }
+
+  input#image:focus {
+    background-image: none;
+  }
   input {
     border: 2px solid black;
     align-items: center;
@@ -103,7 +112,7 @@ const CreateFormStyles = styled.div`
 
   .penguin-image {
     width: 90%;
-    height: 190px;
+    height: 160px;
     margin: auto;
 
     border: 2px solid black;
