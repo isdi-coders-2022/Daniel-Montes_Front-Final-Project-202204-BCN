@@ -11,7 +11,6 @@ import { Dispatch } from "@reduxjs/toolkit";
 import {
   correctAction,
   wrongAction,
-  infoAction,
   stopLoadingAction,
 } from "../../../../components/Modals/Modals";
 import { loadingActionCreator } from "../../features/uiSlice/uiSlice";
