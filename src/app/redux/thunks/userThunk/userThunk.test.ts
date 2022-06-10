@@ -14,7 +14,7 @@ beforeEach(() => {
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-jest.mock("jwt-decode", () => () => ({ username: "user1", id: "1" }));
+jest.mock("jwt-decode", () => () => ({ username: "user1", id: 1 }));
 jest.mock("axios");
 
 HTMLAnchorElement.prototype.click = jest.fn();

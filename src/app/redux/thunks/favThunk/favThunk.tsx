@@ -9,7 +9,7 @@ import {
 } from "../../features/favsSlice/favsSlice";
 import { AppDispatch } from "../../store/store";
 
-export const deleteFavThunk = (id: string) => async (dispatch: AppDispatch) => {
+export const deleteFavThunk = (id: number) => async (dispatch: AppDispatch) => {
   const token = localStorage.getItem("token");
 
   const { status } = await axios.delete(
