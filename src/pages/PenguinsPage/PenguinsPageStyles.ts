@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import iconHamburguer from "../../images/menu_hamburguer.png";
 import iconBack from "../../images/button-back.png";
-import iconFavs from "../../images/icon-folder-starred.png";
-import iconMenuFavs from "../../images/favorite_star_iconPlus.png";
+import iconFavs from "../../images/star_add_icon.png";
+import iconMenuFavs from "../../images/star_add_icon.png";
 import iconLike from "../../images/heartLike.png";
 import iconAddFav from "../../images/icon-folder-edit.png";
-import iconHome from "../../images/icon-menu-home.png";
+import iconHome from "../../images/icon-home.png";
 import iconLogout from "../../images/icon-menu-logout.png";
 
 const PenguinsPageStyles = styled.div`
@@ -19,15 +19,13 @@ const PenguinsPageStyles = styled.div`
   height: 650px;
   text-align: justify;
 
+  .header {
+    text-align: right;
+  }
   form {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
     row-gap: 20px;
     width: 70%;
     margin: auto;
-    padding-top: 105px;
   }
 
   ul,
@@ -37,13 +35,12 @@ const PenguinsPageStyles = styled.div`
     padding-top: 43px;
   }
   h1 {
-    font-size: 25px;
+    font-size: 2px;
     margin-left: 10px;
   }
   h2 {
     font-size: 20px;
     margin-left: 12px;
-    margin-top: 43px;
   }
   h1,
   h2 {
@@ -126,7 +123,7 @@ const PenguinsPageStyles = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: -10px;
   }
 
   button {
@@ -166,15 +163,13 @@ const PenguinsPageStyles = styled.div`
   }
 
   .bt-favs {
-    width: 65px;
-    height: 65px;
+    width: 45px;
+    height: 45px;
     background: url(${iconMenuFavs});
     position: relative;
-    top: 34px;
-    left: -13px;
-    margin-top: 20px;
-    padding: 0 0 0 0;
+    margin-top: 7px;
   }
+
   .bt-addfav {
     width: 65px;
     height: 65px;
@@ -197,6 +192,7 @@ const PenguinsPageStyles = styled.div`
   .penguin-datalist,
   .penguin-title {
     display: flex;
+    height: 40px;
   }
 
   .penguin-name,
@@ -212,7 +208,7 @@ const PenguinsPageStyles = styled.div`
     padding: 0 0 0 0;
     position: relative;
     top: -140px;
-    left: -28px;
+    left: -10px;
   }
 
   .bt-register {
@@ -239,6 +235,65 @@ const PenguinsPageStyles = styled.div`
 
   .display-none {
     visibility: hidden;
+  }
+
+  .projectLayout {
+    max-width: 90%;
+    justify-content: center;
+    align-items: center;
+    -moz-column-count: 4;
+    -webkit-column-gap: 1.5em;
+    -moz-column-gap: 1.5em;
+    column-gap: 1.5em;
+    margin: 1em;
+    padding: 1;
+    -moz-column-gap: 1em;
+    -webkit-column-gap: 1em;
+    column-gap: 1em;
+    font-size: 0.85em;
+    transform: translate(40px, 50px);
+  }
+  .item {
+    display: inline-block;
+    background: #fff;
+    padding: 0.5em;
+    margin: 0 0 1.5em;
+    max-width: 17rem;
+    max-height: 50vh;
+    -webkit-transition: 0.5s;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-shadow: 2px 2px 10px rgb(140, 134, 134);
+    border-radius: 2px 2px 2px 2px;
+    flex-wrap: wrap;
+  }
+  .item img {
+    max-width: 100%;
+    max-height: 20vh;
+  }
+  .item:nth-of-type(4n + 1) {
+    transform: rotate(5deg);
+    transition: all 0.35s;
+  }
+  .item:nth-of-type(4n + 2) {
+    transform: rotate(-5deg);
+    transition: all 0.35s;
+  }
+  .item:nth-of-type(4n + 3) {
+    transform: rotate(3deg);
+    transition: all 0.35s;
+  }
+  .item:nth-of-type(4n + 4) {
+    transform: rotate(-3deg);
+    transition: all 0.35s;
+  }
+  .item:nth-of-type(4n + 5) {
+    transform: rotate(3deg);
+    transition: all 0.35s;
+  }
+  .item:hover {
+    transform: rotate(15deg);
   }
 `;
 
