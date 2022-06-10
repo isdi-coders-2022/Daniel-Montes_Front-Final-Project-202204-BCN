@@ -5,7 +5,7 @@ export interface PenguinInfo {
 }
 
 export interface IPenguin {
-  id: number;
+  id: string;
   name: string;
   category: string;
   likes: number;
@@ -19,7 +19,7 @@ export interface IPenguins {
 }
 
 export interface INewFav {
-  id: number;
+  id: string;
   name: string;
   category: string;
   likes: number;

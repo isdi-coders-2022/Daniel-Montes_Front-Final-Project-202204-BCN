@@ -1,10 +1,11 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-
+import axios from "axios";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { createFavThunk } from "../../app/redux/thunks/favThunk/favThunk";
+import { mockPenguins } from "../../mocks/penguins";
 import CreatePage from "./CreatePage";
 
 describe("Given a CreatePage component", () => {
@@ -44,6 +45,9 @@ describe("Given a CreatePage component", () => {
       const name = screen.getByPlaceholderText(nameLabel);
       const category = screen.getByPlaceholderText(catLabel);
       const submitButton = screen.getByPlaceholderText("bt-save");
+      axios.get = jest
+        .fn()
+        .mockResolvedValue({ data: { penguins: mockPenguins }, status: 200 });
       const dispatch = jest.fn();
 
       userEvent.type(name, inputText);
@@ -52,7 +56,7 @@ describe("Given a CreatePage component", () => {
 
       expect(name).toHaveValue("");
       expect(category).toHaveValue("");
-      await dispatch(createFavThunk(""));
+      await dispatch(createFavThunk);
 
       expect(dispatch).toHaveBeenCalled();
     });
