@@ -34,7 +34,6 @@ export const NavbarStyles = styled.nav`
   .app {
     width: 100vw;
     height: 100vh;
-    position: fixed;
   }
 
   .app .header {
