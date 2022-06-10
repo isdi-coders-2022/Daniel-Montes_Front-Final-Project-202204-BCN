@@ -20,7 +20,9 @@ const PenguinsPageStyles = styled.div`
   text-align: justify;
 
   .header {
-    text-align: right;
+    position: fixed;
+    padding-top: 15px;
+    right: 20px;
   }
   form {
     row-gap: 20px;
