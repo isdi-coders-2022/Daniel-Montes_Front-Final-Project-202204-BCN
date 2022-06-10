@@ -16,7 +16,7 @@ const Penguins = ({ results: penguins }: IPenguins) => {
   }, [dispatch]);
 
   return (
-    <div className="penguins-container">
+    <div className="penguins-container projectLayout">
       {penguins.map((penguin: IPenguin) => {
         return <Penguin penguin={penguin} key={penguin.id} />;
       })}

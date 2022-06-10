@@ -48,17 +48,28 @@ const CreateForm = (): JSX.Element => {
       <div className="container">
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <h1>New fav...</h1>
-          <label htmlFor="username"> Name </label>
+
           <input
             type="text"
-            id="username"
+            id="photo"
             autoComplete="off"
-            placeholder="Username"
+            placeholder="Photo"
+            value={formData.image}
+            onChange={handleInputChange}
+            name="Photo"
+            className="photo"
+          />
+
+          <input
+            type="text"
+            id="name"
+            autoComplete="off"
+            placeholder="Name"
             value={formData.name}
             onChange={handleInputChange}
-            name="Username"
+            name="Name"
           />
-          <label htmlFor="category"> Category </label>
+
           <input
             type="text"
             id="category"
@@ -67,7 +78,7 @@ const CreateForm = (): JSX.Element => {
             value={formData.category}
             name="category"
           />
-          <label htmlFor="description"> Description </label>
+
           <input
             type="text"
             id="description"
@@ -76,11 +87,7 @@ const CreateForm = (): JSX.Element => {
             value={formData.description}
             name="description"
           />
-          <button
-            type="submit"
-            className="bt-register"
-            placeholder="bt-register"
-          >
+          <button type="submit" className="bt-save" placeholder="bt-save">
             Save
           </button>
         </form>

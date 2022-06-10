@@ -12,7 +12,7 @@ const Penguin = ({
     return newStr;
   };
   return (
-    <div className="penguin-container">
+    <div className="penguin-container item">
       <div className="penguin-title">
         <h2 className="penguin-name">{toPascalCase(name)}</h2>
         <button className="bt-favs" />

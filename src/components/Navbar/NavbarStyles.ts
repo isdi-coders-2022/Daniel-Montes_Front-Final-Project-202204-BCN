@@ -43,7 +43,7 @@ export const NavbarStyles = styled.nav`
     padding: 1rem;
     box-sizing: border-box;
     color: white;
-
+    text-align: right;
     display: flex;
     justify-content: space-between;
     align-items: center;

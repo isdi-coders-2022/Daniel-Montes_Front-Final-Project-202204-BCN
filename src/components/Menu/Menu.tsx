@@ -1,11 +1,7 @@
 import * as React from "react";
-
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  createFavThunk,
-  loadFavsThunk,
-} from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { infoAction, stopLoadingAction } from "../Modals/Modals";
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
 
@@ -51,15 +47,15 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
             </Link>
           </li>
           <li>
-            <Link to="/favs">
-              <button onClick={loadFavs} className="bt-favs-menu" />
-              <text>Favourites</text>
-            </Link>
-          </li>
-          <li>
             <Link to="/create">
               <button onClick={addFav} className="bt-addfav" />
               <text>Add new...</text>
+            </Link>
+          </li>
+          <li>
+            <Link to="/favs">
+              <button onClick={loadFavs} className="bt-favs-menu" />
+              <text>Favourites</text>
             </Link>
           </li>
 

@@ -5,7 +5,7 @@ import iconFavs from "../../images/icon-folder-starred.png";
 import iconMenuFavs from "../../images/favorite_star_iconPlus.png";
 import iconLike from "../../images/heartLike.png";
 import iconAddFav from "../../images/icon-folder-edit.png";
-import iconHome from "../../images/icon-menu-home.png";
+import iconHome from "../../images/icon-home.png";
 import iconLogout from "../../images/icon-menu-logout.png";
 
 const CreateFormStyles = styled.div`
@@ -22,14 +22,36 @@ const CreateFormStyles = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
     row-gap: 20px;
     width: 70%;
     margin: auto;
-    padding-top: 105px;
+    width: 85%;
   }
 
+  .photo {
+    width: 100%;
+    height: 300px;
+  }
+
+  .bt-save {
+    color: white;
+    background-color: black;
+    padding: 14px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 15px;
+    align-items: center;
+    margin: auto;
+  }
+  label {
+    visibility: hidden;
+  }
   ul,
   li {
     list-style-type: none;
@@ -121,18 +143,24 @@ const CreateFormStyles = styled.div`
     left: 18px;
     width: 89%;
   }
+  .header {
+    text-align: right;
+  }
   .menu-container {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
-    margin-bottom: 30px;
   }
-
   button {
     width: 32px;
     height: 32px;
     background-repeat: no-repeat;
     border: 0;
+  }
+  .bt-save {
+    width: 100%;
+    height: 92px;
+    background-repeat: no-repeat;
   }
 
   .bt-logout {
