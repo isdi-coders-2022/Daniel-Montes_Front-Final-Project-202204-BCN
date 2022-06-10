@@ -47,11 +47,9 @@ const CreateForm = (): JSX.Element => {
 
   return (
     <CreateFormStyles>
-      <Navbar />
+      <Navbar title="New Fav..." />
       <div className="container">
         <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <h1>New fav...</h1>
-
           <input
             type="text"
             id="photo"
@@ -79,6 +77,7 @@ const CreateForm = (): JSX.Element => {
             autoComplete="off"
             placeholder="Category"
             value={formData.category}
+            onChange={handleInputChange}
             name="category"
           />
 
@@ -88,6 +87,7 @@ const CreateForm = (): JSX.Element => {
             autoComplete="off"
             placeholder="Description"
             value={formData.description}
+            onChange={handleInputChange}
             name="description"
           />
           <button type="submit" className="bt-save" placeholder="bt-save">
