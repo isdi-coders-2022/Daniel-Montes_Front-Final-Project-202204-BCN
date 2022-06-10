@@ -43,26 +43,26 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
           <li>
             <Link to="/homepage">
               <button onClick={loadHome} className="bt-home" title="bt-home" />
-              <text>Home</text>
+              <span>Home</span>
             </Link>
           </li>
           <li>
             <Link to="/create">
               <button onClick={addFav} className="bt-addfav" />
-              <text>Add new...</text>
+              <span>Add new...</span>
             </Link>
           </li>
           <li>
             <Link to="/favs">
               <button onClick={loadFavs} className="bt-favs-menu" />
-              <text>Favourites</text>
+              <span>Favourites</span>
             </Link>
           </li>
 
           <li>
             <Link to="/logout">
               <button onClick={logOutUser} className="bt-logout" />
-              <text>Logout</text>
+              <span>Logout</span>
             </Link>
           </li>
         </ul>

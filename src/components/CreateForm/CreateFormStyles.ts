@@ -22,7 +22,7 @@ const CreateFormStyles = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    row-gap: 20px;
+    row-gap: 10px;
     width: 70%;
     margin: auto;
     width: 85%;
@@ -49,9 +49,7 @@ const CreateFormStyles = styled.div`
     align-items: center;
     margin: auto;
   }
-  label {
-    visibility: hidden;
-  }
+
   ul,
   li {
     list-style-type: none;
@@ -81,10 +79,19 @@ const CreateFormStyles = styled.div`
     display: flex;
     flex-direction: column;
     width: 80%;
-    height: 60px;
-    padding-bottom: 10px;
     font-size: 20px;
     margin: auto;
+    visibility: hidden;
+    height: 5px;
+  }
+  input#image {
+    background-image: url(bg.jpg);
+    background-repeat: no-repeat;
+    text-indent: 20px;
+  }
+
+  input#image:focus {
+    background-image: none;
   }
   input {
     border: 2px solid black;
@@ -94,7 +101,7 @@ const CreateFormStyles = styled.div`
     box-sizing: border-box;
     color: black;
     font-size: 18px;
-    height: 100%;
+    height: 50px;
   }
 
   input :placeholder {
@@ -104,9 +111,15 @@ const CreateFormStyles = styled.div`
   }
 
   .penguin-image {
-    border: 1px solid;
-    border-radius: 5px;
-    width: 340px;
+    width: 90%;
+    height: 160px;
+    margin: auto;
+
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-sizing: border-box;
   }
   nav {
     margin-right: 9px;
