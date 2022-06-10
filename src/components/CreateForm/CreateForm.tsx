@@ -39,6 +39,9 @@ const CreateForm = (): JSX.Element => {
     dispatch(createFavThunk(""));
     setFormData(blankFields);
     correctAction("Created!");
+    infoAction(
+      "Finally operation was unsuccessful, we really sorry about that..."
+    );
     navigate("/favs");
   };
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import iconHamburguer from "../../images/menu_hamburguer.png";
 import iconBack from "../../images/button-back.png";
-import iconFavs from "../../images/star_add_icon.png";
+import iconFavs from "../../images/icon-folder-starred.png";
 import iconMenuFavs from "../../images/star_add_icon.png";
 import iconLike from "../../images/heartLike.png";
 import iconAddFav from "../../images/icon-folder-edit.png";
@@ -90,7 +90,7 @@ const PenguinsPageStyles = styled.div`
   .container {
     width: 100%;
     display: flow-root;
-    text-align: right;
+
     margin-right: 20px;
   }
 
