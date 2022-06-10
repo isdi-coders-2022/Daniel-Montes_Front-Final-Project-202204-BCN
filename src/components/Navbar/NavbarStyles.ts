@@ -15,7 +15,7 @@ export const NavbarStyles = styled.nav`
   }
   text {
     margin-left: 16px;
-    font-size: 28px;
+    font-size: 22px;
     padding-bottom: 10px;
   }
   h1 {

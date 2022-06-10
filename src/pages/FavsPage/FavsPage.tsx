@@ -10,7 +10,7 @@ const FavsPage = () => {
   return (
     <PenguinsPageStyles>
       <div className="container">
-        <Navbar />
+        <Navbar title="Favs" />
         <h1>Favs</h1>
         <Penguins results={penguins} />
       </div>

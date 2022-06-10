@@ -60,6 +60,7 @@
   },
   "jest": {
     "collectCoverageFrom": [
+      "!src/images/**",
       "!src/index.tsx",
       "!src/reportWebVitals.ts",
       "!src/setupTests.tsx",

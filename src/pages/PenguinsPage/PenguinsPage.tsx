@@ -9,7 +9,7 @@ const PenguinsPage = () => {
 
   return (
     <PenguinsPageStyles className="container projecyLayout">
-      <Navbar />
+      <Navbar title="Discover" />
       <Penguins results={penguins} />
     </PenguinsPageStyles>
   );

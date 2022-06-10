@@ -13,7 +13,7 @@ import {
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   try {
-    infoAction("Loading Penguins...");
+    infoAction("Loading all penguins for: " + localStorage.getItem("username"));
     const token = localStorage.getItem("token");
 
     if (token) {

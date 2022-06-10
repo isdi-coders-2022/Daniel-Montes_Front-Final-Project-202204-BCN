@@ -2,17 +2,17 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import Navbar from "./Navbar";
+import { Menu } from "./Menu";
 
-describe("Given a NavBar Component", () => {
+describe("Given a Menu Component", () => {
   describe("When it's call", () => {
-    test("Then it should render a HeaderComponent with exactly 5 buttons", () => {
-      const expectedResult = 5;
+    test("Then it should render a Menu Component with exactly 5 buttons", () => {
+      const expectedResult = 4;
 
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <Navbar title="testing" />
+            <Menu isMenuOpen={true} />
           </Provider>
         </BrowserRouter>
       );
@@ -32,7 +32,7 @@ describe("Given the Navigation component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <Navbar title="Testing" />
+            <Menu isMenuOpen={true} />
           </Provider>
         </BrowserRouter>
       );

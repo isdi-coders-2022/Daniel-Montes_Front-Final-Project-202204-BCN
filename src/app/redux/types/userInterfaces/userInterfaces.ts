@@ -36,3 +36,7 @@ export interface DataAxiosLogin {
 export interface Ierror {
   message: string;
 }
+
+export interface IParameter {
+  title: string;
+}
