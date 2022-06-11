@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom";
+import { stopLoadingAction } from "../Modals/Modals";
 
 const Home = (): JSX.Element => {
+  const stopLoad = () => {
+    stopLoadingAction();
+  };
+
   return (
-    <div className="info">
+    <div className="info" onLoad={stopLoad}>
       <header></header>
       <h1> AdoptaUnPingüino.com </h1>
       <div className="bt-container">

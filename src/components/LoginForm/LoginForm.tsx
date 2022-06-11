@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { LoginData } from "../../app/redux/types/userInterfaces/userInterfaces";
 import { loginThunk } from "../../app/redux/thunks/userThunk/userThunk";
-import { infoAction } from "../Modals/Modals";
+import { infoAction, stopLoadingAction } from "../Modals/Modals";
 
 const LoginForm = () => {
   const blankData: LoginData = {
@@ -13,7 +13,7 @@ const LoginForm = () => {
   const [formData, setFormData] = useState(blankData);
   const buttonDisabled = formData.password === "" || formData.username === "";
   const dispatch = useAppDispatch();
-
+  stopLoadingAction();
   const resetForm = () => {
     setFormData(blankData);
   };
