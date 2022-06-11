@@ -4,10 +4,29 @@ import {
   stopLoadingAction,
 } from "../../../../components/Modals/Modals";
 import {
+  loadFavsActionCreator,
   createFavActionCreator,
-  deleteFavActionCreator,
+  deleteFavsActionCreator,
 } from "../../features/favsSlice/favsSlice";
 import { AppDispatch } from "../../store/store";
+
+export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    const {
+      data: { favs },
+    } = await axios.get(`${process.env.REACT_APP_API_URL}favs`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    dispatch(loadFavsActionCreator(favs));
+
+    stopLoadingAction();
+  }
+};
 
 export const deleteFavThunk = (id: number) => async (dispatch: AppDispatch) => {
   const token = localStorage.getItem("token");
@@ -22,7 +41,7 @@ export const deleteFavThunk = (id: number) => async (dispatch: AppDispatch) => {
   );
 
   if (status === 200) {
-    dispatch(deleteFavActionCreator(id));
+    dispatch(deleteFavsActionCreator(id));
     correctAction("Deleted!");
   }
   stopLoadingAction();
@@ -41,6 +60,5 @@ export const createFavThunk =
     });
 
     dispatch(createFavActionCreator(newFav));
-
     stopLoadingAction();
   };

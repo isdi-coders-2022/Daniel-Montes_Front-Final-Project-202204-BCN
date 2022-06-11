@@ -1,26 +1,28 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { INewFav, IPenguin } from "../../types/penguin/penguinInterfaces";
+import { IFav, INewFav } from "../../../redux/types/penguin/penguinInterfaces";
 
-const initialState: IPenguin[] = [];
+const initialState: IFav[] = [];
 
-const favsSlice = createSlice({
-  name: "favs",
+const checkSlice = createSlice({
+  name: "checks",
   initialState,
   reducers: {
-    loadFavs: (favs, action): IPenguin[] => [...action.payload],
-    createFav: (favs, action: PayloadAction<INewFav>): IPenguin[] => [
-      ...favs,
+    loadFavs: (checks, action): IFav[] => [...action.payload],
+
+    deleteFav: (checks, action): IFav[] =>
+      checks.filter((check) => check.id !== action.payload),
+
+    createFav: (checks, action: PayloadAction<INewFav>): IFav[] => [
+      ...checks,
       action.payload,
     ],
-    deleteFav: (favs, action): IPenguin[] =>
-      favs.filter((fav) => fav.id !== action.payload),
   },
 });
 
 export const {
-  createFav: createFavActionCreator,
   loadFavs: loadFavsActionCreator,
-  deleteFav: deleteFavActionCreator,
-} = favsSlice.actions;
+  deleteFav: deleteFavsActionCreator,
+  createFav: createFavActionCreator,
+} = checkSlice.actions;
 
-export default favsSlice.reducer;
+export default checkSlice.reducer;

@@ -98,7 +98,7 @@ const CreateForm = (): JSX.Element => {
           />
           <label htmlFor="times">Likes</label>
           <input
-            className="times"
+            className="w3-input"
             type="number"
             id="likes"
             autoComplete="off"

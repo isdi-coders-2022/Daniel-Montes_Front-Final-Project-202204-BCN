@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import iconHamburguer from "../../images/menu_hamburguer.png";
 import iconBack from "../../images/button-back.png";
-import iconFavs from "../../images/icon-folder-starred.png";
+import iconFavs from "../../images/icon-stars.png";
 import iconMenuFavs from "../../images/star_add_icon.png";
 import iconLike from "../../images/heartLike.png";
-import iconAddFav from "../../images/icon-folder-edit.png";
+import iconAddFav from "../../images/icon-add_plus.png";
 import iconHome from "../../images/icon-home.png";
-import iconLogout from "../../images/icon-menu-logout.png";
+import iconLogout from "../../images/icon-user_deny.png";
 
 const PenguinsPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -16,7 +16,7 @@ const PenguinsPageStyles = styled.div`
   background-position-x: 80px;
   background-position-y: 230px;
   background-repeat: no-repeat;
-  height: 650px;
+
   text-align: justify;
 
   .header {
@@ -30,8 +30,13 @@ const PenguinsPageStyles = styled.div`
     margin: auto;
   }
 
-  ul,
+  hr {
+    margin-bottom: 25px;
+  }
+  ul {
+  }
   li {
+    height: 48px;
     list-style-type: none;
     text-align: left;
     padding-top: 43px;
@@ -53,13 +58,14 @@ const PenguinsPageStyles = styled.div`
   a {
     text-decoration: none;
     color: white;
+    font-size: 20px;
   }
 
   label {
     display: flex;
     flex-direction: column;
     width: 80%;
-    height: 60px;
+
     padding-bottom: 10px;
     font-size: 20px;
     margin: auto;
@@ -77,15 +83,14 @@ const PenguinsPageStyles = styled.div`
 
   input :placeholder {
     font-weight: bolder;
-    padding-left: 20px;
     text-align: center;
   }
 
   .penguin-image {
     border: 1px solid;
     border-radius: 5px;
-    width: 340px;
   }
+
   nav {
     margin-right: 9px;
   }
@@ -133,12 +138,15 @@ const PenguinsPageStyles = styled.div`
     height: 32px;
     background-repeat: no-repeat;
     border: 0;
+    vertical-align: middle;
   }
 
   .bt-logout {
     background: url(${iconLogout});
     height: 65px;
     width: 65px;
+    background-size: 60%;
+    background-repeat: no-repeat;
   }
 
   .bt-menu {
@@ -150,6 +158,8 @@ const PenguinsPageStyles = styled.div`
     background: url(${iconFavs});
     width: 65px;
     height: 65px;
+    background-size: 60%;
+    background-repeat: no-repeat;
   }
 
   .bt-back {
@@ -162,6 +172,8 @@ const PenguinsPageStyles = styled.div`
     background: url(${iconHome});
     height: 65px;
     width: 65px;
+    background-size: 60%;
+    background-repeat: no-repeat;
   }
 
   .bt-favs {
@@ -176,6 +188,8 @@ const PenguinsPageStyles = styled.div`
     width: 65px;
     height: 65px;
     background: url(${iconAddFav});
+    background-size: 60%;
+    background-repeat: no-repeat;
   }
   .penguin-image-container {
     box-shadow: 0 3px 6px #666;
@@ -185,10 +199,17 @@ const PenguinsPageStyles = styled.div`
     margin: auto;
     text-align: center;
   }
+
   .penguin-container {
+    text-align: center;
+    margin-top: -80px;
+  }
+
+  .penguins-container {
     border-radius: 8px;
     padding: 0 10px 15px;
-    height: 440px;
+    margin-top: 135px;
+    text-align: center;
   }
 
   .penguin-datalist,
@@ -261,7 +282,7 @@ const PenguinsPageStyles = styled.div`
     padding: 0.5em;
     margin: 0 0 1.5em;
     max-width: 17rem;
-    max-height: 50vh;
+    max-height: 55vh;
     -webkit-transition: 0.5s;
     box-sizing: border-box;
     -moz-box-sizing: border-box;

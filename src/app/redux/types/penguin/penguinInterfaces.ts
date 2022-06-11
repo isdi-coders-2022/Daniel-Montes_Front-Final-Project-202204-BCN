@@ -12,12 +12,23 @@ export interface IPenguin {
   description: string;
   image: string;
   imageBackup: string;
+  owner: string;
 }
 
 export interface IPenguins {
   results: IPenguin[];
 }
 
+export interface IFav {
+  id: number;
+  name: string;
+  category: string;
+  likes: number;
+  description: string;
+  image: string;
+  imageBackup: string;
+  owner: string;
+}
 export interface INewFav {
   id: number;
   name: string;

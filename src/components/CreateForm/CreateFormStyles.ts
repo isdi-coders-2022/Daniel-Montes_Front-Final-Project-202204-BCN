@@ -7,6 +7,7 @@ import iconLike from "../../images/heartLike.png";
 import iconAddFav from "../../images/icon-folder-edit.png";
 import iconHome from "../../images/icon-home.png";
 import iconLogout from "../../images/icon-menu-logout.png";
+import iconContactPhoto from "../../images/contact-photo.png";
 
 const CreateFormStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -85,16 +86,17 @@ const CreateFormStyles = styled.div`
     height: 5px;
   }
   input#image {
-    background-image: url(bg.jpg);
+    background-image: url(${iconContactPhoto});
     background-repeat: no-repeat;
     text-indent: 20px;
+    background-position-y: 50%;
+    background-position-x: 50%;
   }
 
   input#image:focus {
     background-image: none;
   }
   input {
-    border: 2px solid black;
     align-items: center;
     justify-content: center;
     border-radius: 12px;
@@ -102,28 +104,24 @@ const CreateFormStyles = styled.div`
     color: black;
     font-size: 18px;
     height: 50px;
-  }
-
-  input :placeholder {
-    font-weight: bolder;
-    padding-left: 20px;
-    text-align: center;
+    border: 2px solid rgb(178 172 172);
+    background-color: #eee;
   }
 
   .penguin-image {
-    width: 90%;
-    height: 160px;
+    font-weight: bolder;
+    padding-left: 20px;
+    text-align: center;
+    background-color: #eee;
+    display: flex;
+    height: 180px;
     margin: auto;
-
-    border: 2px solid black;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    box-sizing: border-box;
   }
+
   nav {
     margin-right: 9px;
   }
+
   .container {
     width: 100%;
     display: flow-root;
