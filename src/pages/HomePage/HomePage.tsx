@@ -1,14 +1,10 @@
 import Home from "../../components/Home/Home";
-import { stopLoadingAction } from "../../components/Modals/Modals";
 
 import HomePageStyles from "./HomePageStyles";
 
 const HomePage = (): JSX.Element => {
-  const stopLoad = () => {
-    stopLoadingAction();
-  };
   return (
-    <HomePageStyles onLoad={stopLoad}>
+    <HomePageStyles>
       <Home />
     </HomePageStyles>
   );

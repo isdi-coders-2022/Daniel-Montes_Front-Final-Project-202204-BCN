@@ -10,14 +10,10 @@ const initialState = {
 describe("Given the loadAllPropertiesActionCreator", () => {
   describe("When invoked", () => {
     test("Then the initialstate will contain the loaded properties", () => {
-      const expectedState = {
-        AllPenguins: mockPenguins,
-      };
-
       const action = loadPenguinsActionCreator(mockPenguins);
-      const loadedState = penguinReducer(initialState, action);
+      const loadedState = penguinReducer(initialState.AllPenguins, action);
 
-      expect(loadedState).toEqual(expectedState);
+      expect(loadedState).toEqual(mockPenguins);
     });
   });
 });

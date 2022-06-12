@@ -1,29 +1,31 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IPenguin } from "../../types/penguin/penguinInterfaces";
-import { RootState } from "../../store/store";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import {
+  IPenguin,
+  INewPenguin,
+} from "../../../redux/types/penguin/penguinInterfaces";
 
-interface PenguinsState {
-  AllPenguins: IPenguin[];
-}
-
-const initialState: PenguinsState = {
-  AllPenguins: [],
-};
+const initialState: IPenguin[] = [];
 
 const penguinSlice = createSlice({
   name: "penguins",
   initialState,
   reducers: {
-    loadPenguins: (penguins, action): PenguinsState => ({
-      ...penguins,
-      AllPenguins: action.payload,
-    }),
+    loadPenguins: (penguins, action): IPenguin[] => [...action.payload],
+
+    deletePenguin: (penguins, action): IPenguin[] =>
+      penguins.filter((penguin) => penguin.id !== action.payload),
+
+    createPenguin: (
+      penguins,
+      action: PayloadAction<INewPenguin>
+    ): IPenguin[] => [...penguins, action.payload],
   },
 });
 
-export const { loadPenguins: loadPenguinsActionCreator } = penguinSlice.actions;
-
-export const penguinsSelector = (state: RootState) =>
-  state.penguins.AllPenguins;
+export const {
+  loadPenguins: loadPenguinsActionCreator,
+  deletePenguin: deletePenguinActionCreator,
+  createPenguin: createPenguinActionCreator,
+} = penguinSlice.actions;
 
 export default penguinSlice.reducer;

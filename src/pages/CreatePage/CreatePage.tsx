@@ -1,13 +1,11 @@
-import CreatePageStyles from "./CreatePageStyles";
 import CreateForm from "../../components/CreateForm/CreateForm";
+import FormsStyles from "../../Styles/FormsStyles";
 
 const CreatePage = (): JSX.Element => {
   return (
-    <>
-      <CreatePageStyles>
-        <CreateForm />
-      </CreatePageStyles>
-    </>
+    <FormsStyles>
+      <CreateForm />
+    </FormsStyles>
   );
 };
 

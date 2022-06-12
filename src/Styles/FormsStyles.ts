@@ -1,26 +1,54 @@
 import styled from "styled-components";
-import iconHamburguer from "../../images/menu_hamburguer.png";
-import iconBack from "../../images/icon-back.png";
-import iconFavs from "../../images/icon-stars.png";
-import iconMenuFavs from "../../images/star_add_icon.png";
-import iconLike from "../../images/heartLike.png";
-import iconAddFav from "../../images/icon-add_plus.png";
-import iconHome from "../../images/icon-home.png";
-import iconLogout from "../../images/icon-user_deny.png";
-import iconDelete from "../../images/icon-logout1.png";
-import iconSoundOff from "../../images/icon-sound-off.png";
-import iconSoundOn from "../../images/icon-sound-on.png";
+import iconHamburguer from "../images/menu_hamburguer.png";
+import iconBack from "../images/icon-back.png";
+import iconFavs from "../images/icon-stars.png";
+import iconMenuFavs from "../images/star_add_icon.png";
+import iconLike from "../images/heartLike.png";
+import iconAddFav from "../images/icon-add_plus.png";
+import iconHome from "../images/icon-home.png";
+import iconLogout from "../images/icon-user_deny.png";
+import iconDelete from "../images/icon-logout1.png";
+import iconSoundOff from "../images/icon-sound-off.png";
+import iconSoundOn from "../images/icon-sound-on.png";
+import image from "../images/background2Heart.png";
+import imagePhotoBackgoud from "../images/contact-photo.png";
 
-const PenguinsPageStyles = styled.div`
+const FormsStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 
+  background-image: url(${image});
   background-size: 200%;
-  background-position-x: 80px;
-  background-position-y: 230px;
+  background-position-x: 97px;
+  background-position-y: 30px;
   background-repeat: no-repeat;
+  height: 690px;
+  text-align: center;
 
-  text-align: justify;
+  .bt-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    width: 100%;
+  }
+
+  .bt-login,
+  .bt-register {
+    color: white;
+    background-color: black;
+    padding: 14px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 15px;
+    align-items: center;
+    margin: auto;
+  }
 
   .header {
     position: fixed;
@@ -32,10 +60,16 @@ const PenguinsPageStyles = styled.div`
   }
 
   form {
+    display: flex;
+    flex-direction: column;
+
     row-gap: 20px;
-    width: 70%;
-    margin: auto;
-    margin-top: 60px;
+    width: 100%;
+    margin-top: 210px;
+  }
+
+  .form-create {
+    margin-top: 100px;
   }
 
   hr {
@@ -51,35 +85,37 @@ const PenguinsPageStyles = styled.div`
     padding-top: 43px;
     width: 200px;
   }
+
   h1 {
-    font-size: 2px;
-    margin-left: 10px;
+    top: 25px;
+    position: relative;
+    width: 100%;
+    font-size: 18px;
   }
+
   h2 {
     font-size: 20px;
     margin-left: 12px;
   }
-  h1,
-  h2 {
-    text-align: left;
-    color: black;
-  }
 
   a {
     text-decoration: none;
-    color: white;
+    color: black;
     font-size: 20px;
+    font-size: 14px;
   }
 
   label {
     display: flex;
     flex-direction: column;
     width: 80%;
-
+    height: 60px;
     padding-bottom: 10px;
     font-size: 20px;
     margin: auto;
+    display: none;
   }
+
   input {
     border: 2px solid black;
     align-items: center;
@@ -88,22 +124,32 @@ const PenguinsPageStyles = styled.div`
     box-sizing: border-box;
     color: black;
     font-size: 18px;
-    height: 100%;
+    height: 60px;
+    width: 80%;
+    margin: auto;
+    background: rgb(207 201 201);
+  }
+
+  .submitContainer {
+    display: flex;
+    width: 100%;
   }
 
   input :placeholder {
     font-weight: bolder;
+    padding-left: 20px;
     text-align: center;
   }
 
   .penguin-image {
     border: 1px solid;
     border-radius: 5px;
-  }
-
-  .penguin-container {
-    display: flex;
-    margin-bottom: 50px;
+    height: 150px;
+    background-image: url(${imagePhotoBackgoud});
+    background-color: rgb(207 201 201);
+    background-repeat: no-repeat;
+    background-position-x: 50%;
+    background-position-y: 50%;
   }
 
   nav {
@@ -121,6 +167,9 @@ const PenguinsPageStyles = styled.div`
   }
 
   .category {
+    position: relative;
+    top: -140px;
+    left: 15px;
     background-color: #ffe02c;
     border-radius: 4px;
     flex: 1;
@@ -128,38 +177,47 @@ const PenguinsPageStyles = styled.div`
     padding-left: 5px;
     box-shadow: 0 3px 6px #666;
     margin-left: 5px;
-    height: fit-content;
-    width: fit-content;
   }
 
   .likes {
     text-align: right;
     flex: 3;
+    position: relative;
+    top: -140px;
+    left: -36px;
   }
   .penguin-description {
     position: relative;
-    top: -200px;
+    top: -140px;
     left: 18px;
     width: 89%;
     text-align: justify;
   }
+
   .menu-container {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
     margin-bottom: -10px;
   }
+
   .menu-header {
     width: 100%;
     margin-top: 30%;
   }
+
   button {
-    width: 32px;
-    height: 32px;
-    background-repeat: no-repeat;
-    border: 0;
-    vertical-align: midde;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%;
     display: flex;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 15px;
+    align-items: center;
   }
 
   .bt-logout {
@@ -195,6 +253,7 @@ const PenguinsPageStyles = styled.div`
 
   .bt-menu {
     background: url(${iconHamburguer});
+    background-repeat: no-repeat;
     border-radius: 10px;
     margin-right: 20px;
   }
@@ -250,15 +309,9 @@ const PenguinsPageStyles = styled.div`
     border-radius: 5px 5px 5px 5px;
     margin: auto;
     text-align: center;
+    width: 100%;
   }
-  .image-delete {
-    position: relative;
-    top: -20px;
-    right: -14px;
-    display: flex;
-    justify-content: flex-end;
-    width: 104%;
-  }
+
   .penguins-container {
     border-radius: 8px;
     padding: 0 10px 15px;
@@ -266,19 +319,10 @@ const PenguinsPageStyles = styled.div`
     text-align: center;
   }
 
-  .penguin-datalist {
-    position: relative;
-    top: -200px;
-    display: flex;
-    height: 40px;
-    width: 90%;
-    margin: auto;
-  }
+  .penguin-datalist,
   .penguin-title {
     display: flex;
     height: 40px;
-    top: 0;
-    width: 97%;
   }
 
   .penguin-name,
@@ -292,10 +336,17 @@ const PenguinsPageStyles = styled.div`
     background: url(${iconLike});
     background-repeat: no-repeat;
     padding: 0 0 0 0;
+    position: relative;
+    top: -140px;
+    left: -10px;
+  }
+
+  .bt-save {
+    margin: auto;
+    background-color: black;
   }
 
   .bt-register {
-    width: 80px;
     color: white;
     background-color: black;
     padding: 14px 20px;
@@ -303,8 +354,12 @@ const PenguinsPageStyles = styled.div`
     font-weight: bold;
     cursor: pointer;
     opacity: 0.9;
+    display: flex;
+    justify-content: center;
     font-size: 20px;
     border-radius: 15px;
+    align-items: center;
+    margin: auto;
   }
 
   .link {
@@ -337,9 +392,11 @@ const PenguinsPageStyles = styled.div`
     transform: translate(40px, 50px);
   }
   .item {
-    display: inline-flex;
+    display: inline-block;
     background: #fff;
     padding: 0.5em;
+    margin: 0 0 1.5em;
+
     max-height: 55vh;
     -webkit-transition: 0.5s;
     box-sizing: border-box;
@@ -349,7 +406,6 @@ const PenguinsPageStyles = styled.div`
     border-radius: 2px 2px 2px 2px;
     flex-wrap: wrap;
   }
-
   .item img {
     max-width: 100%;
   }
@@ -378,4 +434,4 @@ const PenguinsPageStyles = styled.div`
   }
 `;
 
-export default PenguinsPageStyles;
+export default FormsStyles;

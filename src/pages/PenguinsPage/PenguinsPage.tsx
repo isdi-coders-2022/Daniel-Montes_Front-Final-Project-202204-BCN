@@ -1,16 +1,14 @@
-import { useAppSelector } from "../../app/redux/hooks/hooks";
-import { penguinsSelector } from "../../app/redux/features/penguinSlice/penguinSlice";
 import Penguins from "../../components/Penguins/Penguins";
 import PenguinsPageStyles from "./PenguinsPageStyles";
 import Navbar from "../../components/Navbar/Navbar";
+import { infoAction } from "../../components/Modals/Modals";
 
 const PenguinsPage = () => {
-  const penguins = useAppSelector(penguinsSelector);
-
+  infoAction("Loading full list...");
   return (
     <PenguinsPageStyles className="container projecyLayout">
       <Navbar title="Discover" />
-      <Penguins results={penguins} />
+      <Penguins />
     </PenguinsPageStyles>
   );
 };

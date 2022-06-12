@@ -1,6 +1,10 @@
+// import { useAppDispatch } from "../../app/redux/hooks/hooks";
+
+import { useNavigate } from "react-router-dom";
+import { loadPenguinActionCreator } from "../../app/redux/features/DetailSlice/DetailSlice";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
-import { deleteFavThunk } from "../../app/redux/thunks/favThunk/favThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
+import { infoAction } from "../Modals/Modals";
 
 interface Props {
   penguin: IPenguin;
@@ -10,6 +14,7 @@ const Penguin = ({
   penguin: { name, image, category, id, description, imageBackup },
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const toPascalCase = (str: string) => {
     const newStr = str.replace(/\w+/g, function (w) {
@@ -19,16 +24,23 @@ const Penguin = ({
   };
 
   const openDetail = (): void => {
-    dispatch(deleteFavThunk(id));
+    dispatch(loadPenguinActionCreator);
+
+    navigate(`/penguins/${id}`);
   };
 
   const handleLikes = (): void => {
-    dispatch(deleteFavThunk(id));
+    infoAction("Likes clicked!");
   };
 
   const handleDelete = (): void => {
-    dispatch(deleteFavThunk(id));
+    infoAction("Delete clicked!");
+    // dispatch(deleteFavThunk(id));
   };
+
+  const HidderDelete = document.location.href.includes("/penguins")
+    ? " display-none"
+    : "";
 
   return (
     <div className="penguin-container item">
@@ -39,7 +51,7 @@ const Penguin = ({
       <div className="penguin-image-container" onClick={openDetail}>
         <img src={image} alt={name} className="penguin-image" />
       </div>
-      <div className="image-delete" onClick={handleDelete}>
+      <div className={`image-delete${HidderDelete}`} onClick={handleDelete}>
         <button className="bt-delete" />
       </div>
       <div className="penguin-datalist">

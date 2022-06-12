@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../../app/redux/hooks/hooks";
-import { correctAction, stopLoadingAction } from "../Modals/Modals";
+import { correctAction } from "../Modals/Modals";
 
 type Props = {
   children: JSX.Element;
@@ -13,11 +13,11 @@ const CheckOutSecurity = ({ children }: Props) => {
 
   useEffect(() => {
     if (logged) {
-      correctAction("Wellcome: " + username);
-      stopLoadingAction();
+      if (username) {
+        correctAction("Wellcome!");
+      }
+
       navigate("/penguins");
-    } else {
-      stopLoadingAction();
     }
   }, [logged, username, navigate]);
 

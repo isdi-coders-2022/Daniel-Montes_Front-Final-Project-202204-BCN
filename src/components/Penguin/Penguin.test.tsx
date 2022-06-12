@@ -1,32 +1,49 @@
-import Penguin from "../../components/Penguin/Penguin";
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
+import { BrowserRouter } from "react-router-dom";
+import { mockPenguins } from "../../mocks/penguins";
+
 import store from "../../app/redux/store/store";
+import Penguin from "./Penguin";
 
-describe("Given a RegisterForm component", () => {
-  describe("When the word 'hello' is written to the username input field", () => {
-    test("Then the value of the username input field should be 'hello'", () => {
-      const penguin = {
-        id: 3,
-        name: "test",
-        category: "test",
-        description: "test",
-        image: "test",
-        imageBackup: "test",
-        likes: 4,
-        owner: "",
-      };
+const mockDispatch = jest.fn();
 
+jest.mock("../../app/redux/hooks/hooks", () => ({
+  ...jest.requireActual("../../app/redux/hooks/hooks"),
+  useAppDispatch: () => mockDispatch,
+}));
+
+describe("Given the Penguin component", () => {
+  describe("When it's invoked", () => {
+    test("Then it should render one heading element", () => {
       render(
         <Provider store={store}>
-          {" "}
-          <Penguin penguin={penguin} key={penguin.id} />
+          <BrowserRouter>
+            <Penguin penguin={mockPenguins[0]} />
+          </BrowserRouter>
         </Provider>
       );
 
-      const name = screen.getByRole("heading");
+      const result = screen.getByRole("heading");
 
-      expect(name).toHaveTextContent("Test");
+      expect(result).toBeInTheDocument();
+    });
+  });
+  describe("when its clicked the button", () => {
+    test("then it should call dispatch", () => {
+      render(
+        <Provider store={store}>
+          <BrowserRouter>
+            <Penguin penguin={mockPenguins[0]} />
+          </BrowserRouter>
+        </Provider>
+      );
+
+      const buttons = screen.getAllByRole("button");
+      userEvent.click(buttons[2]);
+
+      expect(mockDispatch).not.toHaveBeenCalled();
     });
   });
 });
