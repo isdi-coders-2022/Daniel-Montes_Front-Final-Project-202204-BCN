@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
-import { INewFav } from "../../app/redux/types/penguin/penguinInterfaces";
+import { INewPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { createFavThunk } from "../../app/redux/thunks/favThunk/favThunk";
 import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
-import CreateFormStyles from "./CreateFormStyles";
+
 import Navbar from "../Navbar/Navbar";
 
 const CreateForm = (): JSX.Element => {
   const { username } = useAppSelector((state) => state.users);
 
-  const blankFields: INewFav = {
+  const blankFields: INewPenguin = {
     name: "",
     category: "",
     likes: 0,
@@ -65,64 +65,67 @@ const CreateForm = (): JSX.Element => {
   };
 
   return (
-    <CreateFormStyles>
+    <div className="container">
       <Navbar title="New Fav..." />
-      <div className="container">
-        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
-          <label htmlFor="image">Image</label>
-          <input
-            className="image penguin-image"
-            id="image"
-            type="file"
-            onChange={uploadImage}
-            autoComplete="off"
-            placeholder="Image"
-          />
-          <label htmlFor="title">Name</label>
-          <input
-            type="text"
-            id="name"
-            autoComplete="off"
-            value={formData.name}
-            onChange={handleInputChange}
-            placeholder="Name"
-          />
-          <label htmlFor="title">Category</label>
-          <input
-            type="text"
-            id="category"
-            autoComplete="off"
-            value={formData.category}
-            onChange={handleInputChange}
-            placeholder="Category"
-          />
-          <label htmlFor="times">Likes</label>
-          <input
-            className="w3-input"
-            type="number"
-            id="likes"
-            autoComplete="off"
-            value={formData.likes}
-            placeholder="Likes"
-            onChange={handleInputChange}
-          />
-          <label htmlFor="description">Description</label>
-          <input
-            className="description"
-            type="text"
-            id="description"
-            autoComplete="off"
-            value={formData.description}
-            placeholder="Description"
-            onChange={handleInputChange}
-          />
+      <form
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+        className="form-create"
+      >
+        <label htmlFor="image">Image</label>
+        <input
+          className="image penguin-image"
+          id="image"
+          type="file"
+          onChange={uploadImage}
+          autoComplete="off"
+          placeholder="Image"
+        />
+        <label htmlFor="title">Name</label>
+        <input
+          type="text"
+          id="name"
+          autoComplete="off"
+          value={formData.name}
+          onChange={handleInputChange}
+          placeholder="Name"
+        />
+        <label htmlFor="title">Category</label>
+        <input
+          type="text"
+          id="category"
+          autoComplete="off"
+          value={formData.category}
+          onChange={handleInputChange}
+          placeholder="Category"
+        />
+        <label htmlFor="times">Likes</label>
+        <input
+          className="w3-input"
+          type="number"
+          id="likes"
+          autoComplete="off"
+          value={formData.likes}
+          placeholder="Likes"
+          onChange={handleInputChange}
+        />
+        <label htmlFor="description">Description</label>
+        <input
+          className="description"
+          type="text"
+          id="description"
+          autoComplete="off"
+          value={formData.description}
+          placeholder="Description"
+          onChange={handleInputChange}
+        />
 
-          <button type="submit" className="bt-save" placeholder="bt-save">
-            Save
-          </button>
-        </form>
-      </div>
-    </CreateFormStyles>
+        <button type="submit" className="bt-save" placeholder="bt-save">
+          Save
+        </button>
+      </form>
+    </div>
   );
 };
 

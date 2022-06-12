@@ -1,59 +1,56 @@
-export interface PenguinInfo {
+export interface IPenguin {
+  id?: number;
   name: string;
-  username: string;
-  logged: boolean;
+  likes: number;
+  image: string;
+  category: string;
+  imageBackup: string;
+  description: string;
+  owner?: string;
 }
 
-export interface IPenguin {
+export interface Ipenguin {
+  id?: number;
+  name: string;
+  likes: number;
+  image: string;
+  category: string;
+  imageBackup: string;
+  description: string;
+  owner?: string;
+}
+
+export interface INewPenguin {
   id: number;
   name: string;
-  category: string;
   likes: number;
-  description: string;
   image: string;
+  category: string;
   imageBackup: string;
+  description: string;
   owner: string;
 }
-
-export interface IPenguins {
-  results: IPenguin[];
-}
-
 export interface IFav {
   id: number;
   name: string;
-  category: string;
   likes: number;
-  description: string;
   image: string;
+  category: string;
   imageBackup: string;
+  description: string;
   owner: string;
 }
 export interface INewFav {
   id: number;
   name: string;
-  category: string;
   likes: number;
-  description: string;
   image: string;
+  category: string;
   imageBackup: string;
+  description: string;
   owner: string;
 }
 
-export interface IFavsPenguins {
-  results: IPenguin[];
-}
-
-export interface PenguinsState {
-  id: number;
-  name: string;
-  category: string;
-  likes: number;
-  description: string;
-  image: string;
-  imageBackup: string;
-}
-
-export interface Ierror {
-  message: string;
+export interface IDetail {
+  penguin: IPenguin;
 }

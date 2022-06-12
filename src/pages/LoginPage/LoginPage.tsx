@@ -1,15 +1,15 @@
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { LoginPageStyles } from "./LoginPageStyles";
+import FormsStyles from "../../Styles/FormsStyles";
 
 const LoginPage = (): JSX.Element => {
   return (
-    <LoginPageStyles>
+    <FormsStyles>
       <ToastContainer />
       <h1>AdoptaUnPingüino.com</h1>
       <LoginForm />
-    </LoginPageStyles>
+    </FormsStyles>
   );
 };
 

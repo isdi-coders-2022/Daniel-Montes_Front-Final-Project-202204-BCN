@@ -1,20 +1,21 @@
-import { useAppSelector } from "../../app/redux/hooks/hooks";
-import { penguinsSelector } from "../../app/redux/features/penguinSlice/penguinSlice";
+import { infoAction } from "../../components/Modals/Modals";
 import Navbar from "../../components/Navbar/Navbar";
-import Penguins from "../../components/Penguins/Penguins";
+import Favs from "../../components/Penguins/Penguins";
 import PenguinsPageStyles from "../PenguinsPage/PenguinsPageStyles";
 
 const FavsPage = () => {
-  const penguins = useAppSelector(penguinsSelector);
+  infoAction("Loading Favs full list, please wait...");
 
   return (
-    <PenguinsPageStyles>
-      <div className="container">
-        <Navbar title="Favs" />
-        <h1>Favs</h1>
-        <Penguins results={penguins} />
-      </div>
-    </PenguinsPageStyles>
+    <>
+      <PenguinsPageStyles>
+        <div className="container">
+          <Navbar title="Favs" />
+
+          <Favs />
+        </div>
+      </PenguinsPageStyles>
+    </>
   );
 };
 

@@ -7,7 +7,7 @@ import FavsPage from "./FavsPage";
 describe("Given a FavsPage component", () => {
   describe("When it's called", () => {
     test("Then it should render a heading with the text 'Favs'", () => {
-      const expectedText = "Favs";
+      const expectedText = "Favourites";
 
       render(
         <Provider store={store}>
@@ -17,7 +17,9 @@ describe("Given a FavsPage component", () => {
         </Provider>
       );
 
-      const expectedRenderedHeading = screen.getByRole("heading", { level: 1 });
+      const expectedRenderedHeading = screen.getByRole("button", {
+        name: "Favourites",
+      });
 
       expect(expectedRenderedHeading).toHaveTextContent(expectedText);
     });

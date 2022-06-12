@@ -12,6 +12,15 @@ export const mockPenguins = [
     category: "Penguin",
     description: "Cal is a penguin",
     likes: 2,
-    Image: "image.jpg",
+    image: "image.jpg",
+    imageBackup: "image.jpg",
+  },
+  {
+    name: "Penguin2",
+    category: "Penguin",
+    description: "Cal is a penguin",
+    likes: 2,
+    image: "image.jpg",
+    imageBackup: "image.jpg",
   },
 ];

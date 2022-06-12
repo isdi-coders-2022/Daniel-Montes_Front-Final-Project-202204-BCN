@@ -16,13 +16,15 @@ const toastOptions = {
 };
 
 const toastOptionsSuccess = {
-  autoClose: 1200,
+  autoClose: 2000,
   closeOnClick: true,
+  toastId: `${customID}`,
 };
 
 const toastOptionsWrong = {
   autoClose: 2000,
   closeOnClick: true,
+  toastId: `${customID}`,
 };
 
 export const correctAction = (message: string) => {
