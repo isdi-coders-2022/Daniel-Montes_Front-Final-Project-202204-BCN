@@ -33,7 +33,6 @@ const Penguin = ({
   const openDetail = (): void => {
     if (id) {
       dispatch(getPenguinThunk(`${id}`));
-
       navigate(`/detail/${id}`);
     }
   };

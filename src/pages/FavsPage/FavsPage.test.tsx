@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
 import FavsPage from "./FavsPage";
 
-const expectedText = "Favourites";
 jest.mock("chalk", () => ({
   green: jest.fn(),
   white: jest.fn(),
