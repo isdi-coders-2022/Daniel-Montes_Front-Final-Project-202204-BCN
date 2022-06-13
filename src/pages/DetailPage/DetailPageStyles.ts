@@ -10,7 +10,6 @@ import iconHome from "../../images/icon-home.png";
 import iconLogout from "../../images/icon-logout-white.png";
 import iconDelete from "../../images/icon-logout1.png";
 import iconSoundOff from "../../images/icon-sound-off.png";
-import iconSoundOn from "../../images/icon-sound-on.png";
 
 const DetailPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",

@@ -1,5 +1,4 @@
 import { infoAction } from "../../components/Modals/Modals";
-import Navbar from "../../components/Navbar/Navbar";
 import Favs from "../../components/Favs/Favs";
 import PenguinsPageStyles from "../PenguinsPage/PenguinsPageStyles";
 
