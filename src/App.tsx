@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import { UserInfo } from "./app/redux/types/userInterfaces/userInterfaces";
 import jwtDecode from "jwt-decode";
 import { logInActionCreator } from "./app/redux/features/userSlice/userSlice";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const { logged } = useAppSelector((state) => state.users);
@@ -28,66 +29,69 @@ function App() {
   }, [dispatch, logged]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/homepage" />} />
-      <Route
-        path="/homepage"
-        element={
-          <CheckOutSecurity>
-            <HomePage />
-          </CheckOutSecurity>
-        }
-      />
-      <Route
-        path="/login"
-        element={
-          <CheckOutSecurity>
-            <LoginPage />
-          </CheckOutSecurity>
-        }
-      />
-      <Route
-        path="/register"
-        element={
-          <CheckOutSecurity>
-            <RegisterPage />
-          </CheckOutSecurity>
-        }
-      />
-      <Route
-        path="/penguins"
-        element={
-          <CheckInSecurity>
-            <PenguinsPage />
-          </CheckInSecurity>
-        }
-      />
-      <Route
-        path="/penguins/favs"
-        element={
-          <CheckInSecurity>
-            <FavsPage />
-          </CheckInSecurity>
-        }
-      />
-      <Route
-        path="/create"
-        element={
-          <CheckInSecurity>
-            <CreatePage />
-          </CheckInSecurity>
-        }
-      />
-      <Route
-        path="/penguin-edit/:id"
-        element={
-          <CheckInSecurity>
-            <CreatePage />
-          </CheckInSecurity>
-        }
-      />
-      <Route path="/detail/:idPenguin" element={<DetailPage />} />
-    </Routes>
+    <>
+      <Navbar title="Penguins" />
+      <Routes>
+        <Route path="/" element={<Navigate to="/homepage" />} />
+        <Route
+          path="/homepage"
+          element={
+            <CheckOutSecurity>
+              <HomePage />
+            </CheckOutSecurity>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <CheckOutSecurity>
+              <LoginPage />
+            </CheckOutSecurity>
+          }
+        />
+        <Route
+          path="/register"
+          element={
+            <CheckOutSecurity>
+              <RegisterPage />
+            </CheckOutSecurity>
+          }
+        />
+        <Route
+          path="/penguins"
+          element={
+            <CheckInSecurity>
+              <PenguinsPage />
+            </CheckInSecurity>
+          }
+        />
+        <Route
+          path="/penguins/favs"
+          element={
+            <CheckInSecurity>
+              <FavsPage />
+            </CheckInSecurity>
+          }
+        />
+        <Route
+          path="/create"
+          element={
+            <CheckInSecurity>
+              <CreatePage />
+            </CheckInSecurity>
+          }
+        />
+        <Route
+          path="/penguin-edit/:id"
+          element={
+            <CheckInSecurity>
+              <CreatePage />
+            </CheckInSecurity>
+          }
+        />
+        <Route path="/detail/:idPenguin" element={<DetailPage />} />
+      </Routes>
+    </>
   );
 }
 

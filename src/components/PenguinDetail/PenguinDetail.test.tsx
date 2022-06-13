@@ -1,8 +1,9 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import DetailPage from "./DetailPage";
+import PenguinDetail from "./PenguinDetail";
 
 jest.mock("chalk", () => ({
   green: jest.fn(),
@@ -14,19 +15,25 @@ jest.mock("chalk", () => ({
 describe("Given a CreatePage component", () => {
   describe("When the word 'penguin' is written to the username input field", () => {
     test("Then the value of the username input field should be 'penguin'", () => {
-      const ToFind = "Detail";
+      const ToFind = "button";
+      const expectedButtons = 1;
+      const handleDelete = jest.fn();
 
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <DetailPage />
+            <PenguinDetail />
           </BrowserRouter>
         </Provider>
       );
 
-      const label = screen.getByText(ToFind);
+      const bt = screen.getAllByRole(ToFind);
+      const btDelete = screen.getByTitle("bt-delete");
+      userEvent.click(btDelete);
+      handleDelete();
 
-      expect(label).toHaveTextContent(ToFind);
+      expect(bt.length).toBe(expectedButtons);
+      expect(handleDelete).toHaveBeenCalled();
     });
   });
 });

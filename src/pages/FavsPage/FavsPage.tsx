@@ -9,8 +9,8 @@ const FavsPage = () => {
   return (
     <>
       <PenguinsPageStyles>
+        <h1>Favs</h1>
         <div className="container">
-          <Navbar title="Favs" />
           <Favs />
         </div>
       </PenguinsPageStyles>

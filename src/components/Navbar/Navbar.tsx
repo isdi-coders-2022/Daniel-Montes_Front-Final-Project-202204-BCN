@@ -1,6 +1,6 @@
 import { ReactDimmer } from "react-dimmer";
 import { useState } from "react";
-import { NavbarStyles } from "./NavbarStyles";
+import NavbarStyles from "../../Styles/NavbarStyles";
 import { Menu } from "../Menu/Menu";
 import { IParameter } from "../../app/redux/types/userInterfaces/userInterfaces";
 import { correctAction } from "../Modals/Modals";
@@ -30,23 +30,25 @@ const Navbar = ({ title }: IParameter): JSX.Element => {
     : "";
 
   return (
-    <NavbarStyles className="app">
-      <div className="header">
-        <button className={`bt-back${HidderBack}`} onClick={handleBack} />
-        <button className="menu-btn bt-menu" onClick={handleMenu} />
-      </div>
+    <>
+      <NavbarStyles>
+        <div className="header">
+          <button className={`bt-back${HidderBack}`} onClick={handleBack} />
+          <button className="menu-btn bt-menu" onClick={handleMenu} />
 
-      <Menu isMenuOpen={isMenuOpen} />
+          <nav className="nav"></nav>
+        </div>
 
-      <div className="menu-container">
+        <Menu isMenuOpen={isMenuOpen} />
+
         <ReactDimmer
           isOpen={isMenuOpen}
           exitDimmer={setMenuOpen}
           zIndex={100}
           blur={1.5}
         />
-      </div>
-    </NavbarStyles>
+      </NavbarStyles>
+    </>
   );
 };
 

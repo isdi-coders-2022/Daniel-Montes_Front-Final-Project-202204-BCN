@@ -40,7 +40,7 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
 export const loadFavsThunk =
   (username: string) => async (dispatch: AppDispatch) => {
     try {
-      infoAction("Loading Penguins...");
+      infoAction("Loading favs...");
       const token = localStorage.getItem("token");
 
       if (token) {
@@ -66,6 +66,8 @@ export const loadFavsThunk =
 export const createFavThunk =
   (formData: any) => async (dispatch: AppDispatch) => {
     try {
+      infoAction("Saving fav...(createFavThunk)");
+
       const token = localStorage.getItem("token");
       const {
         data: { newFav },

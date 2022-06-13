@@ -42,6 +42,7 @@ const PenguinDetail = (): JSX.Element => {
           <div
             className={`animated bounce animatedDelete${HidderDelete}`}
             onClick={handleDelete}
+            title="bt-delete"
           >
             <button className="bt-delete" />
           </div>

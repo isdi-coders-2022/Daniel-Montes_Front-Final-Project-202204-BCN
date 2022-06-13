@@ -57,6 +57,9 @@ const Penguin = ({
         correctAction("Fav Added!");
 
         navigate(`/penguins/favs`);
+      } else {
+        stopLoadingAction();
+        wrongAction("Error creating!");
       }
     } catch {
       stopLoadingAction();

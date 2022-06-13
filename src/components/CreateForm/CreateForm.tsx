@@ -9,8 +9,6 @@ import {
   wrongAction,
 } from "../Modals/Modals";
 
-import Navbar from "../Navbar/Navbar";
-
 const CreateForm = (): JSX.Element => {
   const { username } = useAppSelector((state) => state.users);
 
@@ -40,7 +38,7 @@ const CreateForm = (): JSX.Element => {
 
   const handleSubmit = (event: React.FormEvent): void => {
     try {
-      infoAction("Creating...");
+      infoAction("Creating fav...(handleSubmit)");
       event.preventDefault();
 
       const newFav = new FormData();
@@ -48,17 +46,21 @@ const CreateForm = (): JSX.Element => {
       newFav.append("name", formData.id);
       newFav.append("name", formData.name);
       newFav.append("category", formData.category);
-      newFav.append("likes", JSON.stringify(formData.likes));
+      // newFav.append("likes", JSON.stringify(formData.likes));
       newFav.append("description", formData.description);
       newFav.append("image", formData.image);
       newFav.append("imageBackup", formData.imageBackup);
       newFav.append("owner", formData.owner);
 
       if (newFav) {
+        stopLoadingAction();
         dispatch(createFavThunk(newFav));
         setFormData(blankFields);
 
         correctAction("Created!");
+      } else {
+        stopLoadingAction();
+        wrongAction("Error creating!");
       }
     } catch {
       stopLoadingAction();
@@ -84,7 +86,7 @@ const CreateForm = (): JSX.Element => {
   return (
     <div className="container">
       <h1>New favorite...</h1>
-      <Navbar title="New Fav..." />
+
       <form
         noValidate
         autoComplete="off"
@@ -126,6 +128,7 @@ const CreateForm = (): JSX.Element => {
           value={formData.likes}
           placeholder="Likes"
           onChange={handleInputChange}
+          className="input-likes"
         />
         <label htmlFor="description">Description</label>
         <input

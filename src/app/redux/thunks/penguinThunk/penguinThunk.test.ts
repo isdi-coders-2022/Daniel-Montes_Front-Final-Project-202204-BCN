@@ -1,7 +1,15 @@
-import { deletePenguinActionCreator } from "../../features/penguinSlice/penguinSlice";
-import { loadPenguinsThunk } from "./penguinThunk";
+import axios from "axios";
+import { mockPenguin, mockPenguins } from "../../../../mocks/penguins";
+import {
+  deletePenguinActionCreator,
+  createPenguinActionCreator,
+} from "../../features/penguinSlice/penguinSlice";
+import {
+  createFavThunk,
+  deletePenguinThunk,
+  loadFavsThunk,
+} from "./penguinThunk";
 
-const dispatch = jest.fn();
 jest.mock("chalk", () => ({
   green: jest.fn(),
   white: jest.fn(),
@@ -9,28 +17,40 @@ jest.mock("chalk", () => ({
   yellow: jest.fn(),
 }));
 
-describe("Given the loadPenguinsThunk function", () => {
-  describe("When it's called", () => {
-    test("Then it should call dispatch with the load notes action with the penguins received from the axios request", async () => {
-      jest.spyOn(Storage.prototype, "getItem").mockReturnValue("token");
+describe("When it's called and there's no token", () => {
+  test("Then it should not call dispatch", async () => {
+    const dispatch = jest.fn();
 
-      const thunk = loadPenguinsThunk();
-      thunk(dispatch());
+    const thunk = loadFavsThunk("");
+    await thunk(dispatch);
 
-      expect(dispatch).toHaveBeenCalled();
-    });
+    expect(dispatch).not.toHaveBeenCalled();
   });
+});
 
-  describe("When it's called and there is no token", () => {
-    test("Then it should not call dispatch", async () => {
-      const dispatch = jest.fn();
+describe("when it's called with no token", () => {
+  test("Then it should not call the dispatch function", async () => {
+    const dispatch = jest.fn();
 
-      jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
+    jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
 
-      const thunk = deletePenguinActionCreator("");
-      dispatch();
+    const thunk = createFavThunk(mockPenguin);
+    await thunk(dispatch);
 
-      expect(dispatch).toHaveBeenCalled();
-    });
+    expect(dispatch).not.toHaveBeenCalled();
+  });
+});
+
+describe("when it's called with an placeId with no token", () => {
+  test("Then it should not call the dispatch function", async () => {
+    const id = "222";
+    const dispatch = jest.fn();
+
+    jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
+
+    const thunk = deletePenguinThunk(id);
+    await thunk(dispatch);
+
+    expect(dispatch).not.toHaveBeenCalled();
   });
 });

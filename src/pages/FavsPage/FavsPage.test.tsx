@@ -22,12 +22,10 @@ describe("Given a FavsPage component", () => {
           </BrowserRouter>
         </Provider>
       );
+      const expectedText = "Favs";
+      const expected = screen.getByText(expectedText);
 
-      const expectedRenderedHeading = screen.getByRole("button", {
-        name: "Favourites",
-      });
-
-      expect(expectedRenderedHeading).toHaveTextContent(expectedText);
+      expect(expected).toHaveTextContent(expectedText);
     });
   });
 });

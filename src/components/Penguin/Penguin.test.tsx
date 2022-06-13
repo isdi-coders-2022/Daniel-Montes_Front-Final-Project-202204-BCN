@@ -48,7 +48,7 @@ describe("Given the Penguin component", () => {
       const buttons = screen.getAllByRole("button");
       userEvent.click(buttons[2]);
 
-      expect(mockDispatch).not.toHaveBeenCalled();
+      expect(mockDispatch).toHaveBeenCalled();
     });
   });
 });

@@ -22,9 +22,9 @@ describe("Given a PenguinsPage Component", () => {
           </Provider>
         </BrowserRouter>
       );
-
-      const receivedResult = screen.getAllByRole("button");
-      expect(receivedResult.length).toBe(expectedResult);
+      const expectedResult = "Penguins";
+      const receivedResult = screen.getByText(expectedResult);
+      expect(receivedResult).toHaveTextContent(expectedResult);
     });
   });
 });
