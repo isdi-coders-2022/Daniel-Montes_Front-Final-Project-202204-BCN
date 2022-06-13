@@ -13,7 +13,12 @@ jest.mock("../../app/redux/hooks/hooks", () => ({
   ...jest.requireActual("../../app/redux/hooks/hooks"),
   useAppDispatch: () => mockDispatch,
 }));
-
+jest.mock("chalk", () => ({
+  green: jest.fn(),
+  white: jest.fn(),
+  red: jest.fn(),
+  yellow: jest.fn(),
+}));
 describe("Given the Penguin component", () => {
   describe("When it's invoked", () => {
     test("Then it should render one heading element", () => {

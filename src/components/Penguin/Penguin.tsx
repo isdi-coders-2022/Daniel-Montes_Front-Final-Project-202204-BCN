@@ -1,17 +1,24 @@
-// import { useAppDispatch } from "../../app/redux/hooks/hooks";
-
 import { useNavigate } from "react-router-dom";
-import { loadPenguinActionCreator } from "../../app/redux/features/DetailSlice/DetailSlice";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
+import {
+  createFavThunk,
+  deletePenguinThunk,
+  getPenguinThunk,
+} from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import { infoAction } from "../Modals/Modals";
+import {
+  correctAction,
+  infoAction,
+  stopLoadingAction,
+  wrongAction,
+} from "../Modals/Modals";
 
 interface Props {
   penguin: IPenguin;
 }
 
 const Penguin = ({
-  penguin: { name, image, category, id, description, imageBackup },
+  penguin: { name, image, category, id, description, likes, imageBackup },
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -24,9 +31,37 @@ const Penguin = ({
   };
 
   const openDetail = (): void => {
-    dispatch(loadPenguinActionCreator);
+    if (id) {
+      dispatch(getPenguinThunk(`${id}`));
 
-    navigate(`/penguins/${id}`);
+      navigate(`/detail/${id}`);
+    }
+  };
+  const addFav = (event: React.FormEvent): void => {
+    try {
+      infoAction("Creating...");
+      event.preventDefault();
+
+      const formData = new FormData();
+
+      formData.append("id", JSON.stringify(id));
+      formData.append("name", name);
+      formData.append("category", category);
+      formData.append("likes", JSON.stringify(likes));
+      formData.append("description", description);
+      formData.append("image", image);
+      formData.append("imageBackup", imageBackup);
+
+      if (formData) {
+        dispatch(createFavThunk(formData));
+        correctAction("Fav Added!");
+
+        navigate(`/penguins/favs`);
+      }
+    } catch {
+      stopLoadingAction();
+      wrongAction("Error creating!");
+    }
   };
 
   const handleLikes = (): void => {
@@ -34,34 +69,45 @@ const Penguin = ({
   };
 
   const handleDelete = (): void => {
-    infoAction("Delete clicked!");
-    // dispatch(deleteFavThunk(id));
+    if (id) {
+      dispatch(deletePenguinThunk(`${id}`));
+    }
   };
 
-  const HidderDelete = document.location.href.includes("/penguins")
-    ? " display-none"
-    : "";
+  const HidderDelete = document.location.href.includes("/penguins/favs")
+    ? ""
+    : " display-none";
 
   return (
-    <div className="penguin-container item">
+    <div className="item penguin-container">
       <div className="penguin-title">
         <h2 className="penguin-name">{toPascalCase(name)}</h2>
-        <button className="bt-favs" />
+        <button className="animated bounce animatedFav" onClick={addFav} />
       </div>
-      <div className="penguin-image-container" onClick={openDetail}>
+      <div className="penguin-image-container">
         <img src={image} alt={name} className="penguin-image" />
       </div>
-      <div className={`image-delete${HidderDelete}`} onClick={handleDelete}>
-        <button className="bt-delete" />
-      </div>
+
       <div className="penguin-datalist">
         <span className="category">{toPascalCase(category)}</span>
         <span className="likes"></span>
         <div className="image-container" onClick={handleLikes}>
-          <button className="bt-likes" />
+          <button className="animated bounce animatedLike" />
         </div>
       </div>
-      <div className="penguin-description">{description}</div>
+      <div className="penguin-description">
+        {description.substring(0, 130)}
+
+        <span className="link effect" onClick={openDetail}>
+          ...More
+        </span>
+      </div>
+      <div
+        className={`animated bounce animatedDelete${HidderDelete}`}
+        onClick={handleDelete}
+      >
+        <button className="bt-delete" />
+      </div>
     </div>
   );
 };

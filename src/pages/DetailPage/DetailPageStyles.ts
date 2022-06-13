@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import image from "../../images/background2Heart.png";
 import iconHamburguer from "../../images/menu_hamburguer.png";
 import iconBack from "../../images/icon-back.png";
 import iconFavs from "../../images/icon-stars.png";
@@ -11,163 +12,45 @@ import iconDelete from "../../images/icon-logout1.png";
 import iconSoundOff from "../../images/icon-sound-off.png";
 import iconSoundOn from "../../images/icon-sound-on.png";
 
-const PenguinsPageStyles = styled.div`
+const DetailPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 
+  background-image: url(${image});
   background-size: 200%;
-  background-position-x: 80px;
-  background-position-y: 230px;
+  background-position-x: 97px;
+  background-position-y: 30px;
   background-repeat: no-repeat;
 
-  text-align: justify;
+  text-align: center;
 
   element.style {
     text-align: center;
   }
-  .Toastify__toast-body {
-    text-align: center;
-  }
-  .header {
-    position: fixed;
-    right: 20px;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    width: 95%;
-  }
 
-  form {
-    row-gap: 20px;
-    width: 70%;
-    margin: auto;
-    margin-top: 60px;
+  .bt-menu {
+    background: url(${iconHamburguer});
+    border-radius: 10px;
+    margin-right: 20px;
   }
-
-  hr {
-    width: 40%;
-    margin: 35px;
-    margin-top: 5px;
-  }
-
   li {
-    height: 48px;
     list-style-type: none;
-    text-align: left;
-    padding-top: 43px;
-    width: 200px;
+    text-align: justify;
   }
   h1 {
     font-size: 2px;
     margin-left: 10px;
   }
+
   h2 {
     font-size: 16px;
     margin-left: 12px;
   }
+
   h1,
   h2 {
     text-align: left;
     color: black;
-  }
-
-  a {
-    text-decoration: none;
-    color: white;
-    font-size: 20px;
-  }
-
-  label {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-
-    padding-bottom: 10px;
-    font-size: 20px;
-    margin: auto;
-  }
-  input {
-    border: 2px solid black;
-    align-items: center;
-    justify-content: center;
-    border-radius: 12px;
-    box-sizing: border-box;
-    color: black;
-    font-size: 18px;
-    height: 100%;
-  }
-
-  input :placeholder {
-    font-weight: bolder;
-    text-align: center;
-  }
-
-  .penguin-image {
-    border: 1px solid;
-    border-radius: 5px;
-  }
-
-  .penguin-container {
-    display: flex;
-    margin-bottom: 50px;
-    background-color: grey;
-  }
-
-  nav {
-    margin-right: 9px;
-  }
-
-  .container {
-    width: 100%;
-    display: flow-root;
-  }
-
-  span {
-    font-size: 20px;
-    margin-left: 50px;
-  }
-
-  .category {
-    background-color: #ffe02c;
-    border-radius: 4px;
-    flex: 1;
-    margin-bottom: 25px;
-    padding-left: 5px;
-    box-shadow: 0 3px 6px #666;
-    margin-left: 15px;
-    height: fit-content;
-    width: fit-content;
-    font-size: 16px;
-  }
-
-  .likes {
-    text-align: right;
-    flex: 3;
-  }
-  .penguin-description {
-    position: relative;
-    top: -133px;
-    left: 18px;
-    width: 89%;
-    text-align: justify;
-  }
-  .menu-container {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    margin-bottom: -10px;
-  }
-  .menu-header {
-    width: 100%;
-  }
-  button {
-    width: 32px;
-    height: 32px;
-    background-repeat: no-repeat;
-    border: 0;
-    vertical-align: midde;
-    display: flex;
-    background-color: inherit;
   }
 
   .bt-logout {
@@ -178,26 +61,6 @@ const PenguinsPageStyles = styled.div`
     background-repeat: no-repeat;
   }
 
-  .penguin-detail-container {
-    width: 100%;
-  }
-
-  .li-detail {
-  }
-  .bt-delete {
-    height: 65px;
-    width: 65px;
-    background-size: 60%;
-    background-repeat: no-repeat;
-  }
-
-  .bt-sound {
-    background: url(${iconSoundOn});
-    height: 65px;
-    width: 65px;
-    background-size: 60%;
-    background-repeat: no-repeat;
-  }
   .bt-sound-off {
     background: url(${iconSoundOff});
     height: 65px;
@@ -206,18 +69,27 @@ const PenguinsPageStyles = styled.div`
     background-repeat: no-repeat;
   }
 
-  .bt-menu {
-    background: url(${iconHamburguer});
-    border-radius: 10px;
-    margin-right: 20px;
-  }
-
   .bt-favs-menu {
     background: url(${iconFavs});
     width: 65px;
     height: 65px;
     background-size: 60%;
     background-repeat: no-repeat;
+  }
+
+  .penguin-detail-container {
+    box-shadow: 0 3px 6px #666;
+    padding: 10px 10px 150px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px 5px 5px 5px;
+    margin: auto;
+    text-align: center;
+    width: 200px;
+  }
+
+  .penguin-image-container {
+    width: 200px;
+    height: 200px;
   }
 
   .bt-back {
@@ -256,55 +128,6 @@ const PenguinsPageStyles = styled.div`
     background-size: 60%;
     background-repeat: no-repeat;
   }
-  .penguin-image-container {
-    box-shadow: 0 3px 6px #666;
-    padding: 10px 10px 150px 10px;
-    margin-bottom: 10px;
-    border-radius: 5px 5px 5px 5px;
-    margin: auto;
-    text-align: center;
-  }
-
-  .penguin-image-detail {
-    box-shadow: 0 3px 6px #666;
-    padding: 10px 10px 150px 10px;
-    margin-bottom: 10px;
-    border-radius: 5px 5px 5px 5px;
-    margin: auto;
-    text-align: center;
-  }
-
-  .image-delete {
-    position: relative;
-    top: -140px;
-    right: -14px;
-    display: flex;
-    justify-content: flex-end;
-    width: 104%;
-  }
-  .penguins-container {
-    border-radius: 8px;
-    padding: 0 10px 15px;
-    margin-top: 70px;
-    text-align: center;
-  }
-  .penguin-container {
-    width: 100%;
-    height: 453px;
-  }
-  .penguin-datalist {
-    position: relative;
-    top: -130px;
-    display: flex;
-    height: 40px;
-    width: 100%;
-  }
-  .penguin-title {
-    display: flex;
-    height: 40px;
-    top: 0;
-    width: 97%;
-  }
 
   .penguin-name,
   .bt-likes {
@@ -319,34 +142,41 @@ const PenguinsPageStyles = styled.div`
     padding: 0 0 0 0;
   }
 
-  .bt-register {
-    width: 80px;
-    color: white;
-    background-color: black;
-    padding: 14px 20px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    opacity: 0.9;
-    font-size: 20px;
-    border-radius: 15px;
-  }
-
-  .link {
-    margin: auto;
-    color: blue;
-    font-size: 16px;
-  }
-
-  .submitContainer {
+  .image-delete {
+    position: relative;
+    top: -140px;
+    right: -14px;
     display: flex;
+    justify-content: flex-end;
+    width: 104%;
+  }
+
+  .menu-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: -10px;
+  }
+  .menu-header {
     width: 100%;
   }
-
-  .display-none {
-    visibility: hidden;
+  span {
+    font-size: 20px;
+    margin-left: 50px;
   }
 
+  .category {
+    background-color: #ffe02c;
+    border-radius: 4px;
+    flex: 1;
+    margin-bottom: 25px;
+    padding-left: 5px;
+    box-shadow: 0 3px 6px #666;
+    margin-left: 15px;
+    height: fit-content;
+    width: fit-content;
+    font-size: 16px;
+  }
   .projectLayout {
     max-width: 90%;
     justify-content: center;
@@ -471,4 +301,4 @@ const PenguinsPageStyles = styled.div`
   }
 `;
 
-export default PenguinsPageStyles;
+export default DetailPageStyles;

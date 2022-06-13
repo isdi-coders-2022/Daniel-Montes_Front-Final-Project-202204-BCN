@@ -264,6 +264,7 @@ const FormsStyles = styled.div`
     height: 65px;
     background-size: 60%;
     background-repeat: no-repeat;
+    z-index: 150;
   }
 
   .bt-back {
@@ -302,6 +303,7 @@ const FormsStyles = styled.div`
     background-size: 60%;
     background-repeat: no-repeat;
   }
+
   .penguin-image-container {
     box-shadow: 0 3px 6px #666;
     padding: 10px 10px 150px 10px;
@@ -373,6 +375,10 @@ const FormsStyles = styled.div`
 
   .display-none {
     visibility: hidden;
+  }
+  .penguin-container {
+    display: flex;
+    margin-top: 80px;
   }
 
   .projectLayout {

@@ -9,12 +9,12 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 
 const Navbar = ({ title }: IParameter): JSX.Element => {
-  const [isMenuOpen, setMenu] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleMenu = () => {
-    setMenu((prevState) => !prevState);
+    setMenuOpen((prevState) => !prevState);
   };
 
   const handleBack = () => {
@@ -41,7 +41,7 @@ const Navbar = ({ title }: IParameter): JSX.Element => {
       <div className="menu-container">
         <ReactDimmer
           isOpen={isMenuOpen}
-          exitDimmer={setMenu}
+          exitDimmer={setMenuOpen}
           zIndex={100}
           blur={1.5}
         />
