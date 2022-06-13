@@ -2,9 +2,8 @@ import * as React from "react";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { useNavigate } from "react-router-dom";
 import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { correctAction } from "../Modals/Modals";
+import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
-import { loadFavsThunk } from "../../app/redux/thunks/favThunk/favThunk";
 
 interface IMenuProps {
   isMenuOpen: boolean;
@@ -15,27 +14,29 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
   const navigate = useNavigate();
 
   const logOutUser = () => {
+    infoAction("Logging out...");
     dispatch(logOutActionCreator());
     localStorage.removeItem("token");
-
+    correctAction("Logged out!");
     navigate("/");
-    correctAction("Login out...");
+    stopLoadingAction();
   };
 
   const loadFavs = () => {
-    correctAction("Loading Favs...");
-
-    dispatch(loadFavsThunk());
-
-    navigate("/favs");
+    navigate("/penguins/favs");
   };
 
   const loadHome = () => {
-    correctAction("Loading Home...");
+    infoAction("Loading Home...");
 
     dispatch(loadPenguinsThunk());
 
     navigate("/penguins");
+    correctAction("Loading Home...");
+  };
+
+  const toggleSound = () => {
+    infoAction("Sorry nois this feature is not yet implemented");
   };
 
   const addFav = () => {
@@ -45,34 +46,40 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
   return (
     <div className={`app-menu ${isMenuOpen ? "menu-open" : ""}`}>
       <div className="menu-header">
-        <ul>
+        <ul className="menu-icons-lower">
           <li>
-            <button onClick={loadHome} className="bt-home" title="bt-home">
-              {" "}
-              <span>Home</span>
+            <button
+              onClick={logOutUser}
+              className="bt-logout"
+              title="bt-logout"
+            >
+              <span className="menu-icon-label">Logout</span>
             </button>
           </li>
           <li>
-            <button onClick={addFav} className="bt-addfav">
-              <span>New...</span>
-            </button>
-          </li>
-          <li>
-            <button onClick={loadFavs} className="bt-favs-menu">
-              <span>Favourites</span>
+            <button onClick={toggleSound} className="bt-sound" title="bt-sound">
+              <span className="menu-icon-label sound-on">On/</span>
+              <span className="menu-icon-label sound-off">Off</span>
             </button>
           </li>
         </ul>
-
         <hr />
-        <ul className="menu-icons-lower">
+        <ul className="menu-icons-vertical">
           <li>
-            <button onClick={logOutUser} className="bt-logout">
-              <span>Logout</span>
+            <button onClick={loadHome} className="bt-home" title="bt-home">
+              {" "}
+              <span className="menu-icon-label-vertical">Home</span>
             </button>
           </li>
           <li>
-            <button onClick={logOutUser} className="bt-sound" />
+            <button onClick={addFav} className="bt-addfav" title="bt-fav">
+              <span className="menu-icon-label-vertical">New...</span>
+            </button>
+          </li>
+          <li>
+            <button onClick={loadFavs} className="bt-favs-menu" title="bt-favs">
+              <span className="menu-icon-label-vertical">Favourites</span>
+            </button>
           </li>
         </ul>
       </div>

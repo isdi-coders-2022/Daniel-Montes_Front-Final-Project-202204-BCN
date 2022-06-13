@@ -4,9 +4,16 @@ import axios from "axios";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import { createFavThunk } from "../../app/redux/thunks/favThunk/favThunk";
+import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { mockPenguins } from "../../mocks/penguins";
 import CreatePage from "./CreatePage";
+
+jest.mock("chalk", () => ({
+  green: jest.fn(),
+  white: jest.fn(),
+  red: jest.fn(),
+  yellow: jest.fn(),
+}));
 
 describe("Given a CreatePage component", () => {
   describe("When the word 'penguin' is written to the username input field", () => {

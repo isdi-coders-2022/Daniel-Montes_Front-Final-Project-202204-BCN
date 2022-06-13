@@ -16,7 +16,7 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <ToastContainer limit={1} />
+        <ToastContainer limit={2} />
 
         <App />
       </Provider>

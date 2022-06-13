@@ -1,6 +1,6 @@
 import { infoAction } from "../../components/Modals/Modals";
 import Navbar from "../../components/Navbar/Navbar";
-import Favs from "../../components/Penguins/Penguins";
+import Favs from "../../components/Favs/Favs";
 import PenguinsPageStyles from "../PenguinsPage/PenguinsPageStyles";
 
 const FavsPage = () => {
@@ -9,9 +9,8 @@ const FavsPage = () => {
   return (
     <>
       <PenguinsPageStyles>
+        <h1>Favs</h1>
         <div className="container">
-          <Navbar title="Favs" />
-
           <Favs />
         </div>
       </PenguinsPageStyles>

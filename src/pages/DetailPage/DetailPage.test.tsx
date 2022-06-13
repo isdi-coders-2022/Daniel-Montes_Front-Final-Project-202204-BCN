@@ -2,9 +2,8 @@ import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import FavsPage from "./FavsPage";
+import DetailPage from "./DetailPage";
 
-const expectedText = "Favourites";
 jest.mock("chalk", () => ({
   green: jest.fn(),
   white: jest.fn(),
@@ -12,20 +11,22 @@ jest.mock("chalk", () => ({
   yellow: jest.fn(),
 }));
 
-describe("Given a FavsPage component", () => {
-  describe("When it's called", () => {
-    test("Then it should render a heading with the text 'Favs'", () => {
+describe("Given a CreatePage component", () => {
+  describe("When the word 'penguin' is written to the username input field", () => {
+    test("Then the value of the username input field should be 'penguin'", () => {
+      const ToFind = "Detail";
+
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <FavsPage />
+            <DetailPage />
           </BrowserRouter>
         </Provider>
       );
-      const expectedText = "Favs";
-      const expected = screen.getByText(expectedText);
 
-      expect(expected).toHaveTextContent(expectedText);
+      const label = screen.getByText(ToFind);
+
+      expect(label).toHaveTextContent(ToFind);
     });
   });
 });

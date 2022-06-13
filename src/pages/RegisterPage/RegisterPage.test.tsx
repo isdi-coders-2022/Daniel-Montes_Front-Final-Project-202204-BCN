@@ -3,6 +3,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
 import RegisterPage from "./RegisterPage";
+import RegisterPageStyles from "./RegisterPageStyles";
 
 describe("Given a RegisterPage Component", () => {
   describe("When it's rendered", () => {
@@ -12,7 +13,9 @@ describe("Given a RegisterPage Component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <RegisterPage />
+            <RegisterPageStyles>
+              <RegisterPage />
+            </RegisterPageStyles>
           </BrowserRouter>
         </Provider>
       );

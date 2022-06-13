@@ -1,11 +1,13 @@
-import { useNavigate } from "react-router-dom";
 import { INewPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import { createFavThunk } from "../../app/redux/thunks/favThunk/favThunk";
-import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
-
-import Navbar from "../Navbar/Navbar";
+import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import {
+  correctAction,
+  infoAction,
+  stopLoadingAction,
+  wrongAction,
+} from "../Modals/Modals";
 
 const CreateForm = (): JSX.Element => {
   const { username } = useAppSelector((state) => state.users);
@@ -18,11 +20,10 @@ const CreateForm = (): JSX.Element => {
     image: "",
     imageBackup: "",
     owner: username,
-    id: 0,
+    id: "",
   };
 
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   const [formData, setFormData] = useState(blankFields);
 
@@ -36,37 +37,56 @@ const CreateForm = (): JSX.Element => {
   };
 
   const handleSubmit = (event: React.FormEvent): void => {
-    infoAction("Creating...");
-    event.preventDefault();
+    try {
+      infoAction("Creating fav...(handleSubmit)");
+      event.preventDefault();
 
-    const newFav = new FormData();
+      const newFav = new FormData();
 
-    newFav.append("name", formData.name);
-    newFav.append("likes", JSON.stringify(formData.likes));
-    newFav.append("category", formData.category);
-    newFav.append("description", formData.description);
-    newFav.append("image", formData.image);
-    newFav.append("owner", formData.owner);
+      newFav.append("name", formData.id);
+      newFav.append("name", formData.name);
+      newFav.append("category", formData.category);
+      // newFav.append("likes", JSON.stringify(formData.likes));
+      newFav.append("description", formData.description);
+      newFav.append("image", formData.image);
+      newFav.append("imageBackup", formData.imageBackup);
+      newFav.append("owner", formData.owner);
 
-    dispatch(createFavThunk(newFav));
-    setFormData(blankFields);
+      if (newFav) {
+        stopLoadingAction();
+        dispatch(createFavThunk(newFav));
+        setFormData(blankFields);
 
-    correctAction("Created!");
-    navigate("/favs");
+        correctAction("Created!");
+      } else {
+        stopLoadingAction();
+        wrongAction("Error creating!");
+      }
+    } catch {
+      stopLoadingAction();
+      wrongAction("Error creating!");
+    }
   };
 
   const uploadImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    infoAction("Uploading image...");
-    setFormData({
-      ...formData,
-      [event.target.id]: event.target.files?.[0] || "",
-    });
-    stopLoadingAction();
+    try {
+      infoAction("Uploading image...");
+      setFormData({
+        ...formData,
+        [event.target.id]: event.target.files?.[0] || "",
+      });
+      correctAction("Image uploaded!");
+      stopLoadingAction();
+    } catch {
+      stopLoadingAction();
+      wrongAction("Error creating fav!");
+    }
   };
 
   return (
     <div className="container">
-      <Navbar title="New Fav..." />
+      <h1>New favorite...</h1>
+
       <form
         noValidate
         autoComplete="off"
@@ -75,7 +95,7 @@ const CreateForm = (): JSX.Element => {
       >
         <label htmlFor="image">Image</label>
         <input
-          className="image penguin-image"
+          className="penguin-image"
           id="image"
           type="file"
           onChange={uploadImage}
@@ -102,17 +122,16 @@ const CreateForm = (): JSX.Element => {
         />
         <label htmlFor="times">Likes</label>
         <input
-          className="w3-input"
           type="number"
           id="likes"
           autoComplete="off"
           value={formData.likes}
           placeholder="Likes"
           onChange={handleInputChange}
+          className="input-likes"
         />
         <label htmlFor="description">Description</label>
         <input
-          className="description"
           type="text"
           id="description"
           autoComplete="off"

@@ -1,5 +1,5 @@
 export interface IPenguin {
-  id?: number;
+  id?: string;
   name: string;
   likes: number;
   image: string;
@@ -10,7 +10,7 @@ export interface IPenguin {
 }
 
 export interface Ipenguin {
-  id?: number;
+  id?: string;
   name: string;
   likes: number;
   image: string;
@@ -21,7 +21,7 @@ export interface Ipenguin {
 }
 
 export interface INewPenguin {
-  id: number;
+  id: string;
   name: string;
   likes: number;
   image: string;
@@ -31,7 +31,7 @@ export interface INewPenguin {
   owner: string;
 }
 export interface IFav {
-  id: number;
+  id: string;
   name: string;
   likes: number;
   image: string;
@@ -41,7 +41,7 @@ export interface IFav {
   owner: string;
 }
 export interface INewFav {
-  id: number;
+  id: string;
   name: string;
   likes: number;
   image: string;

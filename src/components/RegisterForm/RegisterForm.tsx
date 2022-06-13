@@ -41,6 +41,16 @@ const RegisterForm = (): JSX.Element => {
         <NavLink to="/login" className="link">
           Already have an account? Please Log In
         </NavLink>
+        <label htmlFor="name"> Name </label>
+        <input
+          type="text"
+          id="name"
+          autoComplete="off"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleInputChange}
+          name="Name"
+        />
         <label htmlFor="username"> Username </label>
         <input
           type="text"
