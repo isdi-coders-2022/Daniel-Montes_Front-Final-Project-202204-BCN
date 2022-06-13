@@ -46,7 +46,6 @@ const CreateForm = (): JSX.Element => {
       newFav.append("name", formData.id);
       newFav.append("name", formData.name);
       newFav.append("category", formData.category);
-      // newFav.append("likes", JSON.stringify(formData.likes));
       newFav.append("description", formData.description);
       newFav.append("image", formData.image);
       newFav.append("imageBackup", formData.imageBackup);
