@@ -16,10 +16,12 @@ const DetailPage = (): JSX.Element => {
   }, [dispatch, idPenguin]);
 
   return (
-    <DetailPageStyles>
-      <h1 className="display-none">Detail</h1>
-      <PenguinDetail />
-    </DetailPageStyles>
+    <>
+      <DetailPageStyles>
+        <h1 className="display-none">Detail</h1>
+        <PenguinDetail />
+      </DetailPageStyles>
+    </>
   );
 };
 

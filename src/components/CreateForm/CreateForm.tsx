@@ -1,34 +1,45 @@
-import { INewPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import { useState } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import React, { ChangeEvent, FormEvent, useState } from "react";
+import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
+
+import { useAppDispatch } from "../../app/redux/hooks/hooks";
+import {
+  createFavThunk,
+  editPenguinThunk,
+} from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import {
   correctAction,
   infoAction,
   stopLoadingAction,
   wrongAction,
 } from "../Modals/Modals";
+import { useNavigate } from "react-router-dom";
 
-const CreateForm = (): JSX.Element => {
-  const { username } = useAppSelector((state) => state.users);
+interface ICreateForm {
+  name: string;
+  likes: number;
+  category: string;
+  description: string;
+}
 
-  const blankFields: INewPenguin = {
-    name: "",
-    category: "",
-    likes: 0,
-    description: "",
-    image: "",
-    imageBackup: "",
-    owner: username,
-    id: "",
+interface Props {
+  idPenguin: IPenguin | null;
+}
+
+const CreateForm = ({ idPenguin }: Props): JSX.Element => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const initialFormData: ICreateForm = {
+    name: idPenguin ? idPenguin.name : "",
+    likes: idPenguin ? idPenguin.likes : 0,
+    category: idPenguin ? idPenguin.category : "",
+    description: idPenguin ? idPenguin.description : "",
   };
 
-  const dispatch = useAppDispatch();
-
-  const [formData, setFormData] = useState(blankFields);
+  const [formData, setFormData] = useState<ICreateForm>(initialFormData);
 
   const handleInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ): void => {
     setFormData({
       ...formData,
@@ -36,35 +47,15 @@ const CreateForm = (): JSX.Element => {
     });
   };
 
-  const handleSubmit = (event: React.FormEvent): void => {
-    try {
-      infoAction("Creating fav...(handleSubmit)");
-      event.preventDefault();
-
-      const newFav = new FormData();
-
-      newFav.append("name", formData.id);
-      newFav.append("name", formData.name);
-      newFav.append("category", formData.category);
-      newFav.append("description", formData.description);
-      newFav.append("image", formData.image);
-      newFav.append("imageBackup", formData.imageBackup);
-      newFav.append("owner", formData.owner);
-
-      if (newFav) {
-        stopLoadingAction();
-        dispatch(createFavThunk(newFav));
-        setFormData(blankFields);
-
-        correctAction("Created!");
-      } else {
-        stopLoadingAction();
-        wrongAction("Error creating!");
-      }
-    } catch {
-      stopLoadingAction();
-      wrongAction("Error creating!");
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
+    event.preventDefault();
+    if (idPenguin) {
+      dispatch(editPenguinThunk(idPenguin.id, formData));
+      return;
     }
+    dispatch(createFavThunk(formData));
+    setFormData(initialFormData);
+    navigate("/homepage");
   };
 
   const uploadImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -139,7 +130,12 @@ const CreateForm = (): JSX.Element => {
           onChange={handleInputChange}
         />
 
-        <button type="submit" className="bt-save" placeholder="bt-save">
+        <button
+          type="submit"
+          className="bt-save"
+          placeholder="bt-save"
+          value={idPenguin ? "Edit" : "Create"}
+        >
           Save
         </button>
       </form>

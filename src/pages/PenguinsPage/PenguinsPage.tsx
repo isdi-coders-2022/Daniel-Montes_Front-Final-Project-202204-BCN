@@ -1,14 +1,23 @@
+import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import Penguins from "../../components/Penguins/Penguins";
 import PenguinsPageStyles from "./PenguinsPageStyles";
-import { infoAction } from "../../components/Modals/Modals";
 
 const PenguinsPage = () => {
-  infoAction("Loading full list...");
+  const dispatch = useAppDispatch();
+  const { allPenguins } = useAppSelector((state) => state.penguins);
+  useEffect(() => {
+    dispatch(loadFavsThunk());
+  }, [dispatch]);
+
   return (
-    <PenguinsPageStyles className="container projecyLayout">
-      <h1 className="display-none">Penguins</h1>
-      <Penguins />
-    </PenguinsPageStyles>
+    <>
+      <PenguinsPageStyles>
+        <Penguins penguins={allPenguins} />
+      </PenguinsPageStyles>
+    </>
   );
 };
+
 export default PenguinsPage;

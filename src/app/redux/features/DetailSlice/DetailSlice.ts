@@ -10,6 +10,7 @@ const initialState: IDetail = {
     description: "",
     owner: "",
     category: "",
+    author: "",
     id: "",
   },
 };

@@ -9,10 +9,12 @@ import {
 import {
   createPenguinActionCreator,
   deletePenguinActionCreator,
+  editPenguinActionCreator,
   loadPenguinsActionCreator,
 } from "../../features/penguinSlice/penguinSlice";
 import { loadPenguinActionCreator } from "../../features/DetailSlice/DetailSlice";
 import chalk from "chalk";
+import { INewFav } from "../../types/penguin/penguinInterfaces";
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   try {
@@ -37,57 +39,51 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   }
 };
 
-export const loadFavsThunk =
-  (username: string) => async (dispatch: AppDispatch) => {
-    try {
-      infoAction("Loading favs...");
-      const token = localStorage.getItem("token");
+export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
+  try {
+    infoAction("Loading favs...");
+    const token = localStorage.getItem("token");
 
-      if (token) {
-        const {
-          data: { penguins },
-        } = await axios.get(`${process.env.REACT_APP_API_URL}penguins/favs`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
+    if (token) {
+      const {
+        data: { penguins },
+      } = await axios.get(`${process.env.REACT_APP_API_URL}penguins/favs`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-        dispatch(loadPenguinsActionCreator(penguins));
-
-        stopLoadingAction();
-      }
-    } catch (error) {
-      wrongAction(chalk.red(`ERROR: ${this} Exiting with error:  ${error}`));
+      dispatch(loadPenguinsActionCreator(penguins));
 
       stopLoadingAction();
     }
-  };
+  } catch (error) {
+    wrongAction(chalk.red(`ERROR: ${this} Exiting with error:  ${error}`));
+
+    stopLoadingAction();
+  }
+};
 
 export const createFavThunk =
-  (formData: any) => async (dispatch: AppDispatch) => {
+  (formPenguin: INewFav) => async (dispatch: AppDispatch) => {
+    const token = localStorage.getItem("token");
+
     try {
       infoAction("Saving fav...(createFavThunk)");
-
-      const token = localStorage.getItem("token");
-      const {
-        data: { newFav },
-      } = await axios.post(
-        `${process.env.REACT_APP_API_URL}penguins`,
-        formData,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "mutipart/form-data",
-          },
-        }
-      );
-
-      dispatch(createPenguinActionCreator(newFav));
-      stopLoadingAction();
+      if (token) {
+        const { data: penguin } = await axios.post(
+          `${process.env.REACT_APP_API_URL}penguins`,
+          formPenguin,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        dispatch(createPenguinActionCreator(penguin));
+      }
     } catch (error) {
-      wrongAction(chalk.red(`ERROR: ${this} Exiting with error:  ${error}`));
-
-      stopLoadingAction();
+      wrongAction("Sorry, error saving fav...");
     }
   };
 
@@ -135,6 +131,31 @@ export const deletePenguinThunk =
       }
     } catch (error) {
       wrongAction(chalk.red(`ERROR: ${this} Exiting with error:  ${error}`));
+
+      stopLoadingAction();
+    }
+  };
+
+export const editPenguinThunk =
+  (idPenguin: string, formPenguin: INewFav) =>
+  async (dispatch: AppDispatch) => {
+    const token = localStorage.getItem("token");
+
+    try {
+      if (token) {
+        const { data: responsePenguin } = await axios.put(
+          `${process.env.REACT_APP_API_URL}penguins/${idPenguin}`,
+          formPenguin,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        dispatch(editPenguinActionCreator(responsePenguin));
+      }
+    } catch (error) {
+      wrongAction(chalk.red(`ERROR: EDIT Penguin ${this} -> Error:  ${error}`));
 
       stopLoadingAction();
     }

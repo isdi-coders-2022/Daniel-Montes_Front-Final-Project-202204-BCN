@@ -1,26 +1,17 @@
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import Penguin from "../Penguin/Penguin";
+import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 
-const Favs = () => {
-  const useSelector = useAppSelector;
+interface Props {
+  penguins: IPenguin[];
+}
 
-  const dispatch = useAppDispatch();
-  const { username } = useSelector((state) => state.users);
-
-  useEffect(() => {
-    dispatch(loadFavsThunk(username));
-  }, [dispatch, username]);
-
-  const penguins = useSelector((state) => state.penguins);
+const Favs = ({ penguins }: Props) => {
   return (
     <div className="penguins-container">
-      {penguins.map((penguin) => {
-        return <Penguin key={penguin.id} penguin={penguin} />;
+      {penguins.map((penguin, index) => {
+        return <Penguin key={index} penguin={penguin} />;
       })}
     </div>
   );
 };
-
 export default Favs;

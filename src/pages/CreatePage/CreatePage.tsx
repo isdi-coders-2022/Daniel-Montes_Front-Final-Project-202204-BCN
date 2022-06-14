@@ -1,10 +1,10 @@
 import CreateForm from "../../components/CreateForm/CreateForm";
 import FormsStyles from "../../Styles/FormsStyles";
 
-const CreatePage = (): JSX.Element => {
+const CreatePage = () => {
   return (
     <FormsStyles>
-      <CreateForm />
+      <CreateForm idPenguin={null} />
     </FormsStyles>
   );
 };

@@ -1,23 +1,24 @@
 export interface IPenguin {
-  id?: string;
+  id: string;
   name: string;
   likes: number;
   image: string;
   category: string;
   imageBackup: string;
   description: string;
-  owner?: string;
+  owner: string;
+  author: string;
 }
 
 export interface Ipenguin {
-  id?: string;
+  id: string;
   name: string;
   likes: number;
   image: string;
   category: string;
   imageBackup: string;
   description: string;
-  owner?: string;
+  owner: string;
 }
 
 export interface INewPenguin {
@@ -41,14 +42,10 @@ export interface IFav {
   owner: string;
 }
 export interface INewFav {
-  id: string;
   name: string;
   likes: number;
-  image: string;
   category: string;
-  imageBackup: string;
   description: string;
-  owner: string;
 }
 
 export interface IDetail {
