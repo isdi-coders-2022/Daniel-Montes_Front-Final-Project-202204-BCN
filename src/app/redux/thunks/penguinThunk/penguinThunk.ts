@@ -18,6 +18,7 @@ import { INewFav } from "../../types/penguin/penguinInterfaces";
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   try {
+    infoAction("Loading full list...");
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -52,24 +53,23 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
           Authorization: `Bearer ${token}`,
         },
       });
-
+      if (penguins.length === 0) {
+        infoAction("No favorites found");
+        return;
+      }
       dispatch(loadPenguinsActionCreator(penguins));
-
-      stopLoadingAction();
     }
   } catch (error) {
-    wrongAction(chalk.red(`ERROR: ${this} Exiting with error:  ${error}`));
-
     stopLoadingAction();
+    wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
   }
 };
 
 export const createFavThunk =
   (formPenguin: INewFav) => async (dispatch: AppDispatch) => {
     const token = localStorage.getItem("token");
-
+    infoAction("Creating fav...");
     try {
-      infoAction("Saving fav...(createFavThunk)");
       if (token) {
         const { data: penguin } = await axios.post(
           `${process.env.REACT_APP_API_URL}penguins`,
@@ -90,6 +90,7 @@ export const createFavThunk =
 export const getPenguinThunk =
   (id: string) => async (dispatch: AppDispatch) => {
     try {
+      infoAction("Getting info...");
       const token = localStorage.getItem("token");
 
       if (token) {
@@ -105,7 +106,7 @@ export const getPenguinThunk =
         dispatch(loadPenguinActionCreator(penguin));
       }
     } catch (error) {
-      wrongAction(chalk.red(`ERROR: ${this} Exiting with error:  ${error}`));
+      wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
 
       stopLoadingAction();
     }
@@ -114,6 +115,7 @@ export const getPenguinThunk =
 export const deletePenguinThunk =
   (id: string) => async (dispatch: AppDispatch) => {
     try {
+      infoAction("Deleting...");
       const token = localStorage.getItem("token");
 
       const { status } = await axios.delete(
@@ -130,7 +132,7 @@ export const deletePenguinThunk =
         correctAction("Penguin deleted");
       }
     } catch (error) {
-      wrongAction(chalk.red(`ERROR: ${this} Exiting with error:  ${error}`));
+      wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
 
       stopLoadingAction();
     }
@@ -142,6 +144,7 @@ export const editPenguinThunk =
     const token = localStorage.getItem("token");
 
     try {
+      infoAction("Editing...");
       if (token) {
         const { data: responsePenguin } = await axios.put(
           `${process.env.REACT_APP_API_URL}penguins/${idPenguin}`,

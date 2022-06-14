@@ -66,7 +66,7 @@ const HomePageStyles = styled.div`
     row-gap: 20px;
     width: 100%;
     margin: auto;
-    padding-top: 210px;
+    padding-top: 180px;
   }
 
   label {

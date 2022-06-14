@@ -66,7 +66,7 @@ const FormsStyles = styled.div`
 
     row-gap: 20px;
     width: 100%;
-    margin-top: 210px;
+    margin-top: 180px;
   }
 
   .form-create {
@@ -86,7 +86,9 @@ const FormsStyles = styled.div`
     padding-top: 43px;
     width: 200px;
   }
-
+  div {
+    height: 100%;
+  }
   h1 {
     top: 25px;
     position: relative;
@@ -312,6 +314,7 @@ const FormsStyles = styled.div`
     padding: 0 10px 15px;
     margin-top: 70px;
     text-align: center;
+    width: 95%;
   }
 
   .penguin-datalist,

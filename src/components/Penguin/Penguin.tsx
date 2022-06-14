@@ -1,6 +1,10 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
-import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import {
+  deletePenguinThunk,
+  editPenguinThunk,
+} from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import { infoAction } from "../Modals/Modals";
 
@@ -38,6 +42,26 @@ const Penguin = ({
       dispatch(deletePenguinThunk(`${id}`));
     }
   };
+  const initialFormData: ICreateForm = {
+    name: id ? name : "",
+    likes: id ? likes : 0,
+    category: id ? category : "",
+    description: id ? description : "",
+  };
+  interface ICreateForm {
+    name: string;
+    likes: number;
+    category: string;
+    description: string;
+  }
+
+  const [formData] = useState<ICreateForm>(initialFormData);
+
+  const handleAddToFav = (): void => {
+    if (id) {
+      dispatch(editPenguinThunk(id, formData));
+    }
+  };
 
   const HidderDelete = document.location.href.includes("/penguins/favs")
     ? ""
@@ -47,7 +71,10 @@ const Penguin = ({
     <div className="item penguin-container">
       <div className="penguin-title">
         <h2 className="penguin-name">{toPascalCase(name)}</h2>
-        <button className="animated bounce animatedFav" />
+        <button
+          className="animated bounce animatedFav"
+          onClick={handleAddToFav}
+        />
       </div>
       <div className="penguin-image-container">
         <img src={image} alt={name} className="penguin-image" />

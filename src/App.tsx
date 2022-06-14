@@ -82,7 +82,7 @@ function App() {
           }
         />
         <Route
-          path="/penguin-edit/:id"
+          path="/penguins/edit/:id"
           element={
             <CheckInSecurity>
               <CreatePage />

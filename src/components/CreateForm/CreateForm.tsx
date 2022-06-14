@@ -28,7 +28,13 @@ interface Props {
 const CreateForm = ({ idPenguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
+  const blankFields = {
+    name: "",
+    category: "",
+    description: "",
+    image: "",
+    likes: 0,
+  };
   const initialFormData: ICreateForm = {
     name: idPenguin ? idPenguin.name : "",
     likes: idPenguin ? idPenguin.likes : 0,
@@ -51,11 +57,15 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
     event.preventDefault();
     if (idPenguin) {
       dispatch(editPenguinThunk(idPenguin.id, formData));
+      correctAction("Updated successfully");
+      setFormData(blankFields);
+      navigate("/penguins");
       return;
     }
     dispatch(createFavThunk(formData));
-    setFormData(initialFormData);
-    navigate("/homepage");
+
+    setFormData(blankFields);
+    navigate("/favs");
   };
 
   const uploadImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
@@ -66,7 +76,6 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
         [event.target.id]: event.target.files?.[0] || "",
       });
       correctAction("Image uploaded!");
-      stopLoadingAction();
     } catch {
       stopLoadingAction();
       wrongAction("Error creating fav!");
