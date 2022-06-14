@@ -1,8 +1,5 @@
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import {
-  deletePenguinThunk,
-  editPenguinThunk,
-} from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 
 const PenguinDetail = (): JSX.Element => {
   const { penguin } = useAppSelector((state) => state.penguin);
