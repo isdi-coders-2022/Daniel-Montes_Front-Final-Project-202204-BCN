@@ -1,9 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-
+// import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
+// interface Props {
+//   penguin: IPenguin;
+// }
 const PenguinDetail = (): JSX.Element => {
   const { penguin } = useAppSelector((state) => state.penguin);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const HidderDelete = !document.location.href.includes("/penguins/favs")
     ? ""
@@ -14,10 +19,8 @@ const PenguinDetail = (): JSX.Element => {
       dispatch(deletePenguinThunk(`${penguin.id}`));
     }
   };
-  const handleEdit = (): void => {
-    if (penguin.id) {
-      // dispatch(editPenguinThunk(`${penguin.id}`));
-    }
+  const handleEdit = () => {
+    navigate(`/penguins/edit/${penguin.id}`);
   };
 
   return (
