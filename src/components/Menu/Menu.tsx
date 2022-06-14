@@ -23,12 +23,10 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
   };
 
   const loadFavs = () => {
-    isMenuOpen = true;
     navigate("/penguins/favs");
   };
 
   const loadHome = () => {
-    isMenuOpen = true;
     infoAction("Loading Home...");
 
     dispatch(loadPenguinsThunk());
