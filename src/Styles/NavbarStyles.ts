@@ -3,7 +3,7 @@ import iconHamburguer from "../images/menu_hamburguer.png";
 import iconBack from "../images/icon-back.png";
 import iconFavs from "../images/icon-stars.png";
 import iconHome from "../images/icon-home.png";
-import iconLogout from "../images/icon-user_deny.png";
+import iconLogout from "../images/icon-logout-white.png";
 import iconSoundOff from "../images/icon-sound-off.png";
 import iconSoundOn from "../images/icon-sound-on.png";
 import iconMenuFavs from "../images/star_add_icon.png";
@@ -34,16 +34,10 @@ const NavbarStyles = styled.div`
 
   button {
     color: white;
-    padding: 14px 20px;
+
     border: none;
     font-weight: bold;
     cursor: pointer;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    font-size: 20px;
-    border-radius: 15px;
-    align-items: center;
   }
 
   .bt-logout {
@@ -113,6 +107,13 @@ const NavbarStyles = styled.div`
     margin: auto;
     justify-content: space-around;
     margin-top: 20px;
+
+    align-items: baseline;
+    flex-wrap: nowrap;
+
+    list-style-type: none;
+    /* display: flex; */
+    height: 5%;
   }
 
   .bt-home {
@@ -151,20 +152,23 @@ const NavbarStyles = styled.div`
     align-items: center;
   }
 
-  span {
-    font-size: 20px;
-    margin-left: 50px;
+  .menu-icons-vertical {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    gap: 30px;
   }
 
   .menu-icon-label {
     font-size: 20px;
-    margin: auto;
+margin-left:5px
     margin-top: 30px;
-    text-align: center;
   }
 
   .menu-icon-label-vertical {
-    margin-left: 130px;
+    font-size: 20px;
+    margin-left: 50px;
   }
 
   .header .menu-btn {
@@ -177,6 +181,10 @@ const NavbarStyles = styled.div`
     gap: 1rem;
   }
 
+  .header{
+        display: flex;
+    justify-content: flex-end;
+  }
   .app .body {
     height: calc(100% - 5rem);
     display: flex;
@@ -212,7 +220,7 @@ const NavbarStyles = styled.div`
   }
 
   hr {
-    width: 40%;
+    width: 50%;
     margin: 35px;
     margin-top: 50%;
   }
@@ -223,11 +231,7 @@ const NavbarStyles = styled.div`
   .sound-off {
     opacity: 50%;
   }
-  .menu-icons-vertical {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
-  }
+
   .display-none {
     visibility: hidden;
   }

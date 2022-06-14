@@ -31,6 +31,8 @@ const DetailPageStyles = styled.div`
     background: url(${iconHamburguer});
     border-radius: 10px;
     margin-right: 20px;
+    height: 36px;
+    margin: auto;
   }
   li {
     list-style-type: none;
@@ -87,10 +89,12 @@ const DetailPageStyles = styled.div`
   }
 
   .penguin-image-container {
-    width: 200px;
+    width: 100%;
     height: 200px;
   }
-
+  img {
+    width: 100%;
+  }
   .bt-back {
     background: url(${iconBack});
     width: 45px;
@@ -158,6 +162,10 @@ const DetailPageStyles = styled.div`
   }
   .menu-header {
     width: 100%;
+  }
+  .header {
+    width: 100%;
+    justify-content: space-between;
   }
   span {
     font-size: 20px;

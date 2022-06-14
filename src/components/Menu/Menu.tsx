@@ -23,10 +23,12 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
   };
 
   const loadFavs = () => {
+    isMenuOpen = true;
     navigate("/penguins/favs");
   };
 
   const loadHome = () => {
+    isMenuOpen = true;
     infoAction("Loading Home...");
 
     dispatch(loadPenguinsThunk());
@@ -52,15 +54,17 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
               onClick={logOutUser}
               className="bt-logout"
               title="bt-logout"
-            >
-              <span className="menu-icon-label">Logout</span>
-            </button>
+            />
+            <span className="menu-icon-label">Logout</span>
           </li>
           <li>
-            <button onClick={toggleSound} className="bt-sound" title="bt-sound">
-              <span className="menu-icon-label sound-on">On/</span>
-              <span className="menu-icon-label sound-off">Off</span>
-            </button>
+            <button
+              onClick={toggleSound}
+              className="bt-sound"
+              title="bt-sound"
+            />
+            <span className="menu-icon-label sound-on">On/</span>
+            <span className="menu-icon-label sound-off">Off</span>
           </li>
         </ul>
         <hr />

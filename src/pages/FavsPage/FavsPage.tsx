@@ -1,17 +1,20 @@
-import { infoAction } from "../../components/Modals/Modals";
-import Favs from "../../components/Favs/Favs";
+import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
+import Penguins from "../../components/Penguins/Penguins";
 import PenguinsPageStyles from "../PenguinsPage/PenguinsPageStyles";
 
 const FavsPage = () => {
-  infoAction("Loading Favs full list, please wait...");
+  const dispatch = useAppDispatch();
+  const { allPenguins } = useAppSelector((state) => state.penguins);
+  useEffect(() => {
+    dispatch(loadFavsThunk());
+  }, [dispatch]);
 
   return (
     <>
       <PenguinsPageStyles>
-        <h1>Favs</h1>
-        <div className="container">
-          <Favs />
-        </div>
+        <Penguins penguins={allPenguins} />
       </PenguinsPageStyles>
     </>
   );

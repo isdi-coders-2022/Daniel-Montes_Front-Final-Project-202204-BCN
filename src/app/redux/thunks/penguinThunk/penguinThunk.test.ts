@@ -1,9 +1,4 @@
-import axios from "axios";
-import { mockPenguin, mockPenguins } from "../../../../mocks/penguins";
-import {
-  deletePenguinActionCreator,
-  createPenguinActionCreator,
-} from "../../features/penguinSlice/penguinSlice";
+import { mockPenguin } from "../../../../mocks/penguins";
 import {
   createFavThunk,
   deletePenguinThunk,
@@ -21,7 +16,7 @@ describe("When it's called and there's no token", () => {
   test("Then it should not call dispatch", async () => {
     const dispatch = jest.fn();
 
-    const thunk = loadFavsThunk("");
+    const thunk = loadFavsThunk();
     await thunk(dispatch);
 
     expect(dispatch).not.toHaveBeenCalled();
