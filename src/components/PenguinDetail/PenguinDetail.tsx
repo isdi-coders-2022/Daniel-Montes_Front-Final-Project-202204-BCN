@@ -1,10 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-// import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-// interface Props {
-//   penguin: IPenguin;
-// }
+
 const PenguinDetail = (): JSX.Element => {
   const { penguin } = useAppSelector((state) => state.penguin);
   const dispatch = useAppDispatch();
