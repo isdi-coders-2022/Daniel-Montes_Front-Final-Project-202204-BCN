@@ -28,6 +28,9 @@ const DetailPageStyles = styled.div`
     text-align: center;
   }
 
+  button {
+    cursor: pointer;
+  }
   .bt-menu {
     background: url(${iconHamburguer});
     border-radius: 10px;
@@ -40,7 +43,7 @@ const DetailPageStyles = styled.div`
     background: url(${iconEditar});
     width: 45px;
     position: relative;
-    top: -427px;
+    top: -417px;
     left: 70%;
   }
   ul {
@@ -51,10 +54,16 @@ const DetailPageStyles = styled.div`
     height: 420px;
     background: #fff;
   }
+
   li {
     list-style-type: none;
     text-align: justify;
+        margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+
   }
+
   h1 {
     font-size: 234px;
     margin-left: 10px;
@@ -103,6 +112,8 @@ const DetailPageStyles = styled.div`
     box-shadow: 0 15px 6px #666;
     border: 2px solid;
     border-radius: 10px;
+    width: 100%;
+    height: 100%;
   }
 
   .penguin-detail-container {
@@ -120,7 +131,7 @@ const DetailPageStyles = styled.div`
 
   .penguin-image-container {
     width: 100%;
-    height: 220px;
+    height: 100%
     border-radius: 35px;
     border: px solid #fff;
   }
@@ -315,7 +326,7 @@ const DetailPageStyles = styled.div`
     background-image: url(${iconDelete});
     width: 45px;
     position: relative;
-    top: -250px;
+    top: -240px;
     left: 86%;
   }
 

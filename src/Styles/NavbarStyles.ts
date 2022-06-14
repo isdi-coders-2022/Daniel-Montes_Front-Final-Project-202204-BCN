@@ -40,6 +40,10 @@ const NavbarStyles = styled.div`
     cursor: pointer;
   }
 
+   .header-container {
+    width: 100%;
+  }
+
   .bt-logout {
     background: url(${iconLogout});
     height: 65px;
@@ -114,6 +118,7 @@ const NavbarStyles = styled.div`
     list-style-type: none;
     /* display: flex; */
     height: 5%;
+    width:80%;
   }
 
   .bt-home {
@@ -220,9 +225,10 @@ margin-left:5px
   }
 
   hr {
-    width: 50%;
+    width: 75%;
     margin: 35px;
-    margin-top: 50%;
+    margin-top: 10%;
+    margin-bottom: 90px;
   }
 
   li {
