@@ -19,7 +19,7 @@ const DetailPage = (): JSX.Element => {
     <>
       <DetailPageStyles>
         <h1 className="display-none">Detail</h1>
-        <PenguinDetail />
+        <PenguinDetail key={idPenguin} />
       </DetailPageStyles>
     </>
   );
