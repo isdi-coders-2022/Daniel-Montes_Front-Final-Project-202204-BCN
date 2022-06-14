@@ -5,13 +5,18 @@ const PenguinDetail = (): JSX.Element => {
   const { penguin } = useAppSelector((state) => state.penguin);
   const dispatch = useAppDispatch();
 
-  const HidderDelete = document.location.href.includes("/penguins/favs")
+  const HidderDelete = !document.location.href.includes("/penguins/favs")
     ? ""
     : " display-none";
 
   const handleDelete = (): void => {
     if (penguin.id) {
       dispatch(deletePenguinThunk(`${penguin.id}`));
+    }
+  };
+  const handleEdit = (): void => {
+    if (penguin.id) {
+      // dispatch(editPenguinThunk(`${penguin.id}`));
     }
   };
 
@@ -34,7 +39,7 @@ const PenguinDetail = (): JSX.Element => {
           <span className="category">{penguin.category}</span>
           <span className="likes">{penguin.likes}</span>
         </li>
-        <li>
+        <li className="description-container">
           <span className="penguin-description">{penguin.description}</span>
         </li>
         <li>
@@ -46,6 +51,11 @@ const PenguinDetail = (): JSX.Element => {
           >
             <button className="bt-delete" />
           </div>
+          <div
+            className={`animated bounce animatedEdit${HidderDelete}`}
+            onClick={handleEdit}
+            title="bt-edit"
+          ></div>
         </li>
       </ul>
     </div>

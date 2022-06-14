@@ -10,6 +10,7 @@ import iconHome from "../../images/icon-home.png";
 import iconLogout from "../../images/icon-logout-white.png";
 import iconDelete from "../../images/icon-logout1.png";
 import iconSoundOff from "../../images/icon-sound-off.png";
+import iconEditar from "../../images/icon-editar.png";
 
 const DetailPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -34,12 +35,28 @@ const DetailPageStyles = styled.div`
     height: 36px;
     margin: auto;
   }
+
+  .animatedEdit {
+    background: url(${iconEditar});
+    width: 45px;
+    position: relative;
+    top: -427px;
+    left: 70%;
+  }
+  ul {
+    width: 100%;
+    margin: 0 0 0 0;
+    padding: 0;
+    border-radius: 35px;
+    height: 420px;
+    background: #fff;
+  }
   li {
     list-style-type: none;
     text-align: justify;
   }
   h1 {
-    font-size: 2px;
+    font-size: 234px;
     margin-left: 10px;
   }
 
@@ -47,11 +64,14 @@ const DetailPageStyles = styled.div`
     font-size: 16px;
     margin-left: 12px;
   }
-
+  .bt-delete {
+    visibility: hidden;
+  }
   h1,
   h2 {
     text-align: left;
     color: black;
+    font-size: 24px;
   }
 
   .bt-logout {
@@ -78,23 +98,33 @@ const DetailPageStyles = styled.div`
     background-repeat: no-repeat;
   }
 
+  .penguin-image-detail {
+    background-color: rgb(255 254 254);
+    box-shadow: 0 15px 6px #666;
+    border: 2px solid;
+    border-radius: 10px;
+  }
+
   .penguin-detail-container {
-    box-shadow: 0 3px 6px #666;
+    background-color: rgb(255 254 254);
+    box-shadow: 0 15px 6px #666;
     padding: 10px 10px 150px 10px;
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
     margin: auto;
     text-align: center;
-    width: 200px;
+    height: 430px;
+    border: 2px solid;
+    height: 416px;
   }
 
   .penguin-image-container {
     width: 100%;
-    height: 200px;
+    height: 220px;
+    border-radius: 35px;
+    border: px solid #fff;
   }
-  img {
-    width: 100%;
-  }
+
   .bt-back {
     background: url(${iconBack});
     width: 45px;
@@ -107,7 +137,9 @@ const DetailPageStyles = styled.div`
 
     bottom: 20px;
   }
-
+  .display-none {
+    display: none;
+  }
   .bt-home {
     background: url(${iconHome});
     height: 65px;
@@ -145,6 +177,23 @@ const DetailPageStyles = styled.div`
     padding: 0 0 0 0;
   }
 
+  .penguin-image-detail {
+    border-radius: 15px;
+    border: 2px solid;
+  }
+
+  .penguin-description {
+    margin-top: 35px;
+    padding-left: 10px;
+    font-size: 16px;
+  }
+
+  .description-container {
+    margin-top: 45px;
+    background-color: rgb(255 254 254);
+    margin-left: 18px;
+    margin-right: 18px;
+  }
   .image-delete {
     position: relative;
     top: -140px;
@@ -169,7 +218,7 @@ const DetailPageStyles = styled.div`
   }
   span {
     font-size: 20px;
-    margin-left: 50px;
+    margin-left: 100px;
   }
 
   .category {
@@ -266,7 +315,7 @@ const DetailPageStyles = styled.div`
     background-image: url(${iconDelete});
     width: 45px;
     position: relative;
-    top: -136px;
+    top: -250px;
     left: 86%;
   }
 
@@ -305,6 +354,9 @@ const DetailPageStyles = styled.div`
   .bounce {
     -webkit-animation-name: bounce;
     animation-name: bounce;
+  }
+  .header {
+    justify-content: space-between;
   }
 `;
 
