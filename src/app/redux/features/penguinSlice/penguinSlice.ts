@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IPenguin } from "../../../redux/types/penguin/penguinInterfaces";
 
-interface penguinIniState {
+interface PenguinIniState {
   allPenguins: IPenguin[];
   penguinsToLoad: IPenguin[];
 }
 
-const initialState: penguinIniState = {
+const initialState: PenguinIniState = {
   allPenguins: [],
   penguinsToLoad: [],
 };
@@ -18,7 +18,7 @@ const penguinSlice = createSlice({
     loadPenguins: (
       penguins,
       action: PayloadAction<IPenguin[]>
-    ): penguinIniState => ({
+    ): PenguinIniState => ({
       ...penguins,
       allPenguins: [...action.payload],
     }),
@@ -26,7 +26,7 @@ const penguinSlice = createSlice({
     deletePenguin: (
       penguins,
       action: PayloadAction<string>
-    ): penguinIniState => ({
+    ): PenguinIniState => ({
       ...penguins,
       allPenguins: penguins.allPenguins.filter(
         (penguin) => penguin.id !== action.payload
@@ -38,7 +38,7 @@ const penguinSlice = createSlice({
     createPenguin: (
       penguins,
       action: PayloadAction<IPenguin>
-    ): penguinIniState => ({
+    ): PenguinIniState => ({
       ...penguins,
       allPenguins: [...penguins.allPenguins, action.payload],
     }),
@@ -46,7 +46,7 @@ const penguinSlice = createSlice({
     editPenguin: (
       penguins,
       action: PayloadAction<IPenguin>
-    ): penguinIniState => ({
+    ): PenguinIniState => ({
       ...penguins,
       allPenguins: penguins.allPenguins.map((penguin) =>
         penguin.id === action.payload.id
