@@ -7,7 +7,7 @@ const Home = (): JSX.Element => {
   };
 
   return (
-    <div className="info" onLoad={stopLoad}>
+    <div className="info">
       <header></header>
       <h1> AdoptaUnPingüino.com </h1>
       <div className="bt-container">

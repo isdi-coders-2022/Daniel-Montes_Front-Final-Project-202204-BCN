@@ -89,7 +89,14 @@ function App() {
             </CheckInSecurity>
           }
         />
-        <Route path="/detail/:idPenguin" element={<DetailPage />} />
+        <Route
+          path="/detail/:idPenguin"
+          element={
+            <CheckInSecurity>
+              <DetailPage />
+            </CheckInSecurity>
+          }
+        />
       </Routes>
     </>
   );

@@ -31,7 +31,7 @@ const Navbar = ({ title }: IParameter): JSX.Element => {
 
   return (
     <>
-      <NavbarStyles>
+      <NavbarStyles className="header-container">
         <div className="header">
           <button className={`bt-back${HidderBack}`} onClick={handleBack} />
           <button className="menu-btn bt-menu" onClick={handleMenu} />
