@@ -1,17 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
-import {
-  createFavThunk,
-  editPenguinThunk,
-} from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import {
-  correctAction,
-  infoAction,
-  stopLoadingAction,
-  wrongAction,
-} from "../Modals/Modals";
+import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { correctAction } from "../Modals/Modals";
 import { useNavigate } from "react-router-dom";
 
 interface ICreateForm {
@@ -19,6 +10,8 @@ interface ICreateForm {
   likes: number;
   category: string;
   description: string;
+  image: string | File;
+  owner: string;
 }
 
 interface Props {
@@ -27,20 +20,27 @@ interface Props {
 
 const CreateForm = ({ idPenguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+
   const blankFields = {
     name: "",
     category: "",
     description: "",
     image: "",
     likes: 0,
+    owner: "",
   };
+
   const initialFormData: ICreateForm = {
-    name: idPenguin ? idPenguin.name : "",
-    likes: idPenguin ? idPenguin.likes : 0,
-    category: idPenguin ? idPenguin.category : "",
-    description: idPenguin ? idPenguin.description : "",
+    name: "",
+    likes: 0,
+    category: "",
+    description: "",
+    image: "",
+    owner: "",
   };
+
+  let imageURL = "";
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState<ICreateForm>(initialFormData);
 
@@ -51,41 +51,30 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
       ...formData,
       [event.target.id]: event.target.value,
     });
+
+    imageURL = event.target.value;
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    if (idPenguin) {
-      dispatch(editPenguinThunk(idPenguin.id, formData));
-      correctAction("Updated successfully");
-      setFormData(blankFields);
-      navigate("/penguins");
-      return;
-    }
+
     dispatch(createFavThunk(formData));
 
     setFormData(blankFields);
-    navigate("/favs");
+    correctAction("Saved!");
+    navigate("penguins/favs");
   };
 
-  const uploadImage = (event: React.ChangeEvent<HTMLInputElement>): void => {
-    try {
-      infoAction("Uploading image...");
-      setFormData({
-        ...formData,
-        [event.target.id]: event.target.files?.[0] || "",
-      });
-      correctAction("Image uploaded!");
-    } catch {
-      stopLoadingAction();
-      wrongAction("Error creating fav!");
-    }
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setFormData({
+      ...formData,
+      image: event.target.files?.[0] as File,
+    });
+    correctAction("Uploading: " + event.target.value);
   };
 
   return (
     <div className="container">
-      <h1>New favorite...</h1>
-
       <form
         noValidate
         autoComplete="off"
@@ -96,12 +85,13 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
         <input
           className="penguin-image"
           id="image"
-          type="file"
-          onChange={uploadImage}
+          type="text"
+          onChange={handleImageChange}
           autoComplete="off"
           placeholder="Image"
         />
-        <label htmlFor="title">Name</label>
+        {imageURL}
+        <label htmlFor="name">Name</label>
         <input
           type="text"
           id="name"
@@ -110,7 +100,7 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
           onChange={handleInputChange}
           placeholder="Name"
         />
-        <label htmlFor="title">Category</label>
+        <label htmlFor="category">Category</label>
         <input
           type="text"
           id="category"
@@ -119,7 +109,7 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
           onChange={handleInputChange}
           placeholder="Category"
         />
-        <label htmlFor="times">Likes</label>
+        <label htmlFor="likes">Likes</label>
         <input
           type="number"
           id="likes"
@@ -138,15 +128,22 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
           placeholder="Description"
           onChange={handleInputChange}
         />
-
-        <button
+        <div className="parent-div">
+          <button className="btn_upload">Choose photo</button>
+          <input
+            type="file"
+            name="upfile"
+            accept="image/*"
+            className="file-upload"
+            onChange={handleImageChange}
+          />
+        </div>
+        <input
           type="submit"
           className="bt-save"
           placeholder="bt-save"
-          value={idPenguin ? "Edit" : "Create"}
-        >
-          Save
-        </button>
+          value="Save"
+        />
       </form>
     </div>
   );

@@ -30,7 +30,7 @@ function App() {
 
   return (
     <>
-      <Navbar title="Penguins" />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Navigate to="/homepage" />} />
         <Route

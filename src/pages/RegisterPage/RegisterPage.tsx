@@ -4,7 +4,7 @@ import RegisterPageStyles from "../../Styles/FormsStyles";
 const RegisterPage = (): JSX.Element => {
   return (
     <RegisterPageStyles>
-      <h1>AdoptaUnPingüino.com</h1>
+      <h1 className="display-none">AdoptaUnPingüino.com</h1>
       <RegisterForm />
     </RegisterPageStyles>
   );

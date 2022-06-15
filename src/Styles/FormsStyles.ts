@@ -9,20 +9,11 @@ import iconHome from "../images/icon-home.png";
 import iconDelete from "../images/icon-logout1.png";
 import iconSoundOff from "../images/icon-sound-off.png";
 import iconSoundOn from "../images/icon-sound-on.png";
-import image from "../images/background2Heart.png";
 import imagePhotoBackgoud from "../images/contact-photo.png";
 
 const FormsStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-
-  background-image: url(${image});
-  background-size: 200%;
-  background-position-x: 97px;
-  background-position-y: 30px;
-  background-repeat: no-repeat;
-  height: 690px;
-  text-align: center;
 
   .bt-container {
     display: flex;
@@ -63,10 +54,9 @@ const FormsStyles = styled.div`
   form {
     display: flex;
     flex-direction: column;
-
     row-gap: 20px;
     width: 100%;
-    margin-top: 180px;
+    margin-top: 90px;
   }
 
   .form-create {
@@ -106,6 +96,7 @@ const FormsStyles = styled.div`
     color: black;
     font-size: 20px;
     font-size: 14px;
+    cursor: pointer;
   }
 
   label {
@@ -145,14 +136,16 @@ const FormsStyles = styled.div`
   }
 
   .penguin-image {
-    border: 1px solid;
-    border-radius: 5px;
+    border: 2px solid;
+    border-radius: 15px;
     height: 150px;
+    width: 80%;
     background-image: url(${imagePhotoBackgoud});
     background-color: rgb(207 201 201);
     background-repeat: no-repeat;
     background-position-x: 50%;
     background-position-y: 50%;
+    margin: auto;
   }
 
   nav {
@@ -162,6 +155,7 @@ const FormsStyles = styled.div`
   .container {
     width: 100%;
     display: flow-root;
+    margin-top: -45px;
   }
 
   span {
@@ -210,9 +204,8 @@ const FormsStyles = styled.div`
   }
 
   button {
-    color: white;
     padding: 14px 20px;
-    border: none;
+
     font-weight: bold;
     cursor: pointer;
     width: 80%;
@@ -221,6 +214,7 @@ const FormsStyles = styled.div`
     font-size: 20px;
     border-radius: 15px;
     align-items: center;
+    margin: auto;
   }
 
   .bt-delete {
@@ -340,8 +334,10 @@ const FormsStyles = styled.div`
   }
 
   .bt-save {
-    margin: auto;
+    color: white;
     background-color: black;
+    font-size: 20px;
+    font-weight: bold;
   }
 
   .bt-register {
@@ -351,7 +347,6 @@ const FormsStyles = styled.div`
     border: none;
     font-weight: bold;
     cursor: pointer;
-    opacity: 0.9;
     display: flex;
     justify-content: center;
     font-size: 20px;
@@ -433,6 +428,37 @@ const FormsStyles = styled.div`
   }
   .item:hover {
     transform: rotate(15deg);
+  }
+
+  .parent-div {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .parent-div input[type="file"] {
+    left: 0;
+    top: 0;
+    opacity: 0;
+    position: absolute;
+    font-size: 20px;
+  }
+
+  .btn-upload {
+    border: 3px solid #000;
+    color: #000;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+  }
+  .bt-upload {
+    color: black;
+    border: 5px solid;
+    background-color: white;
+  }
+  .btn_upload {
+    border: 3px solid;
   }
 `;
 

@@ -30,13 +30,10 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
         },
       });
       dispatch(loadPenguinsActionCreator(penguins));
-
       stopLoadingAction();
     }
   } catch (error) {
     wrongAction(chalk.red(`ERROR: ${this} Exiting with error:  ${error}`));
-
-    stopLoadingAction();
   }
 };
 
@@ -58,18 +55,17 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
         return;
       }
       dispatch(loadPenguinsActionCreator(penguins));
+      stopLoadingAction();
     }
   } catch (error) {
-    stopLoadingAction();
     wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
   }
 };
 
 export const createFavThunk =
   (formPenguin: INewFav) => async (dispatch: AppDispatch) => {
-    const token = localStorage.getItem("token");
-    infoAction("Creating fav...");
     try {
+      const token = localStorage.getItem("token");
       if (token) {
         const { data: penguin } = await axios.post(
           `${process.env.REACT_APP_API_URL}penguins`,
@@ -80,7 +76,11 @@ export const createFavThunk =
             },
           }
         );
+
         dispatch(createPenguinActionCreator(penguin));
+        correctAction("Penguin created");
+      } else {
+        wrongAction("Sorry, no token no cookies...");
       }
     } catch (error) {
       wrongAction("Sorry, error saving fav...");
@@ -104,11 +104,10 @@ export const getPenguinThunk =
         );
 
         dispatch(loadPenguinActionCreator(penguin));
+        stopLoadingAction();
       }
     } catch (error) {
       wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
-
-      stopLoadingAction();
     }
   };
 
@@ -133,8 +132,6 @@ export const deletePenguinThunk =
       }
     } catch (error) {
       wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
-
-      stopLoadingAction();
     }
   };
 
@@ -144,7 +141,6 @@ export const editPenguinThunk =
     const token = localStorage.getItem("token");
 
     try {
-      infoAction("Editing...");
       if (token) {
         const { data: responsePenguin } = await axios.put(
           `${process.env.REACT_APP_API_URL}penguins/${idPenguin}`,
@@ -156,10 +152,9 @@ export const editPenguinThunk =
           }
         );
         dispatch(editPenguinActionCreator(responsePenguin));
+        correctAction("Saved!");
       }
     } catch (error) {
       wrongAction(chalk.red(`ERROR: EDIT Penguin ${this} -> Error:  ${error}`));
-
-      stopLoadingAction();
     }
   };

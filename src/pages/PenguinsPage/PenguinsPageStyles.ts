@@ -15,11 +15,6 @@ const PenguinsPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 
-  background-size: 200%;
-  background-position-x: 80px;
-  background-position-y: 230px;
-  background-repeat: no-repeat;
-
   text-align: justify;
 
   element.style {
@@ -103,6 +98,7 @@ const PenguinsPageStyles = styled.div`
   }
 
   .penguin-image {
+    display: flex;
     border: 1px solid;
     border-radius: 5px;
   }
@@ -163,6 +159,7 @@ const PenguinsPageStyles = styled.div`
   button {
     width: 32px;
     height: 32px;
+    cursor: pointer;
     background-repeat: no-repeat;
     border: 0;
     vertical-align: midde;
@@ -257,6 +254,7 @@ const PenguinsPageStyles = styled.div`
     background-repeat: no-repeat;
   }
   .penguin-image-container {
+    display: flex;
     box-shadow: 0 3px 6px #666;
     padding: 10px 10px 150px 10px;
     margin-bottom: 10px;
@@ -326,7 +324,6 @@ const PenguinsPageStyles = styled.div`
     padding: 14px 20px;
     border: none;
     font-weight: bold;
-    cursor: pointer;
     opacity: 0.9;
     font-size: 20px;
     border-radius: 15px;
@@ -336,6 +333,7 @@ const PenguinsPageStyles = styled.div`
     margin: auto;
     color: blue;
     font-size: 16px;
+    cursor: pointer;
   }
 
   .submitContainer {

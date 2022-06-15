@@ -13,18 +13,18 @@ jest.mock("chalk", () => ({
 
 describe("Given a Navbar component", () => {
   describe("When it's invoked", () => {
-    test("Then it should render a list of 3 item", () => {
+    test("Then it should render a list of 12 item", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <Navbar title="" />
+            <Navbar />
           </Provider>
         </BrowserRouter>
       );
 
       const expectedListsItems = screen.getAllByRole("listitem");
 
-      expect(expectedListsItems.length).toBe(5);
+      expect(expectedListsItems.length).toBe(12);
     });
   });
 });
