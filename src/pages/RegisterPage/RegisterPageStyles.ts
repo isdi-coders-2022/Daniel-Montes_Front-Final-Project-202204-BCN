@@ -76,9 +76,11 @@ const RegisterPageStyles = styled.div`
     padding-bottom: 10px;
     font-size: 20px;
     margin: auto;
-    display: none;
   }
 
+  .display-none {
+    visibility: hidden;
+  }
   input {
     border: 2px solid black;
     align-items: center;
