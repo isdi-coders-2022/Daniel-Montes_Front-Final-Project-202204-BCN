@@ -13,7 +13,7 @@ interface Props {
 }
 
 const Penguin = ({
-  penguin: { name, category, id, description, likes, author, image },
+  penguin: { name, category, id, description, likes, owner, image },
 }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -48,7 +48,7 @@ const Penguin = ({
     category: id ? category : "",
     description: id ? description : "",
     image: id ? image : "",
-    owner: id ? author : "",
+    owner: id ? owner : "",
   };
 
   interface ICreateForm {

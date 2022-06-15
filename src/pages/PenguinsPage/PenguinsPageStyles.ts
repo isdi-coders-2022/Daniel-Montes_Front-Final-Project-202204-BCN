@@ -98,6 +98,8 @@ const PenguinsPageStyles = styled.div`
   }
 
   .penguin-image {
+    max-width: 100%;
+    height: auto;
     display: flex;
     border: 1px solid;
     border-radius: 5px;
@@ -107,6 +109,8 @@ const PenguinsPageStyles = styled.div`
     display: flex;
     margin-bottom: 50px;
     background-color: grey;
+    text-align: center;
+    padding: 10px 20px;
   }
 
   nav {
@@ -255,12 +259,15 @@ const PenguinsPageStyles = styled.div`
   }
   .penguin-image-container {
     display: flex;
-    box-shadow: 0 3px 6px #666;
+
     padding: 10px 10px 150px 10px;
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
     margin: auto;
     text-align: center;
+
+    background-color: white;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
 
   .penguin-image-detail {
@@ -365,7 +372,7 @@ const PenguinsPageStyles = styled.div`
     display: inline-flex;
     background: #fff;
     padding: 0.5em;
-    max-height: 650px;
+    max-height: auto;
     -webkit-transition: 0.5s;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -376,7 +383,8 @@ const PenguinsPageStyles = styled.div`
   }
 
   .item img {
-    max-width: 100%;
+    max-width: 340px;
+    max-height: 300px;
   }
   .item:nth-of-type(4n + 1) {
     transform: rotate(5deg);
