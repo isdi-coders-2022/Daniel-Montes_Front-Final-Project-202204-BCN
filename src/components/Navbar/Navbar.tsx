@@ -1,53 +1,59 @@
-import { ReactDimmer } from "react-dimmer";
+import "../../Styles/NavbarStyles.css";
 import { useState } from "react";
-import NavbarStyles from "../../Styles/NavbarStyles";
 import { Menu } from "../Menu/Menu";
-import { IParameter } from "../../app/redux/types/userInterfaces/userInterfaces";
-import { correctAction } from "../Modals/Modals";
+import { ReactDimmer } from "react-dimmer";
+import { stopLoadingAction } from "../Modals/Modals";
 import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 
-const Navbar = ({ title }: IParameter): JSX.Element => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
+const Navbar = (): JSX.Element => {
+  const [isMenuOpen, setMenu] = useState(false);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const handleMenu = () => {
-    setMenuOpen((prevState) => !prevState);
+    setMenu((prevState) => !prevState);
   };
 
   const handleBack = () => {
-    correctAction("Loading Home...");
-
     dispatch(loadPenguinsThunk());
 
+    stopLoadingAction();
     navigate("/penguins");
   };
 
-  const HidderBack = document.location.href.includes("/penguins")
-    ? " display-none"
-    : "";
+  const HidderBack =
+    !document.location.href.includes("/detail/") &&
+    !document.location.href.includes("/favs")
+      ? " display-none"
+      : "";
+
+  const HidderMenu =
+    document.location.href.includes("/homepage") ||
+    document.location.href.includes("/login") ||
+    document.location.href.includes("/register")
+      ? " display-none"
+      : "";
 
   return (
     <>
-      <NavbarStyles className="header-container">
+      <div className="app">
         <div className="header">
           <button className={`bt-back${HidderBack}`} onClick={handleBack} />
-          <button className="menu-btn bt-menu" onClick={handleMenu} />
-
-          <nav className="nav"></nav>
+          <h1>AdoptAPenguin.com</h1>
+          <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
+          <div className="nav"></div>
         </div>
+      </div>
+      <Menu isMenuOpen={isMenuOpen} />
 
-        <Menu isMenuOpen={isMenuOpen} />
-
-        <ReactDimmer
-          isOpen={isMenuOpen}
-          exitDimmer={setMenuOpen}
-          zIndex={100}
-          blur={1.5}
-        />
-      </NavbarStyles>
+      <ReactDimmer
+        isOpen={isMenuOpen}
+        exitDimmer={setMenu}
+        zIndex={100}
+        blur={1.5}
+      />
     </>
   );
 };

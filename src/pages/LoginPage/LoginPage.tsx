@@ -7,7 +7,7 @@ const LoginPage = (): JSX.Element => {
   return (
     <FormsStyles>
       <ToastContainer />
-      <h1>AdoptaUnPingüino.com</h1>
+      <h1 className="display-none">AdoptaUnPingüino.com</h1>
       <LoginForm />
     </FormsStyles>
   );

@@ -46,6 +46,8 @@ export interface INewFav {
   likes: number;
   category: string;
   description: string;
+  image: string | File;
+  owner: string;
 }
 
 export interface IDetail {

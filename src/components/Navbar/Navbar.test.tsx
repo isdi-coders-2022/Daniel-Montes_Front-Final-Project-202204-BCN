@@ -17,7 +17,7 @@ describe("Given a Navbar component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <Navbar title="" />
+            <Navbar />
           </Provider>
         </BrowserRouter>
       );

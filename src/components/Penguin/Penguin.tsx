@@ -6,7 +6,7 @@ import {
   editPenguinThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import { infoAction } from "../Modals/Modals";
+import { correctAction, infoAction } from "../Modals/Modals";
 
 interface Props {
   penguin: IPenguin;
@@ -47,12 +47,17 @@ const Penguin = ({
     likes: id ? likes : 0,
     category: id ? category : "",
     description: id ? description : "",
+    image: id ? image : "",
+    owner: id ? author : "",
   };
+
   interface ICreateForm {
     name: string;
     likes: number;
     category: string;
     description: string;
+    image: string;
+    owner: string;
   }
 
   const [formData] = useState<ICreateForm>(initialFormData);
@@ -60,6 +65,7 @@ const Penguin = ({
   const handleAddToFav = (): void => {
     if (id) {
       dispatch(editPenguinThunk(id, formData));
+      correctAction("Saved to favorites!");
     }
   };
 
