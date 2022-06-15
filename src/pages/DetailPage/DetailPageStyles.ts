@@ -43,7 +43,7 @@ const DetailPageStyles = styled.div`
     background: url(${iconEditar});
     width: 45px;
     position: relative;
-    top: -417px;
+    top: -445px;
     left: 70%;
   }
   ul {
@@ -158,7 +158,9 @@ const DetailPageStyles = styled.div`
     background-size: 60%;
     background-repeat: no-repeat;
   }
-
+.bt-edit{
+  top:50px
+}
   .bt-favs {
     width: 45px;
     height: 45px;

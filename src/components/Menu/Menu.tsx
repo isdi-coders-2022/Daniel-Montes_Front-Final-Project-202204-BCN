@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
+import { useState } from "react";
 
 interface IMenuProps {
   isMenuOpen: boolean;
@@ -20,7 +21,11 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
     navigate("/");
   };
 
+  const [, setMenu] = useState(false);
+
   const loadFavs = () => {
+    setMenu((prevState) => !prevState);
+
     navigate("/penguins/favs");
   };
 

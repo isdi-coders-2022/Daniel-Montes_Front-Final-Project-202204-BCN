@@ -16,6 +16,7 @@ const FavsPage = () => {
   return (
     <>
       <PenguinsPageStyles>
+        <h1 className="display-none">AdoptaUnPingüino.com</h1>
         <Penguins penguins={allPenguins} />
       </PenguinsPageStyles>
     </>
