@@ -13,7 +13,14 @@ interface ICreateForm {
   image: string | File;
   owner: string;
 }
-
+const blankFields = {
+  name: "",
+  category: "",
+  description: "",
+  image: "",
+  likes: 0,
+  owner: "",
+};
 interface Props {
   idPenguin: IPenguin | null;
   penguin: IPenguin | null;
@@ -23,14 +30,6 @@ const CreateForm = ({ idPenguin, penguin }: Props) => {
   const dispatch = useAppDispatch();
 
   const { name } = useAppSelector((state) => state.users);
-  const blankFields = {
-    name: "",
-    category: "",
-    description: "",
-    image: "",
-    likes: 0,
-    owner: name,
-  };
 
   const initialFormData: ICreateForm = {
     name: penguin?.name || "",
@@ -74,9 +73,25 @@ const CreateForm = ({ idPenguin, penguin }: Props) => {
       wrongAction("Error:" + error);
     }
   };
-  const HiderImage = !document.location.href.includes("detail")
-    ? " display-none"
-    : "";
+  let HiderImage = "";
+
+  const resetForm = () => {
+    const blankData: ICreateForm = {
+      name: "",
+      category: "",
+      description: "",
+      image: "",
+      likes: 0,
+      owner: name,
+    };
+    setFormData(blankData);
+  };
+
+  if (!document.location.href.includes("detail")) {
+    HiderImage = " display-none";
+  } else {
+    resetForm();
+  }
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
