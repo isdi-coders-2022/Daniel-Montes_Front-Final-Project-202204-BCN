@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { ReactDimmer } from "react-dimmer";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { Prompt } from "../Modals/Prompt";
 
 const PenguinDetail = (): JSX.Element => {
   const { penguin } = useAppSelector((state) => state.penguin);
