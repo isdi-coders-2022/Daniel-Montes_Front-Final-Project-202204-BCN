@@ -58,7 +58,7 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     try {
       event.preventDefault();
-      debugger;
+
       dispatch(createFavThunk(formData));
 
       setFormData(blankFields);
