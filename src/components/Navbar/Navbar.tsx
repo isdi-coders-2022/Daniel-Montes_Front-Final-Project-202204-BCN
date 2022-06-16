@@ -58,7 +58,8 @@ const Navbar = (): JSX.Element => {
 
   const HidderBack =
     !document.location.href.includes("/detail/") &&
-    !document.location.href.includes("/favs")
+    !document.location.href.includes("/favs") &&
+    !document.location.href.includes("/edit")
       ? " display-none"
       : "";
 
@@ -90,7 +91,7 @@ const Navbar = (): JSX.Element => {
                     <button
                       onClick={logOutUser}
                       className="bt-logout"
-                      title="bt-logout"
+                      title="btn-logout"
                     />
                   </li>
                   <li>
@@ -125,6 +126,7 @@ const Navbar = (): JSX.Element => {
                   className="bt-home"
                   title="bt-home"
                 />
+                <h3 className="menu-icon-label-vertical">Home</h3>
               </li>
               <li>
                 <button
@@ -132,21 +134,17 @@ const Navbar = (): JSX.Element => {
                   className="bt-favs"
                   title="bt-favs"
                 />
+                <h3 className="menu-icon-label-vertical">Favourites</h3>
               </li>
               <li>
                 <button onClick={addFav} className="bt-addfav" title="bt-fav" />
+                <h3 className="menu-icon-label-vertical">New...</h3>
               </li>
             </ul>
             <ul>
-              <li>
-                <h3 className="menu-icon-label-vertical">New...</h3>
-              </li>
-              <li>
-                <h3 className="menu-icon-label-vertical">Home</h3>
-              </li>
-              <li>
-                <h3 className="menu-icon-label-vertical">Favourites</h3>
-              </li>
+              <li></li>
+              <li></li>
+              <li></li>
             </ul>
           </div>
         </div>

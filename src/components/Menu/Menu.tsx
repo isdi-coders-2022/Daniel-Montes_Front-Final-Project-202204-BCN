@@ -1,7 +1,10 @@
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { useNavigate } from "react-router-dom";
-import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { correctAction, infoAction, stopLoadingAction } from "../Modals/Modals";
+import {
+  loadFavsThunk,
+  loadPenguinsThunk,
+} from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { infoAction, stopLoadingAction } from "../Modals/Modals";
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
 import { useState } from "react";
 
@@ -13,28 +16,27 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const logOutUser = () => {
-    infoAction("Logging out...");
-    dispatch(logOutActionCreator());
-    localStorage.removeItem("token");
-    correctAction("Logged out!");
-    navigate("/");
-  };
-
   const [, setMenu] = useState(false);
 
   const loadFavs = () => {
     setMenu((prevState) => !prevState);
+    dispatch(loadFavsThunk());
+  };
 
-    navigate("/penguins/favs");
+  const logOutUser = () => {
+    setMenu((prevState) => !prevState);
+
+    infoAction("Logging out...");
+    dispatch(logOutActionCreator());
+    localStorage.removeItem("token");
+    stopLoadingAction();
+    navigate("/");
   };
 
   const loadHome = () => {
-    infoAction("Loading Home...");
-
+    setMenu((prevState) => !prevState);
     dispatch(loadPenguinsThunk());
 
-    navigate("/penguins");
     stopLoadingAction();
   };
 
@@ -52,33 +54,26 @@ export const Menu = ({ isMenuOpen }: IMenuProps) => {
         <div className="menu-header-horizontal">
           <ul className="menu-icons-horizontal">
             <li>
-              <ul>
-                <li>
-                  <button
-                    onClick={logOutUser}
-                    className="bt-logout"
-                    title="bt-logout"
-                  />
-                </li>
-                <li>
-                  <span className="menu-icon-label">Logout</span>
-                </li>
-              </ul>
+              <button
+                onClick={logOutUser}
+                className="bt-logout"
+                title="bt-logout"
+              />
             </li>
             <li>
-              <ul>
-                <li>
-                  <button
-                    onClick={toggleSound}
-                    className="bt-sound"
-                    title="bt-sound"
-                  />
-                </li>
-                <li>
-                  <span className="menu-icon-label sound-on">On/</span>
-                  <span className="menu-icon-label sound-off">Off</span>
-                </li>
-              </ul>
+              <span className="menu-icon-label">Logout</span>
+            </li>
+
+            <li>
+              <button
+                onClick={toggleSound}
+                className="bt-sound"
+                title="bt-sound"
+              />
+            </li>
+            <li>
+              <span className="menu-icon-label sound-on">On/</span>
+              <span className="menu-icon-label sound-off">Off</span>
             </li>
           </ul>
         </div>

@@ -138,11 +138,12 @@ const PenguinsPageStyles = styled.div`
     height: fit-content;
     width: fit-content;
     font-size: 16px;
+    position: relative;
+    top: 24px;
   }
-
-  .likes {
-    text-align: right;
-    flex: 3;
+  span .likes {
+    position: relative;
+    top: -10px;
   }
   .penguin-description {
     position: relative;

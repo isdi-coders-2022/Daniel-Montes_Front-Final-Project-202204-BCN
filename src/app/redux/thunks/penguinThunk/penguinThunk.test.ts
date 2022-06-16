@@ -36,9 +36,9 @@ describe("when it's called with no token", () => {
   });
 });
 
-describe("when it's called with an placeId with no token", () => {
+describe("when it's called with an penguinID with no token", () => {
   test("Then it should not call the dispatch function", async () => {
-    const id = "222";
+    const id = "22";
     const dispatch = jest.fn();
 
     jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");

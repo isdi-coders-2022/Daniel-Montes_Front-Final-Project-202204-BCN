@@ -43,7 +43,7 @@ const DetailPageStyles = styled.div`
     background: url(${iconEditar});
     width: 45px;
     position: relative;
-    top: -445px;
+    top: -495px;
     left: 70%;
   }
   ul {
@@ -127,6 +127,8 @@ const DetailPageStyles = styled.div`
     height: 430px;
     border: 2px solid;
     height: 416px;
+    width:80%;
+    margin-top:15px;
   }
 
   .penguin-image-container {
@@ -328,7 +330,7 @@ const DetailPageStyles = styled.div`
     background-image: url(${iconDelete});
     width: 45px;
     position: relative;
-    top: -240px;
+    top: -290px;
     left: 86%;
   }
 

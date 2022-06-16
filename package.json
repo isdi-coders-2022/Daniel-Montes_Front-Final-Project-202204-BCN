@@ -17,6 +17,7 @@
     "chalk": "^5.0.1",
     "jwt-decode": "^3.1.2",
     "msw": "^0.42.0",
+    "nodemon": "^2.0.16",
     "react": "^18.1.0",
     "react-app-polyfill": "^3.0.0",
     "react-dimmer": "^1.0.7",
@@ -32,6 +33,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
+    "start-dev": "nodemon src -q",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test-coverage": "react-scripts test --coverage --watchAll=false",

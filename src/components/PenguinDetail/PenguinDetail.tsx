@@ -21,44 +21,46 @@ const PenguinDetail = (): JSX.Element => {
   };
 
   return (
-    <div className="penguin-detail-container">
-      <ul>
-        <li className="li-detail">
-          <h2 className="penguin-name">{penguin.name}</h2>
-        </li>
-        <li>
-          <div className="penguin-image-container">
-            <img
-              src={penguin.image}
-              alt={`Pinguino ${penguin.name}`}
-              className="penguin-image-detail"
-            />
-          </div>
-        </li>
-        <li>
-          <span className="category">{penguin.category}</span>
-          <span className="likes">{penguin.likes}</span>
-        </li>
-        <li className="description-container">
-          <span className="penguin-description">{penguin.description}</span>
-        </li>
-        <li>
-          {" "}
-          <div
-            className={`animated bounce animatedDelete${HidderDelete}`}
-            onClick={handleDelete}
-            title="bt-delete"
-          >
-            <button className="bt-delete" />
-          </div>
-          <div
-            className={`animated bounce animatedEdit${HidderDelete}`}
-            onClick={handleEdit}
-            title="bt-edit"
-          ></div>
-        </li>
-      </ul>
-    </div>
+    <>
+      <div className="penguin-detail-container">
+        <ul>
+          <li className="li-detail">
+            <h2 className="penguin-name">{penguin.name}</h2>
+          </li>
+          <li>
+            <div className="penguin-image-container">
+              <img
+                src={penguin.image}
+                alt={`Pinguino ${penguin.name}`}
+                className="penguin-image-detail"
+              />
+            </div>
+          </li>
+          <li>
+            <span className="category">{penguin.category}</span>
+            <span className="likes">{penguin.likes}</span>
+          </li>
+          <li className="description-container">
+            <span className="penguin-description">{penguin.description}</span>
+          </li>
+          <li>
+            {" "}
+            <div
+              className={`animated bounce animatedDelete${HidderDelete}`}
+              onClick={handleDelete}
+              title="bt-delete"
+            >
+              <button className="bt-delete" />
+            </div>
+            <div
+              className={`animated bounce animatedEdit${HidderDelete}`}
+              onClick={handleEdit}
+              title="bt-edit"
+            ></div>
+          </li>
+        </ul>
+      </div>
+    </>
   );
 };
 

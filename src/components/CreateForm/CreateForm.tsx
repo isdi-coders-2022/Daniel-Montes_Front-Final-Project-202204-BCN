@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from "react";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import { useAppDispatch } from "../../app/redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { correctAction } from "../Modals/Modals";
+import { correctAction, wrongAction } from "../Modals/Modals";
 import { useNavigate } from "react-router-dom";
 
 interface ICreateForm {
@@ -20,14 +20,14 @@ interface Props {
 
 const CreateForm = ({ idPenguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
-
+  const { name } = useAppSelector((state) => state.users);
   const blankFields = {
     name: "",
     category: "",
     description: "",
     image: "",
     likes: 0,
-    owner: "",
+    owner: name,
   };
 
   const initialFormData: ICreateForm = {
@@ -36,7 +36,7 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
     category: "",
     description: "",
     image: "",
-    owner: "",
+    owner: name,
   };
 
   let imageURL = "";
@@ -56,13 +56,17 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    dispatch(createFavThunk(formData));
+      dispatch(createFavThunk(formData));
 
-    setFormData(blankFields);
-    correctAction("Saved!");
-    navigate("penguins/favs");
+      setFormData(blankFields);
+
+      navigate("penguins/favs");
+    } catch (error) {
+      wrongAction("Error:" + error);
+    }
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
