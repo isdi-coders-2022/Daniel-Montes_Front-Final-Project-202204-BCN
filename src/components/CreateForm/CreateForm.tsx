@@ -74,6 +74,9 @@ const CreateForm = ({ idPenguin, penguin }: Props) => {
       wrongAction("Error:" + error);
     }
   };
+  const HiderImage = !document.location.href.includes("detail")
+    ? " display-none"
+    : "";
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
@@ -92,8 +95,13 @@ const CreateForm = ({ idPenguin, penguin }: Props) => {
         className="form-create"
       >
         <label htmlFor="image">Image</label>
+        <img
+          className="item penguin-image "
+          src={String(formData.image)}
+          alt={formData.name}
+        />
         <input
-          className="penguin-image"
+          className={`penguin-image ${HiderImage}`}
           id="image"
           type="text"
           onChange={handleImageChange}
