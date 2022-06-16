@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
+import { mockPenguin } from "../../mocks/penguins";
 import PenguinDetail from "./PenguinDetail";
 
 jest.mock("chalk", () => ({
@@ -22,7 +23,7 @@ describe("Given a CreatePage component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <PenguinDetail />
+            <PenguinDetail penguin={mockPenguin} />
           </BrowserRouter>
         </Provider>
       );

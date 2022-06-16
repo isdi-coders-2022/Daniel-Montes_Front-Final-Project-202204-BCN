@@ -16,10 +16,12 @@ interface ICreateForm {
 
 interface Props {
   idPenguin: IPenguin | null;
+  penguin: IPenguin | null;
 }
 
-const CreateForm = ({ idPenguin }: Props): JSX.Element => {
+const CreateForm = ({ idPenguin, penguin }: Props) => {
   const dispatch = useAppDispatch();
+
   const { name } = useAppSelector((state) => state.users);
   const blankFields = {
     name: "",
@@ -31,12 +33,12 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
   };
 
   const initialFormData: ICreateForm = {
-    name: "",
-    likes: 0,
-    category: "",
-    description: "",
-    image: "",
-    owner: name,
+    name: penguin?.name || "",
+    likes: penguin?.likes || 0,
+    category: penguin?.category || "",
+    description: penguin?.description || "",
+    image: penguin?.image || "",
+    owner: penguin?.owner || name,
   };
 
   let imageURL = "";
@@ -58,7 +60,11 @@ const CreateForm = ({ idPenguin }: Props): JSX.Element => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     try {
       event.preventDefault();
-
+      debugger;
+      setFormData({
+        ...formData,
+        owner: name,
+      });
       dispatch(createFavThunk(formData));
 
       setFormData(blankFields);

@@ -1,8 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 
-const PenguinDetail = (): JSX.Element => {
+interface Props {
+  penguin: IPenguin;
+}
+
+const PenguinDetail = (props: Props): JSX.Element => {
   const { penguin } = useAppSelector((state) => state.penguin);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -17,7 +22,9 @@ const PenguinDetail = (): JSX.Element => {
     }
   };
   const handleEdit = () => {
-    navigate(`/penguins/edit/${penguin.id}`);
+    if (penguin.id) {
+      navigate(`/penguins/edit/${penguin.id}`);
+    }
   };
 
   return (
