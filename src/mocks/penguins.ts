@@ -8,6 +8,7 @@ export const mockPenguin = {
   userId: "ejsd02449b",
   imageBackup: "sadsadasd.jpg",
   owner: "yo",
+  author: "author",
 };
 
 export const mockPenguins = [
