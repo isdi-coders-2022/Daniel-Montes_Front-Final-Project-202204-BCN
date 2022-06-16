@@ -91,7 +91,7 @@ const Navbar = (): JSX.Element => {
                     <button
                       onClick={logOutUser}
                       className="bt-logout"
-                      title="bt-logout"
+                      title="btn-logout"
                     />
                   </li>
                   <li>
