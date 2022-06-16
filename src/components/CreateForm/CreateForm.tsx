@@ -74,23 +74,15 @@ const CreateForm = ({ idPenguin, penguin }: Props) => {
     }
   };
   let HiderImage = "";
+  let HiderImageOn = "";
 
-  const resetForm = () => {
-    const blankData: ICreateForm = {
-      name: "",
-      category: "",
-      description: "",
-      image: "",
-      likes: 0,
-      owner: name,
-    };
-    setFormData(blankData);
-  };
-
-  if (!document.location.href.includes("detail")) {
+  if (!document.location.href.includes("create")) {
     HiderImage = " display-none";
+    HiderImageOn = "";
   } else {
-    resetForm();
+    HiderImageOn = " display-none";
+
+    navigate("penguins/favs");
   }
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
@@ -111,7 +103,7 @@ const CreateForm = ({ idPenguin, penguin }: Props) => {
       >
         <label htmlFor="image">Image</label>
         <img
-          className="item penguin-image "
+          className={`penguin-image ${HiderImageOn}`}
           src={String(formData.image)}
           alt={formData.name}
         />
