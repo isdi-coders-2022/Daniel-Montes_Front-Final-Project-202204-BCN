@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
@@ -20,11 +19,6 @@ const PenguinDetail = (): JSX.Element => {
   const handleEdit = () => {
     navigate(`/penguins/edit/${penguin.id}`);
   };
-  const handleClick = () => {
-    setModal((prevState) => !prevState);
-  };
-
-  const [isModalOpen, setModal] = useState(false);
 
   return (
     <>
