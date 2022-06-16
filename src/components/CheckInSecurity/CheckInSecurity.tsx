@@ -19,6 +19,7 @@ const CheckInSecurity = ({ children }: Props) => {
   if (logged) {
     return children;
   } else {
+    navigate("/login");
     return null;
   }
 };

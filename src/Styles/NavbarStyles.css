@@ -88,6 +88,7 @@ hr {
   background: orange;
   display: inline;
   float: left;
+  text-align: left;
 }
 
 .menu-btn {
@@ -120,8 +121,13 @@ hr {
 
 .bt-favs {
   background: url("../images/icon-menu-favs45.png");
+  margin-left: -42px;
 }
-
+h3 {
+  position: relative;
+  top: -50px;
+  left: 70px;
+}
 .header .nav {
   display: flex;
   gap: 1rem;

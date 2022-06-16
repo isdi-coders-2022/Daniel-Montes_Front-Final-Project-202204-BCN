@@ -24,7 +24,7 @@ describe("Given a Navbar component", () => {
 
       const expectedListsItems = screen.getAllByRole("listitem");
 
-      expect(expectedListsItems.length).toBe(24);
+      expect(expectedListsItems.length).toBe(22);
     });
   });
 });

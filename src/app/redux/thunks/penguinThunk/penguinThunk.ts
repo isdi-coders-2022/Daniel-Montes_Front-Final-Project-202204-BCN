@@ -127,10 +127,12 @@ export const deletePenguinThunk =
       );
 
       if (status === 200) {
+        stopLoadingAction();
         dispatch(deletePenguinActionCreator(id));
         correctAction("Penguin deleted");
       }
     } catch (error) {
+      stopLoadingAction();
       wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
     }
   };
