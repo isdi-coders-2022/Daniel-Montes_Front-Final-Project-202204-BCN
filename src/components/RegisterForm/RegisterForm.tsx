@@ -1,46 +1,88 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { registerThunk } from "../../app/redux/thunks/userThunk/userThunk";
 import { NavLink } from "react-router-dom";
-import { infoAction } from "../Modals/Modals";
+import { correctAction } from "../Modals/Modals";
+import RegisterPageStyles from "../../Styles/FormsStyles";
+import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 
+let HiderImage = "";
+let HiderImageOn = "";
+let imageURL = "";
 interface FormData {
   name: string;
   username: string;
   password: string;
+  image: string | File;
 }
 
 const RegisterForm = (): JSX.Element => {
-  const blankFields = {
+  const blankFields: FormData = {
     name: "",
     username: "",
     password: "",
+    image: "",
   };
 
   const [formData, setFormData] = useState<FormData>(blankFields);
   const dispatch = useAppDispatch();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    event.preventDefault();
     setFormData({
       ...formData,
       [event.target.id]: event.target.value,
     });
   };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    infoAction("Registering...");
+  const handleSubmit = (event: ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    dispatch(registerThunk(formData));
 
+    dispatch(registerThunk(formData));
+    dispatch(headerTitleActionCreator("Wellcome"));
     setFormData(blankFields);
   };
 
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setFormData({
+      ...formData,
+      image: event.target.files?.item(0) as File,
+    });
+    correctAction("Added image: " + event.target.value);
+  };
+
+  if (!document.location.href.includes("create")) {
+    HiderImageOn = "";
+    HiderImage = " display-none";
+  } else {
+    HiderImage = "";
+    HiderImageOn = " display-none";
+  }
+
   return (
-    <div className="container">
-      <form noValidate autoComplete="off" onSubmit={handleSubmit}>
+    <RegisterPageStyles className="register-container">
+      <form
+        className="form-register"
+        noValidate
+        autoComplete="off"
+        onSubmit={handleSubmit}
+      >
         <NavLink to="/login" className="link">
           Already have an account? Please Log In
         </NavLink>
+        <img
+          className={`penguin-image${HiderImageOn}`}
+          src={String(formData.image)}
+          alt={formData.name}
+        />
+        <input
+          className={`penguin-image${HiderImage}`}
+          id="image"
+          type="text"
+          onChange={handleImageChange}
+          autoComplete="off"
+        />
+        {imageURL}
         <label htmlFor="name"> Name </label>
         <input
           type="text"
@@ -75,7 +117,17 @@ const RegisterForm = (): JSX.Element => {
           Register
         </button>
       </form>
-    </div>
+      <div className="register-parent-div">
+        <button className="btn-register-upload">Add Photo</button>
+        <input
+          type="file"
+          name="upfile"
+          accept="image/*"
+          className="file-upload"
+          onChange={handleImageChange}
+        />
+      </div>
+    </RegisterPageStyles>
   );
 };
 

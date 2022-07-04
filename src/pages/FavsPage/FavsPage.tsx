@@ -1,26 +1,23 @@
-import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import Penguins from "../../components/Penguins/Penguins";
-import PenguinsPageStyles from "../PenguinsPage/PenguinsPageStyles";
-import { stopLoadingAction } from "../../components/Modals/Modals";
+import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import Favs from "../../components/Favs/Favs";
 
-const FavsPage = () => {
+let firstRun = true;
+
+const FavsPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { allPenguins } = useAppSelector((state) => state.penguins);
+
   useEffect(() => {
-    dispatch(loadFavsThunk());
-    stopLoadingAction();
+    if (firstRun) {
+      dispatch(loadFavsThunk());
+      firstRun = false;
+    }
   }, [dispatch]);
 
-  return (
-    <>
-      <PenguinsPageStyles>
-        <h1 className="display-none">AdoptaUnPingüino.com</h1>
-        <Penguins penguins={allPenguins} />
-      </PenguinsPageStyles>
-    </>
-  );
+  const { allPenguins } = useAppSelector((state) => state.penguins);
+
+  return <Favs allPenguins={allPenguins} />;
 };
 
 export default FavsPage;

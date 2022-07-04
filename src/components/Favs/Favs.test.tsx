@@ -1,11 +1,10 @@
 import { render, screen } from "@testing-library/react";
-
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
 import Favs from "./Favs";
-import { mockPenguins } from "../../mocks/penguins";
 import Navbar from "../Navbar/Navbar";
+import { mockPenguins } from "../../mocks/penguins";
 
 jest.mock("chalk", () => ({
   green: jest.fn(),
@@ -22,8 +21,8 @@ describe("Given a Favs component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <Navbar />
-            <Favs penguins={mockPenguins} />
+            <Navbar headerTitle="test" />
+            <Favs allPenguins={mockPenguins} />
           </BrowserRouter>
         </Provider>
       );

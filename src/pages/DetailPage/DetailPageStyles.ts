@@ -4,13 +4,15 @@ import iconHamburguer from "../../images/menu_hamburguer.png";
 import iconBack from "../../images/icon-back.png";
 import iconFavs from "../../images/icon-stars.png";
 import iconMenuFavs from "../../images/star_add_icon.png";
+import iconMenuFavsDelete from "../../images/icon-fav-delete45.png";
 import iconLike from "../../images/heartLike.png";
 import iconAddFav from "../../images/icon-add_plus.png";
 import iconHome from "../../images/icon-home.png";
 import iconLogout from "../../images/icon-logout-white.png";
-import iconDelete from "../../images/icon-logout1.png";
+import iconDelete from "../../images/icon-logout32.png";
 import iconSoundOff from "../../images/icon-sound-off.png";
-import iconEditar from "../../images/icon-editar.png";
+import iconEditar from "../../images/icon-editar32.png";
+import iconLikeInit from "../../images/icon-likes-empty.png";
 
 const DetailPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -39,29 +41,21 @@ const DetailPageStyles = styled.div`
     margin: auto;
   }
 
-  .animatedEdit {
-    background: url(${iconEditar});
-    width: 45px;
-    position: relative;
-    top: -495px;
-    left: 70%;
-  }
   ul {
     width: 100%;
     margin: 0 0 0 0;
     padding: 0;
     border-radius: 35px;
-    height: 420px;
+    height: fit-content;
     background: #fff;
   }
 
   li {
     list-style-type: none;
     text-align: justify;
-        margin-left: 10px;
+    margin-left: 10px;
     margin-right: 10px;
     margin-top: 10px;
-
   }
 
   h1 {
@@ -73,9 +67,11 @@ const DetailPageStyles = styled.div`
     font-size: 16px;
     margin-left: 12px;
   }
+
   .bt-delete {
     visibility: hidden;
   }
+
   h1,
   h2 {
     text-align: left;
@@ -114,6 +110,24 @@ const DetailPageStyles = styled.div`
     border-radius: 10px;
     width: 100%;
     height: 100%;
+    max-width: 380px;
+    max-height: 255px;
+    margin-top: -30px;
+  }
+
+  .penguin--container {
+    background-color: rgb(255 254 254);
+    box-shadow: 0 15px 6px #666;
+    padding: 10px 10px 150px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px 5px 5px 5px;
+    margin: auto;
+    text-align: center;
+    height: 430px;
+    border: 2px solid;
+    height: fit-content;
+    width: fit-content;
+    margin-top: 5remx;
   }
 
   .penguin-detail-container {
@@ -124,20 +138,27 @@ const DetailPageStyles = styled.div`
     border-radius: 5px 5px 5px 5px;
     margin: auto;
     text-align: center;
-    height: 430px;
     border: 2px solid;
-    height: 416px;
-    width:80%;
-    margin-top:15px;
+    width: fit-content;
+    margin-top: 5rem;
   }
 
   .penguin-image-container {
     width: 100%;
-    height: 100%
+    height: 100%;
     border-radius: 35px;
     border: px solid #fff;
   }
 
+  .penguin-buttons-container {
+    width: 100%;
+    height: 50px;
+    border-radius: 35px;
+    position: relative;
+    display: flex;
+    top: -7px;
+    justify-content: space-between;
+  }
   .bt-back {
     background: url(${iconBack});
     width: 45px;
@@ -150,9 +171,11 @@ const DetailPageStyles = styled.div`
 
     bottom: 20px;
   }
+
   .display-none {
     display: none;
   }
+
   .bt-home {
     background: url(${iconHome});
     height: 65px;
@@ -160,9 +183,12 @@ const DetailPageStyles = styled.div`
     background-size: 60%;
     background-repeat: no-repeat;
   }
-.bt-edit{
-  top:50px
-}
+
+  .bt-edit {
+    top: 50px;
+    flex: 2;
+  }
+
   .bt-favs {
     width: 45px;
     height: 45px;
@@ -181,7 +207,14 @@ const DetailPageStyles = styled.div`
 
   .penguin-name,
   .bt-likes {
-    flex: 3;
+    flex: 2;
+  }
+
+  .likes {
+    flex: 2;
+    margin-top: 7px;
+    text-align: right;
+    margin-right: 5px;
   }
 
   .bt-likes {
@@ -192,9 +225,9 @@ const DetailPageStyles = styled.div`
     padding: 0 0 0 0;
   }
 
-  .penguin-image-detail {
-    border-radius: 15px;
-    border: 2px solid;
+  .penguin-image-footer {
+    display: flex;
+    margin-top: 10px;
   }
 
   .penguin-description {
@@ -204,7 +237,6 @@ const DetailPageStyles = styled.div`
   }
 
   .description-container {
-    margin-top: 45px;
     background-color: rgb(255 254 254);
     margin-left: 18px;
     margin-right: 18px;
@@ -224,24 +256,22 @@ const DetailPageStyles = styled.div`
     margin-top: 10px;
     margin-bottom: -10px;
   }
+
   .menu-header {
     width: 100%;
   }
+
   .header {
     width: 100%;
     justify-content: space-between;
-  }
-  span {
-    font-size: 20px;
-    margin-left: 100px;
   }
 
   .category {
     background-color: #ffe02c;
     border-radius: 4px;
-    flex: 1;
+
     margin-bottom: 25px;
-    padding-left: 5px;
+    padding: 5px;
     box-shadow: 0 3px 6px #666;
     margin-left: 15px;
     height: fit-content;
@@ -306,10 +336,9 @@ const DetailPageStyles = styled.div`
   }
 
   .animated {
-    background-repeat: no-repeat;
     background-position: left top;
-    padding-top: 95px;
-    margin-bottom: 60px;
+    background: none;
+
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
@@ -317,6 +346,7 @@ const DetailPageStyles = styled.div`
   }
 
   .animatedLike {
+    background-repeat: no-repeat;
     background-image: url(${iconLike});
     width: 45px;
   }
@@ -324,14 +354,34 @@ const DetailPageStyles = styled.div`
   .animatedFav {
     background-image: url(${iconMenuFavs});
     width: 45px;
+    margin-left: 10px;
+  }
+
+  .animatedFavDelete {
+    background-image: url(${iconMenuFavsDelete});
+
+    margin-left: 10px;
+    width: 45px;
+  }
+
+  .animatedLikeInit {
+    background-image: url(${iconLikeInit});
+    background-repeat: no-repeat;
+    width: 45px;
   }
 
   .animatedDelete {
     background-image: url(${iconDelete});
+    background-repeat: no-repeat;
+    background-position: center;
     width: 45px;
-    position: relative;
-    top: -290px;
-    left: 86%;
+  }
+
+  .form-detail-animatedEdit {
+    background: url(${iconEditar});
+    background-repeat: no-repeat;
+    background-position: right;
+    width: 70%;
   }
 
   @-webkit-keyframes bounce {
@@ -366,9 +416,29 @@ const DetailPageStyles = styled.div`
     }
   }
 
+  @keyframes bounce2 {
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
+      transform: translateY(0);
+    }
+    40% {
+      transform: translateY(-30px);
+    }
+    60% {
+      transform: translateY(-15px);
+    }
+  }
+
   .bounce {
     -webkit-animation-name: bounce;
     animation-name: bounce;
+  }
+  .bounce2 {
+    -webkit-animation-name: bounce2;
+    animation-name: bounce2;
   }
   .header {
     justify-content: space-between;

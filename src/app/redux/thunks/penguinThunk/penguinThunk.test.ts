@@ -23,18 +23,18 @@ describe("When it's called and there's no token", () => {
   });
 });
 
-describe("when it's called with no token", () => {
-  test("Then it should not call the dispatch function", async () => {
-    const dispatch = jest.fn();
+// describe("when it's called with no token", () => {
+//   test("Then it should not call the dispatch function", async () => {
+//     const dispatch = jest.fn();
 
-    jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
+//     jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
 
-    const thunk = createFavThunk(mockPenguin);
-    await thunk(dispatch);
+//     const thunk = createFavThunk({ mockPenguin });
+//     await thunk(dispatch);
 
-    expect(dispatch).not.toHaveBeenCalled();
-  });
-});
+//     expect(dispatch).not.toHaveBeenCalled();
+//   });
+// });
 
 describe("when it's called with an penguinID with no token", () => {
   test("Then it should not call the dispatch function", async () => {

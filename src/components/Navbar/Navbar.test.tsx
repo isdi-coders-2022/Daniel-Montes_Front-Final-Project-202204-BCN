@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import { stopLoadingAction } from "../Modals/Modals";
 import Navbar from "./Navbar";
 
 jest.mock("chalk", () => ({
@@ -19,7 +18,7 @@ describe("Given a Navbar component", () => {
       render(
         <BrowserRouter>
           <Provider store={store}>
-            <Navbar />
+            <Navbar headerTitle="Test" />
           </Provider>
         </BrowserRouter>
       );

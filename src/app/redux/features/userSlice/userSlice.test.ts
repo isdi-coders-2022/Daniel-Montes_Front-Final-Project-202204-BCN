@@ -7,14 +7,18 @@ describe("Given a userSlice reducer", () => {
   describe("When it receives a user and a login action", () => {
     test("Then it should return the same user but logged", () => {
       const initialUser = {
+        id: "test",
         name: "Test",
         username: "test",
         logged: false,
+        image: "",
       };
       const expectedUser = {
+        id: "test",
         name: "Test",
         username: "test",
         logged: true,
+        image: "",
       };
 
       const action = logInActionCreator(initialUser);
@@ -29,6 +33,8 @@ describe("Given a userSlice reducer", () => {
         name: "Test1",
         username: "test1",
         logged: true,
+        id: "test",
+        image: "",
       };
       const expectedUserStatus = false;
 

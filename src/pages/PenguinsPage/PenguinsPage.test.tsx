@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
 import PenguinsPage from "./PenguinsPage";
-import PenguinsPageStyles from "./PenguinsPageStyles";
+import PenguinsPageStyles from "../../Styles/PagesStyles";
 
 jest.mock("chalk", () => ({
   green: jest.fn(),

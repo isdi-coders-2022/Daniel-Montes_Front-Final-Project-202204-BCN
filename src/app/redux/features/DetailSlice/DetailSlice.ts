@@ -3,15 +3,15 @@ import { IDetail } from "../../types/penguin/penguinInterfaces";
 
 const initialState: IDetail = {
   penguin: {
+    id: "",
     name: "",
+    category: "",
     likes: 1,
     image: "",
     imageBackup: "",
     description: "",
-    owner: "",
-    category: "",
-    author: "",
-    id: "",
+    favs: [],
+    likers: [],
   },
 };
 

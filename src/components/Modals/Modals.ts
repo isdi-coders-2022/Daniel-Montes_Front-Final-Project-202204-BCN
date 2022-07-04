@@ -1,10 +1,10 @@
-import { Id, toast } from "react-toastify";
+import { Id, toast, Bounce } from "react-toastify";
 
 let customID: Id = "custom-id";
 
 const toastOptions = {
-  position: toast.POSITION.TOP_CENTER,
-  autoClose: 3000,
+  position: toast.POSITION.BOTTOM_CENTER,
+  autoClose: 1500,
   hideProgressBar: false,
   newstOnTop: false,
   closeOnClick: true,
@@ -13,10 +13,11 @@ const toastOptions = {
   draggable: true,
   pauseOnHover: true,
   toastId: `${customID}`,
+  transition: Bounce,
 };
 
 const toastOptionsSuccess = {
-  autoClose: 2000,
+  autoClose: 1500,
   closeOnClick: true,
   toastId: `${customID}`,
 };
@@ -46,7 +47,7 @@ export const warnAction = (message: string) => {
   if (!toast.isActive(customID)) {
     customID = toast.warning(message, toastOptionsSuccess);
   }
-  toast.clearWaitingQueue();
+  // toast.clearWaitingQueue();
 };
 
 export const infoAction = (message: string) => {

@@ -12,45 +12,6 @@ import iconSoundOn from "../images/icon-sound-on.png";
 import imagePhotoBackgoud from "../images/contact-photo.png";
 
 const FormsStyles = styled.div`
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-
-  .bt-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 50px;
-    width: 100%;
-  }
-  .input-likes {
-    display: none;
-  }
-  .bt-login,
-  .bt-register {
-    color: white;
-    background-color: black;
-    padding: 14px 20px;
-    border: none;
-    font-weight: bold;
-    cursor: pointer;
-    opacity: 0.9;
-    display: flex;
-    justify-content: center;
-    font-size: 20px;
-    border-radius: 15px;
-    align-items: center;
-    margin: auto;
-  }
-
-  .header {
-    position: fixed;
-    right: 20px;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    width: 95%;
-  }
-
   form {
     display: flex;
     flex-direction: column;
@@ -58,9 +19,12 @@ const FormsStyles = styled.div`
     width: 100%;
     margin-top: 135px;
   }
-
-  .form-create {
-    margin-top: 100px;
+  .form-register {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    width: 100%;
+    margin-top: 90px;
   }
 
   hr {
@@ -109,19 +73,40 @@ const FormsStyles = styled.div`
     margin: auto;
     display: none;
   }
+  button {
+    padding: 14px 20px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 15px;
+    align-items: center;
+    margin: auto;
+  }
+
+  span {
+    font-size: 20px;
+    margin-left: 50px;
+  }
+
+  nav {
+    margin-right: 9px;
+  }
 
   input {
     border: 2px solid black;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: 5px;
     box-sizing: border-box;
     color: black;
     font-size: 18px;
-    height: 60px;
+
     width: 80%;
     margin: auto;
-    background: rgb(207 201 201);
+    background: white;
   }
 
   .submitContainer {
@@ -129,38 +114,78 @@ const FormsStyles = styled.div`
     width: 100%;
   }
 
-  input :placeholder {
+  input ::placeholder {
     font-weight: bolder;
-    padding-left: 20px;
+    padding-left: 220px;
     text-align: center;
+  }
+
+  .bt-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 400px;
+    width: 100%;
+    background-image: none;
+  }
+
+  .input-likes {
+    display: none;
+  }
+
+  .bt-login,
+  .bt-register {
+    color: white;
+    background-color: black;
+    padding: 14px 20px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    opacity: 0.9;
+    display: flex;
+    justify-content: center;
+    font-size: 20px;
+    border-radius: 15px;
+    align-items: center;
+    margin: auto;
+  }
+
+  .header {
+    position: fixed;
+    right: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+  }
+
+  .form-create {
+    margin-top: 100px;
   }
 
   .penguin-image {
     border: 2px solid;
     border-radius: 15px;
-    height: 150px;
     width: 80%;
+    height: 145px;
     background-image: url(${imagePhotoBackgoud});
-    background-color: rgb(207 201 201);
+    background-color: white;
     background-repeat: no-repeat;
     background-position-x: 50%;
     background-position-y: 50%;
     margin: auto;
-  }
-
-  nav {
-    margin-right: 9px;
+    vertical-align: top;
   }
 
   .container {
     width: 100%;
     display: flow-root;
-    margin-top: -45px;
   }
 
-  span {
-    font-size: 20px;
-    margin-left: 50px;
+  .register-container {
+    width: 100%;
+    display: flow-root;
+    margin-top: -50px;
   }
 
   .category {
@@ -203,20 +228,6 @@ const FormsStyles = styled.div`
     margin-top: 30%;
   }
 
-  button {
-    padding: 14px 20px;
-
-    font-weight: bold;
-    cursor: pointer;
-    width: 80%;
-    display: flex;
-    justify-content: center;
-    font-size: 20px;
-    border-radius: 15px;
-    align-items: center;
-    margin: auto;
-  }
-
   .bt-delete {
     background: url(${iconDelete});
     height: 65px;
@@ -253,7 +264,6 @@ const FormsStyles = styled.div`
     height: 65px;
     background-size: 60%;
     background-repeat: no-repeat;
-    z-index: 150;
   }
 
   .bt-back {
@@ -317,11 +327,6 @@ const FormsStyles = styled.div`
     height: 40px;
   }
 
-  .penguin-name,
-  .bt-likes {
-    flex: 3;
-  }
-
   .bt-likes {
     width: 32px;
     height: 32px;
@@ -338,6 +343,8 @@ const FormsStyles = styled.div`
     background-color: black;
     font-size: 20px;
     font-weight: bold;
+    height: 60px;
+    border-radius: 15px;
   }
 
   .bt-register {
@@ -365,6 +372,7 @@ const FormsStyles = styled.div`
   }
 
   .display-none {
+    display: none;
     visibility: hidden;
   }
   .penguin-container {
@@ -407,58 +415,102 @@ const FormsStyles = styled.div`
     max-width: 100%;
   }
   .item:nth-of-type(4n + 1) {
-    transform: rotate(5deg);
+    transform: rotate(2deg);
     transition: all 0.35s;
   }
   .item:nth-of-type(4n + 2) {
-    transform: rotate(-5deg);
+    transform: rotate(-2deg);
     transition: all 0.35s;
   }
   .item:nth-of-type(4n + 3) {
-    transform: rotate(3deg);
+    transform: rotate(2deg);
     transition: all 0.35s;
   }
   .item:nth-of-type(4n + 4) {
-    transform: rotate(-3deg);
+    transform: rotate(-2deg);
     transition: all 0.35s;
   }
   .item:nth-of-type(4n + 5) {
-    transform: rotate(3deg);
+    transform: rotate(2deg);
     transition: all 0.35s;
   }
   .item:hover {
-    transform: rotate(15deg);
+    transform: rotate(1deg);
   }
 
   .parent-div {
     display: inline-block;
     position: relative;
     overflow: hidden;
+    top: -490px;
+    border: 0;
+    width: 100%;
   }
-
+  .register-parent-div {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    top: -360px;
+    border: 0;
+    width: 100%;
+  }
+  .register-parent-div input[type="file"] {
+    left: 0;
+    top: 0;
+    opacity: 0;
+    border: 0;
+    position: absolute;
+    font-size: 20px;
+  }
   .parent-div input[type="file"] {
     left: 0;
     top: 0;
     opacity: 0;
+    border: 0;
     position: absolute;
     font-size: 20px;
   }
 
   .btn-upload {
-    border: 3px solid #000;
     color: #000;
     padding: 10px 25px;
     border-radius: 10px;
     font-size: 22px;
     font-weight: bold;
+    background: none;
   }
+  
+  .btn-register-upload {
+    color: #000;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    background: none;
+  }
+
   .bt-upload {
     color: black;
     border: 5px solid;
     background-color: white;
   }
-  .btn_upload {
-    border: 3px solid;
+
+  .file-upload {
+    visibility: hidden;
+  }
+
+  .input-description {
+    height: 200px;
+    width: 80%;
+    margin: auto;
+    font-family: inherit;
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    box-sizing: border-box;
+    color: black;
+    font-size: 18px;
   }
 `;
 

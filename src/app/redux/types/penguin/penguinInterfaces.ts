@@ -1,55 +1,25 @@
 export interface IPenguin {
   id: string;
   name: string;
-  likes: number;
-  image: string;
   category: string;
-  imageBackup: string;
-  description: string;
-  owner: string;
-  author: string;
-}
-
-export interface Ipenguin {
-  id: string;
-  name: string;
   likes: number;
-  image: string;
-  category: string;
-  imageBackup: string;
-  description: string;
-  owner: string;
-}
-
-export interface INewPenguin {
-  id: string;
-  name: string;
-  likes: number;
-  image: string;
-  category: string;
-  imageBackup: string;
-  description: string;
-  owner: string;
-}
-export interface IFav {
-  id: string;
-  name: string;
-  likes: number;
-  image: string;
-  category: string;
-  imageBackup: string;
-  description: string;
-  owner: string;
-}
-export interface INewFav {
-  name: string;
-  likes: number;
-  category: string;
-  description: string;
+  likers: {}[];
+  favs: {}[];
   image: string | File;
-  owner: string;
+  imageBackup: string | File;
+  description: string;
 }
 
 export interface IDetail {
-  penguin: IPenguin;
+  penguin: {
+    id: string;
+    name: string;
+    category: string;
+    likes: number;
+    likers: {}[];
+    favs: {}[];
+    image: string | File;
+    imageBackup: string | File;
+    description: string;
+  };
 }

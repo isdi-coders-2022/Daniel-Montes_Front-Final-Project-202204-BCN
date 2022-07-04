@@ -7,13 +7,11 @@ type Props = {
 };
 
 const CheckInSecurity = ({ children }: Props) => {
-  const { logged } = useAppSelector((state) => state.users);
+  const { logged } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!logged) {
-      navigate("/login");
-    }
+    if (!logged) navigate("/login");
   }, [logged, navigate]);
 
   if (logged) {
