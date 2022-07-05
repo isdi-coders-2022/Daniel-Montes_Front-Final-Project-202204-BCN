@@ -4,6 +4,7 @@ import { RootState } from "../../store/store";
 interface UISliceState {
   loading: boolean;
   finishedLoading: boolean;
+  promptMessage: string;
   headerTitle: string;
   apiResponse: string;
 }
@@ -13,6 +14,7 @@ const uiSlice = createSlice({
   initialState: {
     loading: false,
     finishedLoading: true,
+    promptMessage: "",
     headerTitle: "",
     apiResponse: "",
   },
@@ -26,6 +28,10 @@ const uiSlice = createSlice({
       ...ui,
       loading: false,
       finishedLoading: true,
+    }),
+    promptMessage: (ui: UISliceState, action: PayloadAction<string>) => ({
+      ...ui,
+      promptMessage: action.payload,
     }),
     headerTitle: (ui: UISliceState, action: PayloadAction<string>) => ({
       ...ui,
@@ -48,6 +54,7 @@ export const {
   loading: loadingActionCreator,
   finishedLoading: finishedLoadingActionCreator,
   headerTitle: headerTitleActionCreator,
+  promptMessage: promptMessageActionCreator,
   apiResponse: apiResponseActionCreator,
   cleanApiResponse: cleanApiResponseActionCreator,
 } = uiSlice.actions;

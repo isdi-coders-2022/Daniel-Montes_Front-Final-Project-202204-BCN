@@ -1,6 +1,7 @@
 import uiReducer, {
   loadingActionCreator,
   finishedLoadingActionCreator,
+  promptMessageActionCreator,
   apiResponseActionCreator,
   cleanApiResponseActionCreator,
 } from "./uiSlice";
@@ -8,6 +9,7 @@ import uiReducer, {
 const initialState = {
   loading: false,
   finishedLoading: true,
+  promptMessage: "",
   feedback: false,
   headerTitle: "",
   apiResponse: "",
@@ -15,6 +17,7 @@ const initialState = {
 const expectedState = {
   loading: false,
   finishedLoading: true,
+  promptMessage: "",
   feedback: true,
   headerTitle: "",
   apiResponse: "Message",
@@ -23,6 +26,7 @@ const expectedState = {
 const expectedLoadingState = {
   loading: true,
   finishedLoading: false,
+  promptMessage: "",
   feedback: true,
   headerTitle: "",
   apiResponse: "Message",

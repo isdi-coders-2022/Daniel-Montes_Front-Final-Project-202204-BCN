@@ -41,7 +41,6 @@ h1 {
 
 button {
   width: 45px;
-  height: 45px;
   background-position: center;
   background-repeat: no-repeat;
   padding: 0;
@@ -150,20 +149,24 @@ ul {
   bottom: 25px;
   width: 100%;
 }
+
 .menu-btn {
   background: url("../images/icon-menu-hamb45.png");
   background-repeat: no-repeat;
+  height: 45px;
 }
 
 .bt-back {
   background: url("../images/icon-menu-back45.png");
   background-repeat: no-repeat;
+  height: 45px;
 }
 
 .bt-logout {
   background: url("../images/icon-menu-logout45.png");
   background-repeat: no-repeat;
   margin: auto;
+  height: 45px;
 }
 
 .bt-modal-accept {
@@ -182,6 +185,8 @@ ul {
   background: url("../images/icon-sound-on.png");
   background-repeat: no-repeat;
   margin: auto;
+  height: 45px;
+  opacity: 50%;
 }
 
 .bt-save {
@@ -189,6 +194,7 @@ ul {
   background-repeat: no-repeat;
   margin: auto;
   margin-right: 10px;
+  height: 45px;
 }
 
 .sound-on {
@@ -208,14 +214,17 @@ ul {
 }
 .bt-addfav {
   background: url("../images/icon-menu-addFav45.png");
+  height: 45px;
 }
 
 .bt-home {
   background: url("../images/icon-menu-home45.png");
+  height: 45px;
 }
 
 .bt-favs {
   background: url("../images/icon-menu-favs45.png");
+  height: 45px;
 }
 
 .header .nav {

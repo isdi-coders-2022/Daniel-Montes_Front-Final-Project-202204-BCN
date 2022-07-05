@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ReactDimmer } from "react-dimmer";
-import { correctAction, infoAction, wrongAction } from "../Modals/Modals";
+import { correctAction, wrongAction } from "../Modals/Modals";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { Modal } from "../Modals/ModalPrompt";
@@ -14,7 +14,10 @@ import {
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import "../../Styles/NavbarStyles.css";
 import { toPascalCase } from "../../utils/utils";
-import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
+import {
+  headerTitleActionCreator,
+  promptMessageActionCreator,
+} from "../../app/redux/features/uiSlice/uiSlice";
 
 let doOnce = true;
 let modFields = [""];
@@ -31,15 +34,16 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const navigate = useNavigate();
 
   const { id } = useAppSelector((state) => state.user);
+  const { promptMessage } = useAppSelector((state) => state.ui);
 
   if (id && doOnce) {
     dispatch(getUserThunk(id));
     doOnce = false;
   }
 
-  const message = "Log out?";
-
   const handleClick = () => {
+    const message = "Log out?";
+    dispatch(promptMessageActionCreator(message));
     setMenu((prevState) => !prevState);
     setModal((prevState) => !prevState);
   };
@@ -62,8 +66,11 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   };
 
   const toggleSound = () => {
+    const message = "Toggle Sound?";
+    dispatch(promptMessageActionCreator(message));
+
     setMenu((prevState) => !prevState);
-    infoAction("Sorry nois this feature is not yet implemented");
+    setModal((prevState) => !prevState);
   };
 
   const addFav = () => {
@@ -144,9 +151,11 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       ? " display-none"
       : "";
 
-  const HidderSave = document.location.href.includes("/edit")
-    ? ""
-    : " display-none";
+  const HidderSave =
+    document.location.href.includes("/edit") ||
+    document.location.href.includes("/create")
+      ? ""
+      : " display-none";
 
   const handleSubmit = () => {
     const listFields = modFields.join(", ");
@@ -242,7 +251,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
         <Modal
           type="logOutUser"
           idPenguin={penguin.id}
-          message={message}
+          message={promptMessage}
           closeModal={setModal}
         />
       )}
