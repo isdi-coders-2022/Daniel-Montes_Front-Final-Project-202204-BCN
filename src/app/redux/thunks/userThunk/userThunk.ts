@@ -28,9 +28,11 @@ export const loginThunk =
       if (status === 200) {
         const { id, username, image }: LoginResponse = jwt_decode(data.token);
         const logged = false;
+        const isAdmin = false;
+
         localStorage.setItem("token", data.token);
 
-        dispatch(logInActionCreator({ id, username, logged, image }));
+        dispatch(logInActionCreator({ id, username, logged, isAdmin, image }));
       }
       dispatch(finishedLoadingActionCreator());
       correctAction("Logged in!");

@@ -39,9 +39,6 @@ export const Modal = ({
   const deletePenguin = () => {
     if (idPenguin) {
       dispatch(deletePenguinThunk(`${idPenguin}`));
-      document.location.href.includes("/favs")
-        ? navigate("/penguins/favs")
-        : navigate("/penguins");
     }
   };
 
@@ -54,9 +51,7 @@ export const Modal = ({
         logOutUser();
         break;
     }
-    if (event.currentTarget.nodeName) {
-      document.location.href.includes("/favs") ? deletePenguin() : logOutUser();
-    }
+    type === "delete" ? deletePenguin() : logOutUser();
   };
 
   const handleCancelClick = () => {

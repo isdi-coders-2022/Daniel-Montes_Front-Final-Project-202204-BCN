@@ -6,6 +6,7 @@ const initialState: UserState = {
   username: "",
   logged: localStorage.getItem("token") ? true : false,
   image: "",
+  isAdmin: false,
 };
 
 const userSlice = createSlice({
@@ -17,12 +18,14 @@ const userSlice = createSlice({
       ...action.payload,
       logged: true,
       username: action.payload.username,
+      isAdmin: action.payload.isAdmin,
       image: action.payload.image,
     }),
     logout: () => ({
       id: "",
       name: "",
       username: "",
+      isAdmin: false,
       logged: false,
       image: "",
     }),
@@ -31,6 +34,7 @@ const userSlice = createSlice({
       id: action.payload.id,
       name: action.payload.username,
       username: action.payload.username,
+      isAdmin: action.payload.isAdmin,
       logged: true,
       image: action.payload.image,
     }),

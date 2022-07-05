@@ -2,6 +2,7 @@ export interface UserInfo {
   id: string;
   username: string;
   logged: boolean;
+  isAdmin: boolean;
   image: string;
 }
 
@@ -9,6 +10,7 @@ export interface UserState {
   id: string;
   username: string;
   logged: boolean;
+  isAdmin: boolean;
   image: string;
 }
 
@@ -16,6 +18,7 @@ export interface LoginResponse {
   id: string;
   name: string;
   username: string;
+  isAdmin: boolean;
   image: string;
 }
 
