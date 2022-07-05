@@ -411,7 +411,6 @@ const PagesStyles = styled.div`
     background-repeat: no-repeat;
     background-position: left top;
 
-    margin-bottom: 60px;
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
@@ -431,6 +430,7 @@ const PagesStyles = styled.div`
   .animatedFav {
     background-image: url(${iconMenuFavs});
     width: 45px;
+    height: 45px;
     position: relative;
     top: 10px;
   }
@@ -440,11 +440,13 @@ const PagesStyles = styled.div`
     background-repeat: no-repeat;
     position: relative;
     top: 10px;
+    height: 45px;
   }
 
   .animatedDelete {
     background-image: url(${iconDelete});
     margin-top: 25px;
+    height: 45px;
   }
 
   @-webkit-keyframes bounce {

@@ -73,6 +73,7 @@ const FormsStyles = styled.div`
     margin: auto;
     display: none;
   }
+
   button {
     padding: 14px 20px;
     font-weight: bold;
@@ -103,10 +104,24 @@ const FormsStyles = styled.div`
     box-sizing: border-box;
     color: black;
     font-size: 18px;
-
     width: 80%;
     margin: auto;
     background: white;
+    height: 50px;
+  }
+
+  .input-login-user {
+    border: 2px solid black;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    box-sizing: border-box;
+    color: black;
+    font-size: 20px;
+    width: 80%;
+    margin: auto;
+    background: white;
+    height: 45px;
   }
 
   .submitContainer {
@@ -118,6 +133,7 @@ const FormsStyles = styled.div`
     font-weight: bolder;
     padding-left: 220px;
     text-align: center;
+    font-size: 20px;
   }
 
   .bt-container {
@@ -479,7 +495,7 @@ const FormsStyles = styled.div`
     font-weight: bold;
     background: none;
   }
-  
+
   .btn-register-upload {
     color: #000;
     padding: 10px 25px;
