@@ -9,7 +9,7 @@ import {
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import { toPascalCase } from "../../utils/utils";
 import { correctAction } from "../Modals/Modals";
-import iconPhotoEmpty from "../../images/littleHeart.png";
+import iconPhotoEmpty from "../../images/no-photo.png";
 import { Modal } from "../Modals/ModalPrompt";
 import { ReactDimmer } from "react-dimmer";
 import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
@@ -150,7 +150,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
   return (
     <div className="item penguin-container">
-      <h1>AdoptAPenguin.com</h1>
+      <h1 className="display-none">AdoptAPenguin.com</h1>
       <div className="penguin-title">
         <button className={`animated animatedDelete`} onClick={handleDelete} />
         <h2 className="penguin-name">{toPascalCase(`${penguin.name}`)}</h2>
