@@ -27,6 +27,7 @@ interface IRegisterForm {
   likes: number;
   image: string | File;
   imageBackup: string | File;
+  originalname: string;
   description: string;
 }
 
@@ -46,6 +47,7 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
     description: isNew ? "" : penguin?.description || "",
     image: isNew ? "" : penguin?.image || "",
     imageBackup: isNew ? "" : penguin?.imageBackup || "",
+    originalname: isNew ? "" : penguin?.originalname || "",
   };
 
   const [formData, setFormData] = useState(initialFormData);
@@ -73,6 +75,7 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
     setFormData({
       ...formData,
       image: event.target.files?.[0] as File,
+      originalname: event.target.files?.[0].name as string,
     });
   };
 
