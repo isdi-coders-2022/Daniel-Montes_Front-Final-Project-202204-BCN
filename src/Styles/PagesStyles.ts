@@ -13,7 +13,7 @@ import iconDelete from "../images/icon-logout32.png";
 import iconSoundOff from "../images/icon-sound-off.png";
 import iconSoundOn from "../images/icon-sound-on.png";
 
-const PageStyles = styled.div`
+const PagesStyles = styled.div`
   text-align: center;
   margin-top: 100px;
 
@@ -503,4 +503,4 @@ const PageStyles = styled.div`
   }
 `;
 
-export default PageStyles;
+export default PagesStyles;

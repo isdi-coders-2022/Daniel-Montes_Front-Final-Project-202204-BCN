@@ -78,7 +78,9 @@ ul {
 
 .user-username {
   margin-left: 10px;
+  margin-top: auto;
 }
+
 .animatedEdit {
   background: url("../images/icon-editar32.png");
   background-repeat: no-repeat;
@@ -106,13 +108,10 @@ ul {
   margin-top: 15px;
 }
 
-.user-username {
-  margin-top: auto;
-}
-
 .menu-header {
   width: inherit;
 }
+
 .menu-icons-horizontal {
   display: flex;
   justify-content: space-between;

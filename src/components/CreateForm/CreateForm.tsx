@@ -90,16 +90,16 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
       userFormData.append("favs", idUser);
       userFormData.append("likers", idUser);
 
+      const comments = document.location.href.includes("create")
+        ? "New Penguin created!"
+        : "Fields updated: " + listFields;
+
       dispatch(
         document.location.href.includes("create")
           ? createFavThunk(userFormData)
-          : editPenguinThunk(
-              formData,
-              document.location.href.includes("create")
-                ? "New Penguin created!"
-                : "Fields updated: " + listFields
-            )
+          : editPenguinThunk(formData, comments)
       );
+
       correctAction("Penguin saved successfully");
       setFormData(initialFormData);
       dispatch(headerTitleActionCreator("Favourites"));

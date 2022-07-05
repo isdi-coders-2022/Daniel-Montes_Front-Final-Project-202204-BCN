@@ -99,10 +99,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     navigate(`/users/edit/${id}`);
   };
 
-  const HidderDelete = document.location.href.includes("/penguins/favs")
-    ? ""
-    : "";
-
   const HidderBack =
     document.location.href.includes("/login") ||
     document.location.href.includes("/homepage") ||
@@ -166,15 +162,14 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       userFormData.append("favs", idUser);
       userFormData.append("likers", idUser);
 
+      const comments = document.location.href.includes("create")
+        ? "New Penguin created!"
+        : "Fields updated: " + listFields;
+
       dispatch(
         document.location.href.includes("create")
           ? createFavThunk(userFormData)
-          : editPenguinThunk(
-              formData,
-              document.location.href.includes("create")
-                ? "New Penguin created!"
-                : "Fields updated: " + listFields
-            )
+          : editPenguinThunk(formData, comments)
       );
       correctAction("Penguin saved successfully");
       setFormData(initialFormData);
@@ -221,7 +216,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
               <img src={image} className="user-photo" alt="user" />
               <h3 className="user-username">{toPascalCase(`${username}`)}</h3>
               <button
-                className={`animated animatedEdit${HidderDelete}`}
+                className={`animated animatedEdit`}
                 onClick={handleEdit}
               />
             </div>

@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IPenguin } from "../../../redux/types/penguin/penguinInterfaces";
 
-interface sliceIniState {
+interface SliceIniState {
   allPenguins: IPenguin[];
   penguin: IPenguin;
 }
 
-const initialState: sliceIniState = {
+const initialState: SliceIniState = {
   allPenguins: [],
   penguin: {
     id: "",
@@ -28,7 +28,7 @@ const penguinSlice = createSlice({
     loadPenguin: (
       penguins,
       action: PayloadAction<IPenguin>
-    ): sliceIniState => ({
+    ): SliceIniState => ({
       ...penguins,
       allPenguins: [...penguins.allPenguins, action.payload],
       penguin: action.payload,
@@ -37,7 +37,7 @@ const penguinSlice = createSlice({
     loadPenguins: (
       penguins,
       action: PayloadAction<IPenguin[]>
-    ): sliceIniState => ({
+    ): SliceIniState => ({
       ...penguins,
       allPenguins: [...action.payload],
     }),
@@ -45,7 +45,7 @@ const penguinSlice = createSlice({
     deletePenguin: (
       penguins,
       action: PayloadAction<string>
-    ): sliceIniState => ({
+    ): SliceIniState => ({
       ...penguins,
       allPenguins: penguins.allPenguins.filter(
         (penguin) => penguin.id !== action.payload
@@ -55,7 +55,7 @@ const penguinSlice = createSlice({
     createPenguin: (
       penguins,
       action: PayloadAction<IPenguin>
-    ): sliceIniState => ({
+    ): SliceIniState => ({
       ...penguins,
       allPenguins: [...penguins.allPenguins, action.payload],
     }),
@@ -63,7 +63,7 @@ const penguinSlice = createSlice({
     editPenguin: (
       penguins,
       action: PayloadAction<IPenguin>
-    ): sliceIniState => ({
+    ): SliceIniState => ({
       ...penguins,
       allPenguins: penguins.allPenguins.map((penguin) =>
         penguin.id === action.payload.id
@@ -76,7 +76,7 @@ const penguinSlice = createSlice({
     resetPenguin: (
       penguins,
       action: PayloadAction<IPenguin>
-    ): sliceIniState => ({
+    ): SliceIniState => ({
       ...penguins,
       penguin: action.payload,
     }),

@@ -45,19 +45,19 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     setModal((prevState) => !prevState);
   };
 
-  const handleMoreDetail = (event: React.FormEvent) => {
+  const handleMoreDetail = () => {
     dispatch(getPenguinThunk(penguin.id));
     dispatch(headerTitleActionCreator("Detail"));
     navigate(`/detail/${penguin.id}`);
   };
 
-  const handleEdit = (event: React.FormEvent) => {
+  const handleEdit = () => {
     dispatch(getPenguinThunk(penguin.id));
     dispatch(headerTitleActionCreator("Edit"));
     navigate(`/penguins/edit/${penguin.id}`);
   };
 
-  const deleteFromLikers = (penguin: IPenguin) => {
+  const deleteFromLikers = () => {
     const newPenguin = {
       ...penguin,
       likers: penguin.likers.filter((liker) => liker !== idUser),
@@ -93,14 +93,12 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       const newFormData = formData;
       newFormData.likers = uniqueLikers;
 
-      uniqueLikers.includes(idUser)
-        ? deleteFromLikers(penguin)
-        : addToLikers(penguin);
+      uniqueLikers.includes(idUser) ? deleteFromLikers() : addToLikers(penguin);
     }
     dispatch(loadPenguinsThunk());
   };
 
-  const deleteFromFavs = (penguin: IPenguin) => {
+  const deleteFromFavs = (penguinData: IPenguin) => {
     const newPenguin = {
       ...penguin,
       favs: penguin.favs.filter((fav) => fav !== idUser),
@@ -117,10 +115,10 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       : navigate("/penguins");
   };
 
-  const addToFavs = (penguin: IPenguin) => {
+  const addToFavs = (penguinData: IPenguin) => {
     const newPenguin = {
-      ...penguin,
-      favs: penguin.favs.concat(idUser),
+      ...penguinData,
+      favs: penguinData.favs.concat(idUser),
     };
 
     setFormData(newPenguin);
