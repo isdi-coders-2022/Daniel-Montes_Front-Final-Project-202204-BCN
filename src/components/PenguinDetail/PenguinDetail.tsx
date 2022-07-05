@@ -46,7 +46,7 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
     navigate(`/penguins/edit/${penguin.id}`);
   };
 
-  const deleteFromLikers = (penguin: IPenguin) => {
+  const deleteFromLikers = () => {
     const newPenguin = {
       ...penguin,
       likers: penguin.likers.filter((liker) => liker !== idUser),
@@ -63,7 +63,7 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
     );
   };
 
-  const addToLikers = (penguin: IPenguin) => {
+  const addToLikers = () => {
     const newPenguin = {
       ...penguin,
       likers: penguin.likers.concat(idUser),
@@ -76,18 +76,10 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
   };
 
   const handleLikes = () => {
-    if (Array(formData.likers)) {
-      const uniqueLikers = Array.from(new Set(formData.likers));
-      const newFormData = formData;
-      newFormData.likers = uniqueLikers;
-
-      uniqueLikers.includes(idUser)
-        ? deleteFromLikers(penguin)
-        : addToLikers(penguin);
-    }
+    formData.likers.includes(idUser) ? deleteFromLikers() : addToLikers();
   };
 
-  const deleteFromFavs = (penguin: IPenguin) => {
+  const deleteFromFavs = () => {
     const newPenguin = {
       ...penguin,
       favs: penguin.favs.filter((fav) => fav !== idUser),
@@ -98,7 +90,7 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
     correctAction(newPenguin.name + ": Deleted from favorites! ");
   };
 
-  const addToFavs = (penguin: IPenguin) => {
+  const addToFavs = () => {
     const newPenguin = {
       ...penguin,
       favs: penguin.favs.concat(idUser),
@@ -111,16 +103,9 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
   };
 
   const handleFavs = () => {
-    if (Array(formData.favs)) {
-      const uniqueLikers = Array.from(new Set(formData.favs));
-      let newFormData = formData;
-      newFormData.favs = uniqueLikers;
-
-      uniqueLikers.includes(idUser)
-        ? deleteFromFavs(newFormData)
-        : addToFavs(newFormData);
-    }
+    formData.favs.includes(idUser) ? deleteFromFavs() : addToFavs();
   };
+
   const HidderDelete = !document.location.href.includes("/penguins/favs")
     ? ""
     : " display-none";

@@ -75,7 +75,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     );
   };
 
-  const addToLikers = (penguin: IPenguin) => {
+  const addToLikers = () => {
     const newPenguin = {
       ...penguin,
       likers: penguin.likers.concat(idUser),
@@ -93,12 +93,12 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       const newFormData = formData;
       newFormData.likers = uniqueLikers;
 
-      uniqueLikers.includes(idUser) ? deleteFromLikers() : addToLikers(penguin);
+      uniqueLikers.includes(idUser) ? deleteFromLikers() : addToLikers();
     }
     dispatch(loadPenguinsThunk());
   };
 
-  const deleteFromFavs = (penguinData: IPenguin) => {
+  const deleteFromFavs = () => {
     const newPenguin = {
       ...penguin,
       favs: penguin.favs.filter((fav) => fav !== idUser),
@@ -115,10 +115,10 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       : navigate("/penguins");
   };
 
-  const addToFavs = (penguinData: IPenguin) => {
+  const addToFavs = () => {
     const newPenguin = {
-      ...penguinData,
-      favs: penguinData.favs.concat(idUser),
+      ...penguin,
+      favs: penguin.favs.concat(idUser),
     };
 
     setFormData(newPenguin);
@@ -136,19 +136,9 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       let newFormData = formData;
       newFormData.favs = uniqueLikers;
 
-      uniqueLikers.includes(idUser)
-        ? deleteFromFavs(newFormData)
-        : addToFavs(newFormData);
+      uniqueLikers.includes(idUser) ? deleteFromFavs() : addToFavs();
     }
   };
-
-  const HidderDelete = document.location.href.includes("/penguins/favs")
-    ? ""
-    : "";
-
-  const HidderEdit = document.location.href.includes("/penguins/favs")
-    ? ""
-    : "";
 
   const selectIconFav = formData.favs?.includes(idUser)
     ? " bounce animatedFavDelete"
@@ -162,10 +152,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     <div className="item penguin-container">
       <h1>AdoptAPenguin.com</h1>
       <div className="penguin-title">
-        <button
-          className={`animated animatedDelete${HidderDelete}`}
-          onClick={handleDelete}
-        />
+        <button className={`animated animatedDelete`} onClick={handleDelete} />
         <h2 className="penguin-name">{toPascalCase(`${penguin.name}`)}</h2>
         <button onClick={handleFavs} className={`animated ${selectIconFav}`} />
       </div>
@@ -198,10 +185,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
         </span>
       </div>
 
-      <button
-        className={`animated animatedEdit${HidderEdit}`}
-        onClick={handleEdit}
-      />
+      <button className={`animated animatedEdit`} onClick={handleEdit} />
       {isModalOpen && (
         <Modal
           closeModal={setModal}
