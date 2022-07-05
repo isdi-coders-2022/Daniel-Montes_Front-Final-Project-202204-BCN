@@ -13,6 +13,7 @@ interface Props {
 const Favs = ({ allPenguins }: Props): JSX.Element => {
   return (
     <PenguinsPageStyles className={`penguins-container${hidderDelete}`}>
+      <h1>AdoptAPenguin.com</h1>
       {allPenguins.map((penguin, index) => {
         return <Penguin key={index} penguin={penguin} />;
       })}

@@ -23,7 +23,7 @@ describe("Given a Navbar component", () => {
         </BrowserRouter>
       );
 
-      const expectedListsItems = screen.getAllByRole("listitem");
+      const expectedListsItems = screen.getAllByRole("separator");
       const submitButton = screen.getByTitle("btn-logout");
       userEvent.click(submitButton);
 
@@ -46,7 +46,7 @@ describe("Given a Navbar component", () => {
       stopLoadingAction();
       expect(stopLoadingAction).toHaveBeenCalled();
 
-      expect(expectedListsItems.length).toBe(22);
+      expect(expectedListsItems.length).toBe(2);
     });
   });
 });

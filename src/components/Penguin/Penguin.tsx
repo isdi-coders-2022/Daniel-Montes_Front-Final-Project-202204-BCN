@@ -162,6 +162,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
   return (
     <div className="item penguin-container">
+      <h1>AdoptAPenguin.com</h1>
       <div className="penguin-title">
         <button
           className={`animated animatedDelete${HidderDelete}`}

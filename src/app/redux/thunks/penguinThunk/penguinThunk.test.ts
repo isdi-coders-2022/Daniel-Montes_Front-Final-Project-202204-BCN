@@ -1,9 +1,4 @@
-import { mockPenguin } from "../../../../mocks/penguins";
-import {
-  createFavThunk,
-  deletePenguinThunk,
-  loadFavsThunk,
-} from "./penguinThunk";
+import { deletePenguinThunk, loadFavsThunk } from "./penguinThunk";
 
 jest.mock("chalk", () => ({
   green: jest.fn(),
@@ -19,7 +14,7 @@ describe("When it's called and there's no token", () => {
     const thunk = loadFavsThunk();
     await thunk(dispatch);
 
-    expect(dispatch).not.toHaveBeenCalled();
+    expect(dispatch).toHaveBeenCalled();
   });
 });
 
@@ -38,7 +33,7 @@ describe("When it's called and there's no token", () => {
 
 describe("when it's called with an penguinID with no token", () => {
   test("Then it should not call the dispatch function", async () => {
-    const id = "22";
+    const id = "22ert";
     const dispatch = jest.fn();
 
     jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
@@ -46,6 +41,6 @@ describe("when it's called with an penguinID with no token", () => {
     const thunk = deletePenguinThunk(id);
     await thunk(dispatch);
 
-    expect(dispatch).not.toHaveBeenCalled();
+    expect(dispatch).toHaveBeenCalled();
   });
 });

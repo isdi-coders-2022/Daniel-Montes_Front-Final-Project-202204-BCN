@@ -15,8 +15,8 @@ describe("Given a Error404Page", () => {
         </BrowserRouter>
       );
 
-      const altMessageLogo = "penguins are cute";
-      const expectedLogo = screen.getByAltText(altMessageLogo);
+      const altMessageLogo = "Page Not Found!";
+      const expectedLogo = screen.getByText(altMessageLogo);
       const messageError = "Page Not Found!";
 
       const espctedMessage = screen.getByText(messageError);

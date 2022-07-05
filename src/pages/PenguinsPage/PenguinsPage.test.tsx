@@ -14,20 +14,18 @@ jest.mock("chalk", () => ({
 
 describe("Given a PenguinsPage Component", () => {
   describe("When it's rendered", () => {
-    test("Then it should show the text 'AdoptaUnPingüino.com'", () => {
-      const expectedResult = "AdoptaUnPingüino.com";
+    test("Then it should show the role 'penguins-page'", () => {
+      const expectedResult = "penguins-page";
 
       render(
         <Provider store={store}>
-          <BrowserRouter>
-            <PenguinsPageStyles>
-              <PenguinsPage />
-            </PenguinsPageStyles>
-          </BrowserRouter>
+          <PenguinsPageStyles role={"penguins-page"}>
+            <PenguinsPage />
+          </PenguinsPageStyles>
         </Provider>
       );
 
-      const receivedResult = screen.getByText(expectedResult);
+      const receivedResult = screen.getByRole(expectedResult);
 
       expect(receivedResult).toBeInTheDocument();
     });

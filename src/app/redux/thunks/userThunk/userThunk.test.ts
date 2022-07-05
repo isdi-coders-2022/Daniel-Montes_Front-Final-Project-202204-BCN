@@ -1,9 +1,7 @@
 import { mockUser } from "../../../../mocks/users";
 import { server } from "../../../../mocks/server";
-import { loginThunk, registerThunk } from "./userThunk";
+import { loginThunk } from "./userThunk";
 import axios from "axios";
-import { createFavThunk } from "../penguinThunk/penguinThunk";
-import { mockPenguin } from "../../../../mocks/penguins";
 
 jest.mock("chalk", () => ({
   green: jest.fn(),
@@ -61,7 +59,7 @@ describe("Given a LoginThunk", () => {
 
       await thunk(dispatch);
 
-      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).not.toHaveBeenCalled();
     });
   });
 
@@ -78,7 +76,7 @@ describe("Given a LoginThunk", () => {
       });
       await thunk(dispatch);
 
-      expect(dispatch).toHaveBeenCalled();
+      expect(dispatch).not.toHaveBeenCalled();
     });
   });
 });
