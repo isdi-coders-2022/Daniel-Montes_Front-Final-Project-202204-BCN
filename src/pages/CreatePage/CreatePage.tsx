@@ -6,7 +6,7 @@ import CreateForm from "../../components/CreateForm/CreateForm";
 import FormsStyles from "../../Styles/FormsStyles";
 
 const CreatePage = (): JSX.Element => {
-  const { penguin } = useAppSelector((state) => state.penguin);
+  const { penguin } = useAppSelector((state) => state.penguins);
   const dispatch = useAppDispatch();
   const { idPenguin } = useParams();
 

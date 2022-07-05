@@ -6,40 +6,38 @@ import {
   LoginResponse,
   UserRegister,
 } from "../../types/userInterfaces/userInterfaces";
-import { logInActionCreator } from "../../features/userSlice/userSlice";
+import {
+  loadUserDataActionCreator,
+  logInActionCreator,
+} from "../../features/userSlice/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import {
   correctAction,
   wrongAction,
   stopLoadingAction,
 } from "../../../../components/Modals/Modals";
-import { loadingActionCreator } from "../../features/uiSlice/uiSlice";
+import { finishedLoadingActionCreator } from "../../features/uiSlice/uiSlice";
 
 export const loginThunk =
   (userData: LoginData) => async (dispatch: Dispatch) => {
     try {
-      dispatch(loadingActionCreator());
       const url: string = `${process.env.REACT_APP_API_URL}users/login`;
 
       const { data, status }: DataAxiosLogin = await axios.post(url, userData);
 
       if (status === 200) {
-        const { name, username }: LoginResponse = jwt_decode(data.token);
+        const { id, username, image }: LoginResponse = jwt_decode(data.token);
         const logged = false;
         localStorage.setItem("token", data.token);
 
-        dispatch(logInActionCreator({ name, username, logged }));
+        dispatch(logInActionCreator({ id, username, logged, image }));
       }
+      dispatch(finishedLoadingActionCreator());
       correctAction("Logged in!");
-      document.location.href = "/penguins";
-
-      stopLoadingAction();
     } catch (error: any) {
       wrongAction(
         "Login failed!\nCheck credentials for username: " + userData.username
       );
-
-      stopLoadingAction();
 
       return error.message;
     }
@@ -49,7 +47,7 @@ export const registerThunk =
   (userData: UserRegister) => async (dispatch: Dispatch) => {
     try {
       const { data, status }: DataAxiosLogin = await axios.post(
-        `${process.env.REACT_APP_API_URL}register`,
+        `${process.env.REACT_APP_API_URL}users/register`,
         userData
       );
       if (status === 200) {
@@ -58,7 +56,7 @@ export const registerThunk =
 
       correctAction("Registed!...");
 
-      stopLoadingAction();
+      dispatch(finishedLoadingActionCreator());
 
       document.location.href = "/penguins";
     } catch (error: any) {
@@ -74,3 +72,21 @@ export const registerThunk =
       return error.message;
     }
   };
+
+export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
+  try {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const { data: user } = await axios.get(
+        `${process.env.REACT_APP_API_URL}users/${id}`
+      );
+
+      dispatch(loadUserDataActionCreator(user));
+      dispatch(finishedLoadingActionCreator());
+      correctAction("GET User: Finished successfully");
+    }
+  } catch (error) {
+    wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
+  }
+};

@@ -1,24 +1,22 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import PenguinDetail from "../../components/PenguinDetail/PenguinDetail";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import { getPenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import PenguinDetail from "../../components/PenguinDetail/PenguinDetail";
 import DetailPageStyles from "./DetailPageStyles";
 
 const DetailPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { idPenguin } = useParams();
+  const { penguin } = useAppSelector((state) => state.penguins);
 
   useEffect(() => {
-    if (idPenguin) {
-      dispatch(getPenguinThunk(idPenguin));
-    }
-  }, [dispatch, idPenguin]);
-  const { penguin } = useAppSelector((state) => state.penguin);
+    dispatch(loadPenguinsThunk());
+  }, [dispatch]);
+
   return (
     <>
-      <DetailPageStyles>
-        <h1 className="display-none">Detail</h1>
+      <DetailPageStyles className="penguin--container">
         <PenguinDetail key={idPenguin} penguin={penguin} />
       </DetailPageStyles>
     </>

@@ -2,8 +2,6 @@ import axios from "axios";
 import { AppDispatch } from "../../store/store";
 import {
   correctAction,
-  infoAction,
-  stopLoadingAction,
   wrongAction,
 } from "../../../../components/Modals/Modals";
 import {
@@ -11,14 +9,19 @@ import {
   deletePenguinActionCreator,
   editPenguinActionCreator,
   loadPenguinsActionCreator,
+  resetPenguinActionCreator,
+  loadPenguinActionCreator,
 } from "../../features/penguinSlice/penguinSlice";
-import { loadPenguinActionCreator } from "../../features/DetailSlice/DetailSlice";
-import chalk from "chalk";
-import { INewFav } from "../../types/penguin/penguinInterfaces";
+
+import { IPenguin } from "../../types/penguin/penguinInterfaces";
+import {
+  finishedLoadingActionCreator,
+  loadingActionCreator,
+} from "../../features/uiSlice/uiSlice";
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   try {
-    infoAction("Loading full list...");
+    dispatch(loadingActionCreator());
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -29,17 +32,26 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      dispatch(loadPenguinsActionCreator(penguins));
-      stopLoadingAction();
+      try {
+        dispatch(loadPenguinsActionCreator(penguins));
+        correctAction("GET Penguins: Finished successfully");
+        dispatch(finishedLoadingActionCreator);
+      } catch (error) {
+        dispatch(finishedLoadingActionCreator);
+        wrongAction(
+          `GET Penguins: ERROR loading full list. (Error:  ${error})`
+        );
+      }
     }
   } catch (error) {
-    wrongAction(chalk.red(`ERROR: ${this} Exiting with error:  ${error}`));
+    dispatch(finishedLoadingActionCreator);
+    wrongAction(`GET Penguins: ERROR loading full list. (Error:  ${error})`);
   }
 };
 
 export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
   try {
-    infoAction("Loading favs...");
+    dispatch(loadingActionCreator());
     const token = localStorage.getItem("token");
 
     if (token) {
@@ -51,24 +63,26 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
         },
       });
       if (penguins.length === 0) {
-        infoAction("No favorites found");
-        return;
+        correctAction("GET favs: No favorites found for this user.");
       }
       dispatch(loadPenguinsActionCreator(penguins));
-      stopLoadingAction();
+
+      correctAction("GET favs: Finished successfully");
+      dispatch(finishedLoadingActionCreator);
     }
   } catch (error) {
+    dispatch(finishedLoadingActionCreator);
     wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
   }
 };
 
 export const createFavThunk =
-  (formPenguin: INewFav) => async (dispatch: AppDispatch) => {
+  (formPenguin: FormData) => async (dispatch: AppDispatch) => {
     try {
       const token = localStorage.getItem("token");
       if (token) {
         const { data: penguin } = await axios.post(
-          `${process.env.REACT_APP_API_URL}penguins`,
+          `${process.env.REACT_APP_API_URL}penguins/create`,
           formPenguin,
           {
             headers: {
@@ -78,19 +92,19 @@ export const createFavThunk =
         );
 
         dispatch(createPenguinActionCreator(penguin));
-        correctAction("Penguin created");
+        correctAction("CREATE Fav: Finished successfully");
       } else {
-        wrongAction("Sorry, no token no cookies...");
+        wrongAction("CREATE Fav: Sorry, no token no cookies...");
       }
     } catch (error) {
-      wrongAction("Sorry, error saving fav...");
+      wrongAction(`CREATE fav: Exiting with error:  ${error}`);
     }
   };
 
 export const getPenguinThunk =
   (id: string) => async (dispatch: AppDispatch) => {
     try {
-      infoAction("Getting info...");
+      dispatch(loadingActionCreator());
       const token = localStorage.getItem("token");
 
       if (token) {
@@ -104,7 +118,8 @@ export const getPenguinThunk =
         );
 
         dispatch(loadPenguinActionCreator(penguin));
-        stopLoadingAction();
+        correctAction("GET Penguin: Finished successfully");
+        dispatch(finishedLoadingActionCreator());
       }
     } catch (error) {
       wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
@@ -114,7 +129,6 @@ export const getPenguinThunk =
 export const deletePenguinThunk =
   (id: string) => async (dispatch: AppDispatch) => {
     try {
-      infoAction("Deleting...");
       const token = localStorage.getItem("token");
 
       const { status } = await axios.delete(
@@ -127,25 +141,25 @@ export const deletePenguinThunk =
       );
 
       if (status === 200) {
-        stopLoadingAction();
         dispatch(deletePenguinActionCreator(id));
-        correctAction("Penguin deleted");
+        correctAction("DELETE Penguin: Finished successfully");
+        dispatch(finishedLoadingActionCreator());
       }
     } catch (error) {
-      stopLoadingAction();
-      wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
+      wrongAction(`DELETE Penguin: Exiting with error:  ${error}`);
+      dispatch(finishedLoadingActionCreator());
     }
   };
 
 export const editPenguinThunk =
-  (idPenguin: string, formPenguin: INewFav) =>
-  async (dispatch: AppDispatch) => {
-    const token = localStorage.getItem("token");
-
+  (formPenguin: IPenguin, type: string) => async (dispatch: AppDispatch) => {
     try {
+      dispatch(loadingActionCreator());
+      const token = localStorage.getItem("token");
+
       if (token) {
-        const { data: responsePenguin } = await axios.put(
-          `${process.env.REACT_APP_API_URL}penguins/${idPenguin}`,
+        const { data: penguin } = await axios.put(
+          `${process.env.REACT_APP_API_URL}penguins/${formPenguin.id}?task=${type}`,
           formPenguin,
           {
             headers: {
@@ -153,10 +167,39 @@ export const editPenguinThunk =
             },
           }
         );
-        dispatch(editPenguinActionCreator(responsePenguin));
-        correctAction("Saved!");
+
+        dispatch(editPenguinActionCreator(penguin));
+
+        correctAction("EDIT Penguin: Finished successfully");
+        dispatch(finishedLoadingActionCreator());
       }
-    } catch (error) {
-      wrongAction(chalk.red(`ERROR: EDIT Penguin ${this} -> Error:  ${error}`));
+    } catch (Error) {
+      wrongAction(`EDIT Penguin: Exiting with error: ${Error}`);
+      dispatch(finishedLoadingActionCreator());
     }
   };
+
+export const resetPenguinThunk = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(loadingActionCreator());
+
+    const blankFormData: IPenguin = {
+      id: "",
+      name: "",
+      category: "",
+      likes: 0,
+      likers: [],
+      favs: [],
+      description: "",
+      image: "",
+      imageBackup: "",
+    };
+
+    dispatch(resetPenguinActionCreator(blankFormData));
+    correctAction("RESET Penguin: Finished successfully");
+    dispatch(finishedLoadingActionCreator());
+  } catch (error) {
+    wrongAction(`RESET Penguin: ERROR: ${this} Exiting with error:  ${error}`);
+    dispatch(finishedLoadingActionCreator());
+  }
+};

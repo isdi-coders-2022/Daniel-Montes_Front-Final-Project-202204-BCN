@@ -1,18 +1,22 @@
 export interface UserInfo {
-  name: string;
+  id: string;
   username: string;
   logged: boolean;
+  image: string;
 }
 
 export interface UserState {
-  name: string;
+  id: string;
   username: string;
   logged: boolean;
+  image: string;
 }
 
 export interface LoginResponse {
+  id: string;
   name: string;
   username: string;
+  image: string;
 }
 
 export interface LoginData {

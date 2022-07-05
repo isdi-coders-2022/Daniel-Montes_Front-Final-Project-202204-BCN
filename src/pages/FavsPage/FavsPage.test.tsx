@@ -11,10 +11,10 @@ jest.mock("chalk", () => ({
   yellow: jest.fn(),
 }));
 
-describe("Given a  FavsPage Component", () => {
+describe("Given a FavsPage Component", () => {
   describe("When it's rendered", () => {
-    test("Then it should show the text 'AdoptaUnPingüino.com'", () => {
-      const expectedResult = "AdoptaUnPingüino.com";
+    test("Then it should show the text 'AdoptAPenguin.com'", () => {
+      const expectedResult = "AdoptAPenguin.com";
 
       render(
         <Provider store={store}>

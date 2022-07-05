@@ -1,26 +1,23 @@
-import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import Penguins from "../../components/Penguins/Penguins";
-import PenguinsPageStyles from "./PenguinsPageStyles";
-import { stopLoadingAction } from "../../components/Modals/Modals";
+import { useEffect } from "react";
+import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
+
+let firstRun = true;
 
 const PenguinsPage = () => {
   const dispatch = useAppDispatch();
-  const { allPenguins } = useAppSelector((state) => state.penguins);
+
   useEffect(() => {
-    dispatch(loadPenguinsThunk());
-    stopLoadingAction();
+    if (firstRun) {
+      dispatch(loadPenguinsThunk());
+      firstRun = false;
+    }
   }, [dispatch]);
 
-  return (
-    <>
-      <PenguinsPageStyles>
-        <h1 className="display-none">AdoptaUnPingüino.com</h1>
-        <Penguins penguins={allPenguins} />
-      </PenguinsPageStyles>
-    </>
-  );
+  const { allPenguins } = useAppSelector((state) => state.penguins);
+
+  return <Penguins allPenguins={allPenguins} />;
 };
 
 export default PenguinsPage;

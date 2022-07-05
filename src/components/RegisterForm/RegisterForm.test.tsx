@@ -41,11 +41,11 @@ describe("Given a RegisterForm component", () => {
 
       const username = screen.getByLabelText(usernameLabel);
       const password = screen.getByLabelText(passwordLabel);
-      const submitButton = screen.getByRole("button");
+      const submitButton = screen.getAllByRole("button");
 
       userEvent.type(username, inputText);
       userEvent.type(password, inputText);
-      userEvent.click(submitButton);
+      userEvent.click(submitButton[0]);
 
       expect(username).toHaveValue("");
       expect(password).toHaveValue("");

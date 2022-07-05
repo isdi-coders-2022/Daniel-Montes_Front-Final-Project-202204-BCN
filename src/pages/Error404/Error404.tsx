@@ -1,11 +1,16 @@
-import imageHeart from "../../images/heartLike.png";
+import Error404Styles from "./Error404Styles";
 
 export const Error404Page = () => {
   return (
-    <div>
-      <p className="not-found" />
-      <img src={imageHeart} alt="penguins are cute" />
-      Page <br></br>Not Found!
-    </div>
+    <Error404Styles>
+      <div className="notfound-container">
+        <h2>
+          Page Not Found!
+          <span className="notfound-message">
+            ..."{document.location.pathname}"
+          </span>
+        </h2>
+      </div>
+    </Error404Styles>
   );
 };

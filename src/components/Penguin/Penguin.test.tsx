@@ -30,9 +30,9 @@ describe("Given the Penguin component", () => {
         </Provider>
       );
 
-      const result = screen.getByRole("heading");
+      const result = screen.getAllByText("Penguin1");
 
-      expect(result).toBeInTheDocument();
+      expect(result.length).toBeGreaterThanOrEqual(1);
     });
   });
   describe("when its clicked the button", () => {

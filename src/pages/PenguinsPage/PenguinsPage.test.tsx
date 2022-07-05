@@ -1,9 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
 import PenguinsPage from "./PenguinsPage";
-import PenguinsPageStyles from "./PenguinsPageStyles";
+import PenguinsPageStyles from "../../Styles/PagesStyles";
 
 jest.mock("chalk", () => ({
   green: jest.fn(),
@@ -14,20 +13,18 @@ jest.mock("chalk", () => ({
 
 describe("Given a PenguinsPage Component", () => {
   describe("When it's rendered", () => {
-    test("Then it should show the text 'AdoptaUnPingüino.com'", () => {
-      const expectedResult = "AdoptaUnPingüino.com";
+    test("Then it should show the role 'penguins-page'", () => {
+      const expectedResult = "penguins-page";
 
       render(
         <Provider store={store}>
-          <BrowserRouter>
-            <PenguinsPageStyles>
-              <PenguinsPage />
-            </PenguinsPageStyles>
-          </BrowserRouter>
+          <PenguinsPageStyles role={"penguins-page"}>
+            <PenguinsPage />
+          </PenguinsPageStyles>
         </Provider>
       );
 
-      const receivedResult = screen.getByText(expectedResult);
+      const receivedResult = screen.getByRole(expectedResult);
 
       expect(receivedResult).toBeInTheDocument();
     });

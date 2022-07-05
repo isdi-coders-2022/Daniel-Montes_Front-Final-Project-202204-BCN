@@ -2,8 +2,6 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
-import FavsPage from "./pages/FavsPage/FavsPage";
 import CheckOutSecurity from "./components/CheckOutSecurity/CheckOutSecurity";
 import CheckInSecurity from "./components/CheckInSecurity/CheckInSecurity";
 import CreatePage from "./pages/CreatePage/CreatePage";
@@ -14,14 +12,19 @@ import { UserInfo } from "./app/redux/types/userInterfaces/userInterfaces";
 import jwtDecode from "jwt-decode";
 import { logInActionCreator } from "./app/redux/features/userSlice/userSlice";
 import Navbar from "./components/Navbar/Navbar";
+import { Error404Page } from "./pages/Error404/Error404";
+import FavsPage from "./pages/FavsPage/FavsPage";
+import { ToastContainer } from "react-toastify";
+import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
 
 function App() {
-  const { logged } = useAppSelector((state) => state.users);
-
+  const { logged } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const { headerTitle } = useAppSelector((state) => state.ui);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     if (token || logged) {
       const userData: UserInfo = jwtDecode(token as string);
       dispatch(logInActionCreator(userData));
@@ -30,7 +33,7 @@ function App() {
 
   return (
     <>
-      <Navbar />
+      <Navbar headerTitle={headerTitle} />
       <Routes>
         <Route path="/" element={<Navigate to="/homepage" />} />
         <Route
@@ -50,7 +53,7 @@ function App() {
           }
         />
         <Route
-          path="/register"
+          path="/users/register"
           element={
             <CheckOutSecurity>
               <RegisterPage />
@@ -97,7 +100,16 @@ function App() {
             </CheckInSecurity>
           }
         />
+        <Route
+          path="*"
+          element={
+            <CheckInSecurity>
+              <Error404Page />
+            </CheckInSecurity>
+          }
+        />
       </Routes>
+      <ToastContainer limit={4} />
     </>
   );
 }

@@ -6,11 +6,22 @@ const HomePageStyles = styled.div`
 
   text-align: center;
 
+<<<<<<< HEAD
+=======
+  body {
+    background-image: url("../images/background2Heart.png");
+  }
+
+>>>>>>> last-updates
   .bt-container {
     display: flex;
     justify-content: center;
     align-items: center;
+<<<<<<< HEAD
     margin-top: 275px;
+=======
+    margin-top: 475px;
+>>>>>>> last-updates
     width: 100%;
   }
 

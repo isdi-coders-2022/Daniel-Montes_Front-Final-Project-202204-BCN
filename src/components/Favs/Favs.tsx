@@ -1,17 +1,23 @@
-import Penguin from "../Penguin/Penguin";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
+import Penguin from "../Penguin/Penguin";
+import PenguinsPageStyles from "../../Styles/PagesStyles";
+import { finishedLoadingActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
+
+const loadedState = finishedLoadingActionCreator();
+const hidderDelete = loadedState ? "" : " display-none";
 
 interface Props {
-  penguins: IPenguin[];
+  allPenguins: IPenguin[];
 }
 
-const Favs = ({ penguins }: Props) => {
+const Favs = ({ allPenguins }: Props): JSX.Element => {
   return (
-    <div className="penguins-container">
-      {penguins.map((penguin, index) => {
+    <PenguinsPageStyles className={`penguins-container${hidderDelete}`}>
+      <h1>AdoptAPenguin.com</h1>
+      {allPenguins.map((penguin, index) => {
         return <Penguin key={index} penguin={penguin} />;
       })}
-    </div>
+    </PenguinsPageStyles>
   );
 };
 export default Favs;

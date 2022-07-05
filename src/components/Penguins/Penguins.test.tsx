@@ -22,8 +22,8 @@ describe("Given a Penguins component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <Navbar />
-            <Penguins penguins={mockPenguins} />
+            <Navbar headerTitle="Test" />
+            <Penguins allPenguins={mockPenguins} />
           </BrowserRouter>
         </Provider>
       );
