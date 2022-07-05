@@ -9,14 +9,14 @@ describe("Given a userSlice reducer", () => {
       const initialUser = {
         id: "test",
         name: "Test",
-        username: "test",
+        username: "Test",
         isAdmin: false,
         logged: false,
         image: "",
       };
       const expectedUser = {
         id: "test",
-        name: "Test",
+        name: "test",
         username: "test",
         isAdmin: false,
         logged: true,
