@@ -124,6 +124,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     likes: number;
     image: string | File;
     imageBackup: string | File;
+    originalname: string;
     description: string;
   }
 
@@ -139,6 +140,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     description: isNew ? "" : penguin?.description || "",
     image: isNew ? "" : penguin?.image || "",
     imageBackup: isNew ? "" : penguin?.imageBackup || "",
+    originalname: isNew ? "" : penguin?.originalname || "",
   };
 
   const [formData, setFormData] = useState(initialFormData);

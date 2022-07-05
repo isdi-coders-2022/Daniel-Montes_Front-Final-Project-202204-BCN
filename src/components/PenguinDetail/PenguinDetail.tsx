@@ -29,6 +29,7 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
     description: penguin.description || "",
     image: penguin.image,
     imageBackup: penguin.imageBackup || "",
+    originalname: penguin.originalname || "",
   };
 
   const [formData, setFormData] = useState<IPenguin>(initialFormData);

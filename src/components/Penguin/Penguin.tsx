@@ -28,6 +28,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     likes: penguin.likes || 0,
     likers: penguin.likers || [],
     favs: penguin.favs || [],
+    originalname: penguin.originalname || "",
     description: penguin.description || "",
     image: penguin.image || "",
     imageBackup: penguin.imageBackup || "",

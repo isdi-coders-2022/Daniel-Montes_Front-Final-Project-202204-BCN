@@ -17,6 +17,7 @@ const userSlice = createSlice({
     login: (user: UserState, action: PayloadAction<UserInfo>) => ({
       ...action.payload,
       logged: true,
+      name: action.payload.username,
       username: action.payload.username,
       isAdmin: action.payload.isAdmin,
       image: action.payload.image,
