@@ -10,6 +10,7 @@ describe("Given a userSlice reducer", () => {
         id: "test",
         name: "Test",
         username: "test",
+        isAdmin: false,
         logged: false,
         image: "",
       };
@@ -17,6 +18,7 @@ describe("Given a userSlice reducer", () => {
         id: "test",
         name: "Test",
         username: "test",
+        isAdmin: false,
         logged: true,
         image: "",
       };
@@ -32,6 +34,7 @@ describe("Given a userSlice reducer", () => {
       const loggedUser = {
         name: "Test1",
         username: "test1",
+        isAdmin: false,
         logged: true,
         id: "test",
         image: "",
