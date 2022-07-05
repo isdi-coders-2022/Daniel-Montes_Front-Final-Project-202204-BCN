@@ -30,8 +30,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  headerTitle = headerTitle === "" ? "AdoptAPenguin.com" : headerTitle;
-
   const { id } = useAppSelector((state) => state.user);
 
   if (id && doOnce) {
@@ -183,7 +181,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     <div className="app">
       <div className="header">
         <button className={`bt-back${HidderBack}`} onClick={handleBack} />
-        <h1>{headerTitle}</h1>
+        <h1>{headerTitle || "AdoptAPenguin.com"}</h1>
         <button className={`bt-save${HidderSave}`} onClick={handleSubmit} />
         <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
       </div>
