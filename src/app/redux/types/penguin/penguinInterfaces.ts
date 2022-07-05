@@ -7,6 +7,7 @@ export interface IPenguin {
   favs: {}[];
   image: string | File;
   imageBackup: string | File;
+  originalname: string;
   description: string;
 }
 
