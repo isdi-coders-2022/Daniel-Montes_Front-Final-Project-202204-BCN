@@ -53,8 +53,8 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
     });
 
     if (Array(modFields)) {
-      modFields = Array.from(new Set(modFields));
       modFields.push(event.target.id);
+      modFields = Array.from(new Set(modFields));
 
       modFields = modFields.filter(function (field) {
         return field != null && field !== "";
@@ -68,6 +68,7 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
     setFormData({
       ...formData,
       image: event.target.files?.[0] as File,
+      imageBackup: event.target.files?.[0].name as string,
       originalname: event.target.files?.[0].name as string,
     });
   };
@@ -76,16 +77,10 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
     event.preventDefault();
 
     const listFields = modFields.join(", ");
-
+    debugger;
     try {
-      const userFormData = new FormData();
-      userFormData.append("id", formData.id);
-      userFormData.append("name", formData.name);
-      userFormData.append("category", formData.category);
-      userFormData.append("description", formData.description);
-      userFormData.append("image", formData.image);
-      userFormData.append("favs", idUser);
-      userFormData.append("likers", idUser);
+      formData.favs = [`${idUser}`];
+      formData.likers = [`${idUser}`];
 
       const comments = document.location.href.includes("create")
         ? "New Penguin created!"
@@ -93,11 +88,11 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
 
       dispatch(
         document.location.href.includes("create")
-          ? createFavThunk(userFormData)
+          ? createFavThunk(formData)
           : editPenguinThunk(formData, comments)
       );
 
-      setFormData(initialFormData);
+      // setFormData(initialFormData);
       dispatch(headerTitleActionCreator("Favourites"));
 
       navigate("/penguins/favs");

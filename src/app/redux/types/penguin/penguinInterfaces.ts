@@ -22,6 +22,7 @@ export interface IDetail {
     image: string | File;
     imageBackup: string | File;
     description: string;
+    originalname: string;
   };
 }
 

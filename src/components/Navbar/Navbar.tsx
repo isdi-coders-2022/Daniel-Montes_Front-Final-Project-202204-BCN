@@ -150,14 +150,9 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const handleSubmit = () => {
     const listFields = modFields.join(", ");
 
-    const userFormData = new FormData();
-    userFormData.append("id", formData.id);
-    userFormData.append("name", formData.name);
-    userFormData.append("category", formData.category);
-    userFormData.append("description", formData.description);
-    userFormData.append("image", formData.image);
-    userFormData.append("favs", idUser);
-    userFormData.append("likers", idUser);
+    formData.favs = [idUser];
+    formData.likers = [idUser];
+    formData.likes = 1;
 
     const comments = document.location.href.includes("create")
       ? "New Penguin created!"
@@ -165,7 +160,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
     dispatch(
       document.location.href.includes("create")
-        ? createFavThunk(userFormData)
+        ? createFavThunk(formData)
         : editPenguinThunk(formData, comments)
     );
 
