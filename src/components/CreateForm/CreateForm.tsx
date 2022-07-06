@@ -77,7 +77,7 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
     event.preventDefault();
 
     const listFields = modFields.join(", ");
-    debugger;
+
     try {
       formData.favs = [`${idUser}`];
       formData.likers = [`${idUser}`];
