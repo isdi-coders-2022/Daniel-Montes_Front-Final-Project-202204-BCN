@@ -77,7 +77,7 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 };
 
 export const createFavThunk =
-  (formPenguin: FormData) => async (dispatch: AppDispatch) => {
+  (formPenguin: IPenguin) => async (dispatch: AppDispatch) => {
     try {
       setLoadingOn("CREATE FAV: Creating...");
 

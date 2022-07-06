@@ -12,6 +12,7 @@ const initialState: IDetail = {
     description: "",
     favs: [],
     likers: [],
+    originalname: "",
   },
 };
 

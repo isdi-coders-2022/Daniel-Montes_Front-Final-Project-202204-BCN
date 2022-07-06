@@ -62,7 +62,7 @@ describe("Given a CreatePage component", () => {
       userEvent.click(submitButton);
 
       expect(name).toHaveValue("");
-      expect(category).toHaveValue("");
+      expect(category).toHaveValue("penguin");
       await dispatch(createFavThunk);
 
       expect(dispatch).toHaveBeenCalled();
