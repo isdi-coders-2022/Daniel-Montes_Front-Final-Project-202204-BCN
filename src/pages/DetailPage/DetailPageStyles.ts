@@ -24,7 +24,7 @@ const DetailPageStyles = styled.div`
   background-position-y: 30px;
   background-repeat: no-repeat;
 
-  text-align: center;
+  text-align: justify;
 
   element.style {
     text-align: center;
@@ -137,7 +137,7 @@ const DetailPageStyles = styled.div`
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
     margin: auto;
-    text-align: center;
+
     border: 2px solid;
     width: fit-content;
     margin-top: 5rem;
