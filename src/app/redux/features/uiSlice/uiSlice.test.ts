@@ -1,7 +1,6 @@
 import uiReducer, {
   loadingActionCreator,
   finishedLoadingActionCreator,
-  promptMessageActionCreator,
   apiResponseActionCreator,
   cleanApiResponseActionCreator,
 } from "./uiSlice";

@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import { correctAction, wrongAction } from "../Modals/Modals";
+import { wrongAction } from "../Modals/Modals";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   createFavThunk,
@@ -103,7 +103,7 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
           : editPenguinThunk(formData, comments)
       );
 
-      correctAction("Penguin saved successfully");
+      // correctAction("Penguin saved successfully");
       setFormData(initialFormData);
       dispatch(headerTitleActionCreator("Favourites"));
 
@@ -134,7 +134,7 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
           <img
             className={`penguin-image${HiderImageOn}`}
             alt={formData.name}
-            src={penguin?.image.toString()}
+            src={penguin?.imageBackup?.toString()}
           />
           <input
             className={`penguin-image${HiderImage}`}

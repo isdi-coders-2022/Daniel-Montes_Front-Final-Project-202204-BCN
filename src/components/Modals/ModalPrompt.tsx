@@ -7,7 +7,6 @@ import {
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { correctAction } from "./Modals";
 
 interface IModalProps {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,7 +30,7 @@ export const Modal = ({
     closeModal(false);
     localStorage.removeItem("token");
 
-    correctAction("Logged out!");
+    //correctAction("Logged out!");
     dispatch(headerTitleActionCreator("AdoptAPenguin.com"));
     navigate("/");
   };

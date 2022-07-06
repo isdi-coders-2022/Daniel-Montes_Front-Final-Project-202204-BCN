@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { ReactDimmer } from "react-dimmer";
-import { correctAction, wrongAction } from "../Modals/Modals";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { Modal } from "../Modals/ModalPrompt";
@@ -54,13 +53,13 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const loadFavs = () => {
     setMenu((prevState) => !prevState);
     dispatch(loadFavsThunk());
-    dispatch(headerTitleActionCreator("Favourites"));
     navigate("/penguins/favs");
+    dispatch(headerTitleActionCreator("Favourites"));
   };
 
-  const loadHome = () => {
+  const loadHome = () => async () => {
     setMenu((prevState) => !prevState);
-    dispatch(loadPenguinsThunk());
+    await dispatch(loadPenguinsThunk());
 
     navigate("/penguins");
   };
@@ -161,31 +160,28 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
   const handleSubmit = () => {
     const listFields = modFields.join(", ");
-    try {
-      const userFormData = new FormData();
-      userFormData.append("id", formData.id);
-      userFormData.append("name", formData.name);
-      userFormData.append("category", formData.category);
-      userFormData.append("description", formData.description);
-      userFormData.append("image", formData.image);
-      userFormData.append("favs", idUser);
-      userFormData.append("likers", idUser);
 
-      const comments = document.location.href.includes("create")
-        ? "New Penguin created!"
-        : "Fields updated: " + listFields;
+    const userFormData = new FormData();
+    userFormData.append("id", formData.id);
+    userFormData.append("name", formData.name);
+    userFormData.append("category", formData.category);
+    userFormData.append("description", formData.description);
+    userFormData.append("image", formData.image);
+    userFormData.append("favs", idUser);
+    userFormData.append("likers", idUser);
 
-      dispatch(
-        document.location.href.includes("create")
-          ? createFavThunk(userFormData)
-          : editPenguinThunk(formData, comments)
-      );
-      correctAction("Penguin saved successfully");
-      setFormData(initialFormData);
-      navigate("/penguins/favs");
-    } catch (error) {
-      wrongAction("Error:" + error);
-    }
+    const comments = document.location.href.includes("create")
+      ? "New Penguin created!"
+      : "Fields updated: " + listFields;
+
+    dispatch(
+      document.location.href.includes("create")
+        ? createFavThunk(userFormData)
+        : editPenguinThunk(formData, comments)
+    );
+    // correctAction("Penguin saved successfully");
+    setFormData(initialFormData);
+    navigate("/penguins/favs");
   };
 
   return (

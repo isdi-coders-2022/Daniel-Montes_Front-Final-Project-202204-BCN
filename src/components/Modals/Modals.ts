@@ -60,3 +60,27 @@ export const stopLoadingAction = () => {
   toast.dismiss(customID);
   toast.clearWaitingQueue();
 };
+
+export const setLoadingOn = (message: string) => {
+  toast.loading(message, {
+    position: toast.POSITION.BOTTOM_CENTER,
+    closeOnClick: true,
+    toastId: `${customID}`,
+  });
+};
+
+export const setLoadingOff = () => {
+  toast.dismiss(customID);
+  toast.clearWaitingQueue();
+};
+
+export const setLoadingOffWithMessage = (message: string, error: boolean) => {
+  toast.update(customID, {
+    render: message,
+    type: error ? "error" : "success",
+    isLoading: false,
+    autoClose: 2500,
+    closeOnClick: true,
+  });
+  toast.clearWaitingQueue();
+};

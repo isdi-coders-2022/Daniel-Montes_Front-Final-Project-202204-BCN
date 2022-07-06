@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { LoginData } from "../../app/redux/types/userInterfaces/userInterfaces";
 import { loginThunk } from "../../app/redux/thunks/userThunk/userThunk";
-import { correctAction } from "../Modals/Modals";
 import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 
 const LoginForm = () => {
@@ -30,7 +29,7 @@ const LoginForm = () => {
 
     resetForm();
     dispatch(headerTitleActionCreator("Home"));
-    correctAction("Wellcome " + formData.username + " !");
+    //correctAction("Wellcome " + formData.username + " !");
   };
 
   return (

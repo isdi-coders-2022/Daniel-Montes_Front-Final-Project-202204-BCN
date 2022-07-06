@@ -19,6 +19,7 @@ const FormsStyles = styled.div`
     width: 100%;
     margin-top: 135px;
   }
+
   .form-register {
     display: flex;
     flex-direction: column;
@@ -412,6 +413,7 @@ const FormsStyles = styled.div`
     font-size: 0.85em;
     transform: translate(40px, 50px);
   }
+
   .item {
     display: inline-block;
     background: #fff;

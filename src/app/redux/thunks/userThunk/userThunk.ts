@@ -12,9 +12,9 @@ import {
 } from "../../features/userSlice/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
 import {
-  correctAction,
   wrongAction,
-  stopLoadingAction,
+  setLoadingOffWithMessage,
+  setLoadingOn,
 } from "../../../../components/Modals/Modals";
 import { finishedLoadingActionCreator } from "../../features/uiSlice/uiSlice";
 
@@ -35,7 +35,7 @@ export const loginThunk =
         dispatch(logInActionCreator({ id, username, logged, isAdmin, image }));
       }
       dispatch(finishedLoadingActionCreator());
-      correctAction("Logged in!");
+      // correctAction("Logged in!");
     } catch (error: any) {
       wrongAction(
         "Login failed!\nCheck credentials for username: " + userData.username
@@ -56,7 +56,7 @@ export const registerThunk =
         localStorage.setItem("token", data.token);
       }
 
-      correctAction("Registed!...");
+      // correctAction("Registed!...");
 
       dispatch(finishedLoadingActionCreator());
 
@@ -69,7 +69,8 @@ export const registerThunk =
           userData.password
       );
 
-      stopLoadingAction();
+      //stopLoadingAction();
+      setLoadingOffWithMessage("REGISTER: Finished successfully", false);
 
       return error.message;
     }
@@ -78,6 +79,7 @@ export const registerThunk =
 export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
   try {
     const token = localStorage.getItem("token");
+    setLoadingOn("Getting user data...");
 
     if (token) {
       const { data: user } = await axios.get(
@@ -86,9 +88,11 @@ export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
 
       dispatch(loadUserDataActionCreator(user));
       dispatch(finishedLoadingActionCreator());
-      correctAction("GET User: Finished successfully");
+      // correctAction("GET User: Finished successfully");
+      setLoadingOffWithMessage("GET User: Finished successfully", false);
     }
   } catch (error) {
-    wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
+    // wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
+    setLoadingOffWithMessage("GET User: Finished successfully", false);
   }
 };
