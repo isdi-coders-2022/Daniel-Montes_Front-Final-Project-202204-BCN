@@ -54,8 +54,9 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const loadFavs = () => {
     setMenu((prevState) => !prevState);
     dispatch(loadFavsThunk());
-    navigate("/penguins/favs");
     dispatch(headerTitleActionCreator("Favourites"));
+
+    navigate("/penguins/favs");
   };
 
   const loadHome = () => async () => {

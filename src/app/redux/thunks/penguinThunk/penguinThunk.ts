@@ -1,10 +1,8 @@
 import axios from "axios";
 import { AppDispatch } from "../../store/store";
 import {
-  correctAction,
   setLoadingOffWithMessage,
   setLoadingOn,
-  wrongAction,
 } from "../../../../components/Modals/Modals";
 import {
   createPenguinActionCreator,
@@ -81,6 +79,8 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 export const createFavThunk =
   (formPenguin: FormData) => async (dispatch: AppDispatch) => {
     try {
+      setLoadingOn("CREATE FAV: Creating...");
+
       const token = localStorage.getItem("token");
       if (token) {
         const { data: penguin } = await axios.post(
@@ -94,12 +94,16 @@ export const createFavThunk =
         );
 
         dispatch(createPenguinActionCreator(penguin));
-        correctAction("CREATE Fav: Finished successfully");
+
+        setLoadingOffWithMessage("CREATE Fav: Finished successfully.", false);
       } else {
-        wrongAction("CREATE Fav: Sorry, no token no cookies...");
+        setLoadingOffWithMessage(
+          "GET favs: Sorry, no token no cookies...",
+          true
+        );
       }
     } catch (error) {
-      wrongAction(`CREATE fav: Exiting with error:  ${error}`);
+      setLoadingOffWithMessage(`GET favs: ERROR  ${error}`, true);
     }
   };
 
@@ -172,12 +176,15 @@ export const editPenguinThunk =
 
         dispatch(editPenguinActionCreator(penguin));
 
-        correctAction("EDIT Penguin: Finished successfully");
         dispatch(finishedLoadingActionCreator());
         dispatch(loadPenguinsThunk());
+        setLoadingOffWithMessage(`EDIT Penguin: Finished successfully.`, false);
       }
     } catch (Error) {
-      wrongAction(`EDIT Penguin: Exiting with error: ${Error}`);
+      setLoadingOffWithMessage(
+        `EDIT Penguin: Exiting with error: ${Error}`,
+        true
+      );
       dispatch(finishedLoadingActionCreator());
     }
   };
@@ -200,10 +207,14 @@ export const resetPenguinThunk = () => async (dispatch: AppDispatch) => {
     };
 
     dispatch(resetPenguinActionCreator(blankFormData));
-    correctAction("RESET Penguin: Finished successfully");
+
     dispatch(finishedLoadingActionCreator());
+    setLoadingOffWithMessage("RESET Penguin: Finished successfully.", false);
   } catch (error) {
-    wrongAction(`RESET Penguin: ERROR: ${this} Exiting with error:  ${error}`);
     dispatch(finishedLoadingActionCreator());
+    setLoadingOffWithMessage(
+      `RESET Penguin: ERROR: ${this} Exiting with error:  ${error}`,
+      true
+    );
   }
 };

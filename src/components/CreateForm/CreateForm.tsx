@@ -46,6 +46,7 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ): void => {
+    event.preventDefault();
     setFormData({
       ...formData,
       [event.target.id]: event.target.value,
@@ -62,6 +63,8 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    event.preventDefault();
+
     setFormData({
       ...formData,
       image: event.target.files?.[0] as File,
@@ -71,6 +74,7 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
+
     const listFields = modFields.join(", ");
 
     try {
