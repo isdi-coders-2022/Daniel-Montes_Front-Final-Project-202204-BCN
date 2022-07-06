@@ -35,7 +35,6 @@ export const loginThunk =
         dispatch(logInActionCreator({ id, username, logged, isAdmin, image }));
       }
       dispatch(finishedLoadingActionCreator());
-      // correctAction("Logged in!");
     } catch (error: any) {
       wrongAction(
         "Login failed!\nCheck credentials for username: " + userData.username
@@ -56,8 +55,6 @@ export const registerThunk =
         localStorage.setItem("token", data.token);
       }
 
-      // correctAction("Registed!...");
-
       dispatch(finishedLoadingActionCreator());
 
       document.location.href = "/penguins";
@@ -69,7 +66,6 @@ export const registerThunk =
           userData.password
       );
 
-      //stopLoadingAction();
       setLoadingOffWithMessage("REGISTER: Finished successfully", false);
 
       return error.message;
@@ -88,11 +84,10 @@ export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
 
       dispatch(loadUserDataActionCreator(user));
       dispatch(finishedLoadingActionCreator());
-      // correctAction("GET User: Finished successfully");
+
       setLoadingOffWithMessage("GET User: Finished successfully", false);
     }
   } catch (error) {
-    // wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
     setLoadingOffWithMessage("GET User: Finished successfully", false);
   }
 };

@@ -68,12 +68,6 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     setFormData(newPenguin);
 
     dispatch(editPenguinThunk(newPenguin, "Deleted Like!"));
-    // correctAction(
-    //   newPenguin.name +
-    //     ": You don´t like this penguin! Likes counter total: " +
-    //     penguin.likes +
-    //     ". Added: (-1)"
-    // );
   };
 
   const addToLikers = () => {
@@ -85,7 +79,6 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Added Like!"));
-    // correctAction("You like: " + newPenguin.name + " this penguin! ");
   };
 
   const handleLikes = () => {
@@ -107,12 +100,6 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Deleted from favorites!"));
-    // correctAction(newPenguin.name + ": Deleted from favorites! ");
-
-    // document.location.href.includes("/favs") ||
-    // document.location.href.includes("/detail")
-    //   ? navigate("/penguins/favs")
-    //   : navigate("/penguins");
   };
 
   const addToFavs = () => {

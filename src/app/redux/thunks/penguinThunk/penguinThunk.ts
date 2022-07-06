@@ -38,15 +38,12 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
 
       setLoadingOffWithMessage("GET penguins finished successfully!", false);
       dispatch(loadPenguinsActionCreator(penguins));
-      // correctAction("GET Penguins: Finished successfully");
 
       dispatch(finishedLoadingActionCreator);
     }
   } catch (error) {
     dispatch(finishedLoadingActionCreator);
     setLoadingOffWithMessage(`GET Penguins: ERROR. (Error:  ${error})`, true);
-
-    // wrongAction(`GET Penguins: ERROR loading full list. (Error:  ${error})`);
   }
 };
 
@@ -67,18 +64,16 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
       });
       if (penguins.length === 0) {
         setLoadingOffWithMessage("GET favs: No favs added yet", false);
-        // correctAction("GET favs: No favorites found for this user.");
       }
       dispatch(loadPenguinsActionCreator(penguins));
 
-      // correctAction("GET favs: Finished successfully");
       dispatch(finishedLoadingActionCreator);
 
       setLoadingOffWithMessage("GET favs: Finished successfully", false);
     }
   } catch (error) {
     dispatch(finishedLoadingActionCreator);
-    // wrongAction(`ERROR: ${this} Exiting with error:  ${error}`);
+
     setLoadingOffWithMessage(`GET favs: ERROR--> ${error}`, true);
   }
 };
@@ -128,7 +123,6 @@ export const getPenguinThunk =
         dispatch(finishedLoadingActionCreator());
       }
     } catch (error) {
-      // wrongAction(`GET Penguin: ERROR--> ${error}`);
       setLoadingOffWithMessage(`GET Penguin: ERROR--> ${error}`, true);
       dispatch(finishedLoadingActionCreator());
     }
@@ -150,11 +144,10 @@ export const deletePenguinThunk =
 
       if (status === 200) {
         dispatch(deletePenguinActionCreator(id));
-        // correctAction("DELETE Penguin: Finished successfully");
+
         dispatch(finishedLoadingActionCreator());
       }
     } catch (error) {
-      //wrongAction(`DELETE Penguin: Exiting with error:  ${error}`);
       setLoadingOffWithMessage(`DELETE Penguin: ERROR--> ${error}`, true);
       dispatch(finishedLoadingActionCreator());
     }

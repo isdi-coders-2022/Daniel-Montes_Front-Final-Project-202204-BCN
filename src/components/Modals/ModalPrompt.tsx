@@ -30,7 +30,6 @@ export const Modal = ({
     closeModal(false);
     localStorage.removeItem("token");
 
-    //correctAction("Logged out!");
     dispatch(headerTitleActionCreator("AdoptAPenguin.com"));
     navigate("/");
   };

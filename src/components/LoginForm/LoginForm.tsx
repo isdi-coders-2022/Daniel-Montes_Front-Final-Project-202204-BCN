@@ -29,7 +29,6 @@ const LoginForm = () => {
 
     resetForm();
     dispatch(headerTitleActionCreator("Home"));
-    //correctAction("Wellcome " + formData.username + " !");
   };
 
   return (

@@ -1,5 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
+import {
+  IPenguin,
+  IRegisterForm,
+} from "../../app/redux/types/penguin/penguinInterfaces";
 import { wrongAction } from "../Modals/Modals";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
@@ -16,19 +19,6 @@ let modFields = [""];
 interface Props {
   idPenguin: IPenguin | null;
   penguin: IPenguin | null;
-}
-
-interface IRegisterForm {
-  id: string;
-  name: string;
-  category: string;
-  favs: {}[];
-  likers: {}[];
-  likes: number;
-  image: string | File;
-  imageBackup: string | File;
-  originalname: string;
-  description: string;
 }
 
 const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
@@ -103,7 +93,6 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
           : editPenguinThunk(formData, comments)
       );
 
-      // correctAction("Penguin saved successfully");
       setFormData(initialFormData);
       dispatch(headerTitleActionCreator("Favourites"));
 

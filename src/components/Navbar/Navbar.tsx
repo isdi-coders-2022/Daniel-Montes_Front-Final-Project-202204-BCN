@@ -17,6 +17,7 @@ import {
   headerTitleActionCreator,
   promptMessageActionCreator,
 } from "../../app/redux/features/uiSlice/uiSlice";
+import { IRegisterForm } from "../../app/redux/types/penguin/penguinInterfaces";
 
 let doOnce = true;
 let modFields = [""];
@@ -114,19 +115,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       ? " display-none"
       : "";
 
-  interface IRegisterForm {
-    id: string;
-    name: string;
-    category: string;
-    favs: {}[];
-    likers: {}[];
-    likes: number;
-    image: string | File;
-    imageBackup: string | File;
-    originalname: string;
-    description: string;
-  }
-
   const isNew = document.location.href.includes("/create");
 
   const initialFormData: IRegisterForm = {
@@ -179,7 +167,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
         ? createFavThunk(userFormData)
         : editPenguinThunk(formData, comments)
     );
-    // correctAction("Penguin saved successfully");
+
     setFormData(initialFormData);
     navigate("/penguins/favs");
   };

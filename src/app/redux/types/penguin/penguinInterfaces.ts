@@ -24,3 +24,16 @@ export interface IDetail {
     description: string;
   };
 }
+
+export interface IRegisterForm {
+  id: string;
+  name: string;
+  category: string;
+  favs: {}[];
+  likers: {}[];
+  likes: number;
+  image: string | File;
+  imageBackup: string | File;
+  originalname: string;
+  description: string;
+}
