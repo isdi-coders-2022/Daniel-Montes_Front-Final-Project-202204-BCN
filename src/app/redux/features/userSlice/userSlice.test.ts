@@ -8,7 +8,7 @@ describe("Given a userSlice reducer", () => {
     test("Then it should return the same user but logged", () => {
       const initialUser = {
         id: "test",
-        name: "Test",
+        name: "test",
         username: "test",
         isAdmin: false,
         logged: false,
@@ -16,7 +16,7 @@ describe("Given a userSlice reducer", () => {
       };
       const expectedUser = {
         id: "test",
-        name: "Test",
+        name: "test",
         username: "test",
         isAdmin: false,
         logged: true,
@@ -32,7 +32,7 @@ describe("Given a userSlice reducer", () => {
   describe("When it receives a logout action", () => {
     test("Then it should switch the user logged property at false", () => {
       const loggedUser = {
-        name: "Test1",
+        name: "test1",
         username: "test1",
         isAdmin: false,
         logged: true,

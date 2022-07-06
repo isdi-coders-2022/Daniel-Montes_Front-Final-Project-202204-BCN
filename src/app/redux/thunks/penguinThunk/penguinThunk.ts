@@ -193,6 +193,7 @@ export const resetPenguinThunk = () => async (dispatch: AppDispatch) => {
       description: "",
       image: "",
       imageBackup: "",
+      originalname: "",
     };
 
     dispatch(resetPenguinActionCreator(blankFormData));
