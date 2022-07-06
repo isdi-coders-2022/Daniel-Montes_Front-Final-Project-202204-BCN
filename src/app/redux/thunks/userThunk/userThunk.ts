@@ -11,11 +11,7 @@ import {
   logInActionCreator,
 } from "../../features/userSlice/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
-import {
-  wrongAction,
-  setLoadingOffWithMessage,
-  setLoadingOn,
-} from "../../../../components/Modals/Modals";
+import { setLoadingOffWithMessage } from "../../../../components/Modals/Modals";
 import { finishedLoadingActionCreator } from "../../features/uiSlice/uiSlice";
 
 export const loginThunk =
@@ -33,11 +29,16 @@ export const loginThunk =
         localStorage.setItem("token", data.token);
 
         dispatch(logInActionCreator({ id, username, logged, isAdmin, image }));
+        setLoadingOffWithMessage(
+          "Login successfully." + userData.username,
+          false
+        );
       }
       dispatch(finishedLoadingActionCreator());
     } catch (error: any) {
-      wrongAction(
-        "Login failed!\nCheck credentials for username: " + userData.username
+      setLoadingOffWithMessage(
+        "Login failed!\nCheck credentials for username: " + userData.username,
+        true
       );
 
       return error.message;
@@ -59,14 +60,13 @@ export const registerThunk =
 
       document.location.href = "/penguins";
     } catch (error: any) {
-      wrongAction(
+      setLoadingOffWithMessage(
         "Registration failed!: \nUsername: " +
           userData.username +
           "\nPass: " +
-          userData.password
+          userData.password,
+        true
       );
-
-      setLoadingOffWithMessage("REGISTER: Finished successfully", false);
 
       return error.message;
     }
@@ -75,7 +75,6 @@ export const registerThunk =
 export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
   try {
     const token = localStorage.getItem("token");
-    setLoadingOn("Getting user data...");
 
     if (token) {
       const { data: user } = await axios.get(
@@ -84,10 +83,8 @@ export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
 
       dispatch(loadUserDataActionCreator(user));
       dispatch(finishedLoadingActionCreator());
-
-      setLoadingOffWithMessage("GET User: Finished successfully", false);
     }
   } catch (error) {
-    setLoadingOffWithMessage("GET User: Finished successfully", false);
+    setLoadingOffWithMessage(`GET User: ERROR: ${error}`, false);
   }
 };
