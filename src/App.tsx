@@ -19,8 +19,8 @@ import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
 
 function App() {
   const { logged } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
   const { headerTitle } = useAppSelector((state) => state.ui);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem("token");

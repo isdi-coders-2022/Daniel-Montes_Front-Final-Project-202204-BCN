@@ -20,11 +20,11 @@ import {
 } from "../../features/uiSlice/uiSlice";
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
-  try {
-    dispatch(loadingActionCreator());
-    setLoadingOn("GET penguins...");
-    const token = localStorage.getItem("token");
+  dispatch(loadingActionCreator());
+  setLoadingOn("GET penguins...");
+  const token = localStorage.getItem("token");
 
+  try {
     if (token) {
       const {
         data: { penguins },
@@ -35,12 +35,14 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
       });
 
       setLoadingOffWithMessage("GET penguins finished successfully!", false);
+
       dispatch(loadPenguinsActionCreator(penguins));
 
       dispatch(finishedLoadingActionCreator);
     }
   } catch (error) {
     dispatch(finishedLoadingActionCreator);
+
     setLoadingOffWithMessage(`GET Penguins: ERROR. (Error:  ${error})`, true);
   }
 };
@@ -60,6 +62,7 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (penguins.length === 0) {
         setLoadingOffWithMessage("GET favs: No favs added yet", false);
       }
@@ -77,33 +80,27 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 };
 
 export const createFavThunk =
-  (formPenguin: IPenguin) => async (dispatch: AppDispatch) => {
-    try {
-      setLoadingOn("CREATE FAV: Creating...");
+  (formPenguin: any) => async (dispatch: AppDispatch) => {
+    setLoadingOn("CREATE FAV: Creating...");
 
-      const token = localStorage.getItem("token");
-      if (token) {
-        const { data: penguin } = await axios.post(
-          `${process.env.REACT_APP_API_URL}penguins/create`,
-          formPenguin,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+    const token = localStorage.getItem("token");
+    if (token) {
+      const { data: penguin } = await axios.post(
+        `${process.env.REACT_APP_API_URL}penguins/create`,
+        formPenguin,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "mutipart/form-data",
+          },
+        }
+      );
 
-        dispatch(createPenguinActionCreator(penguin));
+      dispatch(createPenguinActionCreator(penguin));
 
-        setLoadingOffWithMessage("CREATE Fav: Finished successfully.", false);
-      } else {
-        setLoadingOffWithMessage(
-          "GET favs: Sorry, no token no cookies...",
-          true
-        );
-      }
-    } catch (error) {
-      setLoadingOffWithMessage(`GET favs: ERROR  ${error}`, true);
+      setLoadingOffWithMessage("CREATE Fav: Finished successfully.", false);
+    } else {
+      setLoadingOffWithMessage("GET favs: Sorry, no token no cookies...", true);
     }
   };
 

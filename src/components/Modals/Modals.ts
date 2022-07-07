@@ -79,8 +79,9 @@ export const setLoadingOffWithMessage = (message: string, error: boolean) => {
     render: message,
     type: error ? "error" : "success",
     isLoading: false,
-    autoClose: 2500,
+    autoClose: 2000,
     closeOnClick: true,
+    transition: Bounce,
   });
   toast.clearWaitingQueue();
 };

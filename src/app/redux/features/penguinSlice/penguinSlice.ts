@@ -31,7 +31,6 @@ const penguinSlice = createSlice({
       action: PayloadAction<IPenguin>
     ): SliceIniState => ({
       ...penguins,
-      allPenguins: [...penguins.allPenguins, action.payload],
       penguin: action.payload,
     }),
 
@@ -51,6 +50,7 @@ const penguinSlice = createSlice({
       allPenguins: penguins.allPenguins.filter(
         (penguin) => penguin.id !== action.payload
       ),
+      penguin: initialState.penguin,
     }),
 
     createPenguin: (
@@ -58,7 +58,7 @@ const penguinSlice = createSlice({
       action: PayloadAction<IPenguin>
     ): SliceIniState => ({
       ...penguins,
-      allPenguins: [...penguins.allPenguins, action.payload],
+      penguin: action.payload,
     }),
 
     editPenguin: (

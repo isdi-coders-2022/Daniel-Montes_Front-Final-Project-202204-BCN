@@ -17,31 +17,29 @@ let HiderImageOn = "";
 let modFields = [""];
 
 interface Props {
-  idPenguin: IPenguin | null;
   penguin: IPenguin | null;
 }
 
-const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
+const CreateForm = ({ penguin }: Props): JSX.Element => {
+  const userId = useAppSelector((state) => state.user.id);
+
+  const initialFormData: IRegisterForm = {
+    id: "",
+    name: "",
+    category: "",
+    likes: 1,
+    likers: [userId],
+    favs: [userId],
+    description: "",
+    image: "",
+    imageBackup: "",
+    originalname: "",
+  };
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const isNew = document.location.href.includes("/create");
-
-  const initialFormData: IRegisterForm = {
-    id: isNew ? "" : penguin?.id || "",
-    name: isNew ? "" : penguin?.name || "",
-    category: isNew ? "" : penguin?.category || "",
-    likes: isNew ? 0 : penguin?.likes || 0,
-    likers: isNew ? [] : penguin?.likers || [],
-    favs: isNew ? [] : penguin?.favs || [],
-    description: isNew ? "" : penguin?.description || "",
-    image: isNew ? "" : penguin?.image || "",
-    imageBackup: isNew ? "" : penguin?.imageBackup || "",
-    originalname: isNew ? "" : penguin?.originalname || "",
-  };
-
   const [formData, setFormData] = useState(initialFormData);
-  const idUser = useAppSelector((state) => state.user.id);
 
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
@@ -67,20 +65,25 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
 
     setFormData({
       ...formData,
-      image: event.target.files?.[0] as File,
-      imageBackup: event.target.files?.[0].name as string,
-      originalname: event.target.files?.[0].name as string,
+      [event.target.id]: event.target.files?.[0] || "",
     });
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    const listFields = modFields.join(", ");
-
     try {
-      formData.favs = [`${idUser}`];
-      formData.likers = [`${idUser}`];
+      const listFields = modFields.join(", ");
+
+      const newFormData = new FormData();
+
+      newFormData.append("name", formData.name);
+      newFormData.append("category", formData.category);
+      newFormData.append("favs", JSON.stringify(formData.favs));
+      newFormData.append("likers", JSON.stringify(formData.likers));
+      newFormData.append("likes", "1");
+      newFormData.append("image", formData.image);
+      newFormData.append("description", formData.description);
 
       const comments = document.location.href.includes("create")
         ? "New Penguin created!"
@@ -88,7 +91,7 @@ const CreateForm = ({ idPenguin, penguin }: Props): JSX.Element => {
 
       dispatch(
         document.location.href.includes("create")
-          ? createFavThunk(formData)
+          ? createFavThunk(newFormData)
           : editPenguinThunk(formData, comments)
       );
 
