@@ -5,8 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { Modal } from "../Modals/ModalPrompt";
 import { getUserThunk } from "../../app/redux/thunks/userThunk/userThunk";
 import {
-  createFavThunk,
-  editPenguinThunk,
   loadFavsThunk,
   loadPenguinsThunk,
   resetPenguinThunk,
@@ -17,10 +15,8 @@ import {
   headerTitleActionCreator,
   promptMessageActionCreator,
 } from "../../app/redux/features/uiSlice/uiSlice";
-import { IRegisterForm } from "../../app/redux/types/penguin/penguinInterfaces";
 
 let doOnce = true;
-let modFields = [""];
 
 interface Props {
   headerTitle: string;
@@ -116,24 +112,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       ? " display-none"
       : "";
 
-  const isNew = document.location.href.includes("/create");
-
-  const initialFormData: IRegisterForm = {
-    id: isNew ? "" : penguin?.id || "",
-    name: isNew ? "" : penguin?.name || "",
-    category: isNew ? "" : penguin?.category || "",
-    likes: isNew ? 0 : penguin?.likes || 0,
-    likers: isNew ? [] : penguin?.likers || [],
-    favs: isNew ? [] : penguin?.favs || [],
-    description: isNew ? "" : penguin?.description || "",
-    image: isNew ? "" : penguin?.image || "",
-    imageBackup: isNew ? "" : penguin?.imageBackup || "",
-    originalname: isNew ? "" : penguin?.originalname || "",
-  };
-
-  const [formData, setFormData] = useState(initialFormData);
-  const idUser = useAppSelector((state) => state.user.id);
-
   const HidderMenu =
     document.location.href.includes("/homepage") ||
     document.location.href.includes("/login") ||
@@ -141,45 +119,12 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       ? " display-none"
       : "";
 
-  const HidderSave =
-    document.location.href.includes("/edit") ||
-    document.location.href.includes("/create")
-      ? ""
-      : " display-none";
-
-  const handleSubmit = () => {
-    const listFields = modFields.join(", ");
-
-    const newFormData = new FormData();
-
-    newFormData.append("name", formData.name);
-    newFormData.append("category", formData.category);
-    newFormData.append("favs", idUser);
-    newFormData.append("likers", idUser);
-    newFormData.append("likes", "1");
-    newFormData.append("image", formData.image);
-    newFormData.append("description", formData.description);
-
-    const comments = document.location.href.includes("create")
-      ? "New Penguin created!"
-      : "Fields updated: " + listFields;
-
-    dispatch(
-      document.location.href.includes("create")
-        ? createFavThunk(newFormData)
-        : editPenguinThunk(formData, comments)
-    );
-
-    setFormData(initialFormData);
-    navigate("/penguins/favs");
-  };
-
   return (
     <div className="app">
       <div className="header">
         <button className={`bt-back${HidderBack}`} onClick={handleBack} />
         <h1>{headerTitle || "AdoptAPenguin.com"}</h1>
-        <button className={`bt-save${HidderSave}`} onClick={handleSubmit} />
+
         <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
       </div>
       <div className="nav">

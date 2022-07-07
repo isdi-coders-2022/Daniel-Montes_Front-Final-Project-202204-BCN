@@ -66,6 +66,9 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     setFormData({
       ...formData,
       [event.target.id]: event.target.files?.[0] || "",
+
+      imageBackup: event.target.files?.[0].name as string,
+      originalname: event.target.files?.[0].name as string,
     });
   };
 
@@ -75,15 +78,15 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     try {
       const listFields = modFields.join(", ");
 
-      const newFormData = new FormData();
+      const newPenguin = new FormData();
 
-      newFormData.append("name", formData.name);
-      newFormData.append("category", formData.category);
-      newFormData.append("favs", JSON.stringify(formData.favs));
-      newFormData.append("likers", JSON.stringify(formData.likers));
-      newFormData.append("likes", "1");
-      newFormData.append("image", formData.image);
-      newFormData.append("description", formData.description);
+      newPenguin.append("name", formData.name);
+      newPenguin.append("category", formData.category);
+      newPenguin.append("likes", JSON.stringify(formData.likes));
+      newPenguin.append("likers", JSON.stringify(formData.likers));
+      newPenguin.append("favs", JSON.stringify(formData.favs));
+      newPenguin.append("image", formData.image);
+      newPenguin.append("description", formData.description);
 
       const comments = document.location.href.includes("create")
         ? "New Penguin created!"
@@ -91,11 +94,10 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
       dispatch(
         document.location.href.includes("create")
-          ? createFavThunk(newFormData)
-          : editPenguinThunk(formData, comments)
+          ? createFavThunk(newPenguin)
+          : editPenguinThunk(newPenguin, comments)
       );
 
-      // setFormData(initialFormData);
       dispatch(headerTitleActionCreator("Favourites"));
 
       navigate("/penguins/favs");
@@ -129,9 +131,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           />
           <input
             className={`penguin-image${HiderImage}`}
-            id="image"
             type="text"
-            onChange={handleImageChange}
             autoComplete="off"
           />
 
@@ -183,6 +183,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
         <div className="parent-div">
           <button className="btn-upload">Add Photo</button>
           <input
+            id="image"
             type="file"
             name="upfile"
             accept="image/*"

@@ -155,7 +155,7 @@ export const deletePenguinThunk =
   };
 
 export const editPenguinThunk =
-  (formPenguin: IPenguin, type: string) => async (dispatch: AppDispatch) => {
+  (formPenguin: any, type: string) => async (dispatch: AppDispatch) => {
     try {
       dispatch(loadingActionCreator());
       const token = localStorage.getItem("token");
