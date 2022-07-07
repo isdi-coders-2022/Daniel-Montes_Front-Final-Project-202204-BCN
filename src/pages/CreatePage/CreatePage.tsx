@@ -18,7 +18,7 @@ const CreatePage = (): JSX.Element => {
 
   return (
     <FormsStyles>
-      <CreateForm idPenguin={penguin} penguin={penguin} />
+      <CreateForm penguin={penguin} />
     </FormsStyles>
   );
 };
