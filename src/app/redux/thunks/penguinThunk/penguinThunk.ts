@@ -97,7 +97,7 @@ export const createFavThunk =
       );
 
       dispatch(createPenguinActionCreator(penguin));
-      dispatch(loadPenguinActionCreator(penguin));
+      dispatch(loadPenguinsActionCreator(penguin));
       setLoadingOffWithMessage("CREATE Fav: Finished successfully.", false);
     } else {
       setLoadingOffWithMessage("GET favs: Sorry, no token no cookies...", true);
