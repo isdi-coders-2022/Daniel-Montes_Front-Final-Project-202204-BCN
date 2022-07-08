@@ -87,6 +87,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       newPenguin.append("favs", userId);
       newPenguin.append("image", formData.image);
       newPenguin.append("description", formData.description);
+      newPenguin.append("imageBackup", formData.imageBackup);
 
       const comments = document.location.href.includes("create")
         ? "New Penguin created!"
