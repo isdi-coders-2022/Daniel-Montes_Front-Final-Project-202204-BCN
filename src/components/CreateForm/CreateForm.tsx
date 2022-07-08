@@ -11,6 +11,7 @@ import {
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
 import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
+import { loadPenguinsActionCreator } from "../../app/redux/features/penguinSlice/penguinSlice";
 
 let HiderImage = "";
 let HiderImageOn = "";
@@ -22,6 +23,7 @@ interface Props {
 
 const CreateForm = ({ penguin }: Props): JSX.Element => {
   const userId = useAppSelector((state) => state.user.id);
+  const { allPenguins } = useAppSelector((state) => state.penguins);
 
   const initialFormData: IRegisterForm = {
     id: penguin?.id || "",
@@ -98,7 +100,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       );
 
       dispatch(headerTitleActionCreator("Favourites"));
-
+      dispatch(loadPenguinsActionCreator(allPenguins));
       navigate("/penguins/favs");
     } catch (error) {
       wrongAction("Error:" + error);
