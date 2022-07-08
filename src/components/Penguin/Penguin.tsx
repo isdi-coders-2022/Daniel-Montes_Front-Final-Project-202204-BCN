@@ -145,7 +145,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       <div className="penguin-image-container">
         <div className="penguin-image-content">
           <img
-            src={penguin.image || penguin.imageBackup || iconPhotoEmpty}
+            src={penguin.imageBackup || penguin.image || iconPhotoEmpty}
             alt={penguin.name}
             className="penguin-image"
           />
