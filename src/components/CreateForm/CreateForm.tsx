@@ -61,11 +61,11 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
     event.preventDefault();
+    modFields.push(event.target.id);
 
     setFormData({
       ...formData,
       [event.target.id]: event.target.files?.[0] || "",
-
       imageBackup: event.target.files?.[0].name as string,
     });
   };
