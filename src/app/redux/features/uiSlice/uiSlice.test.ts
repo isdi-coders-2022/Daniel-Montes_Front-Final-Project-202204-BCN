@@ -12,6 +12,9 @@ const initialState = {
   feedback: false,
   headerTitle: "",
   apiResponse: "",
+  pages: 0,
+  currentPage: 1,
+  pagination: 5,
 };
 const expectedState = {
   loading: false,
@@ -20,6 +23,9 @@ const expectedState = {
   feedback: true,
   headerTitle: "",
   apiResponse: "Message",
+  pages: 0,
+  currentPage: 1,
+  pagination: 5,
 };
 
 const expectedLoadingState = {
@@ -29,6 +35,9 @@ const expectedLoadingState = {
   feedback: true,
   headerTitle: "",
   apiResponse: "Message",
+  pages: 0,
+  currentPage: 1,
+  pagination: 5,
 };
 describe("Given the loadingActionCreator", () => {
   describe("When invoked", () => {
