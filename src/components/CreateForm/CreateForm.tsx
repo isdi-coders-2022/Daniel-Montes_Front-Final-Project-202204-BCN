@@ -24,16 +24,15 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   const userId = useAppSelector((state) => state.user.id);
 
   const initialFormData: IRegisterForm = {
-    id: "",
-    name: "",
-    category: "",
-    likes: 1,
-    likers: userId,
-    favs: userId,
-    description: "",
-    image: "",
-    imageBackup: "",
-    originalname: "",
+    id: penguin?.id || "",
+    name: penguin?.name || "",
+    category: penguin?.category || "",
+    likes: penguin?.likes || 0,
+    likers: penguin?.likers || {},
+    favs: penguin?.favs || {},
+    description: penguin?.description || "",
+    image: penguin?.image || "",
+    imageBackup: penguin?.imageBackup || "",
   };
 
   const dispatch = useAppDispatch();
@@ -68,7 +67,6 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       [event.target.id]: event.target.files?.[0] || "",
 
       imageBackup: event.target.files?.[0].name as string,
-      originalname: event.target.files?.[0].name as string,
     });
   };
 

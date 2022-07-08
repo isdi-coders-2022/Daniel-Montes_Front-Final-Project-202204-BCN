@@ -1,23 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store/store";
+import { UISliceState } from "../../types/uiInterfaces";
 
-interface UISliceState {
-  loading: boolean;
-  finishedLoading: boolean;
-  promptMessage: string;
-  headerTitle: string;
-  apiResponse: string;
-}
+const initialState: UISliceState = {
+  loading: false,
+  finishedLoading: true,
+  promptMessage: "",
+  headerTitle: "",
+  pages: 0,
+  currentPage: 1,
+  pagination: 5,
+};
 
 const uiSlice = createSlice({
   name: "ui",
-  initialState: {
-    loading: false,
-    finishedLoading: true,
-    promptMessage: "",
-    headerTitle: "",
-    apiResponse: "",
-  },
+  initialState,
   reducers: {
     loading: (ui: UISliceState, action: PayloadAction<void>) => ({
       ...ui,
@@ -37,15 +34,25 @@ const uiSlice = createSlice({
       ...ui,
       headerTitle: action.payload,
     }),
-    apiResponse: (ui: UISliceState, action: PayloadAction<any>) => ({
-      ...ui,
-      feedback: true,
-      apiResponse: action.payload,
+    setPages: (users, action: PayloadAction<number>) => ({
+      ...users,
+      pages: action.payload,
     }),
-    cleanApiResponse: (ui: UISliceState, action: PayloadAction<void>) => ({
-      ...ui,
-      feedback: false,
-      apiResponse: "",
+    setCurrentPage: (users) => ({
+      ...users,
+      currentPage: users.currentPage + 1,
+    }),
+    resetCurrentPage: (users) => ({
+      ...users,
+      currentPage: 1,
+    }),
+    setPagination: (users) => ({
+      ...users,
+      pagination: users.pagination + 5,
+    }),
+    resetPagination: (users) => ({
+      ...users,
+      pagination: 5,
     }),
   },
 });
@@ -55,8 +62,11 @@ export const {
   finishedLoading: finishedLoadingActionCreator,
   headerTitle: headerTitleActionCreator,
   promptMessage: promptMessageActionCreator,
-  apiResponse: apiResponseActionCreator,
-  cleanApiResponse: cleanApiResponseActionCreator,
+  setPages: setPagesActionCreator,
+  setCurrentPage: setCurrentPageActionCreator,
+  setPagination: setPaginationActionCreator,
+  resetCurrentPage: resetCurrentPageActionCreator,
+  resetPagination: resetPaginationActionCreator,
 } = uiSlice.actions;
 
 export const uiLoadSpinnerSelector = (state: RootState) => state.ui.loading;
