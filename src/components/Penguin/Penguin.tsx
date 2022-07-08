@@ -13,6 +13,7 @@ import iconPhotoEmpty from "../../images/no-photo.png";
 import { Modal } from "../Modals/ModalPrompt";
 import { ReactDimmer } from "react-dimmer";
 import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
+import { url } from "inspector";
 
 interface Props {
   penguin: IPenguin;
@@ -134,6 +135,8 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     ? " bounce animatedLike"
     : ` bounce2 animatedLikeInit`;
 
+  const imageURL = url(penguin.image);
+
   return (
     <div className="item penguin-container">
       <h1 className="display-none">AdoptAPenguin.com</h1>
@@ -145,7 +148,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       <div className="penguin-image-container">
         <div className="penguin-image-content">
           <img
-            src={penguin.image || penguin.imageBackup || iconPhotoEmpty}
+            src={imageURL || penguin.imageBackup || iconPhotoEmpty}
             alt={penguin.name}
             className="penguin-image"
           />
