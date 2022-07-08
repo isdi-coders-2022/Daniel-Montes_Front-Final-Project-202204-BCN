@@ -28,8 +28,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     name: "",
     category: "",
     likes: 1,
-    likers: [userId],
-    favs: [userId],
+    likers: userId,
+    favs: userId,
     description: "",
     image: "",
     imageBackup: "",
@@ -83,8 +83,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       newPenguin.append("name", formData.name);
       newPenguin.append("category", formData.category);
       newPenguin.append("likes", JSON.stringify(formData.likes));
-      newPenguin.append("likers", JSON.stringify(formData.likers));
-      newPenguin.append("favs", JSON.stringify(formData.favs));
+      newPenguin.append("likers", userId);
+      newPenguin.append("favs", userId);
       newPenguin.append("image", formData.image);
       newPenguin.append("description", formData.description);
 

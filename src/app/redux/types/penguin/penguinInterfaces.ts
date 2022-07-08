@@ -30,8 +30,8 @@ export interface IRegisterForm {
   id: string;
   name: string;
   category: string;
-  favs: {}[];
-  likers: {}[];
+  favs: string;
+  likers: string;
   likes: number;
   image: string;
   imageBackup: string;
