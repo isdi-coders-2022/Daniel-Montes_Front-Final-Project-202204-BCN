@@ -145,11 +145,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       <div className="penguin-image-container">
         <div className="penguin-image-content">
           <img
-            src={
-              penguin.image?.toString()
-                ? penguin.image.toString()
-                : iconPhotoEmpty
-            }
+            src={penguin.image || penguin.imageBackup || iconPhotoEmpty}
             alt={penguin.name}
             className="penguin-image"
           />

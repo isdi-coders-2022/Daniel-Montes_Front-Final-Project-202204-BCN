@@ -55,9 +55,10 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     navigate("/penguins/favs");
   };
 
-  const loadHome = () => async () => {
+  const loadHome = () => {
     setMenu((prevState) => !prevState);
-    await dispatch(loadPenguinsThunk());
+    dispatch(loadPenguinsThunk());
+    dispatch(headerTitleActionCreator("Home"));
 
     navigate("/penguins");
   };
