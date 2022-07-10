@@ -82,17 +82,15 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     setMenu((prevState) => !prevState);
   };
 
-  const lastLocation = useAppSelector((state) => state.ui.headerTitleLast);
-
   const handleBack = () => {
-    if (lastLocation !== "Home") {
-      dispatch(loadFavsThunk());
-
-      navigate("/penguins/favs");
-    } else {
+    if (headerTitle === "Favourites") {
       dispatch(loadPenguinsThunk());
-
+      debugger;
       navigate("/penguins");
+    } else {
+      dispatch(loadFavsThunk());
+      debugger;
+      navigate("/penguins/favs");
     }
   };
 

@@ -1,10 +1,7 @@
 import { NavLink } from "react-router-dom";
 import HomePageStyles from "../../pages/HomePage/HomePageStyles";
-import { stopLoadingAction } from "../Modals/Modals";
 
 const Home = (): JSX.Element => {
-  stopLoadingAction();
-
   return (
     <HomePageStyles className="info">
       <h1 className="display-none"> AdoptAPenguin.com </h1>
