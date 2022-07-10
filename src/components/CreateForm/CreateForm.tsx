@@ -90,8 +90,6 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       newPenguin.append("name", formData.name);
       newPenguin.append("category", formData.category);
       newPenguin.append("likes", JSON.stringify(formData.likes));
-      newPenguin.append("likers", JSON.stringify(formData.likers));
-      newPenguin.append("favs", JSON.stringify(formData.favs));
       newPenguin.append("image", formData.image);
       newPenguin.append("description", formData.description);
       newPenguin.append("imageBackup", formData.imageBackup);
