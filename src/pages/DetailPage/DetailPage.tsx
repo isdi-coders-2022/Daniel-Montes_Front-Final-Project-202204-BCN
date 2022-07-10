@@ -5,8 +5,6 @@ import { getPenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThun
 import PenguinDetail from "../../components/PenguinDetail/PenguinDetail";
 import DetailPageStyles from "./DetailPageStyles";
 
-// let firstRun = true;
-
 const DetailPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
@@ -22,9 +20,6 @@ const DetailPage = (): JSX.Element => {
       dispatch(getPenguinThunk(idPenguin));
     }
     dispatch(headerTitleActionCreator("Detail"));
-
-    // firstRun = false;
-    // }
   }, [dispatch, idPenguin]);
 
   return (

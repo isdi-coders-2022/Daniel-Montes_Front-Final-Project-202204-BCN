@@ -4,18 +4,13 @@ import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinTh
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 
-// let firstRun = true;
-
 const PenguinsPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    // if (firstRun) {
     dispatch(headerTitleActionCreator("Home"));
 
     dispatch(loadPenguinsThunk());
-    // firstRun = false;
-    // }
   }, [dispatch]);
 
   const { allPenguins } = useAppSelector((state) => state.penguins);

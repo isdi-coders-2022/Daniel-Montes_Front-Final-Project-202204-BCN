@@ -4,18 +4,13 @@ import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import Favs from "../../components/Favs/Favs";
 
-// let firstRun = true;
-
 const FavsPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { headerTitle } = useAppSelector((state) => state.ui);
 
   useEffect(() => {
-    // if (firstRun) {
     dispatch(headerTitleActionCreator("Favourites"));
     dispatch(loadFavsThunk());
-    //   firstRun = false;
-    // }
   }, [dispatch, headerTitle]);
 
   const { allPenguins } = useAppSelector((state) => state.penguins);

@@ -79,7 +79,9 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     });
   };
 
-  const handleEdit = () => {};
+  const handleEdit = (event: ChangeEvent<HTMLInputElement>): void => {
+    handleImageChange(event);
+  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -136,7 +138,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           <label htmlFor="image">Image</label>
           <img
             className={`penguin-image${HiderImageOn}`}
-            alt={`Detailed` + formData.name ? ` ` + formData.name : ""}
+            alt={`Detailed` + ` ` + formData.name}
             src={penguin?.image || penguin?.imageBackup}
           />
 
