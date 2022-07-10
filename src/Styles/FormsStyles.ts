@@ -491,11 +491,11 @@ const FormsStyles = styled.div`
 
   .btn-upload {
     color: #000;
-    padding: 10px 25px;
+    margin-left: 80px;
     border-radius: 10px;
     font-size: 22px;
     font-weight: bold;
-    background: none;
+    height: 45px;
   }
 
   .btn-register-upload {

@@ -15,3 +15,17 @@ export const toPascalCase = (strValue: string) => {
     return w[0].toUpperCase() + w.slice(1).toLowerCase();
   });
 };
+
+export const addToCleanArray = (
+  array: Array<string>,
+  newValue: string
+): any => {
+  if (Array(array)) {
+    array.push(newValue);
+    array = Array.from(new Set(array));
+    array = array.filter(function (field) {
+      return field != null && field !== "";
+    });
+    return array;
+  }
+};

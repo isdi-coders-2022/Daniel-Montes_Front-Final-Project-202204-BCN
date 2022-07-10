@@ -25,6 +25,7 @@ const RegisterForm = (): JSX.Element => {
   };
 
   const [formData, setFormData] = useState<FormData>(blankFields);
+
   const dispatch = useAppDispatch();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { LoginData } from "../../app/redux/types/userInterfaces/userInterfaces";
 import { loginThunk } from "../../app/redux/thunks/userThunk/userThunk";
-import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 
 const LoginForm = () => {
   const blankData: LoginData = {
@@ -28,7 +27,6 @@ const LoginForm = () => {
     dispatch(loginThunk(formData));
 
     resetForm();
-    dispatch(headerTitleActionCreator("Home"));
   };
 
   return (

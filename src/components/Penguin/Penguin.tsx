@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   editPenguinThunk,
   getPenguinThunk,
+  loadFavsThunk,
   loadPenguinsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
@@ -28,7 +29,6 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     likes: penguin.likes || 0,
     likers: penguin.likers || {},
     favs: penguin.favs || {},
-    originalname: penguin.originalname || "",
     description: penguin.description || "",
     image: penguin.image || "",
     imageBackup: penguin.imageBackup || "",
@@ -48,13 +48,13 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
   const handleMoreDetail = () => {
     dispatch(getPenguinThunk(penguin.id));
-    dispatch(headerTitleActionCreator("Detail"));
+
     navigate(`/detail/${penguin.id}`);
   };
 
   const handleEdit = () => {
-    dispatch(getPenguinThunk(penguin.id));
     dispatch(headerTitleActionCreator("Edit"));
+
     navigate(`/penguins/edit/${penguin.id}`);
   };
 
@@ -66,7 +66,6 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     };
 
     setFormData(newPenguin);
-
     dispatch(editPenguinThunk(newPenguin, "Deleted Like!"));
   };
 
@@ -89,7 +88,11 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
       uniqueLikers.includes(idUser) ? deleteFromLikers() : addToLikers();
     }
-    dispatch(loadPenguinsThunk());
+    dispatch(
+      document.location.href.includes("favs")
+        ? loadFavsThunk()
+        : loadPenguinsThunk()
+    );
   };
 
   const deleteFromFavs = () => {
