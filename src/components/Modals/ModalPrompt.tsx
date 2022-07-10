@@ -1,9 +1,6 @@
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
-import {
-  finishedLoadingActionCreator,
-  headerTitleActionCreator,
-} from "../../app/redux/features/uiSlice/uiSlice";
+import { finishedLoadingActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
@@ -30,7 +27,6 @@ export const Modal = ({
     closeModal(false);
     localStorage.removeItem("token");
 
-    dispatch(headerTitleActionCreator("AdoptAPenguin.com"));
     navigate("/");
   };
 

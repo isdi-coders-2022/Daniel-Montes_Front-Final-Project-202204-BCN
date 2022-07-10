@@ -50,7 +50,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const loadFavs = () => {
     setMenu((prevState) => !prevState);
     dispatch(loadFavsThunk());
-    dispatch(headerTitleActionCreator("Favourites"));
 
     navigate("/penguins/favs");
   };
@@ -58,7 +57,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const loadHome = () => {
     setMenu((prevState) => !prevState);
     dispatch(loadPenguinsThunk());
-    dispatch(headerTitleActionCreator("Home"));
 
     navigate("/penguins");
   };
@@ -74,6 +72,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const addFav = () => {
     setMenu((prevState) => !prevState);
     dispatch(resetPenguinThunk());
+
     dispatch(headerTitleActionCreator("New..."));
 
     navigate("/create");
@@ -83,15 +82,15 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     setMenu((prevState) => !prevState);
   };
 
+  const lastLocation = useAppSelector((state) => state.ui.headerTitleLast);
+
   const handleBack = () => {
-    if (document.location.href.includes("/detail")) {
+    if (lastLocation !== "Home") {
       dispatch(loadFavsThunk());
-      dispatch(headerTitleActionCreator("Favourites"));
 
       navigate("/penguins/favs");
     } else {
       dispatch(loadPenguinsThunk());
-      dispatch(headerTitleActionCreator("Home"));
 
       navigate("/penguins");
     }

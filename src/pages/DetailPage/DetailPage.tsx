@@ -1,25 +1,36 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { getPenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import PenguinDetail from "../../components/PenguinDetail/PenguinDetail";
 import DetailPageStyles from "./DetailPageStyles";
 
+// let firstRun = true;
+
 const DetailPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
-  const { idPenguin } = useParams();
+
   const { penguin } = useAppSelector((state) => state.penguins);
 
+  const idPenguin = document.location.href.substring(
+    document.location.href.lastIndexOf("/") + 1,
+    document.location.href.length
+  );
+
   useEffect(() => {
-    dispatch(loadPenguinsThunk());
-  }, [dispatch]);
+    if (typeof idPenguin !== "undefined" || idPenguin === "") {
+      dispatch(getPenguinThunk(idPenguin));
+    }
+    dispatch(headerTitleActionCreator("Detail"));
+
+    // firstRun = false;
+    // }
+  }, [dispatch, idPenguin]);
 
   return (
-    <>
-      <DetailPageStyles className="penguin--container">
-        <PenguinDetail key={idPenguin} penguin={penguin} />
-      </DetailPageStyles>
-    </>
+    <DetailPageStyles className="penguin--container">
+      <PenguinDetail penguin={penguin} />
+    </DetailPageStyles>
   );
 };
 

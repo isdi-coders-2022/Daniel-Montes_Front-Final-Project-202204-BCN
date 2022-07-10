@@ -7,6 +7,7 @@ const initialState: UISliceState = {
   finishedLoading: true,
   promptMessage: "",
   headerTitle: "",
+  headerTitleLast: "",
   pages: 0,
   currentPage: 1,
   pagination: 5,

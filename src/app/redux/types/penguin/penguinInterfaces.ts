@@ -3,11 +3,11 @@ export interface IPenguin {
   name: string;
   category: string;
   likes: number;
-  likers: {}[];
-  favs: {}[];
+  likers: string[];
+  favs: string[];
   image: string;
   imageBackup: string;
-  originalname: string;
+
   description: string;
 }
 
@@ -17,12 +17,11 @@ export interface IDetail {
     name: string;
     category: string;
     likes: number;
-    likers: {}[];
-    favs: {}[];
+    likers: string[];
+    favs: string[];
     image: string;
     imageBackup: string;
     description: string;
-    originalname: string;
   };
 }
 
@@ -30,8 +29,8 @@ export interface IRegisterForm {
   id: string;
   name: string;
   category: string;
-  favs: {};
-  likers: {};
+  favs: {}[];
+  likers: {}[];
   likes: number;
   image: string;
   imageBackup: string;

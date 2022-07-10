@@ -2,17 +2,20 @@ import Penguins from "../../components/Penguins/Penguins";
 import { useEffect } from "react";
 import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
+import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 
-let firstRun = true;
+// let firstRun = true;
 
 const PenguinsPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (firstRun) {
-      dispatch(loadPenguinsThunk());
-      firstRun = false;
-    }
+    // if (firstRun) {
+    dispatch(headerTitleActionCreator("Home"));
+
+    dispatch(loadPenguinsThunk());
+    // firstRun = false;
+    // }
   }, [dispatch]);
 
   const { allPenguins } = useAppSelector((state) => state.penguins);

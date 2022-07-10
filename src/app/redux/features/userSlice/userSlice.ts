@@ -31,7 +31,6 @@ const userSlice = createSlice({
       image: "",
     }),
     loadUserData: (user: UserState, action: PayloadAction<UserInfo>) => ({
-      ...action.payload,
       id: action.payload.id,
       name: action.payload.username,
       username: action.payload.username,

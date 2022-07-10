@@ -11,7 +11,7 @@ const CreatePage = (): JSX.Element => {
   const { idPenguin } = useParams();
 
   useEffect(() => {
-    if (idPenguin) {
+    if (typeof idPenguin !== "undefined") {
       dispatch(getPenguinThunk(idPenguin));
     }
   }, [dispatch, idPenguin]);

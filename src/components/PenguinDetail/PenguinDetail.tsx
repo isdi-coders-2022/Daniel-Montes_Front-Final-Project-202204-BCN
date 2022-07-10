@@ -16,9 +16,10 @@ interface Props {
 }
 
 const PenguinDetail = ({ penguin }: Props): JSX.Element => {
-  const idUser = useAppSelector((state) => state.user.id);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+
+  const idUser = useAppSelector((state) => state.user.id);
 
   const initialFormData: IPenguin = {
     id: penguin.id || "",
@@ -30,7 +31,6 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
     description: penguin.description || "",
     image: penguin.image,
     imageBackup: penguin.imageBackup || "",
-    originalname: penguin.originalname || "",
   };
 
   const [formData, setFormData] = useState<IPenguin>(initialFormData);
@@ -144,7 +144,6 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
         alt={`Pinguino ${penguin.name}`}
         className="penguin-image-detail"
       />
-
       <div className="penguin-image-footer">
         <span className="category">{penguin.category}</span>
         <span className="likes">{penguin.likes}</span>
