@@ -6,16 +6,18 @@ import { finishedLoadingActionCreator } from "../../app/redux/features/uiSlice/u
 const loadedState = finishedLoadingActionCreator();
 const hidderDelete = loadedState ? "" : " display-none";
 
-interface Props {
+const Favs = ({
+  allPenguins,
+  idUser,
+}: {
   allPenguins: IPenguin[];
-}
-
-const Favs = ({ allPenguins }: Props): JSX.Element => {
+  idUser: string;
+}): JSX.Element => {
   return (
     <PenguinsPageStyles className={`penguins-container${hidderDelete}`}>
       <h1 className="display-none">AdoptAPenguin.com</h1>
       {allPenguins.map((penguin, index) => {
-        return <Penguin key={index} penguin={penguin} />;
+        return <Penguin key={index} idUser={idUser} penguin={penguin} />;
       })}
     </PenguinsPageStyles>
   );

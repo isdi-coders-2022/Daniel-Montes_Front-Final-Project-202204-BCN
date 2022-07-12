@@ -11,7 +11,6 @@ import {
   getPenguinThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
-import { loadPenguinsActionCreator } from "../../app/redux/features/penguinSlice/penguinSlice";
 import { addToCleanArray } from "../../utils/utils";
 
 let HiderImage = "";
@@ -23,7 +22,7 @@ interface Props {
 }
 
 const CreateForm = ({ penguin }: Props): JSX.Element => {
-  const { allPenguins } = useAppSelector((state) => state.penguins);
+  const userId = useAppSelector((state) => state.user.id);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -46,8 +45,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     name: penguin?.name || "",
     category: penguin?.category || "",
     likes: 1,
-    favs: penguin?.favs || [],
-    likers: penguin?.likers || [],
+    favs: [`${userId}`],
+    likers: [`${userId}`],
     description: penguin?.description || "",
     image: penguin?.image || "",
     imageBackup: penguin?.imageBackup || "",
@@ -76,6 +75,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       ...formData,
       [event.target.id]: event.target.files?.[0],
       imageBackup: event.target.files?.[0].name as string,
+      favs: [userId],
+      likers: [userId],
     });
   };
 
@@ -91,8 +92,10 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       newPenguin.append("category", formData.category);
       newPenguin.append("likes", JSON.stringify(formData.likes));
       newPenguin.append("image", formData.image);
-      newPenguin.append("description", formData.description);
+      newPenguin.append("favs", userId);
+      newPenguin.append("likers", userId);
       newPenguin.append("imageBackup", formData.imageBackup);
+      newPenguin.append("description", formData.description);
 
       const comments = document.location.href.includes("create")
         ? "Create new penguin"
@@ -103,8 +106,6 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           ? createFavThunk(newPenguin)
           : editPenguinThunk(newPenguin, comments)
       );
-
-      dispatch(loadPenguinsActionCreator(allPenguins));
 
       navigate("/penguins/favs");
     } catch (error) {

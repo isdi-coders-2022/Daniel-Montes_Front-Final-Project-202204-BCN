@@ -1,21 +1,32 @@
 import Penguins from "../../components/Penguins/Penguins";
-import { useEffect } from "react";
 import { loadPenguinsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
+import { useEffect } from "react";
+import {
+  headerLastTitleActionCreator,
+  headerTitleActionCreator,
+} from "../../app/redux/features/uiSlice/uiSlice";
 
-const PenguinsPage = () => {
+const PenguinsPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
+  const idUser = useAppSelector((state) => state.user.id);
+  const { allPenguins } = useAppSelector((state) => state.penguins);
+  const { headerTitle } = useAppSelector((state) => state.ui);
+
   useEffect(() => {
-    dispatch(headerTitleActionCreator("Home"));
+    const SetTitleHeader = (title: string, lastTitle: string) => {
+      dispatch(headerTitleActionCreator(title));
+      dispatch(headerLastTitleActionCreator(lastTitle));
+    };
+
+    const thisTitle = "Home";
+    if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
 
     dispatch(loadPenguinsThunk());
-  }, [dispatch]);
+  }, [dispatch, headerTitle]);
 
-  const { allPenguins } = useAppSelector((state) => state.penguins);
-
-  return <Penguins allPenguins={allPenguins} />;
+  return <Penguins allPenguins={allPenguins} idUser={idUser} />;
 };
 
 export default PenguinsPage;

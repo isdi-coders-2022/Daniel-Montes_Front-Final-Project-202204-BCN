@@ -3,7 +3,7 @@ export interface UISliceState {
   finishedLoading: boolean;
   promptMessage: string;
   headerTitle: string;
-  headerTitleLast: string;
+  headerLastTitle: string;
   apiResponse: string;
   pages: number;
   currentPage: number;
