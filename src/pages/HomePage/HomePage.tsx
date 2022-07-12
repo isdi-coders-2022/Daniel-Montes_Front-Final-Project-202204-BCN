@@ -1,14 +1,22 @@
-import { useEffect } from "react";
-import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
-import { useAppDispatch } from "../../app/redux/hooks/hooks";
+import {
+  headerLastTitleActionCreator,
+  headerTitleActionCreator,
+} from "../../app/redux/features/uiSlice/uiSlice";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import Home from "../../components/Home/Home";
 
 const HomePage = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(headerTitleActionCreator("Home"));
-  }, [dispatch]);
+  const { headerTitle } = useAppSelector((state) => state.ui);
+
+  const SetTitleHeader = (title: string, lastTitle: string) => {
+    dispatch(headerTitleActionCreator(title));
+    dispatch(headerLastTitleActionCreator(lastTitle));
+  };
+
+  const thisTitle = "Home";
+  if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
 
   return <Home />;
 };
