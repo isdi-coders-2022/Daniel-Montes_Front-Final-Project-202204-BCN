@@ -107,12 +107,6 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           : editPenguinThunk(newPenguin, comments)
       );
 
-      // dispatch(loadPenguinsActionCreator(allPenguins));
-      // dispatch(
-      //   document.location.href.includes("create")
-      //     ? loadFavsThunk()
-      //     : loadPenguinsThunk()
-      // );
       navigate("/penguins/favs");
     } catch (error) {
       wrongAction("Error:" + error);
