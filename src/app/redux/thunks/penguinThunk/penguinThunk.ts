@@ -22,7 +22,7 @@ import {
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   dispatch(loadingActionCreator());
-  // setLoadingOn("GET penguins...");
+
   const token = localStorage.getItem("token");
 
   try {
@@ -37,8 +37,6 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
 
       dispatch(loadPenguinsActionCreator(penguins));
       dispatch(finishedLoadingActionCreator());
-
-      // setLoadingOffWithMessage("GET penguins: Finished successfully!", false);
     }
   } catch (error) {
     dispatch(finishedLoadingActionCreator());
@@ -49,7 +47,6 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
 
 export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
   try {
-    setLoadingOn("GET Favs...");
     dispatch(loadingActionCreator());
 
     const token = localStorage.getItem("token");
@@ -68,8 +65,6 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
       }
       dispatch(loadPenguinsActionCreator(penguins));
       dispatch(finishedLoadingActionCreator());
-
-      setLoadingOffWithMessage("GET favs: Finished successfully!", false);
     }
   } catch (error) {
     dispatch(finishedLoadingActionCreator());
