@@ -5,7 +5,6 @@ import store from "../../app/redux/store/store";
 import Favs from "./Favs";
 import Navbar from "../Navbar/Navbar";
 import { mockPenguins } from "../../mocks/penguins";
-import { mockUser } from "../../mocks/users";
 
 jest.mock("chalk", () => ({
   green: jest.fn(),
@@ -23,7 +22,7 @@ describe("Given a Favs component", () => {
         <Provider store={store}>
           <BrowserRouter>
             <Navbar headerTitle="test" />
-            <Favs idUser={mockUser.id} allPenguins={mockPenguins} />
+            <Favs allPenguins={mockPenguins} />
           </BrowserRouter>
         </Provider>
       );

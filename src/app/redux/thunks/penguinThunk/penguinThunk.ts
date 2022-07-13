@@ -75,7 +75,7 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 
 export const createFavThunk =
   (formPenguin: any) => async (dispatch: AppDispatch) => {
-    setLoadingOn("CREATE FAV: Creating...");
+    setLoadingOn(`CREATE Fav: Creating ${formPenguin.name}...`);
 
     const token = localStorage.getItem("token");
     if (token) {
@@ -95,7 +95,10 @@ export const createFavThunk =
 
       setLoadingOffWithMessage("CREATE Fav: Finished successfully.", false);
     } else {
-      setLoadingOffWithMessage("GET favs: Sorry, no token no cookies...", true);
+      setLoadingOffWithMessage(
+        "CREATE fav: Sorry, no token no cookies...",
+        true
+      );
     }
   };
 

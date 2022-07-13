@@ -74,7 +74,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    debugger;
+
     try {
       const listFields = modFields.join(", ");
 
@@ -85,8 +85,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       setFormData(newPenguin);
 
       const comments = document.location.href.includes("create")
-        ? "Create new penguin"
-        : "Update fields: " + listFields;
+        ? "Created new penguin"
+        : "Updated fields: " + listFields;
 
       document.location.href.includes("create")
         ? dispatch(createFavThunk(newPenguin))

@@ -4,6 +4,7 @@ import {
   headerTitleActionCreator,
 } from "../../app/redux/features/uiSlice/uiSlice";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
+import { loadFavsThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import Favs from "../../components/Favs/Favs";
 
 const FavsPage = (): JSX.Element => {
@@ -11,7 +12,6 @@ const FavsPage = (): JSX.Element => {
 
   const thisTitle = "Favourites";
 
-  const idUser = useAppSelector((state) => state.user.id);
   const { headerTitle } = useAppSelector((state) => state.ui);
   const { allPenguins } = useAppSelector((state) => state.penguins);
 
@@ -21,9 +21,10 @@ const FavsPage = (): JSX.Element => {
       dispatch(headerLastTitleActionCreator(lastTitle));
     };
     if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
+    dispatch(loadFavsThunk());
   }, [dispatch, headerTitle, thisTitle]);
 
-  return <Favs idUser={idUser} allPenguins={allPenguins} />;
+  return <Favs allPenguins={allPenguins} />;
 };
 
 export default FavsPage;

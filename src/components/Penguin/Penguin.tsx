@@ -55,7 +55,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     const newPenguin = {
       ...penguin,
       likers: penguin.likers.filter((liker) => liker !== idUser),
-      likes: penguin.likes - 1,
+      likes: penguin.likes >= 1 ? penguin.likes - 1 : penguin.likes,
     };
 
     setFormData(newPenguin);
