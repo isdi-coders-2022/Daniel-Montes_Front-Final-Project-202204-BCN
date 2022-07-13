@@ -7,7 +7,7 @@ const initialState: UISliceState = {
   finishedLoading: true,
   promptMessage: "",
   headerTitle: "",
-  headerTitleLast: "",
+  headerLastTitle: "",
   pages: 0,
   currentPage: 1,
   pagination: 5,
@@ -35,6 +35,10 @@ const uiSlice = createSlice({
     headerTitle: (ui: UISliceState, action: PayloadAction<string>) => ({
       ...ui,
       headerTitle: action.payload,
+    }),
+    headerLastTitle: (ui: UISliceState, action: PayloadAction<string>) => ({
+      ...ui,
+      headerLastTitle: action.payload,
     }),
     apiResponse: (ui: UISliceState, action: PayloadAction<any>) => ({
       ...ui,
@@ -73,6 +77,7 @@ export const {
   loading: loadingActionCreator,
   finishedLoading: finishedLoadingActionCreator,
   headerTitle: headerTitleActionCreator,
+  headerLastTitle: headerLastTitleActionCreator,
   promptMessage: promptMessageActionCreator,
   apiResponse: apiResponseActionCreator,
   cleanApiResponse: cleanApiResponseActionCreator,

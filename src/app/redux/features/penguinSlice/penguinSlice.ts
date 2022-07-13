@@ -14,7 +14,6 @@ const initialState: SliceIniState = {
     category: "",
     image: "",
     imageBackup: "",
-
     likes: 0,
     likers: [],
     favs: [],
@@ -81,6 +80,14 @@ const penguinSlice = createSlice({
       ...penguins,
       penguin: action.payload,
     }),
+
+    resetPenguins: (
+      penguins,
+      action: PayloadAction<IPenguin>
+    ): SliceIniState => ({
+      ...penguins,
+      allPenguins: [action.payload],
+    }),
   },
 });
 
@@ -91,6 +98,7 @@ export const {
   createPenguin: createPenguinActionCreator,
   editPenguin: editPenguinActionCreator,
   resetPenguin: resetPenguinActionCreator,
+  resetPenguins: resetPenguinsActionCreator,
 } = penguinSlice.actions;
 
 export default penguinSlice.reducer;

@@ -1,11 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { mockPenguins } from "../../mocks/penguins";
 
 import store from "../../app/redux/store/store";
 import Penguin from "./Penguin";
+import { mockUser } from "../../mocks/users";
 
 const mockDispatch = jest.fn();
 

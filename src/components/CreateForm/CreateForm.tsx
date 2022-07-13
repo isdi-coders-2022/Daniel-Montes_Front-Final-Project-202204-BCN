@@ -4,7 +4,7 @@ import {
   IRegisterForm,
 } from "../../app/redux/types/penguin/penguinInterfaces";
 import { wrongAction } from "../Modals/Modals";
-import { useAppDispatch } from "../../app/redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   createFavThunk,
   editPenguinThunk,
@@ -25,6 +25,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const idUser = useAppSelector((state) => state.user.id);
+
   const urlParam = document.location.href.substring(
     document.location.href.lastIndexOf("/") + 1,
     document.location.href.length
@@ -32,19 +34,13 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const idPenguin = urlParam !== "create" ? urlParam : "";
 
-  useEffect(() => {
-    if (typeof idPenguin !== "undefined" && idPenguin === "") {
-      dispatch(getPenguinThunk(idPenguin));
-    }
-  }, [dispatch, idPenguin]);
-
   const initialFormData: IRegisterForm = {
     id: idPenguin,
     name: penguin?.name || "",
     category: penguin?.category || "",
     likes: 1,
-    favs: penguin?.favs || [],
-    likers: penguin?.likers || [],
+    favs: [`${idUser}`],
+    likers: [`${idUser}`],
     description: penguin?.description || "",
     image: penguin?.image || "",
     imageBackup: penguin?.imageBackup || "",
@@ -78,7 +74,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
+    debugger;
     try {
       const listFields = modFields.join(", ");
 
@@ -109,6 +105,12 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     HiderImage = " display-none";
     HiderImageOn = "";
   }
+
+  useEffect(() => {
+    if (typeof idPenguin !== "undefined" && idPenguin === "") {
+      dispatch(getPenguinThunk(idPenguin));
+    }
+  }, [dispatch, idPenguin]);
 
   return (
     <>

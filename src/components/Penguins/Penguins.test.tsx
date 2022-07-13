@@ -6,6 +6,7 @@ import store from "../../app/redux/store/store";
 import Penguins from "./Penguins";
 import { mockPenguins } from "../../mocks/penguins";
 import Navbar from "../Navbar/Navbar";
+import { mockUser } from "../../mocks/users";
 
 jest.mock("chalk", () => ({
   green: jest.fn(),

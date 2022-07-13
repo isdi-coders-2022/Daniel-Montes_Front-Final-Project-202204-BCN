@@ -61,6 +61,14 @@ function App() {
           }
         />
         <Route
+          path="/users/edit/:id"
+          element={
+            <CheckOutSecurity>
+              <DetailPage />
+            </CheckOutSecurity>
+          }
+        />
+        <Route
           path="/penguins"
           element={
             <CheckInSecurity>
