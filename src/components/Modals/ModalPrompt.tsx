@@ -37,14 +37,6 @@ export const Modal = ({
   };
 
   const handleAcceptClick = (event: React.FormEvent) => {
-    switch (type) {
-      case "deletePenguin":
-        deletePenguin();
-        break;
-      case "logOutUser":
-        logOutUser();
-        break;
-    }
     type === "delete" ? deletePenguin() : logOutUser();
   };
 

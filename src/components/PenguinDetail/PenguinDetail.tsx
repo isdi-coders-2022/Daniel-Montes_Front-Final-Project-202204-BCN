@@ -112,11 +112,14 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
     ? ""
     : " display-none";
 
-  const selectIconFav = penguin.favs?.includes(idUser)
+  const isFav = penguin.favs.includes(idUser);
+  const isLiker = penguin.likers.includes(idUser);
+
+  const selectIconFav = isFav
     ? " bounce animatedFavDelete"
     : ` bounce2 animatedFav`;
 
-  const selectIconLike = penguin.likers?.includes(idUser)
+  const selectIconLike = isLiker
     ? " bounce animatedLike"
     : ` bounce2 animatedLikeInit`;
 

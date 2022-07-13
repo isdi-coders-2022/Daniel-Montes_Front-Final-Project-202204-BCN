@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
+import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import {
   editPenguinThunk,
-  getPenguinThunk,
   loadFavsThunk,
   loadPenguinsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
@@ -12,22 +11,20 @@ import { toPascalCase } from "../../utils/utils";
 import iconPhotoEmpty from "../../images/contact-photo-add.png";
 import { Modal } from "../Modals/ModalPrompt";
 import { ReactDimmer } from "react-dimmer";
-import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 
 interface Props {
   penguin: IPenguin;
+  idUser: string;
 }
 
-const Penguin = ({ penguin }: Props): JSX.Element => {
-  const idUser = useAppSelector((state) => state.user.id);
-
+const Penguin = ({ penguin, idUser }: Props): JSX.Element => {
   const initialFormData: IPenguin = {
     id: penguin.id || "",
     name: penguin.name || "",
     category: penguin.category || "",
     likes: penguin.likes || 0,
-    likers: penguin.likers || {},
-    favs: penguin.favs || {},
+    likers: penguin.likers,
+    favs: penguin.favs,
     description: penguin.description || "",
     image: penguin.image || "",
     imageBackup: penguin.imageBackup || "",
@@ -46,14 +43,10 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
   };
 
   const handleMoreDetail = () => {
-    dispatch(getPenguinThunk(penguin.id));
-
     navigate(`/detail/${penguin.id}`);
   };
 
   const handleEdit = () => {
-    dispatch(headerTitleActionCreator("Edit"));
-
     navigate(`/penguins/edit/${penguin.id}`);
   };
 
@@ -66,6 +59,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Deleted Like!"));
+    correctAction(newPenguin.name + ": Deleted Like!");
   };
 
   const addToLikers = () => {
@@ -77,6 +71,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Added Like!"));
+    correctAction(newPenguin.name + ": Added Like!");
   };
 
   const handleLikes = () => {
@@ -86,10 +81,18 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       newFormData.likers = uniqueLikers;
 
       uniqueLikers.includes(idUser) ? deleteFromLikers() : addToLikers();
+
+      dispatch(
+        document.location.href.includes("favs")
+          ? loadFavsThunk()
+          : loadPenguinsThunk()
+      );
     }
+
     document.location.href.includes("favs")
       ? dispatch(loadFavsThunk())
       : dispatch(loadPenguinsThunk());
+
   };
 
   const deleteFromFavs = () => {
@@ -100,6 +103,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Deleted from favorites!"));
+   
   };
 
   const addToFavs = () => {
@@ -110,10 +114,12 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Added to favorites! "));
+
+ 
+
   };
 
   const handleFavs = () => {
-    dispatch(getPenguinThunk(formData.id));
     if (Array(formData.favs)) {
       const uniqueLikers = Array.from(new Set(formData.favs));
       let newFormData = formData;
@@ -127,11 +133,14 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     }
   };
 
-  const selectIconFav = penguin.favs?.includes(idUser)
+  const isFav = penguin.favs.includes(idUser);
+  const isLiker = penguin.likers.includes(idUser);
+
+  const selectIconFav = isFav
     ? " bounce animatedFavDelete"
     : " bounce2 animatedFav";
 
-  const selectIconLike = penguin.likers?.includes(idUser)
+  const selectIconLike = isLiker
     ? " bounce animatedLike"
     : ` bounce2 animatedLikeInit`;
 

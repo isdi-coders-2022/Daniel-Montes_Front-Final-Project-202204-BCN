@@ -6,6 +6,7 @@ import { mockPenguins } from "../../mocks/penguins";
 
 import store from "../../app/redux/store/store";
 import Penguin from "./Penguin";
+import { mockUser } from "../../mocks/users";
 
 const mockDispatch = jest.fn();
 
@@ -25,7 +26,7 @@ describe("Given the Penguin component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <Penguin penguin={mockPenguins[0]} />
+            <Penguin idUser={mockUser.id} penguin={mockPenguins[0]} />
           </BrowserRouter>
         </Provider>
       );
@@ -40,7 +41,7 @@ describe("Given the Penguin component", () => {
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <Penguin penguin={mockPenguins[0]} />
+            <Penguin idUser={mockUser.id} penguin={mockPenguins[0]} />
           </BrowserRouter>
         </Provider>
       );

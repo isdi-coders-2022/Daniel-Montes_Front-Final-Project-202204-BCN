@@ -11,10 +11,7 @@ import {
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import "../../Styles/NavbarStyles.css";
 import { toPascalCase } from "../../utils/utils";
-import {
-  headerTitleActionCreator,
-  promptMessageActionCreator,
-} from "../../app/redux/features/uiSlice/uiSlice";
+import { promptMessageActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 
 let doOnce = true;
 
@@ -49,16 +46,13 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
   const loadFavs = () => {
     setMenu((prevState) => !prevState);
-    dispatch(loadFavsThunk());
-
+    headerTitle === "Home" ? loadFavsThunk() : navigate("/penguins/favs");
     navigate("/penguins/favs");
   };
 
   const loadHome = () => {
     setMenu((prevState) => !prevState);
-    dispatch(loadPenguinsThunk());
-
-    navigate("/penguins");
+    headerTitle === "Home" ? loadPenguinsThunk() : navigate("/penguins");
   };
 
   const toggleSound = () => {
@@ -72,8 +66,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const addFav = () => {
     setMenu((prevState) => !prevState);
     dispatch(resetPenguinThunk());
-
-    dispatch(headerTitleActionCreator("New..."));
 
     navigate("/create");
   };

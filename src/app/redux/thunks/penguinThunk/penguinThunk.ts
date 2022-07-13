@@ -11,6 +11,7 @@ import {
   loadPenguinsActionCreator,
   resetPenguinActionCreator,
   loadPenguinActionCreator,
+  resetPenguinsActionCreator,
 } from "../../features/penguinSlice/penguinSlice";
 
 import { IPenguin } from "../../types/penguin/penguinInterfaces";
@@ -78,7 +79,7 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 };
 
 export const createFavThunk =
-  (formPenguin: any) => async (dispatch: AppDispatch) => {
+  (formPenguin: FormData) => async (dispatch: AppDispatch) => {
     setLoadingOn("CREATE FAV: Creating...");
 
     const token = localStorage.getItem("token");
@@ -133,6 +134,8 @@ export const getPenguinThunk =
 export const deletePenguinThunk =
   (id: string) => async (dispatch: AppDispatch) => {
     try {
+      setLoadingOn("DELETE FAV: Deleting...");
+
       const token = localStorage.getItem("token");
 
       const { status } = await axios.delete(
@@ -216,6 +219,35 @@ export const resetPenguinThunk = () => async (dispatch: AppDispatch) => {
     dispatch(finishedLoadingActionCreator());
     setLoadingOffWithMessage(
       `RESET Penguin: ERROR: ${this} Exiting with error:  ${error}`,
+      true
+    );
+  }
+};
+
+export const resetPenguinsThunk = () => async (dispatch: AppDispatch) => {
+  try {
+    dispatch(loadingActionCreator());
+
+    const blankFormData: IPenguin = {
+      id: "",
+      name: "",
+      category: "",
+      likes: 0,
+      likers: [],
+      favs: [],
+      description: "",
+      image: "",
+      imageBackup: "",
+    };
+
+    dispatch(resetPenguinsActionCreator(blankFormData));
+    dispatch(finishedLoadingActionCreator());
+
+    setLoadingOffWithMessage("RESET Penguins: Finished successfully.", false);
+  } catch (error) {
+    dispatch(finishedLoadingActionCreator());
+    setLoadingOffWithMessage(
+      `RESET Penguins: ERROR: ${this} Exiting with error:  ${error}`,
       true
     );
   }
