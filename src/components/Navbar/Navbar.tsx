@@ -84,12 +84,8 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
   const handleBack = () => {
     if (headerTitle === "Favourites") {
-      dispatch(loadPenguinsThunk());
-      debugger;
       navigate("/penguins");
     } else {
-      dispatch(loadFavsThunk());
-      debugger;
       navigate("/penguins/favs");
     }
   };

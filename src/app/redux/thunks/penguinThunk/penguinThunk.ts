@@ -21,7 +21,7 @@ import {
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   dispatch(loadingActionCreator());
-  setLoadingOn("GET penguins...");
+  // setLoadingOn("GET penguins...");
   const token = localStorage.getItem("token");
 
   try {
@@ -37,7 +37,7 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
       dispatch(loadPenguinsActionCreator(penguins));
       dispatch(finishedLoadingActionCreator());
 
-      setLoadingOffWithMessage("GET penguins: Finished successfully!", false);
+      // setLoadingOffWithMessage("GET penguins: Finished successfully!", false);
     }
   } catch (error) {
     dispatch(finishedLoadingActionCreator());
@@ -162,6 +162,7 @@ export const deletePenguinThunk =
 export const editPenguinThunk =
   (formPenguin: any, type: string) => async (dispatch: AppDispatch) => {
     try {
+      setLoadingOn("EDIT Penguin...");
       dispatch(loadingActionCreator());
       const token = localStorage.getItem("token");
 
@@ -180,7 +181,7 @@ export const editPenguinThunk =
 
         dispatch(finishedLoadingActionCreator());
 
-        setLoadingOffWithMessage(`EDIT Penguin: Finished successfully.`, false);
+        setLoadingOffWithMessage(`${type}`, false);
       }
     } catch (Error) {
       setLoadingOffWithMessage(

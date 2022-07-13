@@ -9,8 +9,7 @@ import {
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import { toPascalCase } from "../../utils/utils";
-import { correctAction } from "../Modals/Modals";
-import iconPhotoEmpty from "../../images/no-photo.png";
+import iconPhotoEmpty from "../../images/contact-photo-add.png";
 import { Modal } from "../Modals/ModalPrompt";
 import { ReactDimmer } from "react-dimmer";
 import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
@@ -88,11 +87,9 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
       uniqueLikers.includes(idUser) ? deleteFromLikers() : addToLikers();
     }
-    dispatch(
-      document.location.href.includes("favs")
-        ? loadFavsThunk()
-        : loadPenguinsThunk()
-    );
+    document.location.href.includes("favs")
+      ? dispatch(loadFavsThunk())
+      : dispatch(loadPenguinsThunk());
   };
 
   const deleteFromFavs = () => {
@@ -113,9 +110,6 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Added to favorites! "));
-    correctAction(newPenguin.name + ": Added to favorites!");
-
-    dispatch(loadPenguinsThunk());
   };
 
   const handleFavs = () => {
@@ -126,32 +120,57 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
       newFormData.favs = uniqueLikers;
 
       uniqueLikers.includes(idUser) ? deleteFromFavs() : addToFavs();
+
+      document.location.href.includes("favs")
+        ? dispatch(loadFavsThunk())
+        : dispatch(loadPenguinsThunk());
     }
   };
 
-  const selectIconFav = formData.favs?.includes(idUser)
+  const selectIconFav = penguin.favs?.includes(idUser)
     ? " bounce animatedFavDelete"
     : " bounce2 animatedFav";
 
-  const selectIconLike = formData.likers?.includes(idUser)
+  const selectIconLike = penguin.likers?.includes(idUser)
     ? " bounce animatedLike"
     : ` bounce2 animatedLikeInit`;
+
+  const penguinImage =
+    penguin.image === "" && !penguin.imageBackup.includes("/")
+      ? iconPhotoEmpty
+      : penguin.imageBackup;
+
+  const contactImageClass =
+    penguin.image === "" && !penguin.imageBackup.includes("/")
+      ? " iconPhotoEmpty"
+      : "";
 
   return (
     <div className="item penguin-container">
       <h1 className="display-none">AdoptAPenguin.com</h1>
-      <div className="penguin-title">
-        <button className={`animated animatedDelete`} onClick={handleDelete} />
-        <h2 className="penguin-name">{toPascalCase(`${penguin.name}`)}</h2>
-        <button onClick={handleFavs} className={`animated ${selectIconFav}`} />
-      </div>
+      <h2 className="penguin-name">{toPascalCase(`${penguin.name}`)}</h2>
+
       <div className="penguin-image-container">
         <div className="penguin-image-content">
           <img
-            src={penguin.imageBackup ? penguin.imageBackup : iconPhotoEmpty}
+            src={penguinImage}
             alt={penguin.name}
-            className="penguin-image"
+            className={`penguin-image${contactImageClass}`}
           />
+          <div className="penguin-buttons">
+            <button
+              onClick={handleFavs}
+              className={`animated ${selectIconFav}`}
+            />
+            <button
+              className={`animated bounce animatedEdit`}
+              onClick={handleEdit}
+            />
+            <button
+              className={`animated bounce animatedDelete`}
+              onClick={handleDelete}
+            />
+          </div>
         </div>
       </div>
       <div className="penguin-datalist">
@@ -170,7 +189,6 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
         </span>
       </div>
 
-      <button className={`animated animatedEdit`} onClick={handleEdit} />
       {isModalOpen && (
         <Modal
           closeModal={setModal}

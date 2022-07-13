@@ -6,14 +6,12 @@ import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSli
 
 const PenguinsPage = () => {
   const dispatch = useAppDispatch();
+  const { allPenguins } = useAppSelector((state) => state.penguins);
 
   useEffect(() => {
     dispatch(headerTitleActionCreator("Home"));
-
     dispatch(loadPenguinsThunk());
   }, [dispatch]);
-
-  const { allPenguins } = useAppSelector((state) => state.penguins);
 
   return <Penguins allPenguins={allPenguins} />;
 };
