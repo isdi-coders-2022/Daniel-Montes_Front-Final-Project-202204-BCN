@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store/store";
-import { UISliceState } from "../../types/uiInterfaces";
+import { UISliceState } from "../../types/ui/uiInterfaces";
 
 const initialState: UISliceState = {
   loading: false,

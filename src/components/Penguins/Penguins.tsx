@@ -7,7 +7,10 @@ import PenguinsPageStyles from "../../Styles/PagesStyles";
 const loadedState = finishedLoadingActionCreator();
 const hidderDelete = loadedState ? "" : " display-none";
 
-const Penguins = ({ allPenguins }: { allPenguins: IPenguin[] }) => {
+interface Props {
+  allPenguins: IPenguin[];
+}
+const Penguins = ({ allPenguins }: Props) => {
   return (
     <PenguinsPageStyles className={`penguins-container${hidderDelete}`}>
       {allPenguins.map((penguin, index) => {
