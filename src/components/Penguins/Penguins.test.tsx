@@ -24,7 +24,7 @@ describe("Given a Penguins component", () => {
         <Provider store={store}>
           <BrowserRouter>
             <Navbar headerTitle="Test" />
-            <Penguins idUser={mockUser.id} allPenguins={mockPenguins} />
+            <Penguins allPenguins={mockPenguins} />
           </BrowserRouter>
         </Provider>
       );

@@ -17,7 +17,7 @@ const Favs = ({
     <PenguinsPageStyles className={`penguins-container${hidderDelete}`}>
       <h1 className="display-none">AdoptAPenguin.com</h1>
       {allPenguins.map((penguin, index) => {
-        return <Penguin key={index} idUser={idUser} penguin={penguin} />;
+        return <Penguin key={index} penguin={penguin} />;
       })}
     </PenguinsPageStyles>
   );

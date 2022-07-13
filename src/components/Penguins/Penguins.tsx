@@ -2,24 +2,18 @@ import Penguin from "../Penguin/Penguin";
 import { finishedLoadingActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import PageStyles from "../../Styles/PagesStyles";
+import PenguinsPageStyles from "../../Styles/PagesStyles";
 
 const loadedState = finishedLoadingActionCreator();
 const hidderDelete = loadedState ? "" : " display-none";
 
-const Penguins = ({
-  allPenguins,
-  idUser,
-}: {
-  allPenguins: IPenguin[];
-  idUser: string;
-}) => {
+const Penguins = ({ allPenguins }: { allPenguins: IPenguin[] }) => {
   return (
-    <PageStyles className={`penguins-container${hidderDelete}`}>
+    <PenguinsPageStyles className={`penguins-container${hidderDelete}`}>
       {allPenguins.map((penguin, index) => {
-        return <Penguin key={index} idUser={idUser} penguin={penguin} />;
+        return <Penguin key={index} penguin={penguin} />;
       })}
-    </PageStyles>
+    </PenguinsPageStyles>
   );
 };
 

@@ -9,7 +9,7 @@ import {
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import { correctAction } from "../Modals/Modals";
-import iconPhotoEmpty from "../../images/no-photo.png";
+import iconPhotoEmpty from "../../images/contact-photo-add.png";
 
 interface Props {
   penguin: IPenguin;
@@ -123,6 +123,11 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
     ? " bounce animatedLike"
     : ` bounce2 animatedLikeInit`;
 
+  const penguinImage =
+    penguin.image === "" && !penguin.imageBackup.includes("/")
+      ? iconPhotoEmpty
+      : penguin.imageBackup;
+
   return (
     <div className="penguin-detail-container">
       <h1 className="display-none">Detail</h1>
@@ -143,7 +148,7 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
         <button onClick={handleFavs} className={`animated ${selectIconFav}`} />
       </div>
       <img
-        src={penguin.imageBackup ? penguin.imageBackup : iconPhotoEmpty}
+        src={penguinImage}
         alt={`Pinguino ${penguin.name}`}
         className="penguin-image-detail"
       />

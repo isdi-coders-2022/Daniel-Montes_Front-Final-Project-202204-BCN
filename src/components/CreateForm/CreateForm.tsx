@@ -22,10 +22,10 @@ interface Props {
 }
 
 const CreateForm = ({ penguin }: Props): JSX.Element => {
-  const userId = useAppSelector((state) => state.user.id);
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const idUser = useAppSelector((state) => state.user.id);
 
   const urlParam = document.location.href.substring(
     document.location.href.lastIndexOf("/") + 1,
@@ -34,19 +34,13 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const idPenguin = urlParam !== "create" ? urlParam : "";
 
-  useEffect(() => {
-    if (typeof idPenguin !== "undefined" && idPenguin === "") {
-      dispatch(getPenguinThunk(idPenguin));
-    }
-  }, [dispatch, idPenguin]);
-
   const initialFormData: IRegisterForm = {
-    id: penguin?.id || "",
+    id: idPenguin,
     name: penguin?.name || "",
     category: penguin?.category || "",
     likes: 1,
-    favs: [`${userId}`],
-    likers: [`${userId}`],
+    favs: [`${idUser}`],
+    likers: [`${idUser}`],
     description: penguin?.description || "",
     image: penguin?.image || "",
     imageBackup: penguin?.imageBackup || "",
@@ -75,37 +69,28 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       ...formData,
       [event.target.id]: event.target.files?.[0],
       imageBackup: event.target.files?.[0].name as string,
-      favs: [userId],
-      likers: [userId],
     });
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-
+    debugger;
     try {
       const listFields = modFields.join(", ");
 
-      const newPenguin = new FormData();
+      const newPenguin = {
+        ...formData,
+      };
 
-      newPenguin.append("name", formData.name);
-      newPenguin.append("category", formData.category);
-      newPenguin.append("likes", JSON.stringify(formData.likes));
-      newPenguin.append("image", formData.image);
-      newPenguin.append("favs", userId);
-      newPenguin.append("likers", userId);
-      newPenguin.append("imageBackup", formData.imageBackup);
-      newPenguin.append("description", formData.description);
+      setFormData(newPenguin);
 
       const comments = document.location.href.includes("create")
         ? "Create new penguin"
         : "Update fields: " + listFields;
 
-      dispatch(
-        document.location.href.includes("create")
-          ? createFavThunk(newPenguin)
-          : editPenguinThunk(newPenguin, comments)
-      );
+      document.location.href.includes("create")
+        ? dispatch(createFavThunk(newPenguin))
+        : dispatch(editPenguinThunk(newPenguin, comments));
 
       navigate("/penguins/favs");
     } catch (error) {
@@ -120,6 +105,12 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     HiderImage = " display-none";
     HiderImageOn = "";
   }
+
+  useEffect(() => {
+    if (typeof idPenguin !== "undefined" && idPenguin === "") {
+      dispatch(getPenguinThunk(idPenguin));
+    }
+  }, [dispatch, idPenguin]);
 
   return (
     <>
@@ -142,7 +133,17 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
             type="text"
             autoComplete="off"
           />
-
+          <label htmlFor="id">Id</label>
+          <input
+            type="text"
+            id="id"
+            autoComplete="off"
+            value={formData.id}
+            onChange={handleInputChange}
+            placeholder="Id"
+            contentEditable="false"
+            className="display-none"
+          />
           <label htmlFor="name">Name</label>
           <input
             type="text"

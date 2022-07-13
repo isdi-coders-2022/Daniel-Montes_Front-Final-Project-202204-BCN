@@ -14,7 +14,6 @@ const initialState: SliceIniState = {
     category: "",
     image: "",
     imageBackup: "",
-
     likes: 0,
     likers: [],
     favs: [],
