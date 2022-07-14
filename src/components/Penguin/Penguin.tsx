@@ -3,11 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   editPenguinThunk,
+  getPenguinThunk,
   loadFavsThunk,
   loadPenguinsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import { toPascalCase } from "../../utils/utils";
+import { initialFormData, toPascalCase } from "../../utils/utils";
 import iconPhotoEmpty from "../../images/contact-photo-add.png";
 import { Modal } from "../Modals/ModalPrompt";
 import { ReactDimmer } from "react-dimmer";
@@ -18,18 +19,7 @@ interface Props {
 
 const Penguin = ({ penguin }: Props): JSX.Element => {
   const idUser = useAppSelector((state) => state.user.id);
-
-  const initialFormData: IPenguin = {
-    id: penguin.id || "",
-    name: penguin.name || "",
-    category: penguin.category || "",
-    likes: penguin.likes || 0,
-    likers: penguin.likers,
-    favs: penguin.favs,
-    description: penguin.description || "",
-    image: penguin.image || "",
-    imageBackup: penguin.imageBackup || "",
-  };
+  const isFavsPage = document.location.href.includes("favs");
 
   const [formData, setFormData] = useState<IPenguin>(initialFormData);
   const [isModalOpen, setModal] = useState(false);
@@ -48,29 +38,28 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
   };
 
   const handleEdit = () => {
+    dispatch(getPenguinThunk(penguin.id));
     navigate(`/penguins/edit/${penguin.id}`);
   };
 
   const deleteFromLikers = () => {
-    const newPenguin = {
+    setFormData({
       ...penguin,
       likers: penguin.likers.filter((liker) => liker !== idUser),
       likes: penguin.likes >= 1 ? penguin.likes - 1 : penguin.likes,
-    };
+    });
 
-    setFormData(newPenguin);
-    dispatch(editPenguinThunk(newPenguin, "Deleted Like!"));
+    dispatch(editPenguinThunk(formData, "Deleted Like!"));
   };
 
   const addToLikers = () => {
-    const newPenguin = {
+    setFormData({
       ...penguin,
       likers: penguin.likers.concat(idUser),
       likes: penguin.likes + 1,
-    };
+    });
 
-    setFormData(newPenguin);
-    dispatch(editPenguinThunk(newPenguin, "Added Like!"));
+    dispatch(editPenguinThunk(formData, "Added Like!"));
   };
 
   const handleLikes = () => {
@@ -81,30 +70,26 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
       uniqueLikers.includes(idUser) ? deleteFromLikers() : addToLikers();
 
-      document.location.href.includes("favs")
-        ? dispatch(loadFavsThunk())
-        : dispatch(loadPenguinsThunk());
+      isFavsPage ? dispatch(loadFavsThunk()) : dispatch(loadPenguinsThunk());
     }
   };
 
   const deleteFromFavs = () => {
-    const newPenguin = {
+    setFormData({
       ...penguin,
       favs: penguin.favs.filter((fav) => fav !== idUser),
-    };
+    });
 
-    setFormData(newPenguin);
-    dispatch(editPenguinThunk(newPenguin, "Deleted from favorites!"));
+    dispatch(editPenguinThunk(formData, "Deleted from favorites!"));
   };
 
   const addToFavs = () => {
-    const newPenguin = {
+    setFormData({
       ...penguin,
       favs: penguin.favs.concat(idUser),
-    };
+    });
 
-    setFormData(newPenguin);
-    dispatch(editPenguinThunk(newPenguin, "Added to favorites! "));
+    dispatch(editPenguinThunk(formData, "Added to favorites! "));
   };
 
   const handleFavs = () => {
@@ -115,9 +100,7 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
 
       uniqueLikers.includes(idUser) ? deleteFromFavs() : addToFavs();
 
-      document.location.href.includes("favs")
-        ? dispatch(loadFavsThunk())
-        : dispatch(loadPenguinsThunk());
+      isFavsPage ? dispatch(loadFavsThunk()) : dispatch(loadPenguinsThunk());
     }
   };
 
@@ -132,15 +115,13 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
     ? " bounce animatedLike"
     : ` bounce2 animatedLikeInit`;
 
+  const isURL = penguin.imageBackup.includes("/");
+
   const penguinImage =
-    penguin.image === "" && !penguin.imageBackup.includes("/")
-      ? iconPhotoEmpty
-      : penguin.imageBackup;
+    penguin.image === "" && !isURL ? iconPhotoEmpty : penguin.imageBackup;
 
   const contactImageClass =
-    penguin.image === "" && !penguin.imageBackup.includes("/")
-      ? " iconPhotoEmpty"
-      : "";
+    penguin.image === "" && !isURL ? " iconPhotoEmpty" : "";
 
   return (
     <div className="item penguin-container">

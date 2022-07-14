@@ -16,9 +16,9 @@ const DetailPage = (): JSX.Element => {
   );
 
   useEffect(() => {
-    if (typeof idPenguin !== "undefined" || idPenguin === "") {
-      dispatch(getPenguinThunk(idPenguin));
-    }
+    // if (typeof idPenguin !== "undefined" || idPenguin === "") {
+    dispatch(getPenguinThunk(idPenguin));
+    // }
     dispatch(headerTitleActionCreator("Detail"));
   }, [dispatch, idPenguin]);
 

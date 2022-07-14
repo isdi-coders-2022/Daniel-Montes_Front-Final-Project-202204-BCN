@@ -3,8 +3,9 @@ import { ReactDimmer } from "react-dimmer";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { Modal } from "../Modals/ModalPrompt";
-import { getUserThunk } from "../../app/redux/thunks/userThunk/userThunk";
+// import { getUserThunk } from "../../app/redux/thunks/userThunk/userThunk";
 import {
+  getPenguinThunk,
   loadFavsThunk,
   loadPenguinsThunk,
   resetPenguinThunk,
@@ -12,8 +13,6 @@ import {
 import "../../Styles/NavbarStyles.css";
 import { toPascalCase } from "../../utils/utils";
 import { promptMessageActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
-
-let doOnce = true;
 
 interface Props {
   headerTitle: string;
@@ -26,13 +25,9 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { id } = useAppSelector((state) => state.user);
+  const { id, image, username } = useAppSelector((state) => state.user);
   const { promptMessage } = useAppSelector((state) => state.ui);
-
-  if (id && doOnce) {
-    dispatch(getUserThunk(id));
-    doOnce = false;
-  }
+  const { penguin } = useAppSelector((state) => state.penguins);
 
   const handleClick = () => {
     const message = "Log out?";
@@ -40,9 +35,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     setMenu((prevState) => !prevState);
     setModal((prevState) => !prevState);
   };
-
-  const { image, username } = useAppSelector((state) => state.user);
-  const { penguin } = useAppSelector((state) => state.penguins);
 
   const loadFavs = () => {
     setMenu((prevState) => !prevState);
@@ -82,9 +74,11 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     }
   };
 
-  const handleEdit = (event: React.FormEvent) => {
-    dispatch(getUserThunk(id));
-    navigate(`/users/edit/${id}`);
+  const handleEdit = () => {
+    setMenu((prevState) => !prevState);
+
+    dispatch(getPenguinThunk(id));
+    navigate(`/penguins/edit/${id}`);
   };
 
   const HidderBack =

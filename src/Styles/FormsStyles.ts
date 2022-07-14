@@ -184,7 +184,7 @@ const FormsStyles = styled.div`
     border: 2px solid;
     border-radius: 15px;
     width: 80%;
-    height: 145px;
+
     background-image: url(${imagePhotoBackgoud});
     background-color: white;
     background-repeat: no-repeat;
@@ -460,7 +460,7 @@ const FormsStyles = styled.div`
     display: inline-block;
     position: relative;
     overflow: hidden;
-    top: -490px;
+
     border: 0;
     width: 100%;
   }
@@ -511,10 +511,6 @@ const FormsStyles = styled.div`
     color: black;
     border: 5px solid;
     background-color: white;
-  }
-
-  .file-upload {
-    visibility: hidden;
   }
 
   .input-description {

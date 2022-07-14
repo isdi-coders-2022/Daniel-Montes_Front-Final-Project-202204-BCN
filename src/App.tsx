@@ -7,7 +7,7 @@ import CheckInSecurity from "./components/CheckInSecurity/CheckInSecurity";
 import CreatePage from "./pages/CreatePage/CreatePage";
 import DetailPage from "./pages/DetailPage/DetailPage";
 import { useAppDispatch, useAppSelector } from "./app/redux/hooks/hooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { UserInfo } from "./app/redux/types/userInterfaces/userInterfaces";
 import jwtDecode from "jwt-decode";
 import { logInActionCreator } from "./app/redux/features/userSlice/userSlice";
@@ -16,10 +16,13 @@ import { Error404Page } from "./pages/Error404/Error404";
 import FavsPage from "./pages/FavsPage/FavsPage";
 import { ToastContainer } from "react-toastify";
 import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
+import { getUserThunk } from "./app/redux/thunks/userThunk/userThunk";
 
 function App() {
   const { logged } = useAppSelector((state) => state.user);
-  const { headerTitle } = useAppSelector((state) => state.ui);
+  const { headerTitle, loading } = useAppSelector((state) => state.ui);
+  const [, setMenu] = useState(false);
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -28,8 +31,10 @@ function App() {
     if (token || logged) {
       const userData: UserInfo = jwtDecode(token as string);
       dispatch(logInActionCreator(userData));
+      dispatch(getUserThunk(userData.id));
+      loading ? setMenu(true) : setMenu(false);
     }
-  }, [dispatch, logged]);
+  }, [dispatch, logged, loading]);
 
   return (
     <>
@@ -64,7 +69,7 @@ function App() {
           path="/users/edit/:id"
           element={
             <CheckOutSecurity>
-              <DetailPage />
+              <CreatePage />
             </CheckOutSecurity>
           }
         />

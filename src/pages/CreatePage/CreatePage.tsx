@@ -12,26 +12,31 @@ import FormsStyles from "../../Styles/FormsStyles";
 const CreatePage = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  const { penguin } = useAppSelector((state) => state.penguins);
-  const { idPenguin } = useParams();
+  let { idPenguin } = useParams();
   const { headerTitle } = useAppSelector((state) => state.ui);
+  const { penguin } = useAppSelector((state) => state.penguins);
 
-  const SetTitleHeader = (title: string, lastTitle: string) => {
-    dispatch(headerTitleActionCreator(title));
-    dispatch(headerLastTitleActionCreator(lastTitle));
-  };
+  const isCreate = document.location.href.includes("create");
 
-  const thisTitle = document.location.href.includes("create")
-    ? "New..."
-    : "Edit...";
+  const thisTitle = isCreate ? "New..." : "Edit...";
 
-  if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
+  if (!isCreate) {
+    idPenguin = document.location.href.substring(
+      document.location.href.lastIndexOf("/") + 1,
+      document.location.href.length
+    );
+  }
 
   useEffect(() => {
     if (typeof idPenguin !== "undefined") {
-      dispatch(getPenguinThunk(idPenguin));
+      dispatch(getPenguinThunk(`${idPenguin}`));
     }
-  }, [dispatch, idPenguin]);
+    const SetTitleHeader = (title: string, lastTitle: string) => {
+      dispatch(headerTitleActionCreator(title));
+      dispatch(headerLastTitleActionCreator(lastTitle));
+    };
+    if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
+  }, [dispatch, idPenguin, headerTitle, thisTitle]);
 
   return (
     <FormsStyles>

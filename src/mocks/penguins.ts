@@ -8,7 +8,6 @@ export const mockPenguin = {
   favs: ["penguin1"],
   image: "image1",
   imageBackup: "sadsadasd.jpg",
-  originalname: "Penguin1",
 };
 
 export const mockPenguins = [
@@ -20,7 +19,7 @@ export const mockPenguins = [
     likers: ["penguin1"],
     favs: ["penguin1"],
     image: "image.jpg",
-    originalname: "Penguin1",
+
     imageBackup: "ImageBackup.jpg",
     description: "Cal is a penguin",
   },
@@ -33,7 +32,7 @@ export const mockPenguins = [
     favs: ["penguin1"],
     image: "image.jpg",
     imageBackup: "ImageBackup.jpg",
-    originalname: "Penguin1",
+
     description: "Cal is a penguin",
   },
 ];
