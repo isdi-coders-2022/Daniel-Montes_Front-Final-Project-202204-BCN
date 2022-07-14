@@ -63,23 +63,24 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     try {
       if (isCreate) {
-        formData.likers = [`${idUser}`];
-        formData.favs = [`${idUser}`];
+        formData.likers = [idUser];
+        formData.favs = [idUser];
         formData.likes = 1;
       }
 
+      debugger;
       const newFormData = new FormData();
 
       newFormData.append("id", formData.id);
       newFormData.append("name", formData.name);
       newFormData.append("category", formData.category);
       newFormData.append("likes", JSON.stringify(formData.likes));
-      newFormData.append("likers", idUser);
+      newFormData.append("likers", JSON.stringify(formData.likers));
       newFormData.append("favs", JSON.stringify(formData.favs));
       newFormData.append("image", formData.image);
       newFormData.append("imageBackup", formData.imageBackup);
       newFormData.append("description", formData.description);
-
+      debugger;
       !isCreate
         ? dispatch(editPenguinThunk(newFormData, "Updated"))
         : dispatch(createFavThunk(formData));
@@ -92,7 +93,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     }
   };
 
-  if (isCreate) {
+  if (!isCreate) {
     HiderImageOn = "";
     HiderImage = " display-none";
   } else {
@@ -111,8 +112,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
         <label htmlFor="image">Image</label>
         <img
           className={`penguin-image${HiderImageOn}`}
-          src={formData.imageBackup}
-          alt={formData.name}
+          src={penguin.imageBackup || formData.imageBackup}
+          alt={penguin.name || formData.name}
         />
         <input
           className={`penguin-image${HiderImage}`}
@@ -125,7 +126,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           type="text"
           id="id"
           autoComplete="off"
-          value={formData.id}
+          value={penguin.id || formData.id}
           onChange={handleInputChange}
           placeholder="Id"
           contentEditable="false"
@@ -137,7 +138,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           type="text"
           id="name"
           autoComplete="off"
-          value={formData.name}
+          value={penguin.name || formData.name}
           onChange={handleInputChange}
           placeholder="Name"
           contentEditable="true"
@@ -147,7 +148,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           type="text"
           id="category"
           autoComplete="off"
-          value={formData.category}
+          value={penguin.category || formData.category}
           onChange={handleInputChange}
           placeholder="Category"
         />
@@ -156,7 +157,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           type="number"
           id="likes"
           autoComplete="off"
-          value={formData.likes}
+          value={penguin.likes || formData.likes}
           placeholder="Likes"
           onChange={handleInputChange}
           className="input-likes"
@@ -166,7 +167,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           type="text"
           id="description"
           autoComplete="off"
-          value={formData.description}
+          value={penguin.description || formData.description}
           placeholder="Description"
           onChange={handleInputChange}
           className="input-description"

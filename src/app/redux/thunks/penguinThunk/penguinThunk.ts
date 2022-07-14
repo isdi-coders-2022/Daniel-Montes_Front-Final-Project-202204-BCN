@@ -14,7 +14,7 @@ import {
   resetPenguinsActionCreator,
 } from "../../features/penguinSlice/penguinSlice";
 
-import { IPenguin } from "../../types/penguin/penguinInterfaces";
+import { IPenguin, IRegisterForm } from "../../types/penguin/penguinInterfaces";
 import {
   finishedLoadingActionCreator,
   loadingActionCreator,
@@ -86,7 +86,7 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 };
 
 export const createFavThunk =
-  (formPenguin: any) => async (dispatch: AppDispatch) => {
+  (formPenguin: IRegisterForm) => async (dispatch: AppDispatch) => {
     setLoadingOn(`CREATE Fav: Creating ${formPenguin.name}...`);
 
     const token = localStorage.getItem("token");
@@ -175,6 +175,7 @@ export const deletePenguinThunk =
 export const editPenguinThunk =
   (formPenguin: any, type: string) => async (dispatch: AppDispatch) => {
     try {
+      const isFav = document.location.href.includes("favs");
       setLoadingOn("EDIT Penguin...");
       dispatch(loadingActionCreator());
       const token = localStorage.getItem("token");
@@ -193,7 +194,7 @@ export const editPenguinThunk =
         dispatch(editPenguinActionCreator(penguin));
 
         dispatch(finishedLoadingActionCreator());
-
+        isFav ? dispatch(loadFavsThunk()) : dispatch(loadPenguinsThunk());
         setLoadingOffWithMessage(`${type}`, false);
       }
     } catch (Error) {

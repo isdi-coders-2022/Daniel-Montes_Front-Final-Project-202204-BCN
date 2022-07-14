@@ -6,9 +6,12 @@ import {
   deletePenguinThunk,
   editPenguinThunk,
   getPenguinThunk,
+  loadPenguinsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import { correctAction } from "../Modals/Modals";
+import {
+  IPenguin,
+  IRegisterForm,
+} from "../../app/redux/types/penguin/penguinInterfaces";
 import iconPhotoEmpty from "../../images/contact-photo-add.png";
 import { initialFormData } from "../../utils/utils";
 
@@ -22,7 +25,10 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
 
   const idUser = useAppSelector((state) => state.user.id);
 
-  const [formData, setFormData] = useState<IPenguin>(initialFormData);
+  const [formData, setFormData] = useState<IRegisterForm>(initialFormData);
+
+  const isFav = penguin.favs.includes(idUser);
+  const isLiker = penguin.likers.includes(idUser);
 
   const handleDelete = (): void => {
     if (penguin.id) {
@@ -41,17 +47,11 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
     const newPenguin = {
       ...penguin,
       likers: penguin.likers.filter((liker) => liker !== idUser),
-      likes: penguin.likes - 1,
+      likes: penguin.likes >= 1 ? penguin.likes - 1 : penguin.likes,
     };
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Deleted Like!"));
-    correctAction(
-      newPenguin.name +
-        ": You don´t like this penguin! Likes counter total: " +
-        penguin.likes +
-        ". Added: (-1)"
-    );
   };
 
   const addToLikers = () => {
@@ -63,11 +63,18 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Added Like!"));
-    correctAction("You like: " + formData.name + " this penguin! ");
   };
 
   const handleLikes = () => {
-    formData.likers.includes(idUser) ? deleteFromLikers() : addToLikers();
+    if (Array(formData.likers)) {
+      const uniqueLikers = Array.from(new Set(formData.likers));
+      const newFormData = formData;
+      newFormData.likers = uniqueLikers;
+
+      isFav ? deleteFromLikers() : addToLikers();
+
+      dispatch(getPenguinThunk(penguin.id));
+    }
   };
 
   const deleteFromFavs = () => {
@@ -78,7 +85,6 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Deleted from favorites!"));
-    correctAction(newPenguin.name + ": Deleted from favorites! ");
   };
 
   const addToFavs = () => {
@@ -86,23 +92,20 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
       ...penguin,
       favs: penguin.favs.concat(idUser),
     };
-
     setFormData(newPenguin);
     dispatch(editPenguinThunk(newPenguin, "Added to favorites! "));
-
-    correctAction(newPenguin.name + ": Added to favorites!");
   };
 
   const handleFavs = () => {
-    formData.favs.includes(idUser) ? deleteFromFavs() : addToFavs();
+    isFav ? deleteFromFavs() : addToFavs();
+
+    dispatch(getPenguinThunk(penguin.id));
+    dispatch(loadPenguinsThunk());
   };
 
   const HidderDelete = !document.location.href.includes("/penguins/favs")
     ? ""
     : " display-none";
-
-  const isFav = penguin.favs.includes(idUser);
-  const isLiker = penguin.likers.includes(idUser);
 
   const selectIconFav = isFav
     ? " bounce animatedFavDelete"
