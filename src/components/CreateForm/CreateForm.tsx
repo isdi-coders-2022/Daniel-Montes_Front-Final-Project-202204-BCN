@@ -10,6 +10,7 @@ import {
   editPenguinThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
+import { initialFormData } from "../../utils/utils";
 
 interface Props {
   penguin: IPenguin;
@@ -22,18 +23,6 @@ let imageURL = "";
 const CreateForm = ({ penguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
-  const initialFormData: IRegisterForm = {
-    id: penguin?.id || "",
-    name: penguin?.name || "",
-    category: penguin?.category || "",
-    likers: penguin?.likers || [],
-    likes: penguin?.likes || 0,
-    favs: penguin?.favs || [],
-    description: penguin?.description || "",
-    image: penguin?.image,
-    imageBackup: penguin?.imageBackup || "",
-  };
 
   const isCreate = document.location.href.includes("create");
 
