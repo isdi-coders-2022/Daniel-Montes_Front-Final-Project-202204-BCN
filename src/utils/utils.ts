@@ -1,10 +1,12 @@
-export const initialFormData = {
+import { IRegisterForm } from "../app/redux/types/penguin/penguinInterfaces";
+
+export const initialFormData: IRegisterForm = {
   id: "",
   name: "",
   category: "",
-  likers: [""],
+  likers: [],
   likes: 0,
-  favs: [""],
+  favs: [],
   description: "",
   image: "",
   imageBackup: "",
