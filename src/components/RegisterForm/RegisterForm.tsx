@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
-import { registerThunk } from "../../app/redux/thunks/userThunk/userThunk";
+import { registerThunk } from "../../app/redux/thunks/penguinThunk/userThunk/userThunk";
 import { NavLink } from "react-router-dom";
 import { correctAction } from "../Modals/Modals";
 import RegisterPageStyles from "../../Styles/FormsStyles";

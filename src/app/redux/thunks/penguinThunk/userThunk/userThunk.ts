@@ -5,14 +5,14 @@ import {
   LoginData,
   LoginResponse,
   UserRegister,
-} from "../../types/userInterfaces/userInterfaces";
+} from "../../../types/userInterfaces/userInterfaces";
 import {
   loadUserDataActionCreator,
   logInActionCreator,
-} from "../../features/userSlice/userSlice";
+} from "../../../features/userSlice/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setLoadingOffWithMessage } from "../../../../components/Modals/Modals";
-import { finishedLoadingActionCreator } from "../../features/uiSlice/uiSlice";
+import { setLoadingOffWithMessage } from "../../../../../components/Modals/Modals";
+import { finishedLoadingActionCreator } from "../../../features/uiSlice/uiSlice";
 
 export const loginThunk =
   (userData: LoginData) => async (dispatch: Dispatch) => {

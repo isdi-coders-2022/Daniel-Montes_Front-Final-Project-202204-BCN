@@ -51,28 +51,25 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     try {
-      if (isCreate) {
-        formData.likers = [idUser];
-        formData.favs = [idUser];
-        formData.likes = 1;
-      }
-
-      debugger;
       const newFormData = new FormData();
+
+      if (isCreate) {
+        newFormData.append("likes", "1");
+        newFormData.append("likers", idUser);
+        newFormData.append("favs", idUser);
+      }
 
       newFormData.append("id", formData.id);
       newFormData.append("name", formData.name);
       newFormData.append("category", formData.category);
-      newFormData.append("likes", JSON.stringify(formData.likes));
-      newFormData.append("likers", JSON.stringify(formData.likers));
-      newFormData.append("favs", JSON.stringify(formData.favs));
+
       newFormData.append("image", formData.image);
       newFormData.append("imageBackup", formData.imageBackup);
       newFormData.append("description", formData.description);
-      debugger;
+
       !isCreate
         ? dispatch(editPenguinThunk(newFormData, "Updated"))
-        : dispatch(createFavThunk(formData));
+        : dispatch(createFavThunk(newFormData));
 
       setFormData(initialFormData);
 

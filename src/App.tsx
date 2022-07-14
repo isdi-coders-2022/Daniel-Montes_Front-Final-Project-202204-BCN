@@ -16,7 +16,7 @@ import { Error404Page } from "./pages/Error404/Error404";
 import FavsPage from "./pages/FavsPage/FavsPage";
 import { ToastContainer } from "react-toastify";
 import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
-import { getUserThunk } from "./app/redux/thunks/userThunk/userThunk";
+import { getUserThunk } from "./app/redux/thunks/penguinThunk/userThunk/userThunk";
 
 function App() {
   const { logged } = useAppSelector((state) => state.user);
