@@ -87,7 +87,6 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 
 export const createFavThunk =
   (formPenguin: any) => async (dispatch: AppDispatch) => {
-    debugger;
     setLoadingOn(`CREATE Fav: Creating ${formPenguin.name}...`);
 
     const token = localStorage.getItem("token");
