@@ -62,14 +62,15 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     try {
-      const newFormData = new FormData();
-
       if (isCreate) {
         formData.likers = [`${idUser}`];
         formData.favs = [`${idUser}`];
         formData.likes = 1;
       }
 
+      const newFormData = new FormData();
+
+      newFormData.append("id", formData.id);
       newFormData.append("name", formData.name);
       newFormData.append("category", formData.category);
       newFormData.append("likes", JSON.stringify(formData.likes));
