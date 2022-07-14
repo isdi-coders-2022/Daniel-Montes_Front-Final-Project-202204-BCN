@@ -43,23 +43,25 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
   };
 
   const deleteFromLikers = () => {
-    setFormData({
+    const newPenguin = {
       ...penguin,
       likers: penguin.likers.filter((liker) => liker !== idUser),
       likes: penguin.likes >= 1 ? penguin.likes - 1 : penguin.likes,
-    });
+    };
 
-    dispatch(editPenguinThunk(formData, "Deleted Like!"));
+    setFormData(newPenguin);
+    dispatch(editPenguinThunk(newPenguin, "Deleted Like!"));
   };
 
   const addToLikers = () => {
-    setFormData({
+    const newPenguin = {
       ...penguin,
       likers: penguin.likers.concat(idUser),
       likes: penguin.likes + 1,
-    });
+    };
 
-    dispatch(editPenguinThunk(formData, "Added Like!"));
+    setFormData(newPenguin);
+    dispatch(editPenguinThunk(newPenguin, "Added Like!"));
   };
 
   const handleLikes = () => {
@@ -75,21 +77,22 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
   };
 
   const deleteFromFavs = () => {
-    setFormData({
+    const newPenguin = {
       ...penguin,
       favs: penguin.favs.filter((fav) => fav !== idUser),
-    });
+    };
 
-    dispatch(editPenguinThunk(formData, "Deleted from favorites!"));
+    setFormData(newPenguin);
+    dispatch(editPenguinThunk(newPenguin, "Deleted from favorites!"));
   };
 
   const addToFavs = () => {
-    setFormData({
+    const newPenguin = {
       ...penguin,
       favs: penguin.favs.concat(idUser),
-    });
-
-    dispatch(editPenguinThunk(formData, "Added to favorites! "));
+    };
+    setFormData(newPenguin);
+    dispatch(editPenguinThunk(newPenguin, "Added to favorites! "));
   };
 
   const handleFavs = () => {
