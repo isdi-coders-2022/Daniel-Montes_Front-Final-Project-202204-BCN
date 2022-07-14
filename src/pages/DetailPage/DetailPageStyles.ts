@@ -346,6 +346,7 @@ const DetailPageStyles = styled.div`
 
   .animatedFav {
     background-image: url(${iconMenuFavs});
+    background-repeat: no-repeat;
     width: 45px;
     height: 45px;
     margin-left: 10px;

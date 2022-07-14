@@ -5,7 +5,7 @@ export interface IPenguin {
   likes: number;
   likers: {}[];
   favs: {}[];
-  image: string | File;
+  image: string;
   imageBackup: string;
   description: string;
 }
