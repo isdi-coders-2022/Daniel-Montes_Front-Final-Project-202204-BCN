@@ -14,7 +14,7 @@ import {
   resetPenguinsActionCreator,
 } from "../../features/penguinSlice/penguinSlice";
 
-import { IPenguin, IRegisterForm } from "../../types/penguin/penguinInterfaces";
+import { IPenguin } from "../../types/penguin/penguinInterfaces";
 import {
   finishedLoadingActionCreator,
   loadingActionCreator,
@@ -86,7 +86,8 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 };
 
 export const createFavThunk =
-  (formPenguin: IRegisterForm) => async (dispatch: AppDispatch) => {
+  (formPenguin: any) => async (dispatch: AppDispatch) => {
+    debugger;
     setLoadingOn(`CREATE Fav: Creating ${formPenguin.name}...`);
 
     const token = localStorage.getItem("token");
