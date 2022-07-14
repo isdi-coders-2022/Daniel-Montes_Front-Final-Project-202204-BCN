@@ -2,13 +2,13 @@ import styled from "styled-components";
 import iconHamburguer from "../../images/menu_hamburguer.png";
 import iconBack from "../../images/icon-back.png";
 import iconFavs from "../../images/icon-stars.png";
-import iconMenuFavs from "../../images/star_add_icon.png";
-import iconMenuFavsDelete from "../../images/icon-fav-delete45.png";
+import iconMenuFavs from "../../images/fav-add-32.png";
+import iconMenuFavsDelete from "../../images/fav-delete-32.png";
 import iconLike from "../../images/heartLike.png";
 import iconAddFav from "../../images/icon-add_plus.png";
 import iconHome from "../../images/icon-home.png";
 import iconLogout from "../../images/icon-logout-white.png";
-import iconDelete from "../../images/icon-logout32.png";
+import iconDelete from "../../images/delete-32.png";
 import iconSoundOff from "../../images/icon-sound-off.png";
 import iconEditar from "../../images/icon-editar32.png";
 import iconLikeInit from "../../images/icon-likes-empty.png";
@@ -26,6 +26,7 @@ const DetailPageStyles = styled.div`
   button {
     cursor: pointer;
   }
+
   .bt-menu {
     background: url(${iconHamburguer});
     border-radius: 10px;
@@ -103,7 +104,7 @@ const DetailPageStyles = styled.div`
     border-radius: 10px;
     width: 100%;
     height: 100%;
-
+    max-width: 730px;
     margin-top: -30px;
   }
 
@@ -348,11 +349,13 @@ const DetailPageStyles = styled.div`
     width: 45px;
     height: 45px;
     margin-left: 10px;
+    background-position: center;
   }
 
   .animatedFavDelete {
     background-image: url(${iconMenuFavsDelete});
-
+    background-repeat: no-repeat;
+    background-position: center;
     margin-left: 10px;
     width: 45px;
   }
@@ -373,7 +376,7 @@ const DetailPageStyles = styled.div`
   .form-detail-animatedEdit {
     background: url(${iconEditar});
     background-repeat: no-repeat;
-    background-position: right;
+    background-position: left;
     width: 70%;
   }
 

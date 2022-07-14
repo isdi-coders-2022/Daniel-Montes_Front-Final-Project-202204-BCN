@@ -20,6 +20,18 @@ import {
   loadingActionCreator,
 } from "../../features/uiSlice/uiSlice";
 
+const blankFormData: IPenguin = {
+  id: "",
+  name: "",
+  category: "",
+  likes: 0,
+  likers: [],
+  favs: [],
+  description: "",
+  image: "",
+  imageBackup: "",
+};
+
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   dispatch(loadingActionCreator());
 
@@ -197,18 +209,6 @@ export const resetPenguinThunk = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(loadingActionCreator());
 
-    const blankFormData: IPenguin = {
-      id: "",
-      name: "",
-      category: "",
-      likes: 0,
-      likers: [],
-      favs: [],
-      description: "",
-      image: "",
-      imageBackup: "",
-    };
-
     dispatch(resetPenguinActionCreator(blankFormData));
     dispatch(finishedLoadingActionCreator());
 
@@ -225,18 +225,6 @@ export const resetPenguinThunk = () => async (dispatch: AppDispatch) => {
 export const resetPenguinsThunk = () => async (dispatch: AppDispatch) => {
   try {
     dispatch(loadingActionCreator());
-
-    const blankFormData: IPenguin = {
-      id: "",
-      name: "",
-      category: "",
-      likes: 0,
-      likers: [],
-      favs: [],
-      description: "",
-      image: "",
-      imageBackup: "",
-    };
 
     dispatch(resetPenguinsActionCreator(blankFormData));
     dispatch(finishedLoadingActionCreator());

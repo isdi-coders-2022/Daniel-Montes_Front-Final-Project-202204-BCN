@@ -5,7 +5,7 @@ export interface IPenguin {
   likes: number;
   likers: {}[];
   favs: {}[];
-  image: string;
+  image: string | File;
   imageBackup: string;
   description: string;
 }
@@ -31,7 +31,7 @@ export interface IRegisterForm {
   favs: {}[];
   likers: {}[];
   likes: number;
-  image: string;
+  image: string | File;
   imageBackup: string;
   description: string;
 }

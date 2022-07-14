@@ -10,6 +10,7 @@ import {
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import { correctAction } from "../Modals/Modals";
 import iconPhotoEmpty from "../../images/contact-photo-add.png";
+import { initialFormData } from "../../utils/utils";
 
 interface Props {
   penguin: IPenguin;
@@ -20,18 +21,6 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const idUser = useAppSelector((state) => state.user.id);
-
-  const initialFormData: IPenguin = {
-    id: penguin.id || "",
-    name: penguin.name || "",
-    category: penguin.category || "",
-    likes: penguin.likes || 0,
-    likers: penguin.likers || [],
-    favs: penguin.favs || [],
-    description: penguin.description || "",
-    image: penguin.image,
-    imageBackup: penguin.imageBackup || "",
-  };
 
   const [formData, setFormData] = useState<IPenguin>(initialFormData);
 
@@ -135,12 +124,12 @@ const PenguinDetail = ({ penguin }: Props): JSX.Element => {
 
       <div className="penguin-buttons-container">
         <button
-          className={`animated animatedDelete${HidderDelete}`}
+          className={`animated bounce animatedDelete${HidderDelete}`}
           onClick={handleDelete}
           title="bt-delete"
         />
         <button
-          className={`animated form-detail-animatedEdit${HidderDelete}`}
+          className={`animated bounce form-detail-animatedEdit${HidderDelete}`}
           onClick={handleEdit}
           title="bt-edit"
         />
