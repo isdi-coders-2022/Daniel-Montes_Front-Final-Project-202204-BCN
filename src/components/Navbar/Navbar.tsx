@@ -3,7 +3,6 @@ import { ReactDimmer } from "react-dimmer";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { Modal } from "../Modals/ModalPrompt";
-// import { getUserThunk } from "../../app/redux/thunks/userThunk/userThunk";
 import {
   getPenguinThunk,
   loadFavsThunk,

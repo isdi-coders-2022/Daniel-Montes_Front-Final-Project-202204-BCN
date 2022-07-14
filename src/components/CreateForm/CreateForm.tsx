@@ -78,7 +78,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       newFormData.append("image", formData.image);
       newFormData.append("imageBackup", formData.imageBackup);
       newFormData.append("description", formData.description);
-      debugger;
+
       !isCreate
         ? dispatch(editPenguinThunk(newFormData, "Updated"))
         : dispatch(createFavThunk(formData));
