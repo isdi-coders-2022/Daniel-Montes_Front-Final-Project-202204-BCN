@@ -29,7 +29,7 @@ describe("Given a CreatePage component", () => {
       );
 
       const bt = screen.getAllByRole(ToFind);
-      const btDelete = screen.getByTitle("bt-delete");
+      const btDelete = screen.getByTitle("btn-delete");
       userEvent.click(btDelete);
       handleDelete();
 

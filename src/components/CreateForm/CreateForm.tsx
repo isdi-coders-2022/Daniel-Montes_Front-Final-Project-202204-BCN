@@ -31,7 +31,6 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   let newFormData = new FormData();
   let newData;
 
-  debugger;
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ): void => {
@@ -83,8 +82,6 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   };
 
   const processEdit = () => {
-    debugger;
-
     dispatch(editPenguinThunk(newFormData, "Updated fields: " + modFields));
 
     dispatch(loadFavsThunk());
