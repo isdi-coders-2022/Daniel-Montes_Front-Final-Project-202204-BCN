@@ -1,12 +1,12 @@
-import { IRegisterForm } from "../app/redux/types/penguin/penguinInterfaces";
+import { IPenguin } from "../app/redux/types/penguin/penguinInterfaces";
 
-export const initialFormData: IRegisterForm = {
+export const initialFormData: IPenguin = {
   id: "",
   name: "",
   category: "",
-  likers: [],
+  likers: [] || "",
   likes: 0,
-  favs: [],
+  favs: [] || "",
   description: "",
   image: "",
   imageBackup: "",
@@ -18,16 +18,13 @@ export const toPascalCase = (strValue: string) => {
   });
 };
 
-export const addToCleanArray = (
-  array: Array<string>,
-  newValue: string
-): any => {
+export const cleanArray = (array: any): any => {
   if (Array(array)) {
-    array.push(newValue);
     array = Array.from(new Set(array));
-    array = array.filter(function (field) {
+    array = array.filter(function (field: any) {
       return field != null && field !== "";
     });
+
     return array;
   }
 };

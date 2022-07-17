@@ -3,12 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   editPenguinThunk,
-  getPenguinThunk,
+  // getPenguinThunk,
   loadFavsThunk,
   loadPenguinsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import { initialFormData, toPascalCase } from "../../utils/utils";
+import { cleanArray, initialFormData, toPascalCase } from "../../utils/utils";
 import iconPhotoEmpty from "../../images/contact-photo-add.png";
 import { Modal } from "../Modals/ModalPrompt";
 import { ReactDimmer } from "react-dimmer";
@@ -21,11 +21,14 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
   const idUser = useAppSelector((state) => state.user.id);
   const isFavsPage = document.location.href.includes("favs");
 
-  const [formData, setFormData] = useState<IPenguin>(initialFormData);
+  const [, setFormData] = useState<IPenguin>(initialFormData);
   const [isModalOpen, setModal] = useState(false);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const isFav = penguin.favs.includes(idUser);
+  const isLiker = penguin.likers.includes(idUser);
 
   const message = "Delete penguin: " + penguin?.name + "?";
 
@@ -38,77 +41,63 @@ const Penguin = ({ penguin }: Props): JSX.Element => {
   };
 
   const handleEdit = () => {
-    dispatch(getPenguinThunk(penguin.id));
     navigate(`/penguins/edit/${penguin.id}`);
   };
 
   const deleteFromLikers = () => {
-    const newPenguin = {
-      ...penguin,
-      likers: penguin.likers.filter((liker) => liker !== idUser),
-      likes: penguin.likes >= 1 ? penguin.likes - 1 : penguin.likes,
-    };
+    const newData = { ...penguin };
+    newData.likers = newData.likers.filter((liker) => liker !== idUser);
+    newData.likes = penguin.likes >= 1 ? penguin.likes - 1 : penguin.likes;
 
-    setFormData(newPenguin);
-    dispatch(editPenguinThunk(newPenguin, "Deleted Like!"));
+    setFormData(newData);
+    dispatch(editPenguinThunk(newData, "Deleted Like!"));
   };
 
   const addToLikers = () => {
-    const newPenguin = {
-      ...penguin,
-      likers: penguin.likers.concat(idUser),
-      likes: penguin.likes + 1,
-    };
+    const newData = { ...penguin };
+    newData.likers = newData.likers.concat(idUser);
+    newData.likes = penguin.likes + 1;
 
-    setFormData(newPenguin);
-    dispatch(editPenguinThunk(newPenguin, "Added Like!"));
+    setFormData(newData);
+
+    dispatch(editPenguinThunk(newData, "Added Like!"));
   };
 
   const handleLikes = () => {
-    if (Array(formData.likers)) {
-      const uniqueLikers = Array.from(new Set(formData.likers));
-      const newFormData = formData;
-      newFormData.likers = uniqueLikers;
+    if (Array(penguin.likers)) {
+      cleanArray(penguin.likers);
 
-      uniqueLikers.includes(idUser) ? deleteFromLikers() : addToLikers();
+      isLiker ? deleteFromLikers() : addToLikers();
 
       isFavsPage ? dispatch(loadFavsThunk()) : dispatch(loadPenguinsThunk());
     }
   };
 
   const deleteFromFavs = () => {
-    const newPenguin = {
-      ...penguin,
-      favs: penguin.favs.filter((fav) => fav !== idUser),
-    };
+    const newData = { ...penguin };
+    newData.favs = penguin.favs.filter((fav) => fav !== idUser);
 
-    setFormData(newPenguin);
-    dispatch(editPenguinThunk(newPenguin, "Deleted from favorites!"));
+    setFormData(newData);
+    dispatch(editPenguinThunk(newData, "Deleted from favorites!"));
   };
 
   const addToFavs = () => {
-    const newPenguin = {
-      ...penguin,
-      favs: penguin.favs.concat(idUser),
-    };
-    setFormData(newPenguin);
-    dispatch(editPenguinThunk(newPenguin, "Added to favorites! "));
+    const newData = { ...penguin };
+    newData.favs = penguin.favs.concat(idUser);
+
+    setFormData(newData);
+    dispatch(editPenguinThunk(newData, "Added to favorites! "));
   };
 
   const handleFavs = () => {
-    if (Array(formData.favs)) {
-      const uniqueLikers = Array.from(new Set(formData.favs));
-      let newFormData = formData;
-      newFormData.favs = uniqueLikers;
+    if (Array(penguin.favs)) {
+      cleanArray(penguin.favs);
 
-      uniqueLikers.includes(idUser) ? deleteFromFavs() : addToFavs();
+      isFav ? deleteFromFavs() : addToFavs();
 
       isFavsPage ? dispatch(loadFavsThunk()) : dispatch(loadPenguinsThunk());
     }
   };
-
-  const isFav = penguin.favs.includes(idUser);
-  const isLiker = penguin.likers.includes(idUser);
 
   const selectIconFav = isFav
     ? " bounce animatedFavDelete"
