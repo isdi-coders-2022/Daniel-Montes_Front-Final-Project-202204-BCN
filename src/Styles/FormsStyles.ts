@@ -9,7 +9,8 @@ import iconHome from "../images/icon-home.png";
 import iconDelete from "../images/icon-logout1.png";
 import iconSoundOff from "../images/icon-sound-off.png";
 import iconSoundOn from "../images/icon-sound-on.png";
-import imagePhotoBackgoud from "../images/contact-photo.png";
+import imagePhotoBackground from "../images/contact-photo.png";
+import iconEdit from "../images/icon-editar.png";
 
 const FormsStyles = styled.div`
   form {
@@ -184,8 +185,8 @@ const FormsStyles = styled.div`
     border: 2px solid;
     border-radius: 15px;
     width: 80%;
-
-    background-image: url(${imagePhotoBackgoud});
+    height: 230px;
+    background-image: url(${imagePhotoBackground});
     background-color: white;
     background-repeat: no-repeat;
     background-position-x: 50%;
@@ -457,13 +458,16 @@ const FormsStyles = styled.div`
   }
 
   .parent-div {
-    display: inline-block;
     position: relative;
+    top: 265px;
+    left: 270px;
+    display: inline-block;
+    position: absolute;
     overflow: hidden;
-
     border: 0;
     width: 100%;
   }
+
   .register-parent-div {
     display: inline-block;
     position: relative;
@@ -491,11 +495,13 @@ const FormsStyles = styled.div`
 
   .btn-upload {
     color: #000;
-    margin-left: 80px;
+    background: none;
+    background-image: url(${iconEdit});
+    background-repeat: no-repeat;
+    height: 45px;
     border-radius: 10px;
     font-size: 22px;
     font-weight: bold;
-    height: 45px;
   }
 
   .btn-register-upload {

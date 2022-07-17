@@ -20,7 +20,9 @@ const FavsPage = (): JSX.Element => {
       dispatch(headerTitleActionCreator(title));
       dispatch(headerLastTitleActionCreator(lastTitle));
     };
+
     if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
+
     dispatch(loadFavsThunk());
   }, [dispatch, headerTitle, thisTitle]);
 

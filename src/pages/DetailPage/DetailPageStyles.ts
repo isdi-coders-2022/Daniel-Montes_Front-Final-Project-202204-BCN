@@ -10,7 +10,7 @@ import iconHome from "../../images/icon-home.png";
 import iconLogout from "../../images/icon-logout-white.png";
 import iconDelete from "../../images/delete-32.png";
 import iconSoundOff from "../../images/icon-sound-off.png";
-import iconEditar from "../../images/icon-editar32.png";
+import iconEdit from "../../images/icon-editar32.png";
 import iconLikeInit from "../../images/icon-likes-empty.png";
 
 const DetailPageStyles = styled.div`
@@ -342,6 +342,7 @@ const DetailPageStyles = styled.div`
     background-repeat: no-repeat;
     background-image: url(${iconLike});
     width: 45px;
+    height: 45px;
   }
 
   .animatedFav {
@@ -359,12 +360,14 @@ const DetailPageStyles = styled.div`
     background-position: center;
     margin-left: 10px;
     width: 45px;
+    height: 45px;
   }
 
   .animatedLikeInit {
     background-image: url(${iconLikeInit});
     background-repeat: no-repeat;
     width: 45px;
+    height: 45px;
   }
 
   .animatedDelete {
@@ -372,10 +375,19 @@ const DetailPageStyles = styled.div`
     background-repeat: no-repeat;
     background-position: center;
     width: 45px;
+    height: 45px;
+  }
+
+  .animatedEdit {
+    width: 45px;
+    height: 45px;
+    margin-bottom: 10px;
+    background: url(${iconEdit});
+    background-repeat: no-repeat;
   }
 
   .form-detail-animatedEdit {
-    background: url(${iconEditar});
+    background: url(${iconEdit});
     background-repeat: no-repeat;
     background-position: left;
     width: 70%;

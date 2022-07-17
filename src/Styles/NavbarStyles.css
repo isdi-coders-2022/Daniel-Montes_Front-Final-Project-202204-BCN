@@ -189,14 +189,6 @@ ul {
   opacity: 50%;
 }
 
-.bt-save {
-  background: url("../images/save_icon3-45.png");
-  background-repeat: no-repeat;
-  margin: auto;
-  margin-right: 10px;
-  height: 45px;
-}
-
 .sound-on {
   visibility: hidden;
 }

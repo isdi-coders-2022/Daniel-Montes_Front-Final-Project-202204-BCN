@@ -318,7 +318,7 @@ const PagesStyles = styled.div`
     top: -50px;
     display: flex;
     height: 40px;
-    width: 87%;
+    width: 100%;
     margin: 5px;
   }
 
@@ -414,7 +414,8 @@ const PagesStyles = styled.div`
 
   .animatedLike {
     width: 45px;
-    margin-top: -4px;
+    height: 45px;
+    margin-top: 15px;
     background-image: url(${iconLike});
     background-repeat: no-repeat;
   }
@@ -460,11 +461,15 @@ const PagesStyles = styled.div`
 
   .penguin-buttons {
     width: 32px;
-    height: 150px;
+    height: 290px;
     display: flex;
     flex-direction: column;
     margin-left: 5px;
-    justify-content: space-between;
+
+    justify-content: flex-start;
+    align-content: flex-start;
+    position: relative;
+    top: -250px;
   }
 
   @-webkit-keyframes bounce {

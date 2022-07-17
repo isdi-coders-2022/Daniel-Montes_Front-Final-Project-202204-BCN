@@ -1,16 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import {
-  IPenguin,
-  IRegisterForm,
-} from "../../app/redux/types/penguin/penguinInterfaces";
-import { correctAction, wrongAction } from "../Modals/Modals";
+import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
+import { wrongAction } from "../Modals/Modals";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   createFavThunk,
   editPenguinThunk,
+  loadFavsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
-import { initialFormData } from "../../utils/utils";
+import { initialFormData, cleanArray } from "../../utils/utils";
 
 interface Props {
   penguin: IPenguin;
@@ -18,7 +16,7 @@ interface Props {
 
 let HiderImage = "";
 let HiderImageOn = "";
-let imageURL = "";
+let modFields = [""];
 
 const CreateForm = ({ penguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -28,52 +26,74 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const idUser = useAppSelector((state) => state.user.id);
 
-  const [formData, setFormData] = useState<IRegisterForm>(initialFormData);
+  const [formData, setFormData] = useState<IPenguin>(penguin);
+
+  let newFormData = new FormData();
+  let newData;
 
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ): void => {
-    setFormData({
-      ...formData,
-      [event.target.id]: event.target.value,
-    });
+    event.preventDefault();
 
-    imageURL = event.target.value;
+    if (isCreate) {
+      newFormData.append(event.target.id, event.target.value);
+    } else {
+      newData = { ...penguin, [event.target.id]: event.target.value };
+
+      setFormData(newData);
+    }
+
+    modFields = [...modFields, event.target.id];
+    cleanArray(modFields);
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
       ...formData,
-      image: event.target.files?.[0] as File,
+      [event.target.id]: event.target.files?.[0] as File,
     });
-    correctAction("Added image: " + event.target.value);
+
+    newFormData.append("image", formData.image);
+
+    modFields = [...modFields, event.target.id];
+    cleanArray(modFields);
+  };
+
+  const processCreate = () => {
+    setFormData({
+      ...formData,
+      likes: 1,
+      likers: [idUser],
+      favs: [idUser],
+    });
+
+    newFormData.append("name", penguin.name);
+    newFormData.append("category", formData.category);
+    newFormData.append("likes", JSON.stringify(formData.likes));
+    newFormData.append("likers", idUser);
+    newFormData.append("favs", idUser);
+    newFormData.append("image", formData.image);
+    newFormData.append("imageBackup", formData.imageBackup);
+    newFormData.append("description", formData.description);
+
+    dispatch(createFavThunk(newFormData));
+    dispatch(loadFavsThunk());
+  };
+
+  const processEdit = () => {
+    dispatch(editPenguinThunk(newFormData, "Updated fields: " + modFields));
+
+    dispatch(loadFavsThunk());
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     try {
-      const newFormData = new FormData();
-
-      if (isCreate) {
-        newFormData.append("likes", "1");
-        newFormData.append("likers", idUser);
-        newFormData.append("favs", idUser);
-      }
-
-      newFormData.append("id", formData.id);
-      newFormData.append("name", formData.name);
-      newFormData.append("category", formData.category);
-
-      newFormData.append("image", formData.image);
-      newFormData.append("imageBackup", formData.imageBackup);
-      newFormData.append("description", formData.description);
-
-      !isCreate
-        ? dispatch(editPenguinThunk(newFormData, "Updated"))
-        : dispatch(createFavThunk(newFormData));
+      isCreate ? processCreate() : processEdit();
 
       setFormData(initialFormData);
 
-      navigate("/penguins/favs");
+      navigate("/penguins");
     } catch (error) {
       wrongAction("Error:" + error);
     }
@@ -95,7 +115,17 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
         onSubmit={handleSubmit}
         className="form-create"
       >
-        <label htmlFor="image">Image</label>
+        <div className="parent-div">
+          <button className="btn-upload" />
+          <input
+            id="image"
+            type="file"
+            name="upfile"
+            accept="image/*"
+            className="file-upload"
+            onChange={handleImageChange}
+          />
+        </div>
         <img
           className={`penguin-image${HiderImageOn}`}
           src={penguin.imageBackup || formData.imageBackup}
@@ -109,73 +139,60 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
         />
         <label htmlFor="id">Id</label>
         <input
-          type="text"
           id="id"
+          type="text"
           autoComplete="off"
+          placeholder="Id"
           value={penguin.id || formData.id}
           onChange={handleInputChange}
-          placeholder="Id"
-          contentEditable="false"
           className="display-none"
         />
-        {imageURL}
         <label htmlFor="name">Name</label>
         <input
-          type="text"
           id="name"
-          autoComplete="off"
-          value={penguin.name || formData.name}
-          onChange={handleInputChange}
+          type="text"
           placeholder="Name"
-          contentEditable="true"
+          value={formData.name}
+          autoComplete="off"
+          onChange={handleInputChange}
         />
         <label htmlFor="category">Category</label>
         <input
-          type="text"
           id="category"
-          autoComplete="off"
-          value={penguin.category || formData.category}
-          onChange={handleInputChange}
+          type="text"
           placeholder="Category"
+          value={penguin.category || formData.category}
+          autoComplete="off"
+          onChange={handleInputChange}
         />
         <label htmlFor="likes">Likes</label>
         <input
-          type="number"
           id="likes"
-          autoComplete="off"
-          value={penguin.likes || formData.likes}
+          type="number"
           placeholder="Likes"
-          onChange={handleInputChange}
+          value={penguin.likes || formData.likes}
+          autoComplete="off"
           className="input-likes"
+          onChange={handleInputChange}
         />
         <label htmlFor="description">Description</label>
-        <input
-          type="text"
+        <textarea
           id="description"
-          autoComplete="off"
-          value={penguin.description || formData.description}
           placeholder="Description"
-          onChange={handleInputChange}
+          value={penguin.description || formData.description}
+          autoComplete="off"
           className="input-description"
+          onChange={handleInputChange}
         />
-        <input
+        <button
           type="submit"
           className="bt-save"
           placeholder="bt-save"
           value="Save"
-        />
+        >
+          Save
+        </button>
       </form>
-      <div className="parent-div">
-        <button className="btn_upload">Add Photo</button>
-        <input
-          id="image"
-          type="file"
-          name="upfile"
-          accept="image/*"
-          className="file-upload"
-          onChange={handleImageChange}
-        />
-      </div>
     </div>
   );
 };
