@@ -1,5 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
+import {
+  IPenguin,
+  IRegisterForm,
+} from "../../app/redux/types/penguin/penguinInterfaces";
 import { wrongAction } from "../Modals/Modals";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
@@ -8,7 +11,7 @@ import {
   loadFavsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
-import { initialFormData, cleanArray } from "../../utils/utils";
+import { blankFormData, cleanArray } from "../../utils/utils";
 
 interface Props {
   penguin: IPenguin;
@@ -22,33 +25,39 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const isCreate = document.location.href.includes("create");
+  const initialFormData: IRegisterForm = {
+    id: penguin ? penguin.id : "",
+    name: penguin ? penguin.name : "",
+    category: penguin ? penguin.category : "",
+    likers: penguin ? penguin.likers : [],
+    likes: penguin ? penguin.likes : 0,
+    favs: penguin ? penguin.favs : [],
+    description: penguin ? penguin.description : "",
+    image: penguin ? penguin.image : "",
+    imageBackup: penguin ? penguin.imageBackup : "",
+  };
 
+  const isCreate = document.location.href.includes("create");
   const idUser = useAppSelector((state) => state.user.id);
 
-  const [formData, setFormData] = useState<IPenguin>(penguin);
+  const [formData, setFormData] = useState(initialFormData);
 
   let newFormData = new FormData();
-  let newData;
 
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ): void => {
-    event.preventDefault();
-
-    if (isCreate) {
-      newFormData.append(event.target.id, event.target.value);
-    } else {
-      newData = { ...penguin, [event.target.id]: event.target.value };
-
-      setFormData(newData);
-    }
+    setFormData({
+      ...formData,
+      [event.target.id]: event.target.value,
+    });
 
     modFields = [...modFields, event.target.id];
     cleanArray(modFields);
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    event.preventDefault();
     setFormData({
       ...formData,
       [event.target.id]: event.target.files?.[0] as File,
@@ -91,7 +100,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     try {
       isCreate ? processCreate() : processEdit();
 
-      setFormData(initialFormData);
+      setFormData(blankFormData);
 
       navigate("/penguins");
     } catch (error) {
@@ -152,7 +161,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           id="name"
           type="text"
           placeholder="Name"
-          value={formData.name}
+          value={formData.name || penguin.name}
           autoComplete="off"
           onChange={handleInputChange}
         />
@@ -161,7 +170,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           id="category"
           type="text"
           placeholder="Category"
-          value={penguin.category || formData.category}
+          value={formData.category || penguin.category}
           autoComplete="off"
           onChange={handleInputChange}
         />
@@ -170,7 +179,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           id="likes"
           type="number"
           placeholder="Likes"
-          value={penguin.likes || formData.likes}
+          value={formData.likes || penguin.likes}
           autoComplete="off"
           className="input-likes"
           onChange={handleInputChange}
@@ -179,7 +188,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
         <textarea
           id="description"
           placeholder="Description"
-          value={penguin.description || formData.description}
+          value={formData.description || penguin.description}
           autoComplete="off"
           className="input-description"
           onChange={handleInputChange}

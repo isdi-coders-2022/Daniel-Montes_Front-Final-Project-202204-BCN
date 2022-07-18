@@ -1,5 +1,5 @@
-import { mockUser } from "../../../../../mocks/users";
-import { server } from "../../../../../mocks/server";
+import { mockUser } from "../../../../mocks/users";
+import { server } from "../../../../mocks/server";
 import { loginThunk } from "./userThunk";
 import axios from "axios";
 

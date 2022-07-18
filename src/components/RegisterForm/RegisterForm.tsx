@@ -1,10 +1,13 @@
-import { ChangeEvent, useState } from "react";
-import { useAppDispatch } from "../../app/redux/hooks/hooks";
-import { registerThunk } from "../../app/redux/thunks/penguinThunk/userThunk/userThunk";
+import { ChangeEvent, useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
+import { registerThunk } from "../../app/redux/thunks/userThunk/userThunk";
 import { NavLink } from "react-router-dom";
 import { correctAction } from "../Modals/Modals";
 import RegisterPageStyles from "../../Styles/FormsStyles";
-import { headerTitleActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
+import {
+  headerLastTitleActionCreator,
+  headerTitleActionCreator,
+} from "../../app/redux/features/uiSlice/uiSlice";
 
 let HiderImage = "";
 let HiderImageOn = "";
@@ -16,6 +19,8 @@ interface FormData {
   image: string | File;
 }
 
+const thisTitle = "Wellcome";
+
 const RegisterForm = (): JSX.Element => {
   const blankFields: FormData = {
     name: "",
@@ -23,6 +28,8 @@ const RegisterForm = (): JSX.Element => {
     password: "",
     image: "",
   };
+
+  const { headerTitle } = useAppSelector((state) => state.ui);
 
   const [formData, setFormData] = useState<FormData>(blankFields);
 
@@ -40,7 +47,7 @@ const RegisterForm = (): JSX.Element => {
     event.preventDefault();
 
     dispatch(registerThunk(formData));
-    dispatch(headerTitleActionCreator("Wellcome"));
+
     setFormData(blankFields);
   };
 
@@ -59,6 +66,15 @@ const RegisterForm = (): JSX.Element => {
     HiderImage = "";
     HiderImageOn = " display-none";
   }
+
+  useEffect(() => {
+    const SetTitleHeader = (title: string, lastTitle: string) => {
+      dispatch(headerTitleActionCreator(title));
+      dispatch(headerLastTitleActionCreator(lastTitle));
+    };
+
+    if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
+  }, [dispatch, headerTitle]);
 
   return (
     <RegisterPageStyles className="register-container">

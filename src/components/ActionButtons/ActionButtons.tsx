@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   editPenguinThunk,
+  getPenguinThunk,
   loadFavsThunk,
   loadPenguinsThunk,
+  resetPenguinThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
-import { cleanArray, initialFormData } from "../../utils/utils";
+import { cleanArray, blankFormData } from "../../utils/utils";
 
 interface Props {
   penguin: IPenguin;
@@ -17,7 +19,7 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
   const idUser = useAppSelector((state) => state.user.id);
   const isFavsPage = document.location.href.includes("favs");
 
-  const [, setFormData] = useState<IPenguin>(initialFormData);
+  const [, setFormData] = useState<IPenguin>(blankFormData);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -31,6 +33,8 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
   };
 
   const handleEdit = () => {
+    dispatch(resetPenguinThunk());
+    dispatch(getPenguinThunk(penguin.id));
     navigate(`/penguins/edit/${penguin.id}`);
   };
 

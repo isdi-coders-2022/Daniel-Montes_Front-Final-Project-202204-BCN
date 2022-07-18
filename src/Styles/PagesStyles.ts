@@ -415,15 +415,18 @@ const PagesStyles = styled.div`
   .animatedLike {
     width: 45px;
     height: 45px;
-    margin-top: 15px;
+
     background-image: url(${iconLike});
     background-repeat: no-repeat;
+    margin-left: -84px;
   }
 
   .animatedLikeInit {
+    height: 45px;
     width: 45px;
     background-image: url(${iconLikeInit});
     background-repeat: no-repeat;
+    margin-left: -84px;
   }
 
   .animatedFav {
@@ -447,7 +450,6 @@ const PagesStyles = styled.div`
   .animatedDelete {
     width: 32px;
     height: 32px;
-
     background-image: url(${iconDelete});
   }
 

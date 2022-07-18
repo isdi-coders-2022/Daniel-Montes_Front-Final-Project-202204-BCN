@@ -4,6 +4,7 @@ import { finishedLoadingActionCreator } from "../../app/redux/features/uiSlice/u
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import { correctAction } from "./Modals";
 
 interface IModalProps {
   closeModal: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,7 +38,19 @@ export const Modal = ({
   };
 
   const handleAcceptClick = (event: React.FormEvent) => {
-    type === "delete" ? deletePenguin() : logOutUser();
+    switch (type) {
+      case "delete":
+        deletePenguin();
+        break;
+      case "logOutUser":
+        logOutUser();
+        break;
+      case "Search":
+        logOutUser();
+        break;
+      default:
+        correctAction("Sorry, this feature is not available yet.");
+    }
   };
 
   const handleCancelClick = () => {
@@ -57,6 +70,11 @@ export const Modal = ({
         </h2>
       </div>
       <h3 className="modal-message">{message}</h3>
+      {message === "Search: " ? (
+        <input type="text" className="search-input" />
+      ) : (
+        ""
+      )}
       <div className="modal-body">
         <button
           onClick={handleAcceptClick}

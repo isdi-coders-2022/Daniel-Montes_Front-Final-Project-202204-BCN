@@ -28,8 +28,8 @@ export interface IRegisterForm {
   id: string;
   name: string;
   category: string;
-  favs: [];
-  likers: [];
+  favs: {}[];
+  likers: {}[];
   likes: number;
   image: string | File;
   imageBackup: string;
