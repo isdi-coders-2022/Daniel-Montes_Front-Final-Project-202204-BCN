@@ -422,6 +422,8 @@ const PagesStyles = styled.div`
 
   .animatedLikeInit {
     width: 45px;
+    height: 45px;
+    margin-top: 15px;
     background-image: url(${iconLikeInit});
     background-repeat: no-repeat;
   }

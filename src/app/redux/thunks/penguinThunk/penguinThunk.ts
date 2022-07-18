@@ -87,7 +87,8 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
 
 export const createFavThunk =
   (formPenguin: any) => async (dispatch: AppDispatch) => {
-    setLoadingOn(`CREATE Fav: Creating ${formPenguin.name}...`);
+    setLoadingOn(`CREATE Fav: Creating fav...`);
+
     const token = localStorage.getItem("token");
     if (token) {
       const { data: penguin } = await axios.post(
@@ -104,7 +105,10 @@ export const createFavThunk =
       dispatch(createPenguinActionCreator(penguin));
       dispatch(finishedLoadingActionCreator());
 
-      setLoadingOffWithMessage("CREATE Fav: Finished successfully.", false);
+      setLoadingOffWithMessage(
+        `CREATE Fav: ${penguin.name} created successfully.`,
+        false
+      );
     } else {
       setLoadingOffWithMessage(
         "CREATE fav: Sorry, no token no cookies...",
