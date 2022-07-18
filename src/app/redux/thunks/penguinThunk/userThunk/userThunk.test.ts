@@ -1,6 +1,6 @@
 import { mockUser } from "../../../../../mocks/users";
 import { server } from "../../../../../mocks/server";
-import { loginThunk } from "./userThunk";
+import { getUserThunk, loginThunk } from "./userThunk";
 import axios from "axios";
 
 jest.mock("chalk", () => ({
@@ -49,7 +49,21 @@ global.window.URL.createObjectURL = jest.fn();
 //     });
 //   });
 // });
+describe("Given the getuserThunk function", () => {
+  describe("When it's called with an user", () => {
+    test("Then it should call dispatch with the set notes to show action with the notes received from the axios request", async () => {
+      const dispatch = jest.fn();
 
+      jest.spyOn(Storage.prototype, "getItem").mockReturnValue("token");
+      axios.get = jest.fn().mockResolvedValue({ data: { user: mockUser } });
+
+      const thunk = getUserThunk(mockUser.id);
+      await thunk(dispatch);
+
+      expect(dispatch).toHaveBeenCalledTimes(2);
+    });
+  });
+});
 describe("Given a LoginThunk", () => {
   describe("When its called", () => {
     test("Then it should call the dispatch", async () => {

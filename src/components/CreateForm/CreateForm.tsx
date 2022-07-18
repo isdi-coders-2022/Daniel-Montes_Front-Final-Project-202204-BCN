@@ -64,7 +64,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const processEdit = () => {
     modFields = cleanArray(modFields);
-    debugger;
+
     dispatch(
       editPenguinThunk(formData, "Update fields: " + modFields.join(", "))
     );
