@@ -8,7 +8,7 @@ import {
   loadFavsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
-import { cleanArray } from "../../utils/utils";
+import { cleanArray, initialFormData } from "../../utils/utils";
 
 interface Props {
   penguin: IPenguin;
@@ -26,7 +26,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const idUser = useAppSelector((state) => state.user.id);
 
-  const [formData, setFormData] = useState<IPenguin>(penguin);
+  const [formData, setFormData] = useState<IPenguin>(initialFormData);
   const newFormData = new FormData();
 
   const handleInputChange = (
