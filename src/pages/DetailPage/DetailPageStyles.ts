@@ -363,24 +363,23 @@ const DetailPageStyles = styled.div`
   }
 
   .animatedFav {
-    background-image: url(${iconMenuFavs});
-    background-repeat: no-repeat;
     width: 45px;
     height: 45px;
-    margin-left: 10px;
+    background-image: url(${iconMenuFavs});
+    background-repeat: no-repeat;
     background-position: center;
     position: relative;
-    left: 250px;
+    left: 340px;
   }
 
   .animatedFavDelete {
+    width: 45px;
+    height: 45px;
     background-image: url(${iconMenuFavsDelete});
     background-repeat: no-repeat;
     background-position: center;
-    width: 45px;
-    height: 45px;
     position: relative;
-    left: 305px;
+    left: 340px;
   }
 
   .animatedDelete {
@@ -396,7 +395,6 @@ const DetailPageStyles = styled.div`
   .animatedEdit {
     width: 45px;
     height: 45px;
-
     background: url(${iconEdit});
     background-repeat: no-repeat;
     margin: auto;
