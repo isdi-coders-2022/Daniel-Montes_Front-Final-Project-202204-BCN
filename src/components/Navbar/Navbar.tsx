@@ -143,7 +143,11 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   return (
     <div className="app">
       <div className="header">
-        <button className={`bt-back${HidderBack}`} onClick={handleBack} />
+        <button
+          title="btn-back"
+          className={`bt-back${HidderBack}`}
+          onClick={handleBack}
+        />
         <h1 className="header-title">{headerTitle || "AdoptAPenguin.com"}</h1>
         <button className={`bt-search${HidderSearch}`} onClick={handleSearch} />
         <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
@@ -177,7 +181,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
               <img src={image} className="user-photo" alt="user" />
               <h3 className="user-username">{toPascalCase(`${username}`)}</h3>
               <button
-                className={`animated animatedEdit`}
+                className={`animated menu-animatedEdit`}
                 onClick={handleEdit}
               />
             </div>

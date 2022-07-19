@@ -48,8 +48,9 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ): void => {
     event.preventDefault();
+
     setFormData({
-      ...(formData.id ? formData : penguin),
+      ...formData,
       [event.target.id]: event.target.value,
     });
 

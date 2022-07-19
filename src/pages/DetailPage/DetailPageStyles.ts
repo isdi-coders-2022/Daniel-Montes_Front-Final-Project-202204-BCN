@@ -97,7 +97,12 @@ const DetailPageStyles = styled.div`
     background-repeat: no-repeat;
   }
 
-  .penguin-image-detail {
+  .modal-message {
+    color: black;
+    text-align: center;
+  }
+
+  .detail-image {
     background-color: rgb(255 254 254);
     box-shadow: 0 15px 6px #666;
     border: 2px solid;
@@ -105,6 +110,7 @@ const DetailPageStyles = styled.div`
     width: 100%;
     height: 100%;
     max-width: 730px;
+
     margin-top: -30px;
   }
 
@@ -123,7 +129,7 @@ const DetailPageStyles = styled.div`
     margin-top: 5remx;
   }
 
-  .penguin-detail-container {
+  .detail-container {
     background-color: rgb(255 254 254);
     box-shadow: 0 15px 6px #666;
     padding: 10px 10px 150px 10px;
@@ -147,7 +153,7 @@ const DetailPageStyles = styled.div`
     display: flex;
     justify-content: space-between;
     align-content: space-around;
-    height: 45px;
+    height: 50px;
   }
 
   .bt-back {
@@ -196,7 +202,7 @@ const DetailPageStyles = styled.div`
     background-repeat: no-repeat;
   }
 
-  .penguin-name,
+  .detail-name,
   .bt-likes {
     flex: 2;
   }
@@ -205,7 +211,8 @@ const DetailPageStyles = styled.div`
     flex: 2;
     margin-top: 7px;
     text-align: right;
-    margin-right: 5px;
+
+    margin: auto;
   }
 
   .bt-likes {
@@ -216,12 +223,12 @@ const DetailPageStyles = styled.div`
     padding: 0 0 0 0;
   }
 
-  .penguin-image-footer {
+  .detail-info {
     display: flex;
     margin-top: 10px;
   }
 
-  .penguin-description {
+  .detail-description {
     margin-top: 35px;
     padding-left: 10px;
     font-size: 16px;
@@ -261,13 +268,13 @@ const DetailPageStyles = styled.div`
     background-color: #ffe02c;
     border-radius: 4px;
 
-    margin-bottom: 25px;
     padding: 5px;
     box-shadow: 0 3px 6px #666;
-    margin-left: 15px;
+
     height: fit-content;
     width: fit-content;
     font-size: 16px;
+    margin: auto;
   }
   .projectLayout {
     max-width: 90%;
@@ -335,8 +342,14 @@ const DetailPageStyles = styled.div`
     -webkit-animation-fill-mode: both;
     animation-fill-mode: both;
   }
+  .animatedLike {
+    display: none;
+  }
 
   .animatedLikeInit {
+    display: none;
+  }
+  .detail-animatedLikeInit {
     width: 45px;
     height: 45px;
     background-image: url(${iconLikeInit});
@@ -344,7 +357,7 @@ const DetailPageStyles = styled.div`
     background-position: center;
   }
 
-  .animatedLike {
+  .detail-animatedLike {
     width: 45px;
     height: 45px;
     background-image: url(${iconLike});
@@ -359,20 +372,25 @@ const DetailPageStyles = styled.div`
     height: 45px;
     margin-left: 10px;
     background-position: center;
+    position: relative;
+    left: 250px;
   }
 
   .animatedFavDelete {
     background-image: url(${iconMenuFavsDelete});
     background-repeat: no-repeat;
     background-position: center;
-    margin-left: 10px;
     width: 45px;
     height: 45px;
+    position: relative;
+    left: 305px;
   }
 
   .animatedDelete {
     width: 45px;
     height: 45px;
+    position: relative;
+    left: -300px;
     background-image: url(${iconDelete});
     background-repeat: no-repeat;
     background-position: center;
@@ -381,9 +399,11 @@ const DetailPageStyles = styled.div`
   .animatedEdit {
     width: 45px;
     height: 45px;
-    margin-bottom: 10px;
+
     background: url(${iconEdit});
     background-repeat: no-repeat;
+    margin: auto;
+    margin-left: 10px;
   }
 
   .form-detail-animatedEdit {

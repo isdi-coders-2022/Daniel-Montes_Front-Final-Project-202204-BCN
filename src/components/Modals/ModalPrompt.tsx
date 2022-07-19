@@ -2,7 +2,7 @@ import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { finishedLoadingActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
-import { useAppDispatch } from "../../app/redux/hooks/hooks";
+import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   deletePenguinThunk,
   searchPenguinsThunk,
@@ -24,11 +24,12 @@ export const Modal = ({
 }: IModalProps) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { headerTitle } = useAppSelector((state) => state.ui);
 
   const logOutUser = () => {
     dispatch(finishedLoadingActionCreator());
     dispatch(logOutActionCreator());
-    closeModal(false);
+
     localStorage.removeItem("token");
 
     navigate("/");
@@ -37,6 +38,9 @@ export const Modal = ({
   const deletePenguin = () => {
     if (idPenguin) {
       dispatch(deletePenguinThunk(`${idPenguin}`));
+      if (headerTitle === "Detail") {
+        navigate("/penguins/favs");
+      }
     }
   };
 
@@ -54,6 +58,7 @@ export const Modal = ({
       default:
         correctAction("Sorry, this feature is not available yet.");
     }
+    closeModal(false);
   };
 
   const handleCancelClick = () => {

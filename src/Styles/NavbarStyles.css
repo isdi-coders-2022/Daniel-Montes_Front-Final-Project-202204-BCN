@@ -13,6 +13,17 @@ h1 {
   flex: 3;
 }
 
+.menu-animatedEdit {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 10px;
+  background: url("../images/icon-editar32.png");
+  background-repeat: no-repeat;
+  margin-top: 45px;
+  margin-right: 45px;
+  background-position: right;
+}
+
 .app {
   width: 100vw;
   position: fixed;
