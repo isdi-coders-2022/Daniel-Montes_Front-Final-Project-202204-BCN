@@ -1,8 +1,12 @@
 import { useState } from "react";
+import { ReactDimmer } from "react-dimmer";
 import { useNavigate } from "react-router-dom";
+import {
+  modalMessageActionCreator,
+  modalTypeActionCreator,
+} from "../../app/redux/features/uiSlice/uiSlice";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
-  deletePenguinThunk,
   editPenguinThunk,
   getPenguinThunk,
   loadFavsThunk,
@@ -11,6 +15,7 @@ import {
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import { cleanArray, blankFormData } from "../../utils/utils";
+import { Modal } from "../Modals/ModalPrompt";
 
 interface Props {
   penguin: IPenguin;
@@ -23,6 +28,10 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
   const isFavsPage = document.location.href.includes("favs");
 
   const [, setFormData] = useState<IPenguin>(blankFormData);
+  const [isModalOpen, setModal] = useState(false);
+
+  const { modalMessage } = useAppSelector((state) => state.ui);
+  const { modalType } = useAppSelector((state) => state.ui);
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -31,9 +40,13 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
   const isLiker = penguin.likers.includes(idUser);
 
   const handleDelete = (): void => {
-    if (penguin.id) {
-      dispatch(deletePenguinThunk(`${penguin.id}`));
-    }
+    const message = "Confirm please, delete? ";
+    const newModalType = "delete";
+
+    dispatch(modalTypeActionCreator(newModalType));
+    dispatch(modalMessageActionCreator(message));
+
+    setModal((prevState) => !prevState);
   };
 
   const handleEdit = () => {
@@ -123,6 +136,20 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
         onClick={handleDelete}
       />
       <button className={`animated ${selectIconLike}`} onClick={handleLikes} />
+      {isModalOpen && (
+        <Modal
+          type={modalType}
+          idPenguin={penguin.id}
+          message={modalMessage}
+          closeModal={setModal}
+        />
+      )}
+      <ReactDimmer
+        isOpen={isModalOpen}
+        exitDimmer={setModal}
+        zIndex={90}
+        blur={1.5}
+      />
     </div>
   );
 };

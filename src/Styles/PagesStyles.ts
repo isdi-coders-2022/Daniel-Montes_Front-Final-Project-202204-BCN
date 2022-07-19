@@ -22,19 +22,6 @@ const PagesStyles = styled.div`
     text-align: center;
   }
 
-  .Toastify__toast-body {
-    text-align: center;
-  }
-
-  .header {
-    position: fixed;
-    right: 20px;
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    width: 95%;
-  }
-
   form {
     row-gap: 20px;
     width: 70%;
@@ -107,25 +94,53 @@ const PagesStyles = styled.div`
     text-align: center;
   }
 
-  .penguin-image {
-    border-radius: 5px;
-    min-width: 295px;
-    max-height: 230px;
-    padding: 5px;
-  }
-
   nav {
     margin-right: 9px;
-  }
-
-  .container {
-    width: 100%;
-    display: flow-root;
   }
 
   span {
     font-size: 20px;
     margin-left: 50px;
+  }
+
+  button {
+    cursor: pointer;
+    background-repeat: no-repeat;
+    border: 0;
+    vertical-align: middle;
+    background-color: initial;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  .Toastify__toast-body {
+    text-align: center;
+  }
+
+  .penguin-image {
+    border-radius: 5px;
+    min-width: 286px;
+    max-height: 225px;
+
+    margin-top: 5px;
+    background-color: lightgray;
+    margin-left: 5px;
+  }
+
+  .header {
+    position: fixed;
+    right: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+  }
+
+  .container {
+    width: 100%;
+    display: flow-root;
   }
 
   .category {
@@ -136,6 +151,7 @@ const PagesStyles = styled.div`
     margin-left: 15px;
     height: fit-content;
     font-size: 16px;
+    margin: auto;
   }
 
   .likes {
@@ -144,13 +160,14 @@ const PagesStyles = styled.div`
     flex: 2;
     animation-name: bounce;
     font-size: 16px;
+    margin: auto;
   }
 
   .penguin-description {
+    width: 89%;
     position: relative;
     top: -35px;
     left: 18px;
-    width: 89%;
     text-align: justify;
   }
 
@@ -165,15 +182,6 @@ const PagesStyles = styled.div`
     width: 100%;
   }
 
-  button {
-    cursor: pointer;
-    background-repeat: no-repeat;
-    border: 0;
-    vertical-align: middle;
-
-    background-color: initial;
-  }
-
   .bt-logout {
     background: url(${iconLogout});
     height: 65px;
@@ -182,7 +190,7 @@ const PagesStyles = styled.div`
     background-repeat: no-repeat;
   }
 
-  .penguin-detail-container {
+  .detail-container {
     width: 100%;
   }
 
@@ -190,16 +198,16 @@ const PagesStyles = styled.div`
   }
 
   .bt-sound {
-    background: url(${iconSoundOn});
     height: 65px;
     width: 65px;
+    background: url(${iconSoundOn});
     background-size: 60%;
     background-repeat: no-repeat;
   }
   .bt-sound-off {
-    background: url(${iconSoundOff});
     height: 65px;
     width: 65px;
+    background: url(${iconSoundOff});
     background-size: 60%;
     background-repeat: no-repeat;
   }
@@ -255,10 +263,6 @@ const PagesStyles = styled.div`
     background-repeat: no-repeat;
   }
 
-  img {
-    width: 100%;
-  }
-
   .penguin-image-container {
     height: 280px;
     width: 85%;
@@ -266,7 +270,6 @@ const PagesStyles = styled.div`
     margin-left: 10px;
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
-
     text-align: center;
     background-color: white;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -279,23 +282,23 @@ const PagesStyles = styled.div`
   }
 
   .penguin-image-detail {
+    min-height: auto;
+    min-width: 200px;
     box-shadow: 0 3px 6px #666;
     padding: 10px 10px 100px 10px;
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
     margin: auto;
     text-align: center;
-    min-height: auto;
-    min-width: 200px;
   }
 
   .image-delete {
+    width: 100%;
     position: relative;
     top: -140px;
     right: -14px;
     display: flex;
     justify-content: flex-end;
-    width: 104%;
   }
 
   .penguins-container {
@@ -314,12 +317,12 @@ const PagesStyles = styled.div`
   }
 
   .penguin-datalist {
-    position: relative;
-    top: -50px;
-    display: flex;
     height: 40px;
-    width: 100%;
-    margin: 5px;
+    width: 87%;
+    position: relative;
+    top: -60px;
+    left: 23px;
+    display: flex;
   }
 
   .penguin-name,
@@ -330,7 +333,6 @@ const PagesStyles = styled.div`
   .bt-likes {
     width: 32px;
     height: 32px;
-
     background-repeat: no-repeat;
     padding: 0 0 0 0;
   }
@@ -338,7 +340,6 @@ const PagesStyles = styled.div`
   .bt-likesInit {
     width: 32px;
     height: 32px;
-
     background-repeat: no-repeat;
     padding: 0 0 0 0;
   }
@@ -388,11 +389,11 @@ const PagesStyles = styled.div`
     font-size: 0.85em;
     transform: translate(40px, 50px);
   }
+
   .item {
     display: inline-flex;
     background: #fff;
     padding: 0.5em;
-
     -webkit-transition: 0.5s;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -405,7 +406,6 @@ const PagesStyles = styled.div`
   .animated {
     background-repeat: no-repeat;
     background-position: left top;
-
     -webkit-animation-duration: 1s;
     animation-duration: 1s;
     -webkit-animation-fill-mode: both;
@@ -415,19 +415,18 @@ const PagesStyles = styled.div`
   .animatedLike {
     width: 45px;
     height: 45px;
-
     background-image: url(${iconLike});
     background-repeat: no-repeat;
+    background-position: center;
     margin-left: -84px;
   }
 
   .animatedLikeInit {
     height: 45px;
     width: 45px;
-    height: 45px;
-    margin-top: 15px;
     background-image: url(${iconLikeInit});
     background-repeat: no-repeat;
+    background-position: center;
     margin-left: -84px;
   }
 
@@ -467,16 +466,17 @@ const PagesStyles = styled.div`
   }
 
   .buttons-container {
-    width: 32px;
+    width: 20px;
     height: 290px;
+    margin-left: 12px;
+    width: 20px;
     display: flex;
-    flex-direction: column;
-    margin-left: 5px;
-
-    justify-content: flex-start;
-    align-content: flex-start;
     position: relative;
     top: -250px;
+    flex-direction: column;
+    margin-left: 5px;
+    justify-content: flex-start;
+    align-content: flex-start;
   }
 
   @-webkit-keyframes bounce {
