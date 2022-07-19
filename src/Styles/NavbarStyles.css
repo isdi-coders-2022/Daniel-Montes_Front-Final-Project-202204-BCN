@@ -74,12 +74,8 @@ ul {
   margin-top: 155px;
 }
 
-.header-title {
-  margin-left: 40px;
-}
-
 .hr-menu-horizontal {
-  width: 214px;
+  width: 75%;
   margin-left: 25px;
   position: relative;
   top: 530px;
@@ -98,10 +94,13 @@ ul {
 .bt-search {
   background: url("../images/icon-search-45.png");
   background-repeat: no-repeat;
-  margin-right: 10px;
+  margin: auto;
   height: 45px;
-  position: relative;
-  left: -275px;
+}
+
+.search-input {
+  margin: auto;
+  width: 80%;
 }
 
 .user-photo {
@@ -312,6 +311,7 @@ ul {
 }
 
 .modal-message {
+  font-size: 16px;
   color: black;
   text-align: center;
 }

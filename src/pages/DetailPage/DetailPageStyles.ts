@@ -272,6 +272,8 @@ const DetailPageStyles = styled.div`
     width: fit-content;
     font-size: 16px;
     margin: auto;
+    flex: 1;
+    text-align: center;
   }
   .projectLayout {
     max-width: 90%;

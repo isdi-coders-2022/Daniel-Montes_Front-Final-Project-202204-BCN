@@ -89,10 +89,10 @@ const penguinSlice = createSlice({
     }),
     searchPenguins: (
       penguins,
-      action: PayloadAction<IPenguin>
+      action: PayloadAction<IPenguin[]>
     ): SliceIniState => ({
       ...penguins,
-      allPenguins: [action.payload],
+      allPenguins: [...action.payload],
     }),
   },
 });

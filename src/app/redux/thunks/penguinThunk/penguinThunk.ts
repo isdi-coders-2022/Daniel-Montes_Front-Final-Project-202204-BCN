@@ -57,15 +57,18 @@ export const searchPenguinsThunk =
     dispatch(loadingActionCreator());
 
     const token = localStorage.getItem("token");
-
+    debugger;
     if (token) {
       const {
         data: { penguins },
-      } = await axios.get(`${process.env.REACT_APP_API_URL}penguins`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      } = await axios.get(
+        `${process.env.REACT_APP_API_URL}penguins/search/${{ search }}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       dispatch(searchPenguinsActionCreator(penguins));
       dispatch(finishedLoadingActionCreator());
