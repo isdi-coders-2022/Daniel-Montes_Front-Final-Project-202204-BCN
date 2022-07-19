@@ -58,7 +58,10 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setFormData({ ...formData, image: event.target.files?.[0] as File });
+    setFormData({
+      ...(formData.id || isCreate ? formData : penguin),
+      image: event.target.files?.[0] as File,
+    });
 
     newFormData.append("image", formData.image);
 
