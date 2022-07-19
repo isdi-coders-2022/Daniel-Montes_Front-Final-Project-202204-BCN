@@ -15,7 +15,7 @@ const HomePage = (): JSX.Element => {
     dispatch(headerLastTitleActionCreator(lastTitle));
   };
 
-  const thisTitle = "Home";
+  const thisTitle = "Wellcome";
   if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
 
   return <Home />;

@@ -63,6 +63,10 @@ ul {
   margin-top: 155px;
 }
 
+.header-title {
+  margin-left: 40px;
+}
+
 .hr-menu-horizontal {
   width: 214px;
   margin-left: 25px;
@@ -85,15 +89,6 @@ ul {
   background-repeat: no-repeat;
   margin-right: 10px;
   height: 45px;
-}
-
-.animatedEdit {
-  background: url("../images/icon-editar32.png");
-  background-repeat: no-repeat;
-  background-position: right;
-
-  margin-top: 45px;
-  margin-right: 45px;
 }
 
 .user-photo {

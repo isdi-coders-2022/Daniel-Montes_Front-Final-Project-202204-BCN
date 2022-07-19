@@ -11,6 +11,7 @@ import {
   loadPenguinsActionCreator,
   resetPenguinActionCreator,
   loadPenguinActionCreator,
+  searchPenguinsActionCreator,
   resetPenguinsActionCreator,
 } from "../../features/penguinSlice/penguinSlice";
 
@@ -50,6 +51,26 @@ export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
     dispatch(finishedLoadingActionCreator());
   }
 };
+
+export const searchPenguinsThunk =
+  (search: string) => async (dispatch: AppDispatch) => {
+    dispatch(loadingActionCreator());
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const {
+        data: { penguins },
+      } = await axios.get(`${process.env.REACT_APP_API_URL}penguins`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      dispatch(searchPenguinsActionCreator(penguins));
+      dispatch(finishedLoadingActionCreator());
+    }
+  };
 
 export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
   dispatch(loadingActionCreator());
