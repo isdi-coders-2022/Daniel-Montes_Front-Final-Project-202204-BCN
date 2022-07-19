@@ -25,7 +25,8 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
   const idUser = useAppSelector((state) => state.user.id);
   const { headerTitle } = useAppSelector((state) => state.ui);
 
-  const isFavsPage = document.location.href.includes("favs");
+  const isFavsPage = headerTitle === "Favourites" ? true : false;
+  const isDetailPage = headerTitle === "Detail" ? true : false;
 
   const [, setFormData] = useState<IPenguin>(blankFormData);
   const [isModalOpen, setModal] = useState(false);
@@ -126,16 +127,25 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
     return newClass;
   };
 
+  const classButtonEdit =
+    isDetailPage || isFavsPage ? " animatedEdit" : ` display-none`;
+
+  const classButtonDelete =
+    isDetailPage || isFavsPage ? " animatedDelete" : ` display-none`;
+
   return (
     <div className={btContainerClasses()}>
-      <button onClick={handleFavs} className={`animated ${selectIconFav}`} />
-      <button className={`animated bounce animatedEdit`} onClick={handleEdit} />
+      <button onClick={handleFavs} className={`animated${selectIconFav}`} />
+      <button
+        className={`animated bounce${classButtonEdit}`}
+        onClick={handleEdit}
+      />
       <button
         title="btn-delete"
-        className={`animated bounce animatedDelete`}
+        className={`animated bounce${classButtonDelete}`}
         onClick={handleDelete}
       />
-      <button className={`animated ${selectIconLike}`} onClick={handleLikes} />
+      <button className={`animated${selectIconLike}`} onClick={handleLikes} />
       {isModalOpen && (
         <Modal
           type={modalType}
