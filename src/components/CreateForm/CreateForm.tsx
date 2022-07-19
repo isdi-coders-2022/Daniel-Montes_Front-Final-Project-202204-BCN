@@ -1,8 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import {
-  IPenguin,
-  IRegisterForm,
-} from "../../app/redux/types/penguin/penguinInterfaces";
+
 import { wrongAction } from "../Modals/Modals";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
@@ -12,6 +9,10 @@ import {
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
 import { blankFormData, cleanArray } from "../../utils/utils";
+import {
+  IRegisterForm,
+  IPenguin,
+} from "../../app/redux/types/penguin/penguinInterfaces";
 
 interface Props {
   penguin: IPenguin;
@@ -25,6 +26,9 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const isCreate = document.location.href.includes("create");
+  const idUser = useAppSelector((state) => state.user.id);
+
   const initialFormData: IRegisterForm = {
     id: penguin ? penguin.id : "",
     name: penguin ? penguin.name : "",
@@ -36,9 +40,6 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     image: penguin ? penguin.image : "",
     imageBackup: penguin ? penguin.imageBackup : "",
   };
-
-  const isCreate = document.location.href.includes("create");
-  const idUser = useAppSelector((state) => state.user.id);
 
   const [formData, setFormData] = useState(initialFormData);
 
@@ -62,8 +63,6 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
       ...(formData.id || isCreate ? formData : penguin),
       image: event.target.files?.[0] as File,
     });
-
-    newFormData.append("image", formData.image);
 
     modFields.push(event.target.id);
   };
@@ -131,8 +130,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
         </div>
         <img
           className={`penguin-image${HiderImageOn}`}
-          src={penguin.imageBackup || formData.imageBackup}
-          alt={penguin.name || formData.name}
+          src={formData.imageBackup || penguin.imageBackup}
+          alt={formData.name || penguin.name}
         />
         <input
           className={`penguin-image${HiderImage}`}

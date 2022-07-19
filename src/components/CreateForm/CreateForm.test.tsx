@@ -3,8 +3,8 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import CreateForm from "./CreateForm";
 import { mockPenguin } from "../../mocks/penguins";
+import CreateForm from "./CreateForm";
 
 describe("Given a CreateForm component", () => {
   describe("When the word 'user1' is written to the username input field", () => {

@@ -152,12 +152,12 @@ const PagesStyles = styled.div`
     height: fit-content;
     font-size: 16px;
     margin: auto;
+    flex: 1;
   }
 
   .likes {
-    text-align: right;
     margin-right: 10px;
-    flex: 2;
+    flex: 1;
     animation-name: bounce;
     font-size: 16px;
     margin: auto;
@@ -418,7 +418,7 @@ const PagesStyles = styled.div`
     background-image: url(${iconLike});
     background-repeat: no-repeat;
     background-position: center;
-    margin-left: -84px;
+    margin-left: -48px;
   }
 
   .animatedLikeInit {
@@ -427,7 +427,7 @@ const PagesStyles = styled.div`
     background-image: url(${iconLikeInit});
     background-repeat: no-repeat;
     background-position: center;
-    margin-left: -84px;
+    margin-left: -48px;
   }
 
   .animatedFav {

@@ -33,6 +33,14 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const { penguin } = useAppSelector((state) => state.penguins);
 
   const handleClick = () => {
+    if (headerTitle === "Home") {
+      handleSearch();
+    } else {
+      handleBack();
+    }
+  };
+
+  const handleLogout = () => {
     const message = "Log out?";
     const newModalType = "logOutUser";
 
@@ -55,24 +63,14 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
   const loadFavs = () => {
     setMenu((prevState) => !prevState);
-    headerTitle === "Home" ? loadFavsThunk() : navigate("/penguins/favs");
+    loadFavsThunk();
     navigate("/penguins/favs");
   };
 
   const loadHome = () => {
     setMenu((prevState) => !prevState);
-    headerTitle === "Home" ? loadPenguinsThunk() : navigate("/penguins");
-  };
-
-  const toggleSound = () => {
-    const message = "Toggle Sound?";
-    const newModalType = "Sound";
-
-    dispatch(modalTypeActionCreator(newModalType));
-    dispatch(modalMessageActionCreator(message));
-
-    setMenu((prevState) => !prevState);
-    setModal((prevState) => !prevState);
+    loadPenguinsThunk();
+    navigate("/penguins");
   };
 
   const addFav = () => {
@@ -96,7 +94,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
         break;
       case "Edit...":
         navigate("/penguins/favs");
-
         break;
       default:
         navigate("/penguins");
@@ -118,8 +115,8 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       document.location.href.length,
       document.location.href.length - 3
     ) === "ins"
-      ? " display-none"
-      : "";
+      ? " bt-search"
+      : " bt-back";
 
   const HidderMenu =
     document.location.href.includes("/homepage") ||
@@ -128,24 +125,16 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       ? " display-none"
       : "";
 
-  const HidderSearch =
-    document.location.href.substring(
-      document.location.href.length - 3,
-      document.location.href.length
-    ) !== "ins"
-      ? " display-none"
-      : "";
-
   return (
     <div className="app">
       <div className="header">
         <button
           title="btn-back"
-          className={`bt-back${HidderBack}`}
-          onClick={handleBack}
+          className={`${HidderBack}`}
+          onClick={handleClick}
         />
         <h1 className="header-title">{headerTitle || "AdoptAPenguin.com"}</h1>
-        <button className={`bt-search${HidderSearch}`} onClick={handleSearch} />
+
         <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
       </div>
       <div className="nav">
@@ -154,25 +143,20 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
             <div className="menu-header-horizontal">
               <div className="menu-icons-horizontal">
                 <button
-                  onClick={handleClick}
+                  onClick={handleLogout}
                   className="bt-logout"
                   title="btn-logout"
                 />
-
-                <span className="label-login">Logout</span>
-
                 <button
-                  onClick={toggleSound}
-                  className="bt-sound"
-                  title="bt-sound"
+                  title="btn-search"
+                  className="bt-search"
+                  onClick={handleSearch}
                 />
-
-                <span className="menu-icon-label sound-on">On/</span>
-                <span className="menu-icon-label sound-off">Off</span>
               </div>
             </div>
 
             <hr className="hr-menu-horizontal" />
+
             <div className="user-data-container">
               <img src={image} className="user-photo" alt="user" />
               <h3 className="user-username">{toPascalCase(`${username}`)}</h3>

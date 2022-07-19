@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import {
   headerLastTitleActionCreator,
   headerTitleActionCreator,
@@ -12,7 +11,7 @@ import FormsStyles from "../../Styles/FormsStyles";
 const CreatePage = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
-  let { idPenguin } = useParams();
+  let idPenguin = "";
   const { headerTitle } = useAppSelector((state) => state.ui);
   const { penguin } = useAppSelector((state) => state.penguins);
 
@@ -28,14 +27,13 @@ const CreatePage = (): JSX.Element => {
   }
 
   useEffect(() => {
-    if (typeof idPenguin !== "undefined") {
-      dispatch(getPenguinThunk(`${idPenguin}`));
-    }
     const SetTitleHeader = (title: string, lastTitle: string) => {
       dispatch(headerTitleActionCreator(title));
       dispatch(headerLastTitleActionCreator(lastTitle));
     };
     if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
+
+    dispatch(getPenguinThunk(idPenguin));
   }, [dispatch, idPenguin, headerTitle, thisTitle]);
 
   return (
