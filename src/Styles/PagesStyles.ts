@@ -461,9 +461,12 @@ const PagesStyles = styled.div`
     margin-bottom: 10px;
     background: url(${iconEdit});
     background-repeat: no-repeat;
+    margin-top: 45px;
+    margin-right: 45px;
+    background-position: right;
   }
 
-  .penguin-buttons {
+  .buttons-container {
     width: 32px;
     height: 290px;
     display: flex;

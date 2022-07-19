@@ -7,7 +7,7 @@ const initialState: UISliceState = {
   finishedLoading: true,
   modalMessage: "",
   modalType: "",
-  headerTitle: "",
+  headerTitle: "Wellcome",
   headerLastTitle: "",
   pages: 0,
   currentPage: 1,

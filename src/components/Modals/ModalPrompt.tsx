@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { finishedLoadingActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
 import { logOutActionCreator } from "../../app/redux/features/userSlice/userSlice";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
-import { deletePenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import {
+  deletePenguinThunk,
+  searchPenguinsThunk,
+} from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { correctAction } from "./Modals";
 
 interface IModalProps {
@@ -46,7 +49,7 @@ export const Modal = ({
         logOutUser();
         break;
       case "Search":
-        logOutUser();
+        searchPenguinsThunk("discolo");
         break;
       default:
         correctAction("Sorry, this feature is not available yet.");

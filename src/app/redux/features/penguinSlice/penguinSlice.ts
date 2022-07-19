@@ -80,8 +80,14 @@ const penguinSlice = createSlice({
       ...penguins,
       penguin: action.payload,
     }),
-
     resetPenguins: (
+      penguins,
+      action: PayloadAction<IPenguin>
+    ): SliceIniState => ({
+      ...penguins,
+      allPenguins: [action.payload],
+    }),
+    searchPenguins: (
       penguins,
       action: PayloadAction<IPenguin>
     ): SliceIniState => ({
@@ -94,6 +100,7 @@ const penguinSlice = createSlice({
 export const {
   loadPenguins: loadPenguinsActionCreator,
   loadPenguin: loadPenguinActionCreator,
+  searchPenguins: searchPenguinsActionCreator,
   deletePenguin: deletePenguinActionCreator,
   createPenguin: createPenguinActionCreator,
   editPenguin: editPenguinActionCreator,

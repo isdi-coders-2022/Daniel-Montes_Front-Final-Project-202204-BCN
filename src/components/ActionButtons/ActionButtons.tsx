@@ -18,6 +18,8 @@ interface Props {
 
 const ActionButtons = ({ penguin }: Props): JSX.Element => {
   const idUser = useAppSelector((state) => state.user.id);
+  const { headerTitle } = useAppSelector((state) => state.ui);
+
   const isFavsPage = document.location.href.includes("favs");
 
   const [, setFormData] = useState<IPenguin>(blankFormData);
@@ -103,8 +105,16 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
     ? " bounce animatedLike"
     : ` bounce2 animatedLikeInit`;
 
+  const btContainerClasses = () => {
+    const newClass =
+      headerTitle !== "Detail"
+        ? "buttons-container"
+        : "detail-buttons-container";
+    return newClass;
+  };
+
   return (
-    <div className="penguin-buttons">
+    <div className={btContainerClasses()}>
       <button onClick={handleFavs} className={`animated ${selectIconFav}`} />
       <button className={`animated bounce animatedEdit`} onClick={handleEdit} />
       <button

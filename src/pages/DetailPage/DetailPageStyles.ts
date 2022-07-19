@@ -143,15 +143,13 @@ const DetailPageStyles = styled.div`
     border: px solid #fff;
   }
 
-  .penguin-buttons-container {
-    width: 100%;
-    height: 50px;
-    border-radius: 35px;
-    position: relative;
+  .detail-buttons-container {
     display: flex;
-    top: -7px;
     justify-content: space-between;
+    align-content: space-around;
+    height: 45px;
   }
+
   .bt-back {
     background: url(${iconBack});
     width: 45px;
@@ -338,11 +336,20 @@ const DetailPageStyles = styled.div`
     animation-fill-mode: both;
   }
 
-  .animatedLike {
-    background-repeat: no-repeat;
-    background-image: url(${iconLike});
+  .animatedLikeInit {
     width: 45px;
     height: 45px;
+    background-image: url(${iconLikeInit});
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .animatedLike {
+    width: 45px;
+    height: 45px;
+    background-image: url(${iconLike});
+    background-repeat: no-repeat;
+    background-position: center;
   }
 
   .animatedFav {
@@ -363,19 +370,12 @@ const DetailPageStyles = styled.div`
     height: 45px;
   }
 
-  .animatedLikeInit {
-    background-image: url(${iconLikeInit});
-    background-repeat: no-repeat;
+  .animatedDelete {
     width: 45px;
     height: 45px;
-  }
-
-  .animatedDelete {
     background-image: url(${iconDelete});
     background-repeat: no-repeat;
     background-position: center;
-    width: 45px;
-    height: 45px;
   }
 
   .animatedEdit {
