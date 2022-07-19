@@ -50,7 +50,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     event.preventDefault();
 
     setFormData({
-      ...formData,
+      ...(formData.id || isCreate ? formData : penguin),
       [event.target.id]: event.target.value,
     });
 
