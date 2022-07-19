@@ -35,9 +35,9 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
   const handleClick = () => {
     const message = "Log out?";
-    const modalType = "logOutUser";
+    const newModalType = "logOutUser";
 
-    dispatch(modalTypeActionCreator(modalType));
+    dispatch(modalTypeActionCreator(newModalType));
     dispatch(modalMessageActionCreator(message));
 
     setMenu((prevState) => !prevState);
@@ -46,9 +46,9 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
   const handleSearch = () => {
     const message = "Search: ";
-    const modalType = "Search";
+    const newModalType = "Search";
 
-    dispatch(modalTypeActionCreator(modalType));
+    dispatch(modalTypeActionCreator(newModalType));
     dispatch(modalMessageActionCreator(message));
 
     setModal((prevState) => !prevState);
@@ -67,9 +67,9 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
   const toggleSound = () => {
     const message = "Toggle Sound?";
-    const modalType = "Sound";
+    const newModalType = "Sound";
 
-    dispatch(modalTypeActionCreator(modalType));
+    dispatch(modalTypeActionCreator(newModalType));
     dispatch(modalMessageActionCreator(message));
 
     setMenu((prevState) => !prevState);
