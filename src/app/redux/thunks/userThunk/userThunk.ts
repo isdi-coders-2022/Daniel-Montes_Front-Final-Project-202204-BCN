@@ -5,18 +5,22 @@ import {
   LoginData,
   LoginResponse,
   UserRegister,
-} from "../../../types/userInterfaces/userInterfaces";
+} from "../../types/userInterfaces/userInterfaces";
 import {
   loadUserDataActionCreator,
   logInActionCreator,
-} from "../../../features/userSlice/userSlice";
+} from "../../features/userSlice/userSlice";
 import { Dispatch } from "@reduxjs/toolkit";
-import { setLoadingOffWithMessage } from "../../../../../components/Modals/Modals";
-import { finishedLoadingActionCreator } from "../../../features/uiSlice/uiSlice";
+import {
+  setLoadingOffWithMessage,
+  setLoadingOn,
+} from "../../../../components/Modals/Modals";
+import { finishedLoadingActionCreator } from "../../features/uiSlice/uiSlice";
 
 export const loginThunk =
   (userData: LoginData) => async (dispatch: Dispatch) => {
     try {
+      setLoadingOn(`LOGIN: ${userData.username}...`);
       const url: string = `${process.env.REACT_APP_API_URL}users/login`;
 
       const { data, status }: DataAxiosLogin = await axios.post(url, userData);
@@ -29,12 +33,13 @@ export const loginThunk =
         localStorage.setItem("token", data.token);
 
         dispatch(logInActionCreator({ id, username, logged, isAdmin, image }));
+
+        dispatch(finishedLoadingActionCreator());
         setLoadingOffWithMessage(
-          "Login successfully." + userData.username,
+          `${userData.username} logged successfully.`,
           false
         );
       }
-      dispatch(finishedLoadingActionCreator());
     } catch (error: any) {
       setLoadingOffWithMessage(
         "Login failed!\nCheck credentials for username: " + userData.username,

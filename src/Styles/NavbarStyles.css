@@ -80,6 +80,13 @@ ul {
   margin-top: auto;
 }
 
+.bt-search {
+  background: url("../images/icon-search-45.png");
+  background-repeat: no-repeat;
+  margin-right: 10px;
+  height: 45px;
+}
+
 .animatedEdit {
   background: url("../images/icon-editar32.png");
   background-repeat: no-repeat;

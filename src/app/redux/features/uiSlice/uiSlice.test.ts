@@ -8,7 +8,8 @@ import uiReducer, {
 const initialState = {
   loading: false,
   finishedLoading: true,
-  promptMessage: "",
+  modalMessage: "",
+  modalType: "",
   feedback: false,
   headerTitle: "",
   headerLastTitle: "",
@@ -20,7 +21,8 @@ const initialState = {
 const expectedState = {
   loading: false,
   finishedLoading: true,
-  promptMessage: "",
+  modalMessage: "",
+  modalType: "",
   feedback: true,
   headerTitle: "",
   headerLastTitle: "",
@@ -33,7 +35,8 @@ const expectedState = {
 const expectedLoadingState = {
   loading: true,
   finishedLoading: false,
-  promptMessage: "",
+  modalMessage: "",
+  modalType: "",
   feedback: true,
   headerTitle: "",
   headerLastTitle: "",

@@ -1,6 +1,6 @@
 import { IPenguin } from "../app/redux/types/penguin/penguinInterfaces";
 
-export const initialFormData: IPenguin = {
+export const blankFormData: IPenguin = {
   id: "",
   name: "",
   category: "",

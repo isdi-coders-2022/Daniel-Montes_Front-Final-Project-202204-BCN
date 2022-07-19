@@ -2,7 +2,7 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppDispatch } from "../../app/redux/hooks/hooks";
 import { LoginData } from "../../app/redux/types/userInterfaces/userInterfaces";
-import { loginThunk } from "../../app/redux/thunks/penguinThunk/userThunk/userThunk";
+import { loginThunk } from "../../app/redux/thunks/userThunk/userThunk";
 
 const LoginForm = () => {
   const blankData: LoginData = {

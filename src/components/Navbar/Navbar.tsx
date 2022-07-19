@@ -11,7 +11,10 @@ import {
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import "../../Styles/NavbarStyles.css";
 import { toPascalCase } from "../../utils/utils";
-import { promptMessageActionCreator } from "../../app/redux/features/uiSlice/uiSlice";
+import {
+  modalMessageActionCreator,
+  modalTypeActionCreator,
+} from "../../app/redux/features/uiSlice/uiSlice";
 
 interface Props {
   headerTitle: string;
@@ -25,13 +28,29 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const navigate = useNavigate();
 
   const { id, image, username } = useAppSelector((state) => state.user);
-  const { promptMessage } = useAppSelector((state) => state.ui);
+  const { modalMessage } = useAppSelector((state) => state.ui);
+  const { modalType } = useAppSelector((state) => state.ui);
   const { penguin } = useAppSelector((state) => state.penguins);
+  const { headerLastTitle } = useAppSelector((state) => state.ui);
 
   const handleClick = () => {
     const message = "Log out?";
-    dispatch(promptMessageActionCreator(message));
+    const newModalType = "logOutUser";
+
+    dispatch(modalTypeActionCreator(newModalType));
+    dispatch(modalMessageActionCreator(message));
+
     setMenu((prevState) => !prevState);
+    setModal((prevState) => !prevState);
+  };
+
+  const handleSearch = () => {
+    const message = "Search: ";
+    const newModalType = "Search";
+
+    dispatch(modalTypeActionCreator(newModalType));
+    dispatch(modalMessageActionCreator(message));
+
     setModal((prevState) => !prevState);
   };
 
@@ -48,7 +67,10 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
   const toggleSound = () => {
     const message = "Toggle Sound?";
-    dispatch(promptMessageActionCreator(message));
+    const newModalType = "Sound";
+
+    dispatch(modalTypeActionCreator(newModalType));
+    dispatch(modalMessageActionCreator(message));
 
     setMenu((prevState) => !prevState);
     setModal((prevState) => !prevState);
@@ -66,10 +88,22 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   };
 
   const handleBack = () => {
-    if (headerTitle === "Favourites") {
-      navigate("/penguins");
-    } else {
-      navigate("/penguins/favs");
+    switch (headerLastTitle) {
+      case "Home":
+        navigate("/penguins");
+        break;
+      case "Favourites":
+        navigate("/penguins/favs");
+        break;
+      case "HomePage":
+        navigate("/penguins");
+        break;
+      case "Edit...":
+        navigate("/penguins/favs");
+
+        break;
+      default:
+        navigate("/penguins");
     }
   };
 
@@ -98,12 +132,20 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       ? " display-none"
       : "";
 
+  const HidderSearch =
+    document.location.href.substring(
+      document.location.href.length - 3,
+      document.location.href.length
+    ) !== "ins"
+      ? " display-none"
+      : "";
+
   return (
     <div className="app">
       <div className="header">
         <button className={`bt-back${HidderBack}`} onClick={handleBack} />
         <h1>{headerTitle || "AdoptAPenguin.com"}</h1>
-
+        <button className={`bt-search${HidderSearch}`} onClick={handleSearch} />
         <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
       </div>
       <div className="nav">
@@ -161,9 +203,9 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
       {isModalOpen && (
         <Modal
-          type="logOutUser"
+          type={modalType}
           idPenguin={penguin.id}
-          message={promptMessage}
+          message={modalMessage}
           closeModal={setModal}
         />
       )}

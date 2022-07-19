@@ -1,5 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from "react";
-import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
+import {
+  IPenguin,
+  IRegisterForm,
+} from "../../app/redux/types/penguin/penguinInterfaces";
 import { wrongAction } from "../Modals/Modals";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
@@ -8,7 +11,7 @@ import {
   loadFavsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
-import { cleanArray, initialFormData } from "../../utils/utils";
+import { blankFormData, cleanArray } from "../../utils/utils";
 
 interface Props {
   penguin: IPenguin;
@@ -22,11 +25,23 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const isCreate = document.location.href.includes("create");
+  const initialFormData: IRegisterForm = {
+    id: penguin ? penguin.id : "",
+    name: penguin ? penguin.name : "",
+    category: penguin ? penguin.category : "",
+    likers: penguin ? penguin.likers : [],
+    likes: penguin ? penguin.likes : 0,
+    favs: penguin ? penguin.favs : [],
+    description: penguin ? penguin.description : "",
+    image: penguin ? penguin.image : "",
+    imageBackup: penguin ? penguin.imageBackup : "",
+  };
 
+  const isCreate = document.location.href.includes("create");
   const idUser = useAppSelector((state) => state.user.id);
 
-  const [formData, setFormData] = useState<IPenguin>(initialFormData);
+  const [formData, setFormData] = useState(initialFormData);
+
   const newFormData = new FormData();
 
   const handleInputChange = (
@@ -73,6 +88,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     try {
       isCreate ? processCreate() : processEdit();
+
+      setFormData(blankFormData);
 
       dispatch(loadFavsThunk());
       navigate("/penguins/favs");
@@ -125,8 +142,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           id="name"
           type="text"
           placeholder="Name"
-          autoComplete="off"
           value={formData.name || penguin.name}
+          autoComplete="off"
           onChange={handleInputChange}
         />
 

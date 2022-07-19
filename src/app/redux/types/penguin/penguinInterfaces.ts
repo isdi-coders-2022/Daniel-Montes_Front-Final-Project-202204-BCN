@@ -25,6 +25,7 @@ export interface IDetail {
 }
 
 export interface IRegisterForm {
+  id: string;
   name: string;
   category: string;
   favs: {}[];
