@@ -148,7 +148,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
                   title="btn-logout"
                 />
                 <button
-                  title="btn-back"
+                  title="btn-search"
                   className="bt-search"
                   onClick={handleSearch}
                 />

@@ -57,7 +57,7 @@ export const searchPenguinsThunk =
     dispatch(loadingActionCreator());
 
     const token = localStorage.getItem("token");
-    debugger;
+
     if (token) {
       const {
         data: { penguins },
