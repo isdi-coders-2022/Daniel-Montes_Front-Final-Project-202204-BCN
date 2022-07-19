@@ -31,7 +31,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const { modalMessage } = useAppSelector((state) => state.ui);
   const { modalType } = useAppSelector((state) => state.ui);
   const { penguin } = useAppSelector((state) => state.penguins);
-  const { headerLastTitle } = useAppSelector((state) => state.ui);
 
   const handleClick = () => {
     const message = "Log out?";
@@ -88,15 +87,12 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   };
 
   const handleBack = () => {
-    switch (headerLastTitle) {
-      case "Home":
-        navigate("/penguins");
-        break;
+    switch (headerTitle) {
       case "Favourites":
-        navigate("/penguins/favs");
-        break;
-      case "HomePage":
         navigate("/penguins");
+        break;
+      case "Detail":
+        navigate("/penguins/favs");
         break;
       case "Edit...":
         navigate("/penguins/favs");

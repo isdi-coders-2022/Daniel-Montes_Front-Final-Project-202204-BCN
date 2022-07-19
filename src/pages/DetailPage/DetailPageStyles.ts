@@ -125,20 +125,17 @@ const DetailPageStyles = styled.div`
     height: 430px;
     border: 2px solid;
     height: fit-content;
-    width: fit-content;
+    width: auto;
     margin-top: 5remx;
   }
 
   .detail-container {
     background-color: rgb(255 254 254);
-    box-shadow: 0 15px 6px #666;
     padding: 10px 10px 150px 10px;
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
     margin: auto;
-
-    border: 2px solid;
-    width: fit-content;
+    width: auto;
     margin-top: 5rem;
   }
 
@@ -390,7 +387,7 @@ const DetailPageStyles = styled.div`
     width: 45px;
     height: 45px;
     position: relative;
-    left: -300px;
+    left: -330px;
     background-image: url(${iconDelete});
     background-repeat: no-repeat;
     background-position: center;

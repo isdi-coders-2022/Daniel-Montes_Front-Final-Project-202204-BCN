@@ -100,6 +100,8 @@ ul {
   background-repeat: no-repeat;
   margin-right: 10px;
   height: 45px;
+  position: relative;
+  left: -275px;
 }
 
 .user-photo {
