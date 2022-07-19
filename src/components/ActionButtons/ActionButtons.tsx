@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
+  deletePenguinThunk,
   editPenguinThunk,
   getPenguinThunk,
   loadFavsThunk,
@@ -26,10 +27,11 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
 
   const isFav = penguin.favs.includes(idUser);
   const isLiker = penguin.likers.includes(idUser);
-  const [, setModal] = useState(false);
 
   const handleDelete = (): void => {
-    setModal((prevState) => !prevState);
+    if (penguin.id) {
+      dispatch(deletePenguinThunk(`${penguin.id}`));
+    }
   };
 
   const handleEdit = () => {
@@ -44,7 +46,7 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
     newData.likes = penguin.likes >= 1 ? penguin.likes - 1 : penguin.likes;
 
     setFormData(newData);
-    dispatch(editPenguinThunk(newData, "Deleted Like!"));
+    dispatch(editPenguinThunk(newData, "Delete Like."));
   };
 
   const addToLikers = () => {
@@ -54,7 +56,7 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
 
     setFormData(newData);
 
-    dispatch(editPenguinThunk(newData, "Added Like!"));
+    dispatch(editPenguinThunk(newData, "Add Like."));
   };
 
   const handleLikes = () => {
@@ -72,7 +74,7 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
     newData.favs = penguin.favs.filter((fav) => fav !== idUser);
 
     setFormData(newData);
-    dispatch(editPenguinThunk(newData, "Deleted from favorites!"));
+    dispatch(editPenguinThunk(newData, "Delete from favorites."));
   };
 
   const addToFavs = () => {
@@ -80,7 +82,7 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
     newData.favs = penguin.favs.concat(idUser);
 
     setFormData(newData);
-    dispatch(editPenguinThunk(newData, "Added to favorites! "));
+    dispatch(editPenguinThunk(newData, "Add to favorites."));
   };
 
   const handleFavs = () => {
@@ -106,14 +108,11 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
       <button onClick={handleFavs} className={`animated ${selectIconFav}`} />
       <button className={`animated bounce animatedEdit`} onClick={handleEdit} />
       <button
+        title="btn-delete"
         className={`animated bounce animatedDelete`}
         onClick={handleDelete}
       />
-      <button
-        title="btn-delete"
-        className={`animated ${selectIconLike}`}
-        onClick={handleLikes}
-      />
+      <button className={`animated ${selectIconLike}`} onClick={handleLikes} />
     </div>
   );
 };

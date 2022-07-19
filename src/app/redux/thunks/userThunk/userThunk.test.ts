@@ -1,14 +1,7 @@
 import { mockUser } from "../../../../mocks/users";
 import { server } from "../../../../mocks/server";
-import { loginThunk } from "./userThunk";
+import { getUserThunk, loginThunk } from "./userThunk";
 import axios from "axios";
-
-jest.mock("chalk", () => ({
-  green: jest.fn(),
-  white: jest.fn(),
-  red: jest.fn(),
-  yellow: jest.fn(),
-}));
 
 beforeAll(() => {
   server.listen({ onUnhandledRequest: "bypass" });
@@ -27,29 +20,21 @@ jest.mock("axios");
 HTMLAnchorElement.prototype.click = jest.fn();
 global.window.URL.createObjectURL = jest.fn();
 
-// describe("Given a registerThunk", () => {
-//   describe("When its called", () => {
-//     test("Then it should call the dispatch", async () => {
-//       const dispatch = jest.fn();
-//       const dispatch2 = jest.fn();
-//       const thunklogin = createFavThunk(mockPenguin);
+describe("Given the getuserThunk function", () => {
+  describe("When it's called with an user", () => {
+    test("Then it should call dispatch with the set notes to show action with the notes received from the axios request", async () => {
+      const dispatch = jest.fn();
 
-//       await thunklogin(dispatch2);
-//       const thunk = registerThunk(mockUser);
-//       thunk(dispatch());
-//       jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
-//       expect(dispatch).toHaveBeenCalled();
+      jest.spyOn(Storage.prototype, "getItem").mockReturnValue("token");
+      axios.get = jest.fn().mockResolvedValue({ data: { user: mockUser } });
 
-//       jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
-//       expect(dispatch).toHaveBeenCalled();
+      const thunk = getUserThunk(mockUser.id);
+      await thunk(dispatch);
 
-//       const thunkLoginAction = loginThunk(mockUser);
-//       thunkLoginAction(dispatch());
-//       expect(dispatch).toHaveBeenCalled();
-//     });
-//   });
-// });
-
+      expect(dispatch).toHaveBeenCalledTimes(2);
+    });
+  });
+});
 describe("Given a LoginThunk", () => {
   describe("When its called", () => {
     test("Then it should call the dispatch", async () => {

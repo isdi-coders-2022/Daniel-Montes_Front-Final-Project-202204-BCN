@@ -19,12 +19,10 @@ export const toPascalCase = (strValue: string) => {
 };
 
 export const cleanArray = (array: any): any => {
-  if (Array(array)) {
-    array = Array.from(new Set(array));
-    array = array.filter(function (field: any) {
-      return field != null && field !== "";
-    });
+  array = Array.from(new Set(array));
+  array = array.filter(function (field: any) {
+    return field != null && field !== "" && field !== "undefined";
+  });
 
-    return array;
-  }
+  return array;
 };

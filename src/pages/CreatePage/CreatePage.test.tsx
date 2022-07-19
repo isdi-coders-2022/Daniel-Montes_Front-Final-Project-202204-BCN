@@ -8,13 +8,6 @@ import { createFavThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk
 import { mockPenguins } from "../../mocks/penguins";
 import CreatePage from "./CreatePage";
 
-jest.mock("chalk", () => ({
-  green: jest.fn(),
-  white: jest.fn(),
-  red: jest.fn(),
-  yellow: jest.fn(),
-}));
-
 describe("Given a CreatePage component", () => {
   describe("When the word 'penguin' is written to the username input field", () => {
     test("Then the value of the username input field should be 'penguin'", () => {

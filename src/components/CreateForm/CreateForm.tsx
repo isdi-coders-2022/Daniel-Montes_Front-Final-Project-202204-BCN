@@ -42,44 +42,32 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
   const [formData, setFormData] = useState(initialFormData);
 
-  let newFormData = new FormData();
+  const newFormData = new FormData();
 
   const handleInputChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ): void => {
+    event.preventDefault();
     setFormData({
-      ...formData,
+      ...(formData.id ? formData : penguin),
       [event.target.id]: event.target.value,
     });
 
-    modFields = [...modFields, event.target.id];
-    cleanArray(modFields);
+    modFields.push(event.target.id);
   };
 
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    event.preventDefault();
-    setFormData({
-      ...formData,
-      [event.target.id]: event.target.files?.[0] as File,
-    });
+    setFormData({ ...formData, image: event.target.files?.[0] as File });
 
     newFormData.append("image", formData.image);
 
-    modFields = [...modFields, event.target.id];
-    cleanArray(modFields);
+    modFields.push(event.target.id);
   };
 
   const processCreate = () => {
-    setFormData({
-      ...formData,
-      likes: 1,
-      likers: [idUser],
-      favs: [idUser],
-    });
-
-    newFormData.append("name", penguin.name);
+    newFormData.append("name", formData.name);
     newFormData.append("category", formData.category);
-    newFormData.append("likes", JSON.stringify(formData.likes));
+    newFormData.append("likes", JSON.stringify(1));
     newFormData.append("likers", idUser);
     newFormData.append("favs", idUser);
     newFormData.append("image", formData.image);
@@ -87,13 +75,14 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     newFormData.append("description", formData.description);
 
     dispatch(createFavThunk(newFormData));
-    dispatch(loadFavsThunk());
   };
 
   const processEdit = () => {
-    dispatch(editPenguinThunk(newFormData, "Updated fields: " + modFields));
+    modFields = cleanArray(modFields);
 
-    dispatch(loadFavsThunk());
+    dispatch(
+      editPenguinThunk(formData, "Update fields: " + modFields.join(", "))
+    );
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -102,7 +91,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
       setFormData(blankFormData);
 
-      navigate("/penguins");
+      dispatch(loadFavsThunk());
+      navigate("/penguins/favs");
     } catch (error) {
       wrongAction("Error:" + error);
     }
@@ -146,16 +136,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           onChange={handleImageChange}
           autoComplete="off"
         />
-        <label htmlFor="id">Id</label>
-        <input
-          id="id"
-          type="text"
-          autoComplete="off"
-          placeholder="Id"
-          value={penguin.id || formData.id}
-          onChange={handleInputChange}
-          className="display-none"
-        />
+
         <label htmlFor="name">Name</label>
         <input
           id="name"
@@ -165,6 +146,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
           autoComplete="off"
           onChange={handleInputChange}
         />
+
         <label htmlFor="category">Category</label>
         <input
           id="category"
