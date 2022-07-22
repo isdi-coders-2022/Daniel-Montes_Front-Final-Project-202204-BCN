@@ -160,12 +160,11 @@ const DetailPageStyles = styled.div`
   }
 
   .detail-container {
-    background-color: rgb(255 254 254);
-    padding: 10px 10px 150px 10px;
+    padding: 0 10px 150px 10px;
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
     margin: auto;
-    width: auto;
+    width: min-content;
     margin-top: 5rem;
   }
 
@@ -180,7 +179,9 @@ const DetailPageStyles = styled.div`
     display: flex;
     justify-content: space-between;
     align-content: space-around;
-    height: 50px;
+
+    width: 370px;
+    margin: auto;
   }
 
   .bt-back {
@@ -235,7 +236,8 @@ const DetailPageStyles = styled.div`
 
   .detail-name {
     flex: 2;
-    margin-left: 55px;
+
+    text-align: center;
   }
 
   .likes {
@@ -256,7 +258,7 @@ const DetailPageStyles = styled.div`
 
   .detail-info {
     display: flex;
-    width: 75%;
+    width: 275px;
     margin: auto;
     margin-top: 15px;
   }
@@ -265,6 +267,8 @@ const DetailPageStyles = styled.div`
     margin-top: 35px;
     padding-left: 10px;
     font-size: 16px;
+    width: 227px;
+    background-color: white;
   }
 
   .description-container {
@@ -417,7 +421,7 @@ const DetailPageStyles = styled.div`
     background-repeat: no-repeat;
     background-position: inherit;
     position: relative;
-    left: 340px;
+    left: 300px;
   }
 
   .animatedDelete {
