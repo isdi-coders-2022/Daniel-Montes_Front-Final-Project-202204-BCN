@@ -42,12 +42,7 @@ const userSlice = createSlice({
     }),
 
     editUser: (user: UserState, action: PayloadAction<UserInfo>) => ({
-      id: action.payload.id,
-      name: action.payload.username,
-      username: action.payload.username,
-      isAdmin: action.payload.isAdmin,
-      logged: true,
-      image: action.payload.image,
+      ...action.payload,
     }),
   },
 });

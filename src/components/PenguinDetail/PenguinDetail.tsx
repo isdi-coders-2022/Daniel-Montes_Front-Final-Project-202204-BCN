@@ -31,10 +31,8 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
     const actualPos = allPenguins.map((e) => e.id).indexOf(thisPenguin.id);
 
     const newPos =
-      actualPos >= 0
+      actualPos >= 0 || actualPos < allPenguins.length
         ? actualPos + 1
-        : actualPos > allPenguins.length
-        ? allPenguins.length
         : actualPos;
 
     const nextPenguinId = allPenguins[newPos]?.id.toString();
