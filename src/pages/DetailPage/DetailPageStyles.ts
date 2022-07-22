@@ -161,11 +161,11 @@ const DetailPageStyles = styled.div`
   }
 
   .detail-container {
-    padding: 0 10px 150px 10px;
+    padding: 0 20px 150px 20px;
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
     margin: auto;
-    width: min-content;
+
     margin-top: 5rem;
   }
 

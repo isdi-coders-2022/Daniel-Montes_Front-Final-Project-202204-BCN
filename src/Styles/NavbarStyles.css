@@ -79,7 +79,7 @@ ul {
   width: 75%;
   margin-left: 25px;
   position: relative;
-  top: 530px;
+  top: 600px;
 }
 
 .hr-photo {
@@ -181,7 +181,7 @@ ul {
 .bt-logout {
   background: url("../images/icon-menu-logout45.png");
   background-repeat: no-repeat;
-  margin: auto;
+  margin-left: 50px;
   height: 45px;
 }
 
