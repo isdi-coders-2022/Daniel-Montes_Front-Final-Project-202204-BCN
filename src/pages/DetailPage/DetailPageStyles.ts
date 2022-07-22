@@ -111,7 +111,7 @@ const DetailPageStyles = styled.div`
     border-radius: 10px;
     width: 100%;
     height: 100%;
-    max-width: 330px;
+    max-width: 300px;
     margin-top: -30px;
   }
 
@@ -119,6 +119,7 @@ const DetailPageStyles = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
   }
 
   .imgDetailNext {
@@ -406,7 +407,7 @@ const DetailPageStyles = styled.div`
     background-repeat: no-repeat;
     background-position: inherit;
     position: relative;
-    left: 340px;
+    left: 300px;
   }
 
   .animatedFavDelete {
@@ -423,7 +424,7 @@ const DetailPageStyles = styled.div`
     width: 45px;
     height: 45px;
     position: relative;
-    left: -330px;
+    left: -290px;
     background-image: url(${iconDelete});
     background-repeat: no-repeat;
     background-position: inherit;
