@@ -2,27 +2,21 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { registerThunk } from "../../app/redux/thunks/userThunk/userThunk";
 import { NavLink } from "react-router-dom";
-import { correctAction } from "../Modals/Modals";
 import RegisterPageStyles from "../../Styles/FormsStyles";
 import {
   headerLastTitleActionCreator,
   headerTitleActionCreator,
 } from "../../app/redux/features/uiSlice/uiSlice";
+import { UserRegister } from "../../app/redux/types/userInterfaces/userInterfaces";
 
 let HiderImage = "";
 let HiderImageOn = "";
 let imageURL = "";
-interface FormData {
-  name: string;
-  username: string;
-  password: string;
-  image: string | File;
-}
 
 const thisTitle = "Wellcome";
 
 const RegisterForm = (): JSX.Element => {
-  const blankFields: FormData = {
+  const blankFields: UserRegister = {
     name: "",
     username: "",
     password: "",
@@ -31,7 +25,9 @@ const RegisterForm = (): JSX.Element => {
 
   const { headerTitle } = useAppSelector((state) => state.ui);
 
-  const [formData, setFormData] = useState<FormData>(blankFields);
+  const [formData, setFormData] = useState(blankFields);
+
+  const newFormData = new FormData();
 
   const dispatch = useAppDispatch();
 
@@ -43,10 +39,19 @@ const RegisterForm = (): JSX.Element => {
     });
   };
 
+  const processRegistration = () => {
+    newFormData.append("name", formData.name);
+    newFormData.append("username", formData.username);
+    newFormData.append("password", formData.password);
+    newFormData.append("image", formData.image);
+    debugger;
+    dispatch(registerThunk(newFormData));
+  };
+
   const handleSubmit = (event: ChangeEvent<HTMLFormElement>): void => {
     event.preventDefault();
 
-    dispatch(registerThunk(formData));
+    processRegistration();
 
     setFormData(blankFields);
   };
@@ -54,9 +59,8 @@ const RegisterForm = (): JSX.Element => {
   const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
     setFormData({
       ...formData,
-      image: event.target.files?.item(0) as File,
+      image: event.target.files?.[0] as File,
     });
-    correctAction("Added image: " + event.target.value);
   };
 
   if (!document.location.href.includes("create")) {

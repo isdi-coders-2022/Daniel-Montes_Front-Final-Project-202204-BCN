@@ -157,7 +157,7 @@ const DetailPageStyles = styled.div`
     border: 2px solid;
     height: fit-content;
     width: auto;
-    margin-top: 5remx;
+    margin-top: 5rem;
   }
 
   .detail-container {

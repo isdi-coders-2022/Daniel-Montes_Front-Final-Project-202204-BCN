@@ -35,7 +35,9 @@ const blankFormData: IPenguin = {
 
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   dispatch(loadingActionCreator());
-  setLoadingOn(`GET Penguins: Loading data...`);
+  setLoadingOn(
+    `GET Penguins: Be watter penguin, remember render.com is free...`
+  );
   const token = localStorage.getItem("token");
 
   if (token) {
