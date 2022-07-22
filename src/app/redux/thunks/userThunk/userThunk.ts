@@ -4,7 +4,6 @@ import {
   DataAxiosLogin,
   LoginData,
   LoginResponse,
-  UserRegister,
 } from "../../types/userInterfaces/userInterfaces";
 import {
   editUserActionCreator,
@@ -54,32 +53,31 @@ export const loginThunk =
     }
   };
 
-export const registerThunk =
-  (userData: UserRegister) => async (dispatch: Dispatch) => {
-    try {
-      const { data, status }: DataAxiosLogin = await axios.post(
-        `${process.env.REACT_APP_API_URL}users/register`,
-        userData
-      );
-      if (status === 200) {
-        localStorage.setItem("token", data.token);
-      }
-
-      dispatch(finishedLoadingActionCreator());
-
-      document.location.href = "/penguins";
-    } catch (error: any) {
-      setLoadingOffWithMessage(
-        "Registration failed!: \nUsername: " +
-          userData.username +
-          "\nPass: " +
-          userData.password,
-        true
-      );
-
-      return error.message;
+export const registerThunk = (userData: any) => async (dispatch: Dispatch) => {
+  try {
+    const { data, status }: DataAxiosLogin = await axios.post(
+      `${process.env.REACT_APP_API_URL}users/register`,
+      userData
+    );
+    if (status === 200) {
+      localStorage.setItem("token", data.token);
     }
-  };
+
+    dispatch(finishedLoadingActionCreator());
+
+    document.location.href = "/penguins";
+  } catch (error: any) {
+    setLoadingOffWithMessage(
+      "Registration failed!: \nUsername: " +
+        userData.username +
+        "\nPass: " +
+        userData.password,
+      true
+    );
+
+    return error.message;
+  }
+};
 
 export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
   try {
