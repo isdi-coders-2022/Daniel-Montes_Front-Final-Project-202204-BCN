@@ -104,7 +104,7 @@ export const editUserThunk = (idUser: any) => async (dispatch: Dispatch) => {
   dispatch(loadingActionCreator());
 
   const token = localStorage.getItem("token");
-  debugger;
+
   if (token) {
     const { data: user } = await axios.put(
       `${process.env.REACT_APP_API_URL}users/edit/${idUser}`,

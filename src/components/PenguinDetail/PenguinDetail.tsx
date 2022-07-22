@@ -29,7 +29,7 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
 
   const getDetailNext = () => {
     const actualPos = allPenguins.map((e) => e.id).indexOf(thisPenguin.id);
-    debugger;
+
     const newPos =
       actualPos >= 0
         ? actualPos + 1
