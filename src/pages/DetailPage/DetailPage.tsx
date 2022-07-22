@@ -12,6 +12,7 @@ const DetailPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const { penguin } = useAppSelector((state) => state.penguins);
+  const { allPenguins } = useAppSelector((state) => state.penguins);
   const { headerTitle } = useAppSelector((state) => state.ui);
 
   const thisTitle = "Detail";
@@ -34,7 +35,7 @@ const DetailPage = (): JSX.Element => {
 
   return (
     <DetailPageStyles className="penguin--container">
-      <PenguinDetail penguin={penguin} />
+      <PenguinDetail allPenguins={allPenguins} penguin={penguin} />
     </DetailPageStyles>
   );
 };

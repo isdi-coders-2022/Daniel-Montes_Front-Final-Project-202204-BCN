@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import store from "../../app/redux/store/store";
-import { mockPenguin } from "../../mocks/penguins";
+import { mockPenguin, mockPenguins } from "../../mocks/penguins";
 import PenguinDetail from "./PenguinDetail";
 
 jest.mock("chalk", () => ({
@@ -17,13 +17,13 @@ describe("Given a CreatePage component", () => {
   describe("When the word 'penguin' is written to the username input field", () => {
     test("Then the value of the username input field should be 'penguin'", () => {
       const ToFind = "button";
-      const expectedButtons = 5;
+      const expectedButtons = 7;
       const handleDelete = jest.fn();
 
       render(
         <Provider store={store}>
           <BrowserRouter>
-            <PenguinDetail penguin={mockPenguin} />
+            <PenguinDetail allPenguins={mockPenguins} penguin={mockPenguin} />
           </BrowserRouter>
         </Provider>
       );
