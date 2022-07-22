@@ -31,6 +31,8 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const { modalType } = useAppSelector((state) => state.ui);
   const { penguin } = useAppSelector((state) => state.penguins);
 
+  const userImage = user.image;
+
   const handleClick = () => {
     if (headerTitle === "Home") {
       handleSearch();
@@ -157,7 +159,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
             <hr className="hr-menu-horizontal" />
 
             <div className="user-data-container">
-              <img src={""} className="user-photo" alt="user" />
+              <img src={userImage} className="user-photo" alt="user" />
               <h3 className="user-username">
                 {toPascalCase(`${user.username}`)}
               </h3>

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   headerLastTitleActionCreator,
   headerTitleActionCreator,
@@ -8,15 +9,17 @@ import Home from "../../components/Home/Home";
 const HomePage = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
+  const thisTitle = "Wellcome";
+
   const { headerTitle } = useAppSelector((state) => state.ui);
 
-  const SetTitleHeader = (title: string, lastTitle: string) => {
-    dispatch(headerTitleActionCreator(title));
-    dispatch(headerLastTitleActionCreator(lastTitle));
-  };
-
-  const thisTitle = "Wellcome";
-  if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
+  useEffect(() => {
+    const SetTitleHeader = (title: string, lastTitle: string) => {
+      dispatch(headerTitleActionCreator(title));
+      dispatch(headerLastTitleActionCreator(lastTitle));
+    };
+    if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
+  }, [dispatch, headerTitle]);
 
   return <Home />;
 };
