@@ -22,6 +22,7 @@ const userSlice = createSlice({
       isAdmin: action.payload.isAdmin,
       image: action.payload.image,
     }),
+
     logout: () => ({
       id: "",
       name: "",
@@ -30,6 +31,7 @@ const userSlice = createSlice({
       logged: false,
       image: "",
     }),
+
     loadUserData: (user: UserState, action: PayloadAction<UserInfo>) => ({
       id: action.payload.id,
       name: action.payload.username,
@@ -38,12 +40,17 @@ const userSlice = createSlice({
       logged: true,
       image: action.payload.image,
     }),
+
+    editUser: (user: UserState, action: PayloadAction<UserInfo>) => ({
+      ...action.payload,
+    }),
   },
 });
 
 export const {
   login: logInActionCreator,
   logout: logOutActionCreator,
+  editUser: editUserActionCreator,
   loadUserData: loadUserDataActionCreator,
 } = userSlice.actions;
 

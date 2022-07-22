@@ -10,8 +10,8 @@ import {
 import { useNavigate } from "react-router-dom";
 import { blankFormData, cleanArray } from "../../utils/utils";
 import {
-  IRegisterForm,
   IPenguin,
+  IRegisterForm,
 } from "../../app/redux/types/penguin/penguinInterfaces";
 
 interface Props {
@@ -27,7 +27,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   const navigate = useNavigate();
 
   const isCreate = document.location.href.includes("create");
-  const idUser = useAppSelector((state) => state.user.id);
+  const { user } = useAppSelector((state) => state);
 
   const initialFormData: IRegisterForm = {
     id: penguin ? penguin.id : "",
@@ -71,8 +71,8 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
     newFormData.append("name", formData.name);
     newFormData.append("category", formData.category);
     newFormData.append("likes", JSON.stringify(1));
-    newFormData.append("likers", idUser);
-    newFormData.append("favs", idUser);
+    newFormData.append("likers", user.id);
+    newFormData.append("favs", user.id);
     newFormData.append("image", formData.image);
     newFormData.append("imageBackup", formData.imageBackup);
     newFormData.append("description", formData.description);

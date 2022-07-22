@@ -12,6 +12,8 @@ import iconDelete from "../../images/delete-32.png";
 import iconSoundOff from "../../images/icon-sound-off.png";
 import iconEdit from "../../images/icon-editar32.png";
 import iconLikeInit from "../../images/icon-likes-empty.png";
+import detailPrev from "../../images/detail-prev.png";
+import detailNext from "../../images/detail-next.png";
 
 const DetailPageStyles = styled.div`
   font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
@@ -109,9 +111,36 @@ const DetailPageStyles = styled.div`
     border-radius: 10px;
     width: 100%;
     height: 100%;
-    max-width: 730px;
-
+    max-width: 330px;
     margin-top: -30px;
+  }
+
+  .img-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .imgDetailNext {
+    height: 180px;
+  }
+
+  .detailNext {
+    background: none;
+    background-image: url(${detailNext});
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+  }
+
+  .imgDetailPrev {
+    height: 180px;
+  }
+
+  .detailPrev {
+    background: none;
+    background-image: url(${detailPrev});
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
   }
 
   .penguin--container {
@@ -199,9 +228,13 @@ const DetailPageStyles = styled.div`
     background-repeat: no-repeat;
   }
 
-  .detail-name,
   .bt-likes {
     flex: 2;
+  }
+
+  .detail-name {
+    flex: 2;
+    margin-left: 55px;
   }
 
   .likes {
@@ -222,7 +255,9 @@ const DetailPageStyles = styled.div`
 
   .detail-info {
     display: flex;
-    margin-top: 10px;
+    width: 75%;
+    margin: auto;
+    margin-top: 15px;
   }
 
   .detail-description {
@@ -369,7 +404,7 @@ const DetailPageStyles = styled.div`
     height: 45px;
     background-image: url(${iconMenuFavs});
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: inherit;
     position: relative;
     left: 340px;
   }
@@ -379,7 +414,7 @@ const DetailPageStyles = styled.div`
     height: 45px;
     background-image: url(${iconMenuFavsDelete});
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: inherit;
     position: relative;
     left: 340px;
   }
@@ -391,7 +426,7 @@ const DetailPageStyles = styled.div`
     left: -330px;
     background-image: url(${iconDelete});
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: inherit;
   }
 
   .animatedEdit {
@@ -400,7 +435,7 @@ const DetailPageStyles = styled.div`
     background: url(${iconEdit});
     background-repeat: no-repeat;
     margin: auto;
-    margin-left: 10px;
+    margin-left: 70px;
   }
 
   .form-detail-animatedEdit {

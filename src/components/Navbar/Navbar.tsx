@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { Modal } from "../Modals/ModalPrompt";
 import {
-  getPenguinThunk,
   loadFavsThunk,
   loadPenguinsThunk,
   resetPenguinThunk,
@@ -27,7 +26,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const { id, image, username } = useAppSelector((state) => state.user);
+  const { user } = useAppSelector((state) => state);
   const { modalMessage } = useAppSelector((state) => state.ui);
   const { modalType } = useAppSelector((state) => state.ui);
   const { penguin } = useAppSelector((state) => state.penguins);
@@ -58,6 +57,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     dispatch(modalTypeActionCreator(newModalType));
     dispatch(modalMessageActionCreator(message));
 
+    setMenu(false);
     setModal((prevState) => !prevState);
   };
 
@@ -103,8 +103,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const handleEdit = () => {
     setMenu((prevState) => !prevState);
 
-    dispatch(getPenguinThunk(id));
-    navigate(`/penguins/edit/${id}`);
+    navigate(`/users/edit/${user.id}`);
   };
 
   const HidderBack =
@@ -158,8 +157,10 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
             <hr className="hr-menu-horizontal" />
 
             <div className="user-data-container">
-              <img src={image} className="user-photo" alt="user" />
-              <h3 className="user-username">{toPascalCase(`${username}`)}</h3>
+              <img src={""} className="user-photo" alt="user" />
+              <h3 className="user-username">
+                {toPascalCase(`${user.username}`)}
+              </h3>
               <button
                 className={`animated menu-animatedEdit`}
                 onClick={handleEdit}

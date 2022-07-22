@@ -11,7 +11,7 @@ export interface UserState {
   username: string;
   logged: boolean;
   isAdmin: boolean;
-  image: string;
+  image: string | File;
 }
 
 export interface LoginResponse {

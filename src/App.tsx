@@ -68,9 +68,9 @@ function App() {
         <Route
           path="/users/edit/:id"
           element={
-            <CheckOutSecurity>
+            <CheckInSecurity>
               <CreatePage />
-            </CheckOutSecurity>
+            </CheckInSecurity>
           }
         />
         <Route

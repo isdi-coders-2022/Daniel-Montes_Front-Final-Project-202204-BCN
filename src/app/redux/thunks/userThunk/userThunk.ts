@@ -7,6 +7,7 @@ import {
   UserRegister,
 } from "../../types/userInterfaces/userInterfaces";
 import {
+  editUserActionCreator,
   loadUserDataActionCreator,
   logInActionCreator,
 } from "../../features/userSlice/userSlice";
@@ -15,7 +16,10 @@ import {
   setLoadingOffWithMessage,
   setLoadingOn,
 } from "../../../../components/Modals/Modals";
-import { finishedLoadingActionCreator } from "../../features/uiSlice/uiSlice";
+import {
+  finishedLoadingActionCreator,
+  loadingActionCreator,
+} from "../../features/uiSlice/uiSlice";
 
 export const loginThunk =
   (userData: LoginData) => async (dispatch: Dispatch) => {
@@ -91,5 +95,31 @@ export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
     }
   } catch (error) {
     setLoadingOffWithMessage(`GET User: ERROR: ${error}`, false);
+  }
+};
+
+export const editUserThunk = (idUser: any) => async (dispatch: Dispatch) => {
+  setLoadingOn("EDIT User...");
+
+  dispatch(loadingActionCreator());
+
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    const { data: user } = await axios.put(
+      `${process.env.REACT_APP_API_URL}users/edit/${idUser}`,
+      idUser,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    dispatch(editUserActionCreator(user));
+
+    dispatch(finishedLoadingActionCreator());
+
+    setLoadingOffWithMessage(`Edit user finished successfully.`, false);
   }
 };
