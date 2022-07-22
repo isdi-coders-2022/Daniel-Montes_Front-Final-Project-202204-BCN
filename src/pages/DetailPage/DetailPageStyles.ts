@@ -112,6 +112,7 @@ const DetailPageStyles = styled.div`
     width: 100%;
     height: 100%;
     max-width: 300px;
+    min-height: 230px;
     margin-top: -30px;
   }
 
