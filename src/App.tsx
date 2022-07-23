@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import CheckOutSecurity from "./components/CheckOutSecurity/CheckOutSecurity";
 import CheckInSecurity from "./components/CheckInSecurity/CheckInSecurity";
 import CreatePage from "./pages/CreatePage/CreatePage";
@@ -17,6 +16,7 @@ import FavsPage from "./pages/FavsPage/FavsPage";
 import { ToastContainer } from "react-toastify";
 import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
 import { getUserThunk } from "./app/redux/thunks/userThunk/userThunk";
+import RegisterPage from "./pages/RegisterPage/RegisterPage";
 
 function App() {
   const { logged } = useAppSelector((state) => state.user);

@@ -27,7 +27,6 @@ export interface LoginData {
   password: string;
 }
 export interface UserRegister {
-  name: string;
   username: string;
   password: string;
   image: string | File;

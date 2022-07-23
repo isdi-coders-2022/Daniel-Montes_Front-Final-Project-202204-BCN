@@ -55,25 +55,30 @@ export const loginThunk =
 
 export const registerThunk = (userData: any) => async (dispatch: Dispatch) => {
   try {
-    const { data, status }: DataAxiosLogin = await axios.post(
+    debugger;
+    setLoadingOn(`REGISTER: Registering...`);
+
+    const { data: user } = await axios.post(
       `${process.env.REACT_APP_API_URL}users/register`,
-      userData
+      userData,
+      {
+        headers: {
+          "Content-Type": "mutipart/form-data",
+        },
+      }
     );
-    if (status === 200) {
-      localStorage.setItem("token", data.token);
-    }
+
+    localStorage.setItem("token", user.token);
 
     dispatch(finishedLoadingActionCreator());
+    setLoadingOffWithMessage(
+      `REGISTER: ${user.username} registered successfully.`,
+      false
+    );
 
     document.location.href = "/penguins";
   } catch (error: any) {
-    setLoadingOffWithMessage(
-      "Registration failed!: \nUsername: " +
-        userData.username +
-        "\nPass: " +
-        userData.password,
-      true
-    );
+    setLoadingOffWithMessage("Registration failed!", true);
 
     return error.message;
   }
