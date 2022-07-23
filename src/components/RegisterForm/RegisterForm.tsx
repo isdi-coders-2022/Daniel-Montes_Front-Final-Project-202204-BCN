@@ -16,8 +16,7 @@ let imageURL = "";
 const thisTitle = "Wellcome";
 
 const RegisterForm = (): JSX.Element => {
-  const blankFields: UserRegister = {
-    name: "",
+  const initialFormData: UserRegister = {
     username: "",
     password: "",
     image: "",
@@ -25,26 +24,29 @@ const RegisterForm = (): JSX.Element => {
 
   const { headerTitle } = useAppSelector((state) => state.ui);
 
-  const [formData, setFormData] = useState(blankFields);
-
-  const newFormData = new FormData();
+  const [formData, setFormData] = useState(initialFormData);
 
   const dispatch = useAppDispatch();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    event.preventDefault();
     setFormData({
       ...formData,
       [event.target.id]: event.target.value,
     });
   };
+  const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
+    setFormData({
+      ...formData,
+      image: event.target.files?.[0] as File,
+    });
+  };
 
   const processRegistration = () => {
-    newFormData.append("name", formData.name);
+    const newFormData = new FormData();
     newFormData.append("username", formData.username);
     newFormData.append("password", formData.password);
     newFormData.append("image", formData.image);
-    debugger;
+
     dispatch(registerThunk(newFormData));
   };
 
@@ -53,14 +55,7 @@ const RegisterForm = (): JSX.Element => {
 
     processRegistration();
 
-    setFormData(blankFields);
-  };
-
-  const handleImageChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    setFormData({
-      ...formData,
-      image: event.target.files?.[0] as File,
-    });
+    setFormData(initialFormData);
   };
 
   if (!document.location.href.includes("create")) {
@@ -94,7 +89,7 @@ const RegisterForm = (): JSX.Element => {
         <img
           className={`penguin-image${HiderImageOn}`}
           src={String(formData.image)}
-          alt={formData.name}
+          alt={formData.username}
         />
         <input
           className={`penguin-image${HiderImage}`}
@@ -104,16 +99,7 @@ const RegisterForm = (): JSX.Element => {
           autoComplete="off"
         />
         {imageURL}
-        <label htmlFor="name"> Name </label>
-        <input
-          type="text"
-          id="name"
-          autoComplete="off"
-          placeholder="Name"
-          value={formData.name}
-          onChange={handleInputChange}
-          name="Name"
-        />
+
         <label htmlFor="username"> Username </label>
         <input
           type="text"

@@ -17,8 +17,13 @@ const CreatePage = (): JSX.Element => {
 
   const isCreate = document.location.href.includes("create");
   const isUserEdit = document.location.href.includes("users");
+  const isRegister = document.location.href.includes("register");
 
-  const thisTitle = isCreate ? "New..." : "Edit...";
+  const thisTitle = isCreate
+    ? "New..."
+    : isRegister
+    ? "Register..."
+    : "Edit...";
 
   const idToProcess = document.location.href.substring(
     document.location.href.lastIndexOf("/") + 1,

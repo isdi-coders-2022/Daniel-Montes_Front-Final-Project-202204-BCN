@@ -27,6 +27,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
   const navigate = useNavigate();
 
   const isCreate = document.location.href.includes("create");
+
   const { user } = useAppSelector((state) => state);
 
   const initialFormData: IRegisterForm = {
