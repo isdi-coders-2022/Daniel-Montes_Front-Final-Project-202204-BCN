@@ -1,5 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
-import { getPenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
+import {
+  getPenguinThunk,
+  resetPenguinThunk,
+} from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import iconPhotoEmpty from "../../images/contact-photo-add.png";
 import ActionButtons from "../ActionButtons/ActionButtons";
@@ -14,6 +17,9 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
   const dispatch = useAppDispatch();
   const thisPenguin = useAppSelector((state) => state.penguins.penguin);
 
+  const idUser = useAppSelector((state) => state.user.id);
+  const isLiker = penguin.likers.includes(idUser);
+
   const penguinImage =
     penguin.image === "" && !penguin.imageBackup.includes("/")
       ? iconPhotoEmpty
@@ -25,11 +31,13 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
 
     if (actualPos === 0 || actualPos <= -1) {
       prevPenguinId = allPenguins[allPenguins.length - 1]?.id.toString();
-      correctAction("Begin of list!");
+      correctAction("End of list!");
     } else {
       const newPos = actualPos - 1;
       prevPenguinId = allPenguins[newPos]?.id.toString();
     }
+
+    dispatch(resetPenguinThunk());
     dispatch(getPenguinThunk(prevPenguinId));
   };
 
@@ -39,14 +47,19 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
 
     if (actualPos === allPenguins.length - 1) {
       nextPenguinId = allPenguins[0]?.id.toString();
-      correctAction("End of list!");
+      correctAction("Begin of list!");
     } else {
       const newPos = actualPos + 1;
       nextPenguinId = allPenguins[newPos]?.id.toString();
     }
 
+    dispatch(resetPenguinThunk());
     dispatch(getPenguinThunk(nextPenguinId));
   };
+
+  const selectIconLike = isLiker
+    ? " bounce detail-animatedLike"
+    : ` bounce2 detail-animatedLikeInit`;
 
   return (
     <div className="detail-container">
@@ -66,7 +79,7 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
       <div className="detail-info">
         <span className="category">{penguin.category}</span>
         <span className="likes">{penguin.likes}</span>
-        <button className="animated  bounce2 detail-animatedLikeInit"></button>
+        <button className={`animated${selectIconLike}`} />
       </div>
       <span className="detail-description">{penguin.description}</span>
     </div>

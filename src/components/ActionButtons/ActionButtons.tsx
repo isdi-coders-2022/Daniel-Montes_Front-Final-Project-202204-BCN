@@ -128,21 +128,18 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
   };
 
   const classButtonEdit =
-    isDetailPage || isFavsPage ? " animatedEdit" : ` display-none`;
+    isDetailPage || isFavsPage ? " bounce animatedEdit" : ` display-none`;
 
   const classButtonDelete =
-    isDetailPage || isFavsPage ? " animatedDelete" : ` display-none`;
+    isDetailPage || isFavsPage ? " bounce animatedDelete" : ` display-none`;
 
   return (
     <div className={btContainerClasses()}>
       <button onClick={handleFavs} className={`animated${selectIconFav}`} />
-      <button
-        className={`animated bounce${classButtonEdit}`}
-        onClick={handleEdit}
-      />
+      <button className={`animated${classButtonEdit}`} onClick={handleEdit} />
       <button
         title="btn-delete"
-        className={`animated bounce${classButtonDelete}`}
+        className={`animated${classButtonDelete}`}
         onClick={handleDelete}
       />
       <button className={`animated${selectIconLike}`} onClick={handleLikes} />
