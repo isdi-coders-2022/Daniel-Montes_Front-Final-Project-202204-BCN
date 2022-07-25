@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { Modal } from "../Modals/ModalPrompt";
 import {
   loadFavsThunk,
+  loadLikesThunk,
   loadPenguinsThunk,
   resetPenguinThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
@@ -67,6 +68,12 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     setMenu((prevState) => !prevState);
     loadFavsThunk();
     navigate("/penguins/favs");
+  };
+
+  const loadLikes = () => {
+    setMenu((prevState) => !prevState);
+    loadLikesThunk();
+    navigate("/penguins/likes");
   };
 
   const loadHome = () => {
@@ -142,6 +149,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
         <div className={`app-menu ${isMenuOpen ? "menu-open" : ""}`}>
           <div className="menu-header">
             <div className="menu-header-horizontal">
+              <hr className="hr-menu-horizontal" />
               <div className="menu-icons-horizontal">
                 <button
                   onClick={handleLogout}
@@ -156,8 +164,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
               </div>
             </div>
 
-            <hr className="hr-menu-horizontal" />
-
             <div className="user-data-container">
               <img src={userImage} className="user-photo" alt="user" />
               <h3 className="user-username">
@@ -171,11 +177,18 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
             <div className="menu-header-vertical">
               <div className="menu-icons-vertical">
                 <hr className="hr-photo" />
-                <button onClick={addFav} className="bt-addfav" title="bt-fav">
-                  <h3 className="menu-icon-label-vertical">New...</h3>
+                <button
+                  onClick={loadLikes}
+                  className="bt-likes"
+                  title="bt-likes"
+                >
+                  <h3 className="menu-icon-label-vertical">Likes</h3>
                 </button>
                 <button onClick={loadFavs} className="bt-favs" title="bt-favs">
                   <h3 className="menu-icon-label-vertical">Favourites</h3>
+                </button>
+                <button onClick={addFav} className="bt-addfav" title="bt-fav">
+                  <h3 className="menu-icon-label-vertical">New...</h3>
                 </button>
               </div>
             </div>

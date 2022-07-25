@@ -78,8 +78,6 @@ ul {
 .hr-menu-horizontal {
   width: 75%;
   margin-left: 25px;
-  position: relative;
-  top: 600px;
 }
 
 .hr-photo {
@@ -129,7 +127,7 @@ ul {
 
 .menu-icons-horizontal {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   text-align: center;
   padding: 0;
@@ -158,9 +156,6 @@ ul {
 }
 
 .menu-header-horizontal {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
   position: absolute;
   bottom: 25px;
   width: 100%;
@@ -170,6 +165,7 @@ ul {
   background: url("../images/icon-menu-hamb45.png");
   background-repeat: no-repeat;
   height: 45px;
+  margin-right: 2%;
 }
 
 .bt-back {
@@ -231,7 +227,13 @@ ul {
 }
 
 .bt-favs {
-  background: url("../images/icon-menu-favs45.png");
+  background: url("../images/icon-star_full.png");
+  height: 45px;
+}
+
+.bt-likes {
+  background: url("../images/menu-favs.png");
+  background-repeat: no-repeat;
   height: 45px;
 }
 

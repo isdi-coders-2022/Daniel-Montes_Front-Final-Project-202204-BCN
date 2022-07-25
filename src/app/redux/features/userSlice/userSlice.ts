@@ -15,12 +15,10 @@ const userSlice = createSlice({
 
   reducers: {
     login: (user: UserState, action: PayloadAction<UserInfo>) => ({
-      ...action.payload,
-      logged: true,
-      name: action.payload.username,
+      ...user,
       username: action.payload.username,
       isAdmin: action.payload.isAdmin,
-      image: action.payload.image,
+      id: action.payload.id,
     }),
 
     logout: () => ({

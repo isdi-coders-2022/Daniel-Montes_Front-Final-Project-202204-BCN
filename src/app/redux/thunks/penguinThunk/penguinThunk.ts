@@ -36,7 +36,7 @@ const blankFormData: IPenguin = {
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   dispatch(loadingActionCreator());
   setLoadingOn(
-    `GET Penguins: Be watter penguin, remember render.com is free...`
+    `GET Penguins: Be watter penguin, waking up service at render.com...`
   );
   const token = localStorage.getItem("token");
 
@@ -96,6 +96,29 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
       setLoadingOffWithMessage("GET favs: No favs added yet", false);
     }
     setLoadingOffWithMessage("GET Favourites: Finished successfully.", false);
+    dispatch(loadPenguinsActionCreator(penguins));
+    dispatch(finishedLoadingActionCreator());
+  }
+};
+
+export const loadLikesThunk = () => async (dispatch: AppDispatch) => {
+  dispatch(loadingActionCreator());
+  setLoadingOn(`GET Likes: Loading data...`);
+  const token = localStorage.getItem("token");
+
+  if (token) {
+    const {
+      data: { penguins },
+    } = await axios.get(`${process.env.REACT_APP_API_URL}penguins/likes`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (penguins.length === 0) {
+      setLoadingOffWithMessage("GET Likes: No likes added yet", false);
+    }
+    setLoadingOffWithMessage("GET Likes: Finished successfully.", false);
     dispatch(loadPenguinsActionCreator(penguins));
     dispatch(finishedLoadingActionCreator());
   }
@@ -196,9 +219,17 @@ export const editPenguinThunk =
           },
         }
       );
+      const isLikesPage = document.location.href.includes("likes")
+        ? true
+        : false;
+      const isFavsPage = document.location.href.includes("favs") ? true : false;
 
       dispatch(editPenguinActionCreator(penguin));
-      dispatch(loadFavsThunk());
+      isFavsPage
+        ? dispatch(loadFavsThunk())
+        : isLikesPage
+        ? dispatch(loadLikesThunk())
+        : dispatch(loadPenguinsThunk());
       dispatch(finishedLoadingActionCreator());
 
       setLoadingOffWithMessage(`${type}`, false);

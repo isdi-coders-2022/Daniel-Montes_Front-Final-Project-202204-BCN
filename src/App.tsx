@@ -13,6 +13,7 @@ import { logInActionCreator } from "./app/redux/features/userSlice/userSlice";
 import Navbar from "./components/Navbar/Navbar";
 import { Error404Page } from "./pages/Error404/Error404";
 import FavsPage from "./pages/FavsPage/FavsPage";
+import LikesPage from "./pages/LikesPage/LikesPage";
 import { ToastContainer } from "react-toastify";
 import PenguinsPage from "./pages/PenguinsPage/PenguinsPage";
 import { getUserThunk } from "./app/redux/thunks/userThunk/userThunk";
@@ -86,6 +87,14 @@ function App() {
           element={
             <CheckInSecurity>
               <FavsPage />
+            </CheckInSecurity>
+          }
+        />
+        <Route
+          path="/penguins/likes"
+          element={
+            <CheckInSecurity>
+              <LikesPage />
             </CheckInSecurity>
           }
         />

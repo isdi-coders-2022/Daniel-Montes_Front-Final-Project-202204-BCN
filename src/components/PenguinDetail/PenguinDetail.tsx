@@ -81,7 +81,9 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
         <span className="likes">{penguin.likes}</span>
         <button className={`animated${selectIconLike}`} />
       </div>
-      <span className="detail-description">{penguin.description}</span>
+      <div className="detail-description-container">
+        <span className="detail-description">{penguin.description}</span>
+      </div>
     </div>
   );
 };

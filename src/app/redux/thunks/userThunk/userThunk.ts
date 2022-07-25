@@ -20,36 +20,46 @@ import {
   loadingActionCreator,
 } from "../../features/uiSlice/uiSlice";
 
+let doOnce = true;
+
 export const loginThunk =
   (userData: UserRegister) => async (dispatch: Dispatch) => {
-    try {
-      setLoadingOn(`LOGIN: ${userData.username}...`);
-      const url: string = `${process.env.REACT_APP_API_URL}users/login`;
+    if (doOnce) {
+      try {
+        setLoadingOn(`LOGIN: ${userData.username}...`);
+        const url: string = `${process.env.REACT_APP_API_URL}users/login`;
 
-      const { data, status }: DataAxiosLogin = await axios.post(url, userData);
-
-      if (status === 200) {
-        const { id, username, image }: LoginResponse = jwt_decode(data.token);
-        const logged = false;
-        const isAdmin = false;
-
-        localStorage.setItem("token", data.token);
-
-        dispatch(logInActionCreator({ id, username, logged, isAdmin, image }));
-
-        dispatch(finishedLoadingActionCreator());
-        setLoadingOffWithMessage(
-          `${userData.username} logged successfully.`,
-          false
+        const { data, status }: DataAxiosLogin = await axios.post(
+          url,
+          userData
         );
-      }
-    } catch (error: any) {
-      setLoadingOffWithMessage(
-        "Login failed!\nCheck credentials for username: " + userData.username,
-        true
-      );
 
-      return error.message;
+        if (status === 200) {
+          doOnce = false;
+          const { id, username, image }: LoginResponse = jwt_decode(data.token);
+          const logged = false;
+          const isAdmin = false;
+
+          localStorage.setItem("token", data.token);
+
+          dispatch(
+            logInActionCreator({ id, username, logged, isAdmin, image })
+          );
+
+          dispatch(finishedLoadingActionCreator());
+          setLoadingOffWithMessage(
+            `${userData.username} logged successfully.`,
+            false
+          );
+        }
+      } catch (error: any) {
+        setLoadingOffWithMessage(
+          "Login failed!\nCheck credentials for username: " + userData.username,
+          true
+        );
+
+        return error.message;
+      }
     }
   };
 
@@ -69,17 +79,9 @@ export const registerThunk =
         );
 
         if (data) {
-          const newUserData = {
-            id: data.id,
-            username: data.username,
-            password: password,
-            logged: true,
-            isAdmin: data.isAdmin,
-            image: data.image,
-          };
           dispatch(finishedLoadingActionCreator());
-          dispatch(logInActionCreator(newUserData));
-          document.location.href = "/penguins";
+
+          document.location.href = "/homepage";
         }
       }
     } catch (error: any) {
@@ -99,7 +101,7 @@ export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
   try {
     const token = localStorage.getItem("token");
 
-    if (token) {
+    if (token && id) {
       const { data: user } = await axios.get(
         `${process.env.REACT_APP_API_URL}users/${id}`
       );
