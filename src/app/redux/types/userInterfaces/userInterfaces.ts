@@ -29,7 +29,6 @@ export interface LoginData {
 export interface UserRegister {
   username: string;
   password: string;
-  image: string | File;
 }
 
 export interface iToken {

@@ -198,7 +198,7 @@ export const editPenguinThunk =
       );
 
       dispatch(editPenguinActionCreator(penguin));
-
+      dispatch(loadFavsThunk());
       dispatch(finishedLoadingActionCreator());
 
       setLoadingOffWithMessage(`${type}`, false);

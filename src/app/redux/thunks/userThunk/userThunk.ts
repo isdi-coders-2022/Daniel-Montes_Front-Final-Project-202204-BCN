@@ -2,8 +2,8 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import {
   DataAxiosLogin,
-  LoginData,
   LoginResponse,
+  UserRegister,
 } from "../../types/userInterfaces/userInterfaces";
 import {
   editUserActionCreator,
@@ -21,7 +21,7 @@ import {
 } from "../../features/uiSlice/uiSlice";
 
 export const loginThunk =
-  (userData: LoginData) => async (dispatch: Dispatch) => {
+  (userData: UserRegister) => async (dispatch: Dispatch) => {
     try {
       setLoadingOn(`LOGIN: ${userData.username}...`);
       const url: string = `${process.env.REACT_APP_API_URL}users/login`;
@@ -53,36 +53,47 @@ export const loginThunk =
     }
   };
 
-export const registerThunk = (userData: any) => async (dispatch: Dispatch) => {
-  try {
-    debugger;
-    setLoadingOn(`REGISTER: Registering...`);
+export const registerThunk =
+  (userData: UserRegister, password: string) => async (dispatch: Dispatch) => {
+    try {
+      setLoadingOn(`REGISTER: ${userData.username}...`);
+      const { data, status } = await axios.post(
+        `${process.env.REACT_APP_API_URL}users/register`,
+        userData
+      );
+      if (status === 200 || status === 201) {
+        localStorage.setItem("token", data.token);
+        setLoadingOffWithMessage(
+          `${userData.username} registered successfully.`,
+          false
+        );
 
-    const { data: user } = await axios.post(
-      `${process.env.REACT_APP_API_URL}users/register`,
-      userData,
-      {
-        headers: {
-          "Content-Type": "mutipart/form-data",
-        },
+        if (data) {
+          const newUserData = {
+            id: data.id,
+            username: data.username,
+            password: password,
+            logged: true,
+            isAdmin: data.isAdmin,
+            image: data.image,
+          };
+          dispatch(finishedLoadingActionCreator());
+          dispatch(logInActionCreator(newUserData));
+          document.location.href = "/penguins";
+        }
       }
-    );
+    } catch (error: any) {
+      setLoadingOffWithMessage(
+        "Registration failed!: \nUsername: " +
+          userData.username +
+          "\nPass: " +
+          userData.password,
+        true
+      );
 
-    localStorage.setItem("token", user.token);
-
-    dispatch(finishedLoadingActionCreator());
-    setLoadingOffWithMessage(
-      `REGISTER: ${user.username} registered successfully.`,
-      false
-    );
-
-    document.location.href = "/penguins";
-  } catch (error: any) {
-    setLoadingOffWithMessage("Registration failed!", true);
-
-    return error.message;
-  }
-};
+      return error.message;
+    }
+  };
 
 export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
   try {

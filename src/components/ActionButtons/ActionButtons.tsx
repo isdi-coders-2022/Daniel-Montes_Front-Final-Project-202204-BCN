@@ -107,7 +107,7 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
 
       isFav ? deleteFromFavs() : addToFavs();
 
-      isFavsPage ? dispatch(loadFavsThunk()) : dispatch(loadPenguinsThunk());
+      navigate("/penguins/favs");
     }
   };
 

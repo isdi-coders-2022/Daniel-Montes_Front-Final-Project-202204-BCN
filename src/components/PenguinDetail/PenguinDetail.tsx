@@ -3,6 +3,7 @@ import { getPenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThun
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
 import iconPhotoEmpty from "../../images/contact-photo-add.png";
 import ActionButtons from "../ActionButtons/ActionButtons";
+import { correctAction } from "../Modals/Modals";
 
 interface Props {
   allPenguins: IPenguin[];
@@ -20,22 +21,29 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
 
   const getDetailPrev = () => {
     const actualPos = allPenguins.map((e) => e.id).indexOf(thisPenguin.id);
+    let prevPenguinId = "";
 
-    const newPos = actualPos > 0 ? actualPos - 1 : 0;
-    const prevPenguinId = allPenguins[newPos]?.id.toString();
-
+    if (actualPos === 0 || actualPos <= -1) {
+      prevPenguinId = allPenguins[allPenguins.length - 1]?.id.toString();
+      correctAction("Begin of list!");
+    } else {
+      const newPos = actualPos - 1;
+      prevPenguinId = allPenguins[newPos]?.id.toString();
+    }
     dispatch(getPenguinThunk(prevPenguinId));
   };
 
   const getDetailNext = () => {
     const actualPos = allPenguins.map((e) => e.id).indexOf(thisPenguin.id);
+    let nextPenguinId = "";
 
-    const newPos =
-      actualPos >= 0 || actualPos < allPenguins.length
-        ? actualPos + 1
-        : actualPos;
-
-    const nextPenguinId = allPenguins[newPos]?.id.toString();
+    if (actualPos === allPenguins.length - 1) {
+      nextPenguinId = allPenguins[0]?.id.toString();
+      correctAction("End of list!");
+    } else {
+      const newPos = actualPos + 1;
+      nextPenguinId = allPenguins[newPos]?.id.toString();
+    }
 
     dispatch(getPenguinThunk(nextPenguinId));
   };
