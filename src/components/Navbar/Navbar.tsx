@@ -14,7 +14,7 @@ import {
   modalMessageActionCreator,
   modalTypeActionCreator,
 } from "../../app/redux/features/uiSlice/uiSlice";
-
+import noPhoto from "../../images/userPhoto.png";
 interface Props {
   headerTitle: string;
 }
@@ -31,7 +31,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
   const { modalType } = useAppSelector((state) => state.ui);
   const { penguin } = useAppSelector((state) => state.penguins);
 
-  const userImage = user.image;
+  const userImage = user.image || noPhoto;
 
   const handleClick = () => {
     if (headerTitle === "Home") {
@@ -149,9 +149,9 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
                   title="btn-logout"
                 />
                 <button
-                  title="btn-search"
-                  className="bt-search"
-                  onClick={handleSearch}
+                  onClick={loadHome}
+                  className="bt-home"
+                  title="bt-home"
                 />
               </div>
             </div>
@@ -171,16 +171,11 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
             <div className="menu-header-vertical">
               <div className="menu-icons-vertical">
                 <hr className="hr-photo" />
-                <button onClick={loadHome} className="bt-home" title="bt-home">
-                  <h3 className="menu-icon-label-vertical">Home</h3>
-                </button>
-
-                <button onClick={loadFavs} className="bt-favs" title="bt-favs">
-                  <h3 className="menu-icon-label-vertical">Favourites</h3>
-                </button>
-
                 <button onClick={addFav} className="bt-addfav" title="bt-fav">
                   <h3 className="menu-icon-label-vertical">New...</h3>
+                </button>
+                <button onClick={loadFavs} className="bt-favs" title="bt-favs">
+                  <h3 className="menu-icon-label-vertical">Favourites</h3>
                 </button>
               </div>
             </div>
