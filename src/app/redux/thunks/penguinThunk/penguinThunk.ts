@@ -222,9 +222,10 @@ export const editPenguinThunk =
       const isLikesPage = document.location.href.includes("likes");
 
       const isFavsPage = document.location.href.includes("favs");
-      const loadType = isFavsPage ? "favs" : isLikesPage ? "likes" : "";
+      let loadType = isFavsPage ? "favs" : "";
+      loadType = isLikesPage ? "likes" : loadType;
 
-      const handleLoads = (loadType: string) => {
+      const handleLoads = () => {
         switch (loadType) {
           case "favs":
             dispatch(loadFavsThunk());
@@ -239,7 +240,7 @@ export const editPenguinThunk =
       };
       dispatch(editPenguinActionCreator(penguin));
 
-      handleLoads(loadType);
+      handleLoads();
       dispatch(finishedLoadingActionCreator());
 
       setLoadingOffWithMessage(`${type}`, false);

@@ -133,14 +133,13 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       ? " display-none"
       : "";
 
-  const isLikesPage = document.location.href.includes("/likes");
-  const isFavsPage = document.location.href.includes("/favs");
+  const isLikesPage = headerTitle.includes("Likes");
+  const isFavsPage = headerTitle.includes("Favourites");
 
-  const iconHeaderTitle = isLikesPage
-    ? " header-likes"
-    : isFavsPage
-    ? " header-favs"
-    : "";
+  let headerIconType = isLikesPage ? "likes" : "";
+  headerIconType = isFavsPage ? "favs" : headerIconType;
+
+  const headerClass = ` header-${headerIconType}`;
 
   return (
     <div className="app">
@@ -150,11 +149,9 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
           className={`${HidderBack}`}
           onClick={handleClick}
         />
-
-        <h1 className={`header-title${iconHeaderTitle}`}>
+        <h1 className={`header-title${headerClass}`}>
           {headerTitle || "AdoptAPenguin.com"}
         </h1>
-
         <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
       </div>
       <div className="nav">
@@ -223,6 +220,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
         zIndex={90}
         blur={1.5}
       />
+
       <ReactDimmer
         isOpen={isModalOpen}
         exitDimmer={setModal}
