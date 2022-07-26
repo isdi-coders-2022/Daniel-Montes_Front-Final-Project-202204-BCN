@@ -62,7 +62,7 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
     dispatch(getPenguinThunk(nextPenguinId));
   };
 
-  const deleteFromLikers = () => {
+  const deleteLikers = () => {
     const newData = { ...penguin };
     newData.likers = newData.likers.filter((liker) => liker !== idUser);
     newData.likes = penguin.likes >= 1 ? penguin.likes - 1 : penguin.likes;
@@ -71,7 +71,7 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
     dispatch(editPenguinThunk(newData, "Delete Like."));
   };
 
-  const addToLikers = () => {
+  const addLikers = () => {
     const newData = { ...penguin };
     newData.likers = newData.likers.concat(idUser);
     newData.likes = penguin.likes + 1;
@@ -85,7 +85,7 @@ const PenguinDetail = ({ penguin, allPenguins }: Props): JSX.Element => {
     if (Array(penguin.likers)) {
       cleanArray(penguin.likers);
 
-      isLiker ? deleteFromLikers() : addToLikers();
+      isLiker ? deleteLikers() : addLikers();
     }
   };
 
