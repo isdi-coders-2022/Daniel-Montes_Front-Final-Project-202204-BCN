@@ -19,6 +19,7 @@ const userSlice = createSlice({
       username: action.payload.username,
       isAdmin: action.payload.isAdmin,
       id: action.payload.id,
+      logged: true,
     }),
 
     logout: () => ({
