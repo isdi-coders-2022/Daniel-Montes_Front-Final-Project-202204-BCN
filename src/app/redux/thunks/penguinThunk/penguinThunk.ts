@@ -81,6 +81,7 @@ export const searchPenguinsThunk =
 export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
   dispatch(loadingActionCreator());
   setLoadingOn(`GET Favourites: Loading data...`);
+
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -95,15 +96,17 @@ export const loadFavsThunk = () => async (dispatch: AppDispatch) => {
     if (penguins.length === 0) {
       setLoadingOffWithMessage("GET favs: No favs added yet", false);
     }
-    setLoadingOffWithMessage("GET Favourites: Finished successfully.", false);
+
     dispatch(loadPenguinsActionCreator(penguins));
     dispatch(finishedLoadingActionCreator());
+    setLoadingOffWithMessage("GET Favourites: Finished successfully.", false);
   }
 };
 
 export const loadLikesThunk = () => async (dispatch: AppDispatch) => {
   dispatch(loadingActionCreator());
   setLoadingOn(`GET Likes: Loading data...`);
+
   const token = localStorage.getItem("token");
 
   if (token) {
@@ -118,14 +121,16 @@ export const loadLikesThunk = () => async (dispatch: AppDispatch) => {
     if (penguins.length === 0) {
       setLoadingOffWithMessage("GET Likes: No likes added yet", false);
     }
-    setLoadingOffWithMessage("GET Likes: Finished successfully.", false);
+
     dispatch(loadPenguinsActionCreator(penguins));
     dispatch(finishedLoadingActionCreator());
+    setLoadingOffWithMessage("GET Likes: Finished successfully.", false);
   }
 };
 
 export const createFavThunk =
   (formPenguin: any) => async (dispatch: AppDispatch) => {
+    dispatch(loadingActionCreator());
     setLoadingOn(`CREATE Fav: Creating fav...`);
 
     const token = localStorage.getItem("token");
@@ -162,6 +167,8 @@ export const createFavThunk =
 export const getPenguinThunk =
   (id: string) => async (dispatch: AppDispatch) => {
     dispatch(loadingActionCreator());
+    setLoadingOn(`GET Penguin: id => ${id}`);
+
     if (id !== "") {
       const token = localStorage.getItem("token");
 
@@ -177,6 +184,10 @@ export const getPenguinThunk =
 
         dispatch(loadPenguinActionCreator(penguin));
         dispatch(finishedLoadingActionCreator());
+        setLoadingOffWithMessage(
+          `GET Penguin: ${penguin.name} successfully.`,
+          false
+        );
       }
     }
   };
@@ -206,9 +217,8 @@ export const deletePenguinThunk =
 
 export const editPenguinThunk =
   (formPenguin: any, type: string) => async (dispatch: AppDispatch) => {
-    setLoadingOn("EDIT Penguin...");
-
     dispatch(loadingActionCreator());
+    setLoadingOn("EDIT Penguin...");
 
     const token = localStorage.getItem("token");
 
@@ -222,9 +232,10 @@ export const editPenguinThunk =
           },
         }
       );
-      const isLikesPage = document.location.href.includes("likes");
 
+      const isLikesPage = document.location.href.includes("likes");
       const isFavsPage = document.location.href.includes("favs");
+
       let loadType = isFavsPage ? "favs" : "";
       loadType = isLikesPage ? "likes" : loadType;
 
@@ -245,7 +256,6 @@ export const editPenguinThunk =
 
       handleLoads();
       dispatch(finishedLoadingActionCreator());
-
       setLoadingOffWithMessage(`${type}`, false);
     }
   };
