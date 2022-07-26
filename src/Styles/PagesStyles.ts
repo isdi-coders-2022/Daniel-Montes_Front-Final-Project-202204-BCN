@@ -144,15 +144,15 @@ const PagesStyles = styled.div`
   }
 
   .category {
-    background-color: #ffe02c;
-    padding-left: 15px;
-    padding-right: 5px;
-    box-shadow: 0 3px 6px #666;
-    margin-left: 15px;
     height: fit-content;
     font-size: 16px;
-    margin: auto;
     flex: 1;
+    margin-left: -5px;
+    margin-top: 5px;
+    background-color: #ffe02c;
+    padding-left: 5px;
+    padding-right: 5px;
+    box-shadow: 0 3px 6px #666;
   }
 
   .likes {
@@ -160,7 +160,7 @@ const PagesStyles = styled.div`
     flex: 1;
     animation-name: bounce;
     font-size: 16px;
-    margin: auto;
+    margin-top: 5px;
   }
 
   .penguin-description {
@@ -264,7 +264,7 @@ const PagesStyles = styled.div`
   }
 
   .penguin-image-container {
-    height: 280px;
+    height: 320px;
     width: 85%;
     display: flex;
     margin-left: 10px;
@@ -320,7 +320,7 @@ const PagesStyles = styled.div`
     height: 40px;
     width: 87%;
     position: relative;
-    top: -60px;
+    top: -80px;
     left: 23px;
     display: flex;
   }

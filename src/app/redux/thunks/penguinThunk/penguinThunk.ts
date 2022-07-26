@@ -36,7 +36,7 @@ const blankFormData: IPenguin = {
 export const loadPenguinsThunk = () => async (dispatch: AppDispatch) => {
   dispatch(loadingActionCreator());
   setLoadingOn(
-    `GET Penguins: Be watter penguin, waking up service at render.com...`
+    `GET Penguins: Be watter penguin, waking up render.com service...`
   );
   const token = localStorage.getItem("token");
 
@@ -142,6 +142,9 @@ export const createFavThunk =
       );
 
       dispatch(createPenguinActionCreator(penguin));
+
+      dispatch(loadFavsThunk());
+
       dispatch(finishedLoadingActionCreator());
 
       setLoadingOffWithMessage(

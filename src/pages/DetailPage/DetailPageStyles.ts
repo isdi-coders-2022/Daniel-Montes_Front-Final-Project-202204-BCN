@@ -268,8 +268,7 @@ const DetailPageStyles = styled.div`
   .detail-description-container {
     margin: auto;
     width: 80%;
-    border-radius: 20px;
-
+    border-radius: 5px;
     background-color: white;
   }
 
@@ -304,19 +303,18 @@ const DetailPageStyles = styled.div`
   }
 
   .category {
-    background-color: #ffe02c;
-    border-radius: 4px;
-
-    padding: 5px;
-    box-shadow: 0 3px 6px #666;
-
     height: fit-content;
     width: fit-content;
     font-size: 16px;
-    margin: auto;
-    flex: 1;
     text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #ffe02c;
+    border-radius: 4px;
+    box-shadow: 0 3px 6px #666;
+    margin: auto;
   }
+
   .projectLayout {
     max-width: 90%;
     justify-content: center;
