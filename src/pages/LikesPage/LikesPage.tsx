@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { loadLikesThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import Favs from "../../components/Favs/Favs";
 
-const FavsPage = (): JSX.Element => {
+const LikesPage = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   const thisTitle = "Likes";
@@ -29,4 +29,4 @@ const FavsPage = (): JSX.Element => {
   return <Favs allPenguins={allPenguins} />;
 };
 
-export default FavsPage;
+export default LikesPage;
