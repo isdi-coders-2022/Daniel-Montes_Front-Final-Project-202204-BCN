@@ -5,7 +5,6 @@ import {
 } from "../../app/redux/features/uiSlice/uiSlice";
 import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { getPenguinThunk } from "../../app/redux/thunks/penguinThunk/penguinThunk";
-import { getUserThunk } from "../../app/redux/thunks/userThunk/userThunk";
 import CreateForm from "../../components/CreateForm/CreateForm";
 import FormsStyles from "../../Styles/FormsStyles";
 
@@ -16,7 +15,6 @@ const CreatePage = (): JSX.Element => {
   const { penguin } = useAppSelector((state) => state.penguins);
 
   const isCreate = document.location.href.includes("create");
-  const isUserEdit = document.location.href.includes("users");
   const isRegister = document.location.href.includes("register");
 
   const thisTitle = isCreate
@@ -38,10 +36,10 @@ const CreatePage = (): JSX.Element => {
 
     if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
 
-    isUserEdit
-      ? dispatch(getUserThunk(idToProcess))
-      : dispatch(getPenguinThunk(idToProcess));
-  }, [dispatch, idToProcess, headerTitle, thisTitle, isUserEdit]);
+    if (!isCreate) {
+      dispatch(getPenguinThunk(idToProcess));
+    }
+  }, [dispatch, idToProcess, headerTitle, thisTitle, isCreate]);
 
   return (
     <FormsStyles>

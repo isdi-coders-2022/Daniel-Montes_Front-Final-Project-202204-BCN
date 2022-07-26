@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   createFavThunk,
   editPenguinThunk,
-  loadFavsThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { useNavigate } from "react-router-dom";
 import { blankFormData, cleanArray } from "../../utils/utils";
@@ -95,7 +94,6 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
 
       setFormData(blankFormData);
 
-      dispatch(loadFavsThunk());
       navigate("/penguins/favs");
     } catch (error) {
       wrongAction("Error:" + error);
