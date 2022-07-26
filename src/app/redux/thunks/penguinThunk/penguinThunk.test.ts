@@ -51,8 +51,8 @@ describe("Given the loadFavsThunk function", () => {
 });
 
 describe("Given createFavThunk", () => {
-  describe("when it's called with no token", () => {
-    test("Then it should not call the dispatch function", async () => {
+  describe("when it's called", () => {
+    test("Then it should call the dispatch function", async () => {
       const dispatch = jest.fn();
 
       jest.spyOn(Storage.prototype, "getItem").mockReturnValue("");
@@ -60,7 +60,7 @@ describe("Given createFavThunk", () => {
       const thunk = createFavThunk({ mockPenguin });
       await thunk(dispatch);
 
-      expect(dispatch).not.toHaveBeenCalled();
+      expect(dispatch).toHaveBeenCalled();
     });
   });
 });
