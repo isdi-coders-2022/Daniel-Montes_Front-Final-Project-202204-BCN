@@ -219,17 +219,27 @@ export const editPenguinThunk =
           },
         }
       );
-      const isLikesPage = document.location.href.includes("likes")
-        ? true
-        : false;
-      const isFavsPage = document.location.href.includes("favs") ? true : false;
+      const isLikesPage = document.location.href.includes("likes");
 
+      const isFavsPage = document.location.href.includes("favs");
+      const loadType = isFavsPage ? "favs" : isLikesPage ? "likes" : "";
+
+      const handleLoads = (loadType: string) => {
+        switch (loadType) {
+          case "favs":
+            dispatch(loadFavsThunk());
+            break;
+          case "likes":
+            dispatch(loadLikesThunk());
+            break;
+          default:
+            dispatch(loadPenguinsThunk());
+            dispatch(getPenguinThunk(formPenguin.id));
+        }
+      };
       dispatch(editPenguinActionCreator(penguin));
-      isFavsPage
-        ? dispatch(loadFavsThunk())
-        : isLikesPage
-        ? dispatch(loadLikesThunk())
-        : dispatch(loadPenguinsThunk());
+
+      handleLoads(loadType);
       dispatch(finishedLoadingActionCreator());
 
       setLoadingOffWithMessage(`${type}`, false);

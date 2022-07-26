@@ -41,7 +41,7 @@ h1 {
   color: white;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .header .menu-btn {
@@ -166,12 +166,14 @@ ul {
   background-repeat: no-repeat;
   height: 45px;
   margin-right: 2%;
+  margin: auto;
 }
 
 .bt-back {
   background: url("../images/icon-menu-back45.png");
   background-repeat: no-repeat;
   height: 45px;
+  margin: auto;
 }
 
 .bt-logout {
@@ -229,14 +231,31 @@ ul {
 .bt-favs {
   background: url("../images/icon-star_full.png");
   height: 45px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .bt-likes {
   background: url("../images/menu-favs.png");
   background-repeat: no-repeat;
+  background-position: center;
   height: 45px;
 }
+.header-favs {
+  background: url("../images/icon-star_full.png");
+  height: 45px;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: auto;
+}
 
+.header-likes {
+  background: url("../images/menu-favs.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 45px;
+  margin: auto;
+}
 .header .nav {
   display: flex;
   gap: 1rem;
@@ -248,7 +267,7 @@ ul {
   left: 70px;
 }
 .display-none {
-  visibility: hidden;
+  display: none;
 }
 /* ------------------------------------------------------------  */
 

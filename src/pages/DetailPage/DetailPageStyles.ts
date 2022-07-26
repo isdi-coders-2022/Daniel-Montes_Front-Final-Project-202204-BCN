@@ -177,8 +177,9 @@ const DetailPageStyles = styled.div`
     justify-content: space-between;
     align-content: space-around;
 
-    width: 370px;
+    width: 400px;
     margin: auto;
+    margin-bottom: -30px;
   }
 
   .bt-back {

@@ -133,6 +133,15 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       ? " display-none"
       : "";
 
+  const isLikesPage = document.location.href.includes("/likes");
+  const isFavsPage = document.location.href.includes("/favs");
+
+  const iconHeaderTitle = isLikesPage
+    ? " header-likes"
+    : isFavsPage
+    ? " header-favs"
+    : "";
+
   return (
     <div className="app">
       <div className="header">
@@ -141,7 +150,10 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
           className={`${HidderBack}`}
           onClick={handleClick}
         />
-        <h1 className="header-title">{headerTitle || "AdoptAPenguin.com"}</h1>
+
+        <h1 className={`header-title${iconHeaderTitle}`}>
+          {headerTitle || "AdoptAPenguin.com"}
+        </h1>
 
         <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
       </div>
