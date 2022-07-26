@@ -391,8 +391,8 @@ const FormsStyles = styled.div`
 
   .display-none {
     display: none;
-    visibility: hidden;
   }
+
   .penguin-container {
     display: flex;
     margin-top: 80px;

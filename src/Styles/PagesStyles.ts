@@ -369,7 +369,6 @@ const PagesStyles = styled.div`
   }
 
   .display-none {
-    visibility: hidden;
     display: none;
   }
 

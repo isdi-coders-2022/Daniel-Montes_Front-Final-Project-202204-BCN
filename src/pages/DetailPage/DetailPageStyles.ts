@@ -109,11 +109,8 @@ const DetailPageStyles = styled.div`
     box-shadow: 0 15px 6px #666;
     border: 2px solid;
     border-radius: 10px;
-    width: 100%;
-    height: 100%;
-    max-width: 300px;
-    min-height: 230px;
-    margin-top: -30px;
+    width: 300px;
+    height: 230px;
   }
 
   .img-container {
@@ -131,7 +128,7 @@ const DetailPageStyles = styled.div`
     background: none;
     background-image: url(${detailNext});
     background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background-position: 95% 50%;
   }
 
   .imgDetailPrev {
@@ -142,7 +139,7 @@ const DetailPageStyles = styled.div`
     background: none;
     background-image: url(${detailPrev});
     background-repeat: no-repeat;
-    background-position: 50% 50%;
+    background-position: 5% 50%;
   }
 
   .penguin--container {
@@ -161,7 +158,6 @@ const DetailPageStyles = styled.div`
   }
 
   .detail-container {
-    padding: 0 20px 150px 20px;
     margin-bottom: 10px;
     border-radius: 5px 5px 5px 5px;
     margin: auto;
@@ -181,8 +177,9 @@ const DetailPageStyles = styled.div`
     justify-content: space-between;
     align-content: space-around;
 
-    width: 370px;
+    width: 400px;
     margin: auto;
+    margin-bottom: -30px;
   }
 
   .bt-back {
@@ -265,10 +262,14 @@ const DetailPageStyles = styled.div`
   }
 
   .detail-description {
-    margin-top: 35px;
-    padding-left: 10px;
     font-size: 16px;
-    width: 227px;
+  }
+
+  .detail-description-container {
+    margin: auto;
+    width: 80%;
+    border-radius: 20px;
+
     background-color: white;
   }
 

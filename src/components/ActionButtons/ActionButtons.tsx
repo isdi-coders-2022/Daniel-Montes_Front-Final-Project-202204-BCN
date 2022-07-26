@@ -9,8 +9,6 @@ import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import {
   editPenguinThunk,
   getPenguinThunk,
-  loadFavsThunk,
-  loadPenguinsThunk,
   resetPenguinThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
 import { IPenguin } from "../../app/redux/types/penguin/penguinInterfaces";
@@ -80,8 +78,6 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
       cleanArray(penguin.likers);
 
       isLiker ? deleteFromLikers() : addToLikers();
-
-      isFavsPage ? dispatch(loadFavsThunk()) : dispatch(loadPenguinsThunk());
     }
   };
 

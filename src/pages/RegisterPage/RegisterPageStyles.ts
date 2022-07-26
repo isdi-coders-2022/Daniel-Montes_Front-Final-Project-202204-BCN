@@ -79,7 +79,7 @@ const RegisterPageStyles = styled.div`
   }
 
   .display-none {
-    visibility: hidden;
+    display: none;
   }
   input {
     border: 2px solid black;

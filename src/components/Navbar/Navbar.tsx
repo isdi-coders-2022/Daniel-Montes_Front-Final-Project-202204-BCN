@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../../app/redux/hooks/hooks";
 import { Modal } from "../Modals/ModalPrompt";
 import {
   loadFavsThunk,
+  loadLikesThunk,
   loadPenguinsThunk,
   resetPenguinThunk,
 } from "../../app/redux/thunks/penguinThunk/penguinThunk";
@@ -69,6 +70,12 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
     navigate("/penguins/favs");
   };
 
+  const loadLikes = () => {
+    setMenu((prevState) => !prevState);
+    loadLikesThunk();
+    navigate("/penguins/likes");
+  };
+
   const loadHome = () => {
     setMenu((prevState) => !prevState);
     loadPenguinsThunk();
@@ -126,6 +133,14 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
       ? " display-none"
       : "";
 
+  const isLikesPage = headerTitle.includes("Likes");
+  const isFavsPage = headerTitle.includes("Favourites");
+
+  let headerIconType = isLikesPage ? "likes" : "";
+  headerIconType = isFavsPage ? "favs" : headerIconType;
+
+  const headerClass = ` header-${headerIconType}`;
+
   return (
     <div className="app">
       <div className="header">
@@ -134,14 +149,16 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
           className={`${HidderBack}`}
           onClick={handleClick}
         />
-        <h1 className="header-title">{headerTitle || "AdoptAPenguin.com"}</h1>
-
+        <h1 className={`header-title${headerClass}`}>
+          {headerTitle || "AdoptAPenguin.com"}
+        </h1>
         <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
       </div>
       <div className="nav">
         <div className={`app-menu ${isMenuOpen ? "menu-open" : ""}`}>
           <div className="menu-header">
             <div className="menu-header-horizontal">
+              <hr className="hr-menu-horizontal" />
               <div className="menu-icons-horizontal">
                 <button
                   onClick={handleLogout}
@@ -156,8 +173,6 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
               </div>
             </div>
 
-            <hr className="hr-menu-horizontal" />
-
             <div className="user-data-container">
               <img src={userImage} className="user-photo" alt="user" />
               <h3 className="user-username">
@@ -171,11 +186,18 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
             <div className="menu-header-vertical">
               <div className="menu-icons-vertical">
                 <hr className="hr-photo" />
-                <button onClick={addFav} className="bt-addfav" title="bt-fav">
-                  <h3 className="menu-icon-label-vertical">New...</h3>
+                <button
+                  onClick={loadLikes}
+                  className="bt-likes"
+                  title="bt-likes"
+                >
+                  <h3 className="menu-icon-label-vertical">Likes</h3>
                 </button>
                 <button onClick={loadFavs} className="bt-favs" title="bt-favs">
                   <h3 className="menu-icon-label-vertical">Favourites</h3>
+                </button>
+                <button onClick={addFav} className="bt-addfav" title="bt-fav">
+                  <h3 className="menu-icon-label-vertical">New...</h3>
                 </button>
               </div>
             </div>
@@ -198,6 +220,7 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
         zIndex={90}
         blur={1.5}
       />
+
       <ReactDimmer
         isOpen={isModalOpen}
         exitDimmer={setModal}
