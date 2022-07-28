@@ -1,4 +1,6 @@
-export const mockPenguin = {
+import { IPenguin } from "../app/redux/types/penguin/penguinInterfaces";
+
+export const mockPenguin: IPenguin = {
   id: "mockPenguin",
   name: "penguin1",
   category: "category1",
@@ -10,7 +12,7 @@ export const mockPenguin = {
   description: "description1",
 };
 
-export const mockPenguins = [
+export const mockPenguins: IPenguin[] = [
   {
     id: "1",
     name: "Penguin1",

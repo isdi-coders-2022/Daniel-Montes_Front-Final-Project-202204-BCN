@@ -47,6 +47,7 @@ export const warnAction = (message: string) => {
   if (!toast.isActive(customID)) {
     customID = toast.warning(message, toastOptionsSuccess);
   }
+  toast.clearWaitingQueue();
 };
 
 export const infoAction = (message: string) => {

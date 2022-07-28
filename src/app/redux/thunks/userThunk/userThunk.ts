@@ -35,7 +35,6 @@ export const loginThunk =
         );
 
         if (status === 200) {
-          doOnce = false;
           const { id, username, image }: LoginResponse = jwt_decode(data.token);
           const logged = false;
           const isAdmin = false;
@@ -51,6 +50,7 @@ export const loginThunk =
             `${userData.username} logged successfully.`,
             false
           );
+          doOnce = false;
         }
       } catch (error: any) {
         setLoadingOffWithMessage(

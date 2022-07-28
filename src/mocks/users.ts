@@ -1,7 +1,12 @@
+import { UserRegister } from "../app/redux/types/userInterfaces/userInterfaces";
+
+export const mockUserLogin: UserRegister = {
+  username: "user1xxx",
+  password: "user1xxx",
+};
+
 export const mockUser = {
-  name: "user1",
-  username: "user1",
+  id: "id",
+  username: "user1xxx",
   password: "user1",
-  image: "",
-  id: "user1",
 };
