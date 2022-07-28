@@ -19,7 +19,7 @@ const HomePage = (): JSX.Element => {
       dispatch(headerLastTitleActionCreator(lastTitle));
     };
     if (headerTitle !== thisTitle) SetTitleHeader(thisTitle, headerTitle);
-  }, [dispatch, headerTitle]);
+  }, [dispatch, headerTitle, thisTitle]);
 
   return <Home />;
 };

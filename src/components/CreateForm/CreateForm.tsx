@@ -125,6 +125,7 @@ const CreateForm = ({ penguin }: Props): JSX.Element => {
             accept="image/*"
             className="file-upload"
             onChange={handleImageChange}
+            placeholder="image"
           />
         </div>
         <img

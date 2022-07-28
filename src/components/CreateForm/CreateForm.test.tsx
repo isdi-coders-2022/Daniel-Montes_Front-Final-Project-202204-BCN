@@ -29,8 +29,9 @@ describe("Given a CreateForm component", () => {
   describe("When the two inputs have text and the submit button is clicked", () => {
     test("Then the two inputs should be empty", () => {
       const usernameLabel = "Name";
-
       const inputText = "user1";
+
+      jest.mock("react");
 
       render(
         <Provider store={store}>
@@ -39,12 +40,13 @@ describe("Given a CreateForm component", () => {
           </BrowserRouter>
         </Provider>
       );
-
       const username = screen.getByPlaceholderText(usernameLabel);
       const submitButton = screen.getByPlaceholderText("bt-save");
+      const imageInput = screen.getByPlaceholderText("image");
 
       userEvent.type(username, inputText);
       userEvent.click(submitButton);
+      userEvent.click(imageInput);
 
       expect(username).toHaveValue("penguin1");
     });

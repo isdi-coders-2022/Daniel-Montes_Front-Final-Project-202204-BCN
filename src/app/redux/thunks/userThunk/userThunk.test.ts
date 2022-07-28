@@ -1,7 +1,13 @@
-import { mockUser } from "../../../../mocks/users";
+import { mockUser, mockUserLogin } from "../../../../mocks/users";
 import { server } from "../../../../mocks/server";
-import { getUserThunk, loginThunk } from "./userThunk";
+import {
+  editUserThunk,
+  getUserThunk,
+  loginThunk,
+  registerThunk,
+} from "./userThunk";
 import axios from "axios";
+import { createUserDataActionCreator } from "../../features/userSlice/userSlice";
 
 beforeAll(() => {
   server.listen({ onUnhandledRequest: "bypass" });
@@ -62,6 +68,40 @@ describe("Given a LoginThunk", () => {
       await thunk(dispatch);
 
       expect(dispatch).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("When invoked with a invalid user and axios throws an error", () => {
+    test("Then it should not call the dispatch", async () => {
+      const dispatch = jest.fn();
+
+      jest.spyOn(Storage.prototype, "setItem").mockReturnValue();
+      axios.post = jest.fn().mockReturnValue({ status: 200 });
+
+      const thunk = loginThunk({
+        username: mockUser.username,
+        password: mockUser.password,
+      });
+      await thunk(dispatch);
+
+      expect(dispatch).not.toHaveBeenCalled();
+    });
+  });
+
+  describe("When invoked editUser", () => {
+    test("Then it should not call the dispatch", async () => {
+      const dispatch = jest.fn();
+
+      jest.spyOn(Storage.prototype, "setItem").mockReturnValue();
+      axios.put = jest.fn().mockRejectedValue({});
+
+      const thunk = editUserThunk({
+        username: mockUser.username,
+        password: "",
+      });
+      await thunk(dispatch);
+
+      expect(dispatch).toHaveBeenCalled();
     });
   });
 });
