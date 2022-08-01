@@ -10,7 +10,7 @@ import {
   loadUserDataActionCreator,
   logInActionCreator,
 } from "../../features/userSlice/userSlice";
-import { Dispatch } from "@reduxjs/toolkit";
+
 import {
   setLoadingOffWithMessage,
   setLoadingOn,
@@ -19,11 +19,12 @@ import {
   finishedLoadingActionCreator,
   loadingActionCreator,
 } from "../../features/uiSlice/uiSlice";
+import { AppDispatch } from "../../store/store";
 
 let doOnce = true;
 
 export const loginThunk =
-  (userData: UserRegister) => async (dispatch: Dispatch) => {
+  (userData: UserRegister) => async (dispatch: AppDispatch) => {
     if (doOnce) {
       try {
         setLoadingOn(`LOGIN: ${userData.username}...`);
@@ -33,7 +34,7 @@ export const loginThunk =
           url,
           userData
         );
-
+        debugger;
         if (status === 200) {
           const { id, username, image }: LoginResponse = jwt_decode(data.token);
           const logged = false;
@@ -64,25 +65,23 @@ export const loginThunk =
   };
 
 export const registerThunk =
-  (userData: UserRegister, password: string) => async (dispatch: Dispatch) => {
+  (userData: any, password: string) => async (dispatch: AppDispatch) => {
     try {
       setLoadingOn(`REGISTER: ${userData.username}...`);
-      const { data, status } = await axios.post(
+      const { data } = await axios.post(
         `${process.env.REACT_APP_API_URL}users/register`,
         userData
       );
-      if (status === 200 || status === 201) {
-        localStorage.setItem("token", data.token);
-        setLoadingOffWithMessage(
-          `${userData.username} registered successfully.`,
-          false
-        );
 
-        if (data) {
-          dispatch(finishedLoadingActionCreator());
+      if (data) {
+        const newUserData = {
+          username: userData.username,
+          password: password,
+        };
 
-          document.location.href = "/homepage";
-        }
+        setLoadingOffWithMessage("User created successfully", false);
+        dispatch(loginThunk(newUserData));
+        dispatch(finishedLoadingActionCreator());
       }
     } catch (error: any) {
       setLoadingOffWithMessage(
@@ -97,7 +96,7 @@ export const registerThunk =
     }
   };
 
-export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
+export const getUserThunk = (id: string) => async (dispatch: AppDispatch) => {
   try {
     const token = localStorage.getItem("token");
 
@@ -114,7 +113,7 @@ export const getUserThunk = (id: string) => async (dispatch: Dispatch) => {
   }
 };
 
-export const editUserThunk = (idUser: any) => async (dispatch: Dispatch) => {
+export const editUserThunk = (idUser: any) => async (dispatch: AppDispatch) => {
   setLoadingOn("EDIT User...");
 
   dispatch(loadingActionCreator());
