@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render } from "@testing-library/react";
 import CheckOutSecurity from "./CheckOutSecurity";
 
 const mockUseNavigate = jest.fn();
@@ -10,7 +10,7 @@ jest.mock("react-router-dom", () => ({
 let mockLogged = true;
 
 jest.mock("../../app/redux/hooks/hooks", () => ({
-  useAppSelector: () => ({ logged: mockLogged }),
+  useAppSelector: () => ({ logged: mockLogged, id: "id" }),
 }));
 
 describe("Given an CheckOutSecurity function", () => {

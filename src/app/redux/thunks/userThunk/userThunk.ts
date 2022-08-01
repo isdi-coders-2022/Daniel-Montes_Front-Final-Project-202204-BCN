@@ -34,7 +34,7 @@ export const loginThunk =
           url,
           userData
         );
-        debugger;
+
         if (status === 200) {
           const { id, username, image }: LoginResponse = jwt_decode(data.token);
           const logged = false;

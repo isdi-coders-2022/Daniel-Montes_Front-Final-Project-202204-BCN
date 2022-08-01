@@ -131,10 +131,15 @@ const ActionButtons = ({ penguin }: Props): JSX.Element => {
 
   return (
     <div className={btContainerClasses()}>
-      <button onClick={handleFavs} className={`animated${selectIconFav}`} />
+      <button
+        placeholder="btn-favs"
+        onClick={handleFavs}
+        className={`animated${selectIconFav}`}
+      />
       <button className={`animated${classButtonEdit}`} onClick={handleEdit} />
       <button
         title="btn-delete"
+        placeholder="btn-delete"
         className={`animated${classButtonDelete}`}
         onClick={handleDelete}
       />
