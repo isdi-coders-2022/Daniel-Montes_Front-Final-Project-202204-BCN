@@ -13,8 +13,6 @@ const CheckInSecurity = ({ children }: Props) => {
   useEffect(() => {
     if (!logged || !id) {
       navigate("/login");
-    } else {
-      navigate("/penguins");
     }
   }, [logged, navigate, id]);
 
