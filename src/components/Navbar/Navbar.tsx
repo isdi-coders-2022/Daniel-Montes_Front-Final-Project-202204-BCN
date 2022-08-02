@@ -143,15 +143,13 @@ const Navbar = ({ headerTitle }: Props): JSX.Element => {
 
   return (
     <div className="app">
-      <div className="header">
+      <div className={`header${headerClass}`}>
         <button
           title="btn-back"
           className={`${HidderBack}`}
           onClick={handleClick}
         />
-        <h1 className={`header-title${headerClass}`}>
-          {headerTitle || "AdoptAPenguin.com"}
-        </h1>
+        <h1 className={`header-title`}>{headerTitle || "AdoptAPenguin.com"}</h1>
         <button className={`menu-btn${HidderMenu}`} onClick={handleMenu} />
       </div>
       <div className="nav">
