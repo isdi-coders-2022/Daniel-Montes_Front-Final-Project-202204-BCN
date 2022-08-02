@@ -1,13 +1,7 @@
-import { mockUser, mockUserLogin } from "../../../../mocks/users";
+import { mockUser } from "../../../../mocks/users";
 import { server } from "../../../../mocks/server";
-import {
-  editUserThunk,
-  getUserThunk,
-  loginThunk,
-  registerThunk,
-} from "./userThunk";
+import { editUserThunk, getUserThunk, loginThunk } from "./userThunk";
 import axios from "axios";
-import { createUserDataActionCreator } from "../../features/userSlice/userSlice";
 
 beforeAll(() => {
   server.listen({ onUnhandledRequest: "bypass" });

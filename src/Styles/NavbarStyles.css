@@ -25,6 +25,10 @@ h1 {
   display: none;
 }
 
+.header-title {
+  margin: auto;
+}
+
 .app {
   width: 100vw;
   position: fixed;
