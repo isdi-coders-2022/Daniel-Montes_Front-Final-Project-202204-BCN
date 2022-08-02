@@ -70,6 +70,7 @@ export const Modal = ({
       <div className="modal-header">
         <h3 className="modal-title">Please confirm</h3>
         <h2
+          placeholder="btn-close"
           onClick={() => {
             closeModal(false);
           }}
@@ -88,11 +89,13 @@ export const Modal = ({
           onClick={handleAcceptClick}
           className="bt-modal-accept"
           title="btn-accept"
+          placeholder="btn-accept"
         />
         <button
           onClick={handleCancelClick}
           className="bt-modal-cancel"
           title="btn-cancel"
+          placeholder="btn-cancel"
         />
       </div>
     </div>
